@@ -1,21 +1,21 @@
 const stompClient = new StompJs.Client({
-  brokerURL: 'ws://localhost:8080/router'
+  brokerURL: 'ws://localhost:8080/messageRouter'
 });
 
 stompClient.onConnect = (frame) => {
   setConnected(true);
   console.log('Connected: ' + frame);
-  stompClient.subscribe('/topic/greetings', (greeting) => {
-    showGreeting(JSON.parse(greeting.body).content);
+  stompClient.subscribe('/domain/' + $("#domain").val() + '/incomingMessages', (message) => {
+    showMessage(message.body);
   });
 };
 
 stompClient.onWebSocketError = (error) => {
-  console.error('Error with websocket', error);
+  console.error('WebSocket error: ', error);
 };
 
 stompClient.onStompError = (frame) => {
-  console.error('Broker reported error: ' + frame.headers['message']);
+  console.error('Broker error: ' + frame.headers['message']);
   console.error('Additional details: ' + frame.body);
 };
 
@@ -27,7 +27,7 @@ function setConnected(connected) {
   } else {
     $("#conversation").hide();
   }
-  $("#greetings").html("");
+  $("#messages").html("");
 }
 
 function connect() {
@@ -40,20 +40,20 @@ function disconnect() {
   console.log("Disconnected");
 }
 
-function sendName() {
+function sendMessage() {
   stompClient.publish({
-    destination: "/app/hello",
-    body: JSON.stringify({ 'name': $("#name").val() })
+    destination: "/app/routeMessage",
+    body: JSON.stringify({ 'from': $("#from").val(), 'to': $("#to").val(), 'body': $("#body").val() })
   });
 }
 
-function showGreeting(message) {
-  $("#greetings").append("<tr><td>" + message + "</td></tr>");
+function showMessage(message) {
+  $("#messages").append("<tr><td>" + message + "</td></tr>");
 }
 
 $(function () {
   $("form").on('submit', (e) => e.preventDefault());
   $("#connect").click(() => connect());
   $("#disconnect").click(() => disconnect());
-  $("#send").click(() => sendName());
+  $("#send").click(() => sendMessage());
 });
