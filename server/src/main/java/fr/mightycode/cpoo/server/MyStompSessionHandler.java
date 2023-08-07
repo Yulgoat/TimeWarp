@@ -1,5 +1,6 @@
 package fr.mightycode.cpoo.server;
 
+import fr.mightycode.cpoo.server.model.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -7,9 +8,16 @@ import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 
+import java.lang.reflect.Type;
+
 public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(MyStompSessionHandler.class);
+
+    @Override
+    public Type getPayloadType(StompHeaders headers) {
+        return Message.class;
+    }
 
     @Override
     public void afterConnected(StompSession session, StompHeaders headers) {
