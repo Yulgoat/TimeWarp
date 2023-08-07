@@ -1,6 +1,6 @@
 package fr.mightycode.cpoo.router.controller;
 
-import fr.mightycode.cpoo.router.MessagingService;
+import fr.mightycode.cpoo.router.service.MessageService;
 import fr.mightycode.cpoo.router.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     @Autowired
-    MessagingService messagingService;
+    MessageService messagingService;
 
     @MessageMapping("/routeMessage")
     public void route(Message message) {

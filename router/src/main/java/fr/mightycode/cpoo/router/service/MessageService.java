@@ -1,4 +1,4 @@
-package fr.mightycode.cpoo.router;
+package fr.mightycode.cpoo.router.service;
 
 import fr.mightycode.cpoo.router.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,12 +6,12 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessagingService {
+public class MessageService {
 
     private final SimpMessagingTemplate messagingTemplate;
 
     @Autowired
-    public MessagingService(SimpMessagingTemplate messagingTemplate) {
+    public MessageService(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
 
