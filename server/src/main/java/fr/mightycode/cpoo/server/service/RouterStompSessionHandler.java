@@ -34,7 +34,7 @@ public class RouterStompSessionHandler extends StompSessionHandlerAdapter {
     @Override
     public void afterConnected(StompSession session, StompHeaders headers) {
         logger.info("Client connected: headers {}", headers);
-        session.subscribe("/domain/acme/incomingMessages", this);
+        session.subscribe("/domain/acme/messages", this);
     }
 
     @Override

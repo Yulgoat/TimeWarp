@@ -16,7 +16,7 @@ public class MessageService {
     }
 
     public void sendMessageToDomain(String domain, Message message) {
-        String destination = "/domain/" + domain + "/incomingMessages";
+        String destination = "/domain/" + domain + "/messages";
         messagingTemplate.convertAndSend(destination, message);
     }
 }

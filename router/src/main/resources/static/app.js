@@ -5,7 +5,7 @@ const stompClient = new StompJs.Client({
 stompClient.onConnect = (frame) => {
   setConnected(true);
   console.log('Connected: ' + frame);
-  stompClient.subscribe('/domain/' + $("#domain").val() + '/incomingMessages', (message) => {
+  stompClient.subscribe('/domain/' + $("#domain").val() + '/messages', (message) => {
     showMessage(message.body);
   });
 };
@@ -42,7 +42,7 @@ function disconnect() {
 
 function sendMessage() {
   stompClient.publish({
-    destination: "/app/routeMessage",
+    destination: "/router/route",
     body: JSON.stringify({ 'from': $("#from").val(), 'to': $("#to").val(), 'body': $("#body").val() })
   });
 }

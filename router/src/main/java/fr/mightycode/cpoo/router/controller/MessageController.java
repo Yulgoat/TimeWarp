@@ -12,7 +12,7 @@ public class MessageController {
     @Autowired
     MessageService messagingService;
 
-    @MessageMapping("/routeMessage")
+    @MessageMapping("/route")
     public void route(Message message) {
         String destinationDomain = message.getTo().split("@")[1];
         messagingService.sendMessageToDomain(destinationDomain, message);
