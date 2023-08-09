@@ -29,7 +29,7 @@ public class RouterService {
         WebSocketStompClient webSocketStompClient = new WebSocketStompClient(new StandardWebSocketClient());
         webSocketStompClient.setMessageConverter(new MappingJackson2MessageConverter());
         routerStompSessionHandler = new RouterStompSessionHandler(webSocketStompClient);
-        webSocketStompClient.connectAsync("ws://localhost:8080/router", routerStompSessionHandler);
+        webSocketStompClient.connectAsync("ws://localhost:8081/router", routerStompSessionHandler);
     }
 
     public void routeMessage(Message message) {

@@ -59,7 +59,7 @@ public class RouterStompSessionHandler extends StompSessionHandlerAdapter {
         if (!session.isConnected()) {
             Thread.sleep(2000);
             logger.info("Trying to reconnect...");
-            webSocketStompClient.connectAsync("ws://localhost:8080/router", this);
+            webSocketStompClient.connectAsync("ws://localhost:8081/router", this);
         }
     }
 }
