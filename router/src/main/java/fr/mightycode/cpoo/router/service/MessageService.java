@@ -1,7 +1,6 @@
 package fr.mightycode.cpoo.router.service;
 
 import fr.mightycode.cpoo.router.model.Message;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,9 @@ public class MessageService {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void sendMessageToDomain(String domain, Message message) {
-        String destination = "/domain/" + domain + "/messages";
-        messagingTemplate.convertAndSend(destination, message);
+    public void routeMessage(Message message) {
+        // TODO: check destination domain validity
+        String destinationDomain = message.getTo().split("@")[1];
+        messagingTemplate.convertAndSend("/domain/" + destinationDomain + "/messages", message);
     }
 }
