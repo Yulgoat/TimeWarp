@@ -8,9 +8,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ScheduledTasks {
+public class MyMessageSender {
 
-    private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyMessageSender.class);
 
     private int i = 0;
 
@@ -21,7 +21,8 @@ public class ScheduledTasks {
     @Scheduled(cron = "* * * * * ?")
     public void ping() {
         try {
-            RouterService.Message message = new RouterService.Message("alice@acme", "bob@acme", "This is message " + i++ + " from alice@acme to bob@acme");
+            RouterService.Message message = new RouterService.Message("alice@acme", "bob@acme",
+                    "This is message " + i++ + " from alice@acme to bob@acme");
             routerService.routeMessage(message);
         } catch (Exception e) {
             logger.error("Cannot send message", e);

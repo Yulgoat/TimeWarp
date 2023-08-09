@@ -1,21 +1,29 @@
 package fr.mightycode.cpoo.server.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.simp.stomp.StompCommand;
+import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
+import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
+
+import java.lang.reflect.Type;
 
 @Service
 public class RouterService {
 
     private static final Logger logger = LoggerFactory.getLogger(RouterService.class);
 
+    /**
+     * Type of messages exchanged between domain servers.
+     */
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
@@ -23,15 +31,91 @@ public class RouterService {
         private String from, to, body;
     }
 
+    /**
+     * This interface is used by the router service to notify the domain server about incoming messages.
+     * It must be implemented as a @Component or @Service, so that it can be injected automatically at service
+     * creation time.
+     */
+    public interface MessageListener {
+
+        /**
+         * Notify the listener about an incoming message for its domain.
+         *
+         * @param message
+         */
+        void onMessageReceived(Message message);
+    }
+
+    @SuppressWarnings("NullableProblems")
+    public static class RouterStompSessionHandler extends StompSessionHandlerAdapter {
+
+        private static final Logger logger = LoggerFactory.getLogger(RouterStompSessionHandler.class);
+
+        private final WebSocketStompClient webSocketStompClient;
+        private final MessageListener messageListener;
+
+        @Getter
+        private StompSession session;
+
+        RouterStompSessionHandler(WebSocketStompClient webSocketStompClient, MessageListener messageListener) {
+            this.webSocketStompClient = webSocketStompClient;
+            this.messageListener = messageListener;
+        }
+
+        @Override
+        public Type getPayloadType(StompHeaders headers) {
+            if (MimeTypeUtils.APPLICATION_JSON.equals(headers.getContentType()))
+                return Message.class;
+            throw new RuntimeException("Unexpected message type " + headers.getContentType());
+        }
+
+        @Override
+        public void afterConnected(StompSession session, StompHeaders headers) {
+            logger.info("Client connected: headers {}", headers);
+            this.session = session;
+            session.subscribe("/domain/acme/messages", this);
+        }
+
+        @Override
+        public void handleFrame(StompHeaders headers, @Nullable Object payload) {
+            logger.info("Client received: payload {}, headers {}", payload, headers);
+            messageListener.onMessageReceived((Message) payload);
+        }
+
+        @Override
+        public void handleException(StompSession session, @Nullable StompCommand command, StompHeaders headers, byte[] payload, Throwable exception) {
+            logger.error("Client error: exception {}, command {}, payload {}, headers {}", exception.getMessage(), command, payload, headers);
+        }
+
+        @SneakyThrows
+        @Override
+        public void handleTransportError(StompSession session, Throwable exception) {
+            logger.error("Client transport error: error {}", exception.getMessage());
+            if (!session.isConnected()) {
+                Thread.sleep(2000);
+                logger.info("Trying to reconnect...");
+                webSocketStompClient.connectAsync("ws://localhost:8081/router", this);
+            }
+        }
+    }
+
     private final RouterStompSessionHandler routerStompSessionHandler;
 
-    RouterService() {
+    RouterService(MessageListener messageListener) {
         WebSocketStompClient webSocketStompClient = new WebSocketStompClient(new StandardWebSocketClient());
         webSocketStompClient.setMessageConverter(new MappingJackson2MessageConverter());
-        routerStompSessionHandler = new RouterStompSessionHandler(webSocketStompClient);
+        routerStompSessionHandler = new RouterStompSessionHandler(webSocketStompClient, messageListener);
+
+        // Start connection attempts immediately
         webSocketStompClient.connectAsync("ws://localhost:8081/router", routerStompSessionHandler);
     }
 
+    /**
+     * Route a message to its recipient's domain server
+     * (i.e. the domain specified in the 'to' property of the message).
+     *
+     * @param message The message to route
+     */
     public void routeMessage(Message message) {
         logger.info("Routing message {}", message);
         StompSession session = routerStompSessionHandler.getSession();
