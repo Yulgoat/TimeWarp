@@ -10,7 +10,6 @@ public class MessageService {
 
     private final SimpMessagingTemplate messagingTemplate;
 
-    @Autowired
     public MessageService(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }

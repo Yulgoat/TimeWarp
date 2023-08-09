@@ -10,11 +10,11 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     @Autowired
-    MessageService messagingService;
+    MessageService messageService;
 
     @MessageMapping("/route")
     public void route(Message message) {
         String destinationDomain = message.getTo().split("@")[1];
-        messagingService.sendMessageToDomain(destinationDomain, message);
+        messageService.sendMessageToDomain(destinationDomain, message);
     }
 }
