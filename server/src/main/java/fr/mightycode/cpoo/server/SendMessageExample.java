@@ -8,9 +8,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyMessageSender {
+public class SendMessageExample {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyMessageSender.class);
+    private static final Logger logger = LoggerFactory.getLogger(SendMessageExample.class);
 
     private int i = 0;
 

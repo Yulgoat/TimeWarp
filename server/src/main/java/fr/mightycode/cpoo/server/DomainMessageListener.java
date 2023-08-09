@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyDomainMessageListener implements RouterService.MessageListener {
+public class DomainMessageListener implements RouterService.MessageListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyDomainMessageListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(DomainMessageListener.class);
 
     @Override
     public void onMessageReceived(RouterService.Message message) {
