@@ -18,7 +18,6 @@ public class MessageController {
 
     @MessageMapping("/route")
     public void route(Message message) {
-        logger.info("Routing message {}", message);
         messageService.routeMessage(message);
     }
 }
