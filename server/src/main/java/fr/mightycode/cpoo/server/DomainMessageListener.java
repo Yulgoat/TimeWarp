@@ -11,12 +11,20 @@ public class DomainMessageListener implements RouterService.MessageListener {
 
     private static final Logger logger = LoggerFactory.getLogger(DomainMessageListener.class);
 
-    @Value("${server.domain}")
+    @Value("${cpoo.server.domain}")
     private String serverDomain;
 
+    @Value("${cpoo.router.url}")
+    private String routerUrl;
+
     @Override
-    public String getDomain() {
+    public String getServerDomain() {
         return serverDomain;
+    }
+
+    @Override
+    public String getRouterUrl() {
+        return routerUrl;
     }
 
     @Override

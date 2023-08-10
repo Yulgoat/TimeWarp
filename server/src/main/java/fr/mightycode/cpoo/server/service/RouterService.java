@@ -41,7 +41,12 @@ public class RouterService {
         /**
          * @return The name of the domain to listen.
          */
-        String getDomain();
+        String getServerDomain();
+
+        /**
+         * @return The URL of the router.
+         */
+        String getRouterUrl();
 
         /**
          * Notify the listener about an incoming message for its domain.
@@ -78,7 +83,7 @@ public class RouterService {
         public void afterConnected(StompSession session, StompHeaders headers) {
             logger.info("Client connected: headers {}", headers);
             this.session = session;
-            session.subscribe("/domain/" + messageListener.getDomain() + "/messages", this);
+            session.subscribe("/domain/" + messageListener.getServerDomain() + "/messages", this);
         }
 
         @Override
@@ -99,7 +104,7 @@ public class RouterService {
             if (!session.isConnected()) {
                 Thread.sleep(2000);
                 logger.info("Trying to reconnect...");
-                webSocketStompClient.connectAsync("ws://localhost:8081/router", this);
+                webSocketStompClient.connectAsync(messageListener.getRouterUrl(), this);
             }
         }
     }
@@ -112,7 +117,7 @@ public class RouterService {
         routerStompSessionHandler = new RouterStompSessionHandler(webSocketStompClient, messageListener);
 
         // Start connection attempts immediately
-        webSocketStompClient.connectAsync("ws://localhost:8081/router", routerStompSessionHandler);
+        webSocketStompClient.connectAsync(messageListener.getRouterUrl(), routerStompSessionHandler);
     }
 
     /**
