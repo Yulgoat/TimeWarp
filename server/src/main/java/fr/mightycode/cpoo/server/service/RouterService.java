@@ -39,9 +39,14 @@ public class RouterService {
     public interface MessageListener {
 
         /**
+         * @return The name of the domain to listen.
+         */
+        String getDomain();
+
+        /**
          * Notify the listener about an incoming message for its domain.
          *
-         * @param message
+         * @param message The incoming message.
          */
         void onMessageReceived(Message message);
     }
@@ -73,7 +78,7 @@ public class RouterService {
         public void afterConnected(StompSession session, StompHeaders headers) {
             logger.info("Client connected: headers {}", headers);
             this.session = session;
-            session.subscribe("/domain/acme/messages", this);
+            session.subscribe("/domain/" + messageListener.getDomain() + "/messages", this);
         }
 
         @Override
