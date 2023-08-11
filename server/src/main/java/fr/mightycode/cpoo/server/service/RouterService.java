@@ -103,7 +103,7 @@ public class RouterService {
             logger.error("Client transport error: error {}", exception.getMessage());
             if (!session.isConnected()) {
                 Thread.sleep(2000);
-                logger.info("Trying to reconnect...");
+                logger.info("Trying to reconnect router {}...", messageListener.getRouterUrl());
                 webSocketStompClient.connectAsync(messageListener.getRouterUrl(), this);
             }
         }
@@ -117,6 +117,7 @@ public class RouterService {
         routerStompSessionHandler = new RouterStompSessionHandler(webSocketStompClient, messageListener);
 
         // Start connection attempts immediately
+        logger.info("Trying to connect to router {}...", messageListener.getRouterUrl());
         webSocketStompClient.connectAsync(messageListener.getRouterUrl(), routerStompSessionHandler);
     }
 
