@@ -1,5 +1,5 @@
 const stompClient = new StompJs.Client({
-  brokerURL: 'wss://cpoo-router-eigyscs5sa-od.a.run.app/router'
+  brokerURL: 'wss://cpoo-router.mightycode.tech/router'
   // brokerURL: 'ws://localhost:8081/router'
 });
 
