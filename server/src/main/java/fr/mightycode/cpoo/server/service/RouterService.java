@@ -88,7 +88,7 @@ public class RouterService {
 
         @Override
         public void handleFrame(StompHeaders headers, @Nullable Object payload) {
-            logger.info("Client received: payload {}, headers {}", payload, headers);
+            logger.debug("Client received: payload {}, headers {}", payload, headers);
             messageListener.onMessageReceived((Message) payload);
         }
 
