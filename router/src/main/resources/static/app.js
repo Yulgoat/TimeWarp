@@ -30,7 +30,7 @@ function setConnected(connected) {
 
 function connect() {
   stompClient.configure({
-    brokerURL: $("#url").val() || 'ws://localhost:8081/router '
+    brokerURL: $("#url").val() || 'wss://cpoo-router.mightycode.tech/router'
   });
   stompClient.activate();
 }
