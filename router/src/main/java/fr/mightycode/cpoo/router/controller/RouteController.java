@@ -1,23 +1,24 @@
 package fr.mightycode.cpoo.router.controller;
 
 import fr.mightycode.cpoo.router.model.Message;
-import fr.mightycode.cpoo.router.service.MessageService;
+import fr.mightycode.cpoo.router.service.RouterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class MessageController {
+public class RouteController {
 
-  private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
+  private static final Logger logger = LoggerFactory.getLogger(RouteController.class);
 
   @Autowired
-  MessageService messageService;
+  RouterService routerService;
 
   @MessageMapping("/route")
-  public void route(Message message) {
-    messageService.routeMessage(message);
+  public void route(Message message, StompHeaderAccessor accessor) {
+    routerService.routeMessage(message, accessor);
   }
 }
