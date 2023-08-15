@@ -1,7 +1,4 @@
-const stompClient = new StompJs.Client({
-  brokerURL: 'wss://cpoo-router.mightycode.tech/router'
-  // brokerURL: 'ws://localhost:8081/router'
-});
+const stompClient = new StompJs.Client();
 
 stompClient.onConnect = (frame) => {
   setConnected(true);
@@ -32,6 +29,9 @@ function setConnected(connected) {
 }
 
 function connect() {
+  stompClient.configure({
+    brokerURL: $("#url").val() || 'ws://localhost:8081/router '
+  });
   stompClient.activate();
 }
 
@@ -44,7 +44,7 @@ function disconnect() {
 function sendMessage() {
   stompClient.publish({
     destination: "/router/route",
-    body: JSON.stringify({ 'from': $("#from").val(), 'to': $("#to").val(), 'body': $("#body").val() })
+    body: JSON.stringify({'from': $("#from").val(), 'to': $("#to").val(), 'body': $("#body").val()})
   });
 }
 

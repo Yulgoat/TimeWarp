@@ -11,13 +11,13 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MessageController {
 
-    private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
+  private static final Logger logger = LoggerFactory.getLogger(MessageController.class);
 
-    @Autowired
-    MessageService messageService;
+  @Autowired
+  MessageService messageService;
 
-    @MessageMapping("/route")
-    public void route(Message message) {
-        messageService.routeMessage(message);
-    }
+  @MessageMapping("/route")
+  public void route(Message message) {
+    messageService.routeMessage(message);
+  }
 }
