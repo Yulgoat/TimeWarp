@@ -9,10 +9,11 @@ The server is a Spring Boot app that should ne located in the /server directory.
 
 ## Client
 
-The client is an Angular Web app that should be located in the /client directory (to create).
+The client is an Angular Web app that should be located in the /client directory.
 
 ## Mockups
 
-The static mockups of the UI (images, HTML files...) should be deliveed in the /mockup directory (to create).
+The static mockups of the UI (images, HTML files...) should be deliveed in the /client/mockups directory.
 
-The "actionable" version of the mockups should be delivered in the /client directory. It is recommanded but not mandatory to deliver this "actionable" version as an Angular app.
+The "actionable" version of the mockups should be delivered in the /client directory.
+It is recommanded but not mandatory to deliver this "actionable" version the first version of the Angular app.
