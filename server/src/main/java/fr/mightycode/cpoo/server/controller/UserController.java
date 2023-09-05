@@ -1,5 +1,6 @@
 package fr.mightycode.cpoo.server.controller;
 
+import fr.mightycode.cpoo.server.dto.UserDTO;
 import fr.mightycode.cpoo.server.service.UserService;
 import jakarta.servlet.ServletException;
 import lombok.AllArgsConstructor;
@@ -7,9 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-record UserDTO(String login, String password) {
-}
 
 @RestController
 @RequestMapping("user")
@@ -29,7 +27,7 @@ public class UserController {
   }
 
   @PostMapping(value = "signin", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void signin(@RequestBody final UserDTO user) throws ServletException {
+  public void signin(@RequestBody final UserDTO user) {
     try {
       if (!userService.signin(user.login(), user.password()))
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already signed in");
