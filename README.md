@@ -1,6 +1,6 @@
 # INFO4 CPOO project
 
-This is the base project your team **MUST** to fork to implement its version of the instant messaging app.
+This is the base project your team **MUST** FORK to implement its version of the instant messaging app.
 
 ## Server
 
