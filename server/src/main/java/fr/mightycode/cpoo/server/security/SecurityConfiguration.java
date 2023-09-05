@@ -24,6 +24,7 @@ public class SecurityConfiguration {
         authorizeRequests
           .requestMatchers(new AntPathRequestMatcher("/user/signup")).permitAll()
           .requestMatchers(new AntPathRequestMatcher("/user/signin")).permitAll()
+          .requestMatchers("/error").permitAll()
           .anyRequest().authenticated())
       .csrf(AbstractHttpConfigurer::disable)
       .build();
