@@ -29,6 +29,12 @@ paths:
       responses:
         '200':
           description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
   /user/signin:
     post:
       security: [ ]
@@ -43,6 +49,12 @@ paths:
       responses:
         '200':
           description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
   /user/signout:
     post:
       tags:
@@ -50,19 +62,12 @@ paths:
       responses:
         '200':
           description: Success
-  /user/info:
-    get:
-      tags:
-        - authentication
-      security:
-        - CookieAuth: []
-      responses:
-        '200':
-          description: Success
+        default:
+          description: Error
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/ErrorDTO'
 components:
   schemas:
     UserDTO:
@@ -72,12 +77,25 @@ components:
           type: string
         password:
           type: string
+    ErrorDTO:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
   securitySchemes:
-    CookieAuth:
-      type: apiKey
-      in: cookie
-      name: JSESSIONID
-      description: Use a session cookie to authenticate (see /login).
+      CookieAuth:
+        type: apiKey
+        in: cookie
+        name: JSESSIONID
+        description: Use a session cookie to authenticate (see /login).
 x-samples-languages:
   - curl
   - javascript
