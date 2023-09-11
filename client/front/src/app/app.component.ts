@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mqte';
+  title = 'front';
 
 
   /* 
@@ -17,32 +17,30 @@ export class AppComponent {
   enfants de app.components.html (donc par <app-home-page> , <app-progil-page> et <app-messaging-page>
   */
 
-  homepage : boolean = true;
-  profilpage : boolean = false;
-  messagingpage : boolean = false;
+  home : boolean = false;
+  settings : boolean = false;
+  login : boolean = true;
 
 
-  goHomePage() : void{
-    this.homepage  = true;
-    this.profilpage  = false;
-    this.messagingpage = false;
+  goLogin() : void{
+    this.home  = false;
+    this.settings  = false;
+    this.login = true;
   }
 
-  goProfilPage() : void{    
-    this.homepage  = false;
-    this.profilpage  = true;
-    this.messagingpage = false;
+  goSettings() : void{    
+    this.home  = false;
+    this.settings  = true;
+    this.login = false;
   }
 
-  goMessagingPage() : void{    
-    this.homepage  = false;
-    this.profilpage  = false;
-    this.messagingpage = true;
+  goHome() : void{    
+    this.home  = true;
+    this.settings  = false;
+    this.login = false;
   }
 
   /* --------------------------------------------------------------------------------------------------------------------------*/
-
-
 
 
 

@@ -1,0 +1,21 @@
+
+<div *ngIf="home">
+  <app-home (goSettings)="goSettings()"></app-home>
+</div>
+
+<div *ngIf="login">
+ <app-login (goHome)="goHome()"></app-login>
+</div>
+
+<div *ngIf="settings">
+ <app-settings (goHome)="goHome()" (goLogin)="goLogin()"></app-settings>
+</div>
+
+
+
+
+
+
+
+
+<router-outlet></router-outlet>

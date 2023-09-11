@@ -1,29 +1,31 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrls: ['./settings.component.css']
 })
-export class HomePageComponent {
+export class SettingsComponent {
 
   /*
     Cette zone permet de réaliser le changement de page, lors qu'une des fonctions est appellé (après un click sur un bouton), elle va permettre l'envoie
     d'une message au père (<app.component>) qui va activé la bonne fonction pour changer la page.
   */
-  @Output() goMessagingPage = new EventEmitter<void>();
-  @Output() goProfilPage = new EventEmitter<void>();
+  @Output() goLogin = new EventEmitter<void>();
+  @Output() goHome = new EventEmitter<void>();
 
 
-  homeToMes() : void{
-    this.goMessagingPage.emit();
+  settingsToHome() : void{
+    this.goHome.emit();
   }
 
-  homeToProfil() : void{    
-    this.goProfilPage.emit();
+  settingsToLogin() : void{    
+    this.goLogin.emit();
   }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+
 
 
 }

@@ -3,16 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './Components/home-page/home-page.component';
-import { ProfilPageComponent } from './Components/profil-page/profil-page.component';
-import { MessagingPageComponent } from './Components/messaging-page/messaging-page.component';
+import { HomeComponent } from './components/home/home.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
-    ProfilPageComponent,
-    MessagingPageComponent
+    HomeComponent,
+    SettingsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
