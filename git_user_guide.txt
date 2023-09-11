@@ -1,0 +1,34 @@
+Pull the modification of the directory that we have fork :
+	First Time :
+		git remote -v
+		git remote add <name> <fork_project_url>
+	After and Other Time : 
+		git checkout main
+		git fetch name
+		git pull name main
+		
+I didn’t manage to do it in a branch other than main (maybe it’s possible)		
+		
+	
+	
+	
+If you want a branch under main get the modification do to main :
+	git checkout <branchname>
+	git merge main
+	
+	
+Connect a branch to Origin (so under main) 
+	git push --set-upstream origin <branchname>
+	
+	
+
+
+Memorise ID and password on Git : 
+	git config --global credential.helper cache                  # remember my password
+     or git config --global credential.helper "cache --timeout=3600" # for one hour at most
+
+Delete registered Password :
+	git config --system --unset credential.helper
+	
+Remove this Help (delete all password before) : 
+	git config --global --unset credential.helper
