@@ -1,19 +1,6 @@
-@font-face {
-    font-family: 'Gliker';
-    src: url('/assets/fonts/Gliker-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-@font-face {
-    font-family: 'Gliker';
-    src: url('/assets/fonts/Gliker-Black.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-  }
-  
 .section1{
     font-size: 30px;
-    width: 60%;
+    width: 65%;
     height: 100vh;
     float: left;
     background-size: cover;
@@ -28,16 +15,50 @@
 
 .section1 h1, .section1 p  {
     margin: 0.4em;
-    font-family: "Gliker";
-    text-shadow: 0.1em 0.1em 0.05em rgb(0, 0, 0);
+    text-shadow: 0.1em 0.1em 0.05em black;
 }
 
 .section2 {
-  width: 40%;
+  font-size: 11px;
+  width: 35%;
   height: 100vh;
   float: left;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fc9631;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section2 h1{
+  font-size: 4em;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.field{
+  background-color: #f8e4d0;
+  color: #fc9631;
+}
+
+label{
+  padding: 0.5em;
+}
+
+.button{
+  background-color: #fc9631;
+  color: white;
+}
+
+.field, .button{
+  border: 0;
+  border-radius: 30px;
+  padding: 0.5em;
 }

@@ -3,5 +3,26 @@
   <p>Travel in Time, one message at a Time</p>
 </div>
 <div class="section2">
-    <button (click)="loginToHome()">Home</button>
-  </div>
+  <h1>USER LOGIN</h1>
+  <form>
+    <div>
+      <input type="text" id="username" name="username" placeholder="Username" class="field">
+    </div>
+    <div>
+      <input type="password" id="password" name="password" placeholder="Password" class="field">
+    </div>
+    <div>
+      <div>
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">Remember me</label>
+      </div>
+      <div>
+        <p>Forgot password ?</p>
+      </div>
+    </div>
+    <div>
+      <input type="submit" value="LOGIN" class="button" (click)="loginToHome()">
+    </div>
+  </form>
+  <p>Create account</p>
+</div>
