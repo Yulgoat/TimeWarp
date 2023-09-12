@@ -32,8 +32,19 @@ public class AuthenticationApiTest {
      */
     @Test
     public void userSigninPostTest() throws ApiException {
+
+        // Signing in with valid credential should work
         UserDTO userDTO = new UserDTO().login("user").password("user");
         api.userSigninPost(userDTO);
+
+        // Signing in with invalid credentials should fail with UNAUTHORIZED
+        try {
+            api.userSigninPost(userDTO.password("invalid"));
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_UNAUTHORIZED, e.getCode());
+        }
     }
 
     /**
@@ -51,13 +62,23 @@ public class AuthenticationApiTest {
         // Set a valid session authentication cookie for subsequent calls
         api.getApiClient().setApiKey(jSessionID);
 
+        // Sign in again with a valid session should fail with CONFLICT
+        // TODO: fix this
+//        try {
+//            api.userSigninPost(userDTO);
+//            Assertions.fail();
+//        }
+//        catch (ApiException e) {
+//            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+//        }
+
         // Signing out with a valid session should work
         api.userSignoutPost();
 
         // Signing out twice should fail with FORBIDDEN
         try {
             api.userSignoutPost();
-            Assertions.fail("Signout should fail");
+            Assertions.fail();
         }
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
@@ -69,7 +90,7 @@ public class AuthenticationApiTest {
         // Signing out with an invalid session should fail with FORBIDDEN
         try {
             api.userSignoutPost();
-            Assertions.fail("Signout should fail");
+            Assertions.fail();
         }
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
@@ -81,7 +102,18 @@ public class AuthenticationApiTest {
      */
     @Test
     public void userSignupPostTest() throws ApiException {
+
+        // Signing up with a new account should work
         UserDTO userDTO = new UserDTO().login("test").password("test");
         api.userSignupPost(userDTO);
+
+        // Signing up twice with the same account should fail with CONFLICT
+        try {
+            api.userSignupPost(userDTO);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
     }
 }
