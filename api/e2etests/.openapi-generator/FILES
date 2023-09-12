@@ -38,6 +38,5 @@ src/main/java/org/openapitools/client/auth/HttpBearerAuth.java
 src/main/java/org/openapitools/client/model/AbstractOpenApiSchema.java
 src/main/java/org/openapitools/client/model/ErrorDTO.java
 src/main/java/org/openapitools/client/model/UserDTO.java
-src/test/java/org/openapitools/client/api/AuthenticationApiTest.java
 src/test/java/org/openapitools/client/model/ErrorDTOTest.java
 src/test/java/org/openapitools/client/model/UserDTOTest.java

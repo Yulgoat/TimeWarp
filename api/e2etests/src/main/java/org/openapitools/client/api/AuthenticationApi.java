@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.core.GenericType;
 
 public class AuthenticationApi {
     private ApiClient localVarApiClient;
@@ -83,7 +82,7 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -134,15 +133,12 @@ public class AuthenticationApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call userSigninPostValidateBeforeCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'userDTO' is set
         if (userDTO == null) {
             throw new ApiException("Missing the required parameter 'userDTO' when calling userSigninPost(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = userSigninPostCall(userDTO, _callback);
-        return localVarCall;
+        return userSigninPostCall(userDTO, _callback);
 
     }
 
@@ -154,7 +150,7 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -171,7 +167,7 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -190,7 +186,7 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -246,7 +242,6 @@ public class AuthenticationApi {
         }
 
         final String[] localVarContentTypes = {
-            
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -259,10 +254,7 @@ public class AuthenticationApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call userSignoutPostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = userSignoutPostCall(_callback);
-        return localVarCall;
+        return userSignoutPostCall(_callback);
 
     }
 
@@ -377,15 +369,12 @@ public class AuthenticationApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call userSignupPostValidateBeforeCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
-        
         // verify the required parameter 'userDTO' is set
         if (userDTO == null) {
             throw new ApiException("Missing the required parameter 'userDTO' when calling userSignupPost(Async)");
         }
-        
 
-        okhttp3.Call localVarCall = userSignupPostCall(userDTO, _callback);
-        return localVarCall;
+        return userSignupPostCall(userDTO, _callback);
 
     }
 

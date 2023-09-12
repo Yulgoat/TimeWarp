@@ -9,7 +9,7 @@ All URIs are relative to *http://localhost:8080*
 | [**userSignupPost**](AuthenticationApi.md#userSignupPost) | **POST** /user/signup |  |
 
 
-<a name="userSigninPost"></a>
+<a id="userSigninPost"></a>
 # **userSigninPost**
 > userSigninPost(userDTO)
 
@@ -66,10 +66,10 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Success |  -  |
+| **200** | Success |  * Set-Cookie -  <br>  |
 | **0** | Error |  -  |
 
-<a name="userSignoutPost"></a>
+<a id="userSignoutPost"></a>
 # **userSignoutPost**
 > userSignoutPost()
 
@@ -132,7 +132,7 @@ null (empty response body)
 | **200** | Success |  -  |
 | **0** | Error |  -  |
 
-<a name="userSignupPost"></a>
+<a id="userSignupPost"></a>
 # **userSignupPost**
 > userSignupPost(userDTO)
 

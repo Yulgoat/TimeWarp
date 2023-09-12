@@ -2,7 +2,7 @@
 
 CPOO Server API
 - API version: 0.0.1
-  - Build date: 2023-09-12T15:07:22.658153+02:00[Europe/Paris]
+  - Build date: 2023-09-12T16:49:50.229355+02:00[Europe/Paris]
 
 This is a prototype of CPOO Project's front/back API.
 
@@ -126,9 +126,12 @@ Class | Method | HTTP request | Description
  - [UserDTO](docs/UserDTO.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation for Authorization
 
+
 Authentication schemes defined for the API:
+<a id="CookieAuth"></a>
 ### CookieAuth
 
 - **Type**: API key

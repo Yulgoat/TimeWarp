@@ -13,12 +13,12 @@
 
 package org.openapitools.client.api;
 
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.ApiResponse;
 import org.openapitools.client.model.UserDTO;
-import org.springframework.http.HttpStatus;
 
 /**
  * API tests for AuthenticationApi
@@ -60,7 +60,7 @@ public class AuthenticationApiTest {
             Assertions.fail("Signout should fail");
         }
         catch (ApiException e) {
-            Assertions.assertEquals(HttpStatus.FORBIDDEN.value(), e.getCode());
+            Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
         }
 
         // Sign in again
@@ -72,7 +72,7 @@ public class AuthenticationApiTest {
             Assertions.fail("Signout should fail");
         }
         catch (ApiException e) {
-            Assertions.assertEquals(HttpStatus.FORBIDDEN.value(), e.getCode());
+            Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
         }
     }
 

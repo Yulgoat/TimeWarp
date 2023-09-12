@@ -48,6 +48,12 @@ paths:
       responses:
         "200":
           description: Success
+          headers:
+            Set-Cookie:
+              explode: false
+              schema:
+                type: string
+              style: simple
         default:
           content:
             application/json:
