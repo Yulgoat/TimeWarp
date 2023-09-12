@@ -13,10 +13,31 @@
   
 .section1{
     font-size: 30px;
-}
+    width: 60%;
+    height: 100vh;
+    float: left;
+    background-size: cover;
+    background-position: center;
+    background-image: url('/assets/images/12498931_4965007.jpeg');
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
 .section1 h1, .section1 p  {
     margin: 0.4em;
     font-family: "Gliker";
     text-shadow: 0.1em 0.1em 0.05em rgb(0, 0, 0);
+}
+
+.section2 {
+  width: 40%;
+  height: 100vh;
+  float: left;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
