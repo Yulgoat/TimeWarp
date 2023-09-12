@@ -8,77 +8,84 @@ info:
   title: CPOO Server API
   version: 0.0.1
 servers:
-  - url: http://localhost:8080/
+- url: http://localhost:8080/
 security:
-  - CookieAuth: [ ]
+- CookieAuth: []
 tags:
-  - name: authentication
-    description: User authentication.
+- description: User authentication.
+  name: authentication
 paths:
   /user/signup:
     post:
-      security: [ ]
-      tags:
-        - authentication
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserDTO'
+        required: true
       responses:
-        '200':
+        "200":
           description: Success
         default:
-          description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      security: []
+      tags:
+      - authentication
+      x-content-type: application/json
+      x-accepts: application/json
   /user/signin:
     post:
-      security: [ ]
-      tags:
-        - authentication
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserDTO'
+        required: true
       responses:
-        '200':
+        "200":
           description: Success
         default:
-          description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      security: []
+      tags:
+      - authentication
+      x-content-type: application/json
+      x-accepts: application/json
   /user/signout:
     post:
-      tags:
-        - authentication
       responses:
-        '200':
+        "200":
           description: Success
         default:
-          description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - authentication
+      x-accepts: application/json
 components:
   schemas:
     UserDTO:
-      type: object
+      example:
+        password: password
+        login: login
       properties:
         login:
           type: string
         password:
           type: string
-    ErrorDTO:
       type: object
+    ErrorDTO:
       properties:
         timestamp:
           type: string
@@ -90,16 +97,18 @@ components:
           type: string
         path:
           type: string
+      type: object
   securitySchemes:
-      CookieAuth:
-        type: apiKey
-        in: cookie
-        name: JSESSIONID
-        description: Use a session cookie to authenticate (see /login).
+    CookieAuth:
+      description: Use a session cookie to authenticate (see /login).
+      in: cookie
+      name: JSESSIONID
+      type: apiKey
 x-samples-languages:
-  - curl
-  - javascript
-  - node
-  - java
-  - python
-  - php
+- curl
+- javascript
+- node
+- java
+- python
+- php
+

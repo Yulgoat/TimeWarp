@@ -36,7 +36,7 @@ public class UserController {
     }
   }
 
-  @PostMapping(value = "signout", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value = "signout")
   public void signout() {
     try {
       if (!userService.signout())
