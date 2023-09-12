@@ -1,6 +1,6 @@
 # INFO4 CPOO project
 
-This is the base project your team need to fork to implement its version of the instant messaging app.
+This is the base project your team **MUST** to fork to implement its version of the instant messaging app.
 
 ## Server
 
@@ -17,3 +17,9 @@ The static mockups of the UI (images, HTML files...) should be deliveed in the /
 
 The "actionable" version of the mockups should be delivered in the /client directory.
 It is recommanded but not mandatory to deliver this "actionable" version the first version of the Angular app.
+
+## Router
+
+The message router used by your server to send and receive messages. It is deployed at https://cpoo-router.mightycode.tech/
+
+**This code is provided for information, you don't actually need it to implement your the project.**
