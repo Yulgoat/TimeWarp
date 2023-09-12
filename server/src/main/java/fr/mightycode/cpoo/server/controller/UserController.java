@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,20 +20,19 @@ public class UserController {
 
   @PostMapping(value = "signup", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signup(@RequestBody final UserDTO user) {
-    try {
-      userService.signup(user.login(), user.password());
-    } catch (final IllegalArgumentException ex) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot sign up", ex);
-    }
+    if (!userService.signup(user.login(), user.password()))
+      throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
   }
 
   @PostMapping(value = "signin", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signin(@RequestBody final UserDTO user) {
     try {
       if (!userService.signin(user.login(), user.password()))
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already signed in");
+        throw new ResponseStatusException(HttpStatus.CONFLICT, "Already signed in");
     } catch (final ServletException ex) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot sign in", ex);
+      if (ex.getCause() instanceof BadCredentialsException)
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bad credentials");
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
   }
 
@@ -42,7 +42,7 @@ public class UserController {
       if (!userService.signout())
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not signed in");
     } catch (final ServletException ex) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot sign in", ex);
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
   }
 }

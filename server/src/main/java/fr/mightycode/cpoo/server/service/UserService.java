@@ -23,11 +23,12 @@ public class UserService {
 
   private final HttpServletRequest httpServletRequest;
 
-  public void signup(final String login, final String password) {
+  public boolean signup(final String login, final String password) {
     if (userDetailsManager.userExists(login))
-      throw new IllegalArgumentException("User already exists");
+      return false;
     final UserDetails user = new User(login, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     userDetailsManager.createUser(user);
+    return true;
   }
 
   public boolean signin(final String login, final String password) throws ServletException {
