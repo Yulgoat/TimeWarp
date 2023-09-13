@@ -95,11 +95,11 @@ components:
         path:
           type: string
   securitySchemes:
-      CookieAuth:
-        type: apiKey
-        in: cookie
-        name: JSESSIONID
-        description: Use a session cookie to authenticate (see /login).
+    CookieAuth:
+      type: apiKey
+      in: cookie
+      name: JSESSIONID
+      description: Use a session cookie to authenticate (see /login).
 x-samples-languages:
   - curl
   - javascript
