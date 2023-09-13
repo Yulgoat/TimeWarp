@@ -13,12 +13,20 @@
 
 package org.openapitools.client.api;
 
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.ApiResponse;
 import org.openapitools.client.model.UserDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * API tests for AuthenticationApi
@@ -27,23 +35,56 @@ public class AuthenticationApiTest {
 
     private final AuthenticationApi api = new AuthenticationApi();
 
+    public class MyCookieJar implements CookieJar {
+
+        private List<Cookie> cookies;
+
+        @Override
+        public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+            this.cookies = cookies;
+        }
+
+        @Override
+        public List<Cookie> loadForRequest(HttpUrl url) {
+            if (cookies != null)
+                return cookies;
+            return new ArrayList<>();
+        }
+    }
+
+    @BeforeEach
+    public void init() throws ApiException {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
+        api.setApiClient(new ApiClient(okHttpClient));
+    }
+
     /**
      * @throws ApiException if the Api call fails
      */
     @Test
     public void userSigninPostTest() throws ApiException {
 
-        // Signing in with valid credential should work
-        UserDTO userDTO = new UserDTO().login("user").password("user");
-        api.userSigninPost(userDTO);
-
         // Signing in with invalid credentials should fail with UNAUTHORIZED
+        UserDTO userDTO = new UserDTO().login("user").password("invalid");
         try {
-            api.userSigninPost(userDTO.password("invalid"));
+            api.userSigninPost(userDTO);
             Assertions.fail();
         }
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_UNAUTHORIZED, e.getCode());
+        }
+
+        // Signing in with valid credential should work
+        api.userSigninPost(userDTO.password("user"));
+
+        // Sign in again should fail with CONFLICT
+        try {
+            api.userSigninPost(userDTO);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
         }
     }
 
@@ -53,41 +94,14 @@ public class AuthenticationApiTest {
     @Test
     public void userSignoutPostTest() throws ApiException {
 
-        // Sign in and read the JSESSIONID authentication cookie
+        // Sign in
         UserDTO userDTO = new UserDTO().login("user").password("user");
-        ApiResponse<Void> apiResponse = api.userSigninPostWithHttpInfo(userDTO);
-        String setCookieHeader = apiResponse.getHeaders().get("Set-Cookie").get(0);
-        String jSessionID = setCookieHeader.split("=")[1].split(";")[0];
-
-        // Set a valid session authentication cookie for subsequent calls
-        api.getApiClient().setApiKey(jSessionID);
-
-        // Sign in again with a valid session should fail with CONFLICT
-        // TODO: fix this
-//        try {
-//            api.userSigninPost(userDTO);
-//            Assertions.fail();
-//        }
-//        catch (ApiException e) {
-//            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
-//        }
-
-        // Signing out with a valid session should work
-        api.userSignoutPost();
-
-        // Signing out twice should fail with FORBIDDEN
-        try {
-            api.userSignoutPost();
-            Assertions.fail();
-        }
-        catch (ApiException e) {
-            Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
-        }
-
-        // Sign in again
         api.userSigninPost(userDTO);
 
-        // Signing out with an invalid session should fail with FORBIDDEN
+        // Signing out while signed in should work
+        api.userSignoutPost();
+
+        // Signing out again should fail with FORBIDDEN
         try {
             api.userSignoutPost();
             Assertions.fail();

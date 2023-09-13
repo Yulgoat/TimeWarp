@@ -2,7 +2,6 @@
 
 CPOO Server API
 - API version: 0.0.1
-  - Build date: 2023-09-12T17:41:33.913468+02:00[Europe/Paris]
 
 This is a prototype of CPOO Project's front/back API.
 
