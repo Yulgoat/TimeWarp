@@ -71,6 +71,19 @@ form {
 
 #username {
   margin-bottom: 1em;
+  background-image: url('/assets/icons/user-orange.svg');
+  background-repeat: no-repeat;
+  background-position: left 10px center; /* Ajustez la position de l'image (gauche, centré) */
+  padding-left: 40px; /* Ajoutez de l'espace à gauche de l'input pour l'image */
+  background-size: 20px 20px;
+}
+
+#password{
+  background-image: url('/assets/icons/padlock-orange.svg');
+  background-repeat: no-repeat;
+  background-position: left 10px center; /* Ajustez la position de l'image (gauche, centré) */
+  padding-left: 40px; /* Ajoutez de l'espace à gauche de l'input pour l'image */
+  background-size: 20px 20px;
 }
 
 .form-row input {
@@ -122,7 +135,7 @@ input[type="checkbox"]:checked + label::before {
   margin: 0.5em;
 }
 
-.form-bottom p {
+form p {
   margin: 0;
 }
 
@@ -156,6 +169,9 @@ input[type="checkbox"]:checked + label::before {
 }
 
 /* Create Account Link Styles */
+#create-account{
+  margin: 0.5em;
+}
 #create-account:hover {
   text-decoration: underline;
   cursor: pointer;
