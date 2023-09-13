@@ -17,9 +17,9 @@ export class AppComponent {
   enfants de app.components.html (donc par <app-home-page> , <app-progil-page> et <app-messaging-page>
   */
 
-  home : boolean = false;
+  home : boolean = true;
   settings : boolean = false;
-  login : boolean = true;
+  login : boolean = false;
 
 
   goLogin() : void{

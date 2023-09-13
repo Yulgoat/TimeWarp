@@ -1,0 +1,105 @@
+/* ***************** Header *********************** */
+.home_header{
+    display: flex;
+    justify-content: space-between;
+	background-color: #f8e4d0 ;
+	padding: 0px ;
+	margin: 0px;
+    height: 8.2vh;
+}
+
+.home_header_title{
+    font-family: 'Gliker' ,serif;
+    font-size: 6vh;
+	padding: 0px ;
+	margin: 0% 0% 0% 1%;
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em 0.05em black;
+    color: #fc9631;
+    height: 100%;
+}
+
+.home_header_div_button{
+    width: 7vh;
+	padding: auto 0% auto 0% ;
+	margin: 0% 2% 0% 0%;
+    display: flex;
+    align-items: center;
+    
+}
+
+.home_header_button{
+    margin: 0x;
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.home_header_button_img{
+    width: 100%;
+    height: auto;
+}
+
+/* ************************************************ */
+
+
+/* ***************** Section ********************** */ 
+.home_section {
+    position: relative;
+    height: 91.8vh;
+    background-image: url(../../../assets/images/12498931_4965007.jpeg);
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: -2;
+}
+
+.home_section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(20px);
+    z-index: -1;
+    height: 91.8vh;
+}
+
+
+.home_list{
+    width: 25vw;
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: transparent;
+    border-radius: 30px;
+}
+
+.home_list_title{
+    display: flex;
+	margin: 6% 0% 0% 6%;
+}
+
+.home_list_title_txt{
+    border: solid;
+    font-family: 'Gliker' ,serif;
+    font-size: 4vh;
+	padding: 0px ;
+	margin: 0px;
+    
+}
+
+.home_list_title_button{
+    border: solid;
+}
+
+.home_conversation{
+    width: 60vw;
+    height: 90vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: transparent;
+    border-radius: 30px;
+}
