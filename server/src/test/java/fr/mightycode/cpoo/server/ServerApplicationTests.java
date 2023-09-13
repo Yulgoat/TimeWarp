@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,11 +24,11 @@ class ServerApplicationTests {
   private WebTestClient webClient;
 
   @Test
-  void testSignUpSignIn() throws Exception {
+  void testSignUpSignInSignOut() throws Exception {
 
     // Signing up an existing account should fail with CONFLICT
     mvc.perform(post("/user/signup")
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .contentType(APPLICATION_JSON)
         .content("""
           {
             "login": "admin",
@@ -38,7 +38,7 @@ class ServerApplicationTests {
 
     // Signing up a non-existing account should succeed
     mvc.perform(post("/user/signup")
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .contentType(APPLICATION_JSON)
         .content("""
           {
             "login": "test",
@@ -48,7 +48,7 @@ class ServerApplicationTests {
 
     // Signing up an existing account should fail with CONFLICT
     mvc.perform(post("/user/signup")
-        .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .contentType(APPLICATION_JSON)
         .content("""
           {
             "login": "test",
@@ -56,10 +56,22 @@ class ServerApplicationTests {
           }"""))
       .andExpect(status().isConflict());
 
+    // Signing in with invalid credentials should fail with UNAUTHORIZED
+    webClient.post()
+      .uri("/user/signin")
+      .contentType(APPLICATION_JSON)
+      .bodyValue("""
+        {
+          "login": "user",
+          "password": "invalid"
+        }""")
+      .exchange()
+      .expectStatus().isUnauthorized();
+
     // Signing in a fresh account should succeed
     webClient.post()
       .uri("/user/signin")
-      .contentType(MediaType.APPLICATION_JSON)
+      .contentType(APPLICATION_JSON)
       .bodyValue("""
         {
           "login": "user",
