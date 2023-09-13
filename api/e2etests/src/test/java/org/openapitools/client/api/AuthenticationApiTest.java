@@ -129,5 +129,11 @@ public class AuthenticationApiTest {
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
         }
+
+        // Signing in with the new account should succeed
+        api.userSigninPost(userDTO);
+
+        // Delete the new account
+        api.userDeletePost();
     }
 }

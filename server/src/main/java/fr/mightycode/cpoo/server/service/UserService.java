@@ -41,15 +41,12 @@ public class UserService {
     return false;
   }
 
-  public boolean signout() throws ServletException {
-    final HttpSession session = httpServletRequest.getSession(false);
-    if (session == null)
-      return false;
+  public void signout() throws ServletException {
     httpServletRequest.logout();
-    return true;
   }
 
-  public UserDetails findUser(final String userName) {
-    return userDetailsManager.loadUserByUsername(userName);
+  public void delete() {
+    String username = httpServletRequest.getUserPrincipal().getName();
+    userDetailsManager.deleteUser(username);
   }
 }

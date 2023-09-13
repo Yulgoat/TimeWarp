@@ -10,6 +10,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("user")
 @AllArgsConstructor
@@ -39,10 +41,14 @@ public class UserController {
   @PostMapping(value = "signout")
   public void signout() {
     try {
-      if (!userService.signout())
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not signed in");
+      userService.signout();
     } catch (final ServletException ex) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
+  }
+
+  @PostMapping(value = "delete")
+  public void delete(Principal user) {
+    userService.delete();
   }
 }

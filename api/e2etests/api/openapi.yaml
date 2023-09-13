@@ -79,6 +79,20 @@ paths:
       tags:
       - authentication
       x-accepts: application/json
+  /user/delete:
+    post:
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - authentication
+      x-accepts: application/json
 components:
   schemas:
     UserDTO:
