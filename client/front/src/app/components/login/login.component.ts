@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,17 +8,19 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class LoginComponent {
 
-  /*
-    Cette zone permet de réaliser le changement de page, lors qu'une des fonctions est appellé (après un click sur un bouton), elle va permettre l'envoie
-    d'une message au père (<app.component>) qui va activé la bonne fonction pour changer la page.
-  */
-  @Output() goHome = new EventEmitter<void>();
-
+  constructor(private router:Router){}
 
   loginToHome() : void{
-    this.goHome.emit();
+    this.router.navigate(['/home']);
   }
 
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
+  navigateToCreateAccount(){
+    this.router.navigate(['/create-account'])
+  }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 

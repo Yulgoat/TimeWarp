@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { LoginComponent } from './components/login/login.component';
+import { CreateAccountComponent } from './components/login/create-account/create-account.component';
+import { ForgotPasswordComponent } from './components/login/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SettingsComponent,
-    LoginComponent
+    LoginComponent,
+    CreateAccountComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
