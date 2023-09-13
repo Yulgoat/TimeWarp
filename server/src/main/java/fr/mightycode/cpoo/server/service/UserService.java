@@ -34,8 +34,8 @@ public class UserService {
   public boolean signin(final String login, final String password) throws ServletException {
     final HttpSession session = httpServletRequest.getSession(false);
     if (session == null) {
-      httpServletRequest.getSession(true);
       httpServletRequest.login(login, password);
+      httpServletRequest.getSession(true);
       return true;
     }
     return false;
