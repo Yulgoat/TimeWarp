@@ -1,0 +1,99 @@
+.screen {
+    height: 20vh;
+    width: 20vw;
+    background-color: #ffffff;
+    border: solid;
+    border-color:#fc9631 ;
+    color: #000000;
+    z-index: 50;
+    position: relative;
+    border-radius: 20px;
+}
+
+.screen_head{
+    display: flex;
+    justify-content: space-between;
+    margin : 3% 1% 7% 4%;
+}
+
+.title{
+    font-size: 3vh;
+    width: 70%;
+}
+
+.back_button{
+    width: 10%;
+}
+
+.back_button button{
+    margin: 0x;
+    padding: 0px;
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.back_button img{
+    width: 100%;
+    height: auto;
+}
+
+.contact_who{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+#username_home_popup {
+  background-color: #f8e4d0;
+  color: #fc9631;
+  width: 80%;
+  font-size: 2vh;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border-color: transparent;
+  margin: 0% auto 0% auto;
+  padding-left: 4%;
+}
+
+
+/* Button Styles */
+.contact_who_button {
+    background-color: #fc9631;
+    color: white;
+    width: 60%;
+    font-size: 2vh;
+    margin: 7% auto 0% auto;
+    cursor: pointer;
+    border-radius: 15px;
+  }
+  
+  .contact_who_button:hover {
+    background-color: #f8a95a;
+  }
+  
+  .contact_who_button:active {
+    background-color: #ffcd9a;
+  }
+
+
+
+
+
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 1100px) {
+    .screen{
+        height: 25vh;
+        width: 70vw;
+    }
+    .title{
+        font-size: 6vw;
+    }
+    #username_home_popup{
+        font-size: 4vw;
+    }
+    .contact_who_button {
+        font-size: 4vw;
+    }
+  }

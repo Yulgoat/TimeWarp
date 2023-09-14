@@ -8,6 +8,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/login/create-account/create-account.component';
 import { ForgotPasswordComponent } from './components/login/forgot-password/forgot-password.component';
+import { NewConvPopupComponent } from './components/home/new-conv-popup/new-conv-popup.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ForgotPasswordComponent } from './components/login/forgot-password/forg
     SettingsComponent,
     LoginComponent,
     CreateAccountComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    NewConvPopupComponent
   ],
   imports: [
     BrowserModule,
