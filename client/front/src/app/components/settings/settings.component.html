@@ -1,20 +1,103 @@
-<header class="home_header">
-  <div class ="home_header_title">TimeWarp</div>
+<header class="settings_header">
+  <div class ="settings_header_title">TimeWarp</div>
 
-  <div class="home_header_div_button">
-    <img class="home_header_button" src="../../../assets/icons/home_header_button_active.png">
+  <div class="settings_header_div_button">
+    <img class="settings_header_button" src="../../../assets/icons/home_header_button_active.png">
   </div>
 </header>
 
 
-<section class="home_section">
-  <div class = "home_list_settings">
-      <div class = "home_list_settings_title">    
+
+
+<section class="settings_section">
+
+  <div class = "settings_list">
+      <div class = "settings_list_title">    
         <a>Settings</a>
       </div>  
+
+
+      <div class="settings_choice_list">
+          <div class="settings_choice_list_bis" *ngIf="account;else elseAccount" >
+              <div class = "settings_choice_active" (click)="display_account_settings()">
+                  <img src = "../../../assets/icons/account_settings_white.png">
+                  <a> Account </a>
+              </div>
+          </div>
+          <ng-template #elseAccount>
+              <div class = "settings_choice" (click)="display_account_settings()">
+                  <img src = "../../../assets/icons/account_settings_orange.png">
+                  <a> Account </a>
+              </div>
+          </ng-template>
+
+
+          <div class="settings_choice_list_bis" *ngIf="notifications;else elseNotifications" >
+              <div class = "settings_choice_active" (click)="display_notifications_settings()">
+                <img src = "../../../assets/icons/notifications_settings_white.png">
+                <a> Notifications </a>
+              </div>
+          </div>
+          <ng-template #elseNotifications>
+              <div class = "settings_choice" (click)="display_notifications_settings()">
+                  <img src = "../../../assets/icons/notifications_settings_orange.png">
+                  <a> Notifications </a>
+              </div>
+          </ng-template>
+
+
+          <div class="settings_choice_list_bis" *ngIf="appearance;else elseAppearance" >
+              <div class = "settings_choice_active" (click)="display_appearance_settings()">
+                <img src = "../../../assets/icons/appearance_settings_white.png">
+                <a> Appearance </a>
+              </div>
+          </div>
+          <ng-template #elseAppearance>
+              <div class = "settings_choice" (click)="display_appearance_settings()">
+                  <img src = "../../../assets/icons/appearance_settings_orange.png">
+                  <a> Appearance </a>
+              </div>
+          </ng-template>
+
+
+          <div class="settings_choice_list_bis" *ngIf="language;else elseLanguage" >
+              <div class = "settings_choice_active" (click)="display_language_settings()">
+                <img src = "../../../assets/icons/language_settings_white.png">
+                <a> Language </a>
+              </div>
+          </div>
+          <ng-template #elseLanguage>
+              <div class = "settings_choice" (click)="display_language_settings()">
+                  <img src = "../../../assets/icons/language_settings_orange.png">
+                  <a> Language </a>
+              </div>
+          </ng-template>
+
+
+          <div class="settings_choice_list_bis" *ngIf="acknowlodgements;else elseAcknowlodgements" >
+              <div class = "settings_choice_active" (click)="display_acknowlodgements_settings()">
+                <img src = "../../../assets/icons/acknowledgements_settings_white.png">
+                <a> Acknowledgements </a>
+              </div>
+          </div>
+          <ng-template #elseAcknowlodgements>
+              <div class = "settings_choice" (click)="display_acknowlodgements_settings()">
+                  <img src = "../../../assets/icons/acknowledgements_settings_orange.png">
+                  <a> Acknowledgements </a>
+              </div>
+          </ng-template>
+
+      </div>
   </div>
 
-  <div class = "home_settings"></div>
+
+
+
+  <div class = "settings_part">
+
+  </div>
+
+
 
 </section>
 

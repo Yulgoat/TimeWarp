@@ -1,5 +1,5 @@
 /* ***************** Header *********************** */
-.home_header{
+.settings_header{
     display: flex;
     justify-content: space-between;
 	background-color: #f8e4d0 ;
@@ -9,7 +9,7 @@
     z-index: 5;
 }
 
-.home_header_title{
+.settings_header_title{
     font-family: 'Gliker' ,serif;
     font-size: 6vh;
 	padding: 0px ;
@@ -20,7 +20,7 @@
     height: 100%;
 }
 
-.home_header_div_button{
+.settings_header_div_button{
     width: 7vh;
 	padding: auto 0% auto 0% ;
 	margin: 0% 2% 0% 0%;
@@ -29,7 +29,7 @@
     
 }
 
-.home_header_button{
+.settings_header_button{
     margin: 0x;
     padding: 0px;
     width: 100%;
@@ -46,7 +46,7 @@
 
 
 /* ***************** Section ********************** */ 
-.home_section {
+.settings_section {
     position: relative;
     min-height: 91.8vh;
     background-image: url(../../../assets/images/12498931_4965007.jpeg);
@@ -57,7 +57,7 @@
     z-index: 0;
 }
 
-.home_section::before {
+.settings_section::before {
     content: "";
     position: absolute;
     top: 0;
@@ -74,7 +74,7 @@
 
 
     /* ********************* List Settings ************************** */    
-.home_list_settings{
+.settings_list{
     width: 33vw;
     min-height: 90vh;
     margin-left: 2vw;
@@ -84,17 +84,65 @@
     z-index: 2;
 }
 
-.home_list_settings_title{
+.settings_list_title{
     font-size: 5.5vh;
     width:65%;
     margin: 6% auto 0% auto;
     text-align: center;
 }
 
+.settings_choice_list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    min-height: 70vh;
+    margin: 6% auto 0% auto;
+}
+
+.settings_choice{
+    background-color: #ffffff;
+    border-radius: 50px;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    font-size: 3vh;    
+    cursor: pointer;
+}
+
+.settings_choice_list_bis{
+    width: 100%;
+}
+
+.settings_choice_active{
+    background-color: #fc9631;
+    border-radius: 50px;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    font-size: 3vh;    
+    cursor: pointer;
+    color : #ffffff;
+}
+
+.settings_choice img{
+    height: 70%;
+    width: auto;
+    margin: 0% 6% 0% 4%;
+}
+
+.settings_choice_active img{
+    height: 70%;
+    width: auto;
+    margin: 0% 6% 0% 4%;
+}
 
 
     /* ************************ Settings **************************** */    
-.home_settings{
+.settings_part{
     width: 60vw;
     min-height: 90vh;
     background-color: rgba(255, 255, 255, 0.6);

@@ -19,7 +19,51 @@ export class SettingsComponent {
   }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+account : boolean = false;
+notifications : boolean = false;
+appearance : boolean = false;
+language : boolean = false;
+acknowlodgements : boolean = false;
 
+display_account_settings() {
+  this.account = true;
+  this.notifications = false;
+  this.appearance = false;
+  this.language = false;
+  this.acknowlodgements = false;
+}
+
+display_notifications_settings(){
+  this.account = false;
+  this.notifications = true;
+  this.appearance = false;
+  this.language = false;
+  this.acknowlodgements = false;
+}
+
+display_appearance_settings(){
+  this.account = false;
+  this.notifications = false;
+  this.appearance = true;
+  this.language = false;
+  this.acknowlodgements = false;
+}
+
+display_language_settings(){
+  this.account = false;
+  this.notifications = false;
+  this.appearance = false;
+  this.language = true;
+  this.acknowlodgements = false;
+}
+
+display_acknowlodgements_settings(){
+  this.account = false;
+  this.notifications = false;
+  this.appearance = false;
+  this.language = false;
+  this.acknowlodgements = true;
+}
 
 
 
