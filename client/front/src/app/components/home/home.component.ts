@@ -15,6 +15,20 @@ export class HomeComponent {
   }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+  new_conv_popup : boolean = false;
+
+
+  display_new_conv_popup() {
+    this.new_conv_popup = true;
+  }
+  hide_new_conv_popup() {
+    this.new_conv_popup = false;
+  }
+  /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+  ownprofilpicture : string = "../../../assets/icons/pp_user1.jpg";
+  contact1 : string = "../../../assets/icons/pp_contact1.jpg";
+  contact2 : string = "../../../assets/icons/pp_contact2.jpg";
 
   
 }
