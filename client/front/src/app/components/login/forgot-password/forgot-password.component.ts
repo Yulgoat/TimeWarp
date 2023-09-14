@@ -14,5 +14,9 @@ export class ForgotPasswordComponent {
     this.router.navigate(['/forgot-password-code']);
   }
 
+  navigateToLogin() : void{
+    this.router.navigate(['/login']);
+  }
+
 
 }
