@@ -53,25 +53,11 @@
 .home_section {
     position: relative;
     min-height: 91.8vh;
-    background-image: url(../../../assets/images/12498931_4965007.jpeg);
+    background-image: url(/assets/images/blur-background-60s-1.jpg);
     background-size: cover;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 0;
-}
-
-.home_section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: inherit;
-    filter: blur(20px);
-    z-index: 1;
-    height: 91.8vh;
 }
 
     /* ***************** List of conversation ********************** */ 
