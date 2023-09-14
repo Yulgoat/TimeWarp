@@ -66,6 +66,7 @@
     margin: 7% auto 0% auto;
     cursor: pointer;
     border-radius: 15px;
+    border: 0;
   }
   
   .contact_who_button:hover {
