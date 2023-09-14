@@ -31,7 +31,8 @@
 .section2 {
   font-size: 15px;
   width: 35%;
-  min-height: 100vh; /* Change height to min-height */
+  min-height: 100vh;
+  max-height: 100vh;
   float: left;
   background-color: white;
   display: flex;
@@ -40,6 +41,7 @@
   color: #fc9631;
   flex-direction: column;
   text-align: center; /* Center align text */
+  overflow-y: auto;
 }
 
 /* Max width for the form and its contents within .section2 */
@@ -58,7 +60,7 @@ form {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 500px; /* Add max-width for responsiveness */
+  width: 500px;
   padding: 1em; /* Add some padding */
   box-sizing: border-box; /* Include padding in width */
 }
@@ -130,7 +132,6 @@ input[type="checkbox"]:checked + label::before {
 .form-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: start;
   width: 100%;
   margin: 0.5em;
 }
@@ -182,5 +183,6 @@ form p {
   .section1,
   .section2 {
     width: 100%;
+    max-height: none;
   }
 }
