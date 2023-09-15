@@ -59,7 +59,7 @@
     /* ********************* List Settings ************************** */    
 .settings_list{
     width: 33vw;
-    min-height: 90vh;
+    min-height: 86vh;
     margin-left: 2vw;
     background-color: rgba(255, 255, 255, 0.6);
     border-color: transparent;
@@ -127,7 +127,7 @@
     /* ************************ Settings **************************** */    
 .settings_part{
     width: 60vw;
-    min-height: 90vh;
+    min-height: 86vh;
     background-color: rgba(255, 255, 255, 0.6);
     border-color: transparent;
     border-radius: 30px;
