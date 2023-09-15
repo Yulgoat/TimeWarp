@@ -88,8 +88,8 @@ form div{
 
  #username,#email,#password,#confirm_password {
     background-repeat: no-repeat;
-    background-position: left 10px center; /* Ajustez la position de l'image (gauche, centré) */
-    padding-left: 40px; /* Ajoutez de l'espace à gauche de l'input pour l'image */
+    background-position: left 10px center;
+    padding-left: 40px;
     background-size: 20px 20px;
     background-color: #f8e4d0;
     color: #fc9631;

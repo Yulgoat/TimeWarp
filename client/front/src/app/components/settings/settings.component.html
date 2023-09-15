@@ -94,9 +94,27 @@
 
 
   <div class = "settings_part">
+    <div *ngIf="account" >
+        <app-settings-account></app-settings-account>
+    </div>
+
+    <div *ngIf="notifications" >
+        <app-settings-notifications></app-settings-notifications>
+    </div>
+
+    <div *ngIf="appearance" >
+        <app-settings-appearance></app-settings-appearance>
+    </div>
+
+    <div *ngIf="language" >
+        <app-settings-language></app-settings-language>
+    </div>
+
+    <div *ngIf="acknowlodgements" >
+        <app-settings-acknowlodgements></app-settings-acknowlodgements>
+    </div>
 
   </div>
-
 
 
 </section>
