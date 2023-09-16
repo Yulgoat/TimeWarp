@@ -98,7 +98,7 @@
     align-items: center;
     font-size: 3vh;    
     cursor: pointer;
-    margin-bottom: 1em;
+    margin-bottom: 3vh;
 }
 
 .settings_choice_list_bis{
@@ -107,7 +107,7 @@
 
 .settings_choice_active{
     background-color: #fc9631;
-    border-radius: 50px;
+    border-radius: 30px;
     width: 100%;
     height: 8vh;
     display: flex;
@@ -115,7 +115,7 @@
     font-size: 3vh;    
     cursor: pointer;
     color : #ffffff;
-    margin-bottom: 1em;
+    margin-bottom: 3vh;
 }
 
 .settings_choice img{
@@ -143,4 +143,36 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+    /* ************************************************************** */
+/* ****************************************************************** */
+
+
+
+
+
+/* Base styles for larger screens */
+.settings_part,
+.settings_list t {
+overflow: hidden;
+}
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 1100px) {
+    .settings_part,
+    .settings_list {
+      width: 85vw;
+      margin: 2% 0% 2% 0%;
+    }
+    .settings_section{
+        flex-direction: column;
+    }
+    .settings_choice_list{
+        font-size: 10.5vw;
+    }
+    .settings_choice_active,
+    .settings_choice{
+        font-size: 5.5vw;
+    }
 }
