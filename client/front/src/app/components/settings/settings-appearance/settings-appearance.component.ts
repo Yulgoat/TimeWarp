@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SettingsAppearanceComponent {
 
+  // Arrays to hold image data for the 1960s and 1970s with selection state
   images60s: { src: string; isSelected: boolean }[] = [
     { src: '/assets/images/12498931_4965007.jpeg', isSelected: false },
     { src: '/assets/images/12277065_4945415.jpeg', isSelected: false },
@@ -19,19 +20,23 @@ export class SettingsAppearanceComponent {
     { src: '/assets/images/35237771_8287145.jpeg', isSelected: false }
   ];
 
-  selectedIndex60s: number | null = null;
+  // Variables to keep track of the selected image indices for each era
+  selectedIndex60s: number | null = 0;
   selectedIndex70s: number | null = null;
 
+  // Function to handle image selection
   selectImage(index: number, imageArray: any[], era: string) {
 
+    // Depending on the era, select or deselect images and update the selected index
     if (era === '60s') {
-      this.selectedIndex70s = null; // Désélectionner l'image dans les années 70
-      this.selectedIndex60s = index; // Sélectionner l'image dans les années 60
+      this.selectedIndex70s = null; // Deselect the image in the 70s era
+      this.selectedIndex60s = index; // Select the image in the 60s era
     } else if (era === '70s') {
-      this.selectedIndex60s = null; // Désélectionner l'image dans les années 60
-      this.selectedIndex70s = index; // Sélectionner l'image dans les années 70
+      this.selectedIndex60s = null; // Deselect the image in the 60s era
+      this.selectedIndex70s = index; // Select the image in the 70s era
     }
 
+    // Update the isSelected property of each image for styling
     imageArray.forEach((image, i) => {
       image.isSelected = i === index;
     });
