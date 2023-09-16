@@ -1,17 +1,23 @@
 <div class="container">
     <div class="title">The 1960s</div>
     <div class="imgs-container">
-        <img src="/assets/images/12498931_4965007.jpeg" class="clickable-image">
-        <img src="/assets/images/12277065_4945415.jpeg" class="clickable-image">
-        <img src="/assets/images/12498935_5012660.jpeg" class="clickable-image">
+        <app-image
+            *ngFor="let image of images60s; let i = index"
+            [src]="image.src"
+            [isSelected]="i === selectedIndex60s"
+            (imageClicked)="selectImage(i, images60s, '60s')"
+        ></app-image>
     </div>
 </div>
 
 <div class="container">
     <div class="title">The 1970s</div>
     <div class="imgs-container">
-        <img src="/assets/images/vecteezy_abstract-spiral-starburst-or-sunburst-background-colorful_15261673.jpg" class="clickable-image">
-        <img src="/assets/images/vecteezy_retro-background-groovy-background_6797719.jpg" class="clickable-image">
-        <img src="/assets/images/35237771_8287145.jpeg" class="clickable-image">
+        <app-image
+            *ngFor="let image of images70s; let i = index"
+            [src]="image.src"
+            [isSelected]="i === selectedIndex70s"
+            (imageClicked)="selectImage(i, images70s, '70s')"
+        ></app-image>
     </div>
 </div>
