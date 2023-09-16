@@ -1,0 +1,23 @@
+.container{
+    background-color: white;
+    border-radius: 30px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+
+img{
+    width: 150px;
+    height: 150px;
+    border-radius: 30px;
+    margin-right: 20px;
+    border: 5px solid black;
+    cursor: pointer;
+}
+
+.title{
+    font-size: 2em;
+    margin-bottom: 1em;
+}
