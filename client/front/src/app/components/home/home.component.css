@@ -42,7 +42,7 @@
 }
 
 .home_header_button:active{
-    content: url(../../../assets/icons/home_header_button_active.png);
+    content: url(/assets/icons/home_header_button_active.png);
 }
 
 /* ************************************************ */
