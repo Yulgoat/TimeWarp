@@ -25,17 +25,21 @@
     width: 10%;
 }
 
-.back_button button{
+
+.back_button_img{
     margin: 0x;
     padding: 0px;
-    background-color: transparent;
-    border-color: transparent;
+    width: 100%;
+    height: auto;
     cursor: pointer;
 }
 
-.back_button img{
-    width: 100%;
-    height: auto;
+.back_button_img:hover{
+    content: url(../../../../assets/icons/hide_home_popup_hower.png);
+}
+
+.back_button_img:active{
+    content: url(../../../../assets/icons/hide_home_popup_active.png);
 }
 
 .contact_who{
@@ -65,7 +69,7 @@
     font-size: 2vh;
     margin: 7% auto 0% auto;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 30px;
     border: 0;
   }
   

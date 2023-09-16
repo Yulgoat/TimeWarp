@@ -32,15 +32,19 @@
 .home_header_button{
     margin: 0x;
     padding: 0px;
-    background-color: transparent;
-    border-color: transparent;
+    width: 100%;
+    height: auto;
     cursor: pointer;
 }
 
-.home_header_button img{
-    width: 100%;
-    height: auto;
+.home_header_button:hover{
+    content: url(/assets/icons/home_header_button_hover.png);
 }
+
+.home_header_button:active{
+    content: url(/assets/icons/home_header_button_active.png);
+}
+
 /* ************************************************ */
 
 
@@ -63,7 +67,7 @@
     /* ***************** List of conversation ********************** */ 
 .home_list{
     width: 25vw;
-    min-height: 90vh;
+    min-height: 86vh;
     background-color: rgba(255, 255, 255, 0.6);
     border-color: transparent;
     border-radius: 30px;
@@ -97,20 +101,23 @@
 }
 
 .home_list_title_button{
+    width: 100%;
+    height: auto;
     margin: 0x;
     padding: 0px;
-    background-color: transparent;
-    border-color: transparent;
     cursor: pointer;
     position: relative;
     z-index: 1;
-
 }
 
-.home_list_title_button img{
-    width: 100%;
-    height: auto;
+.home_list_title_button:hover{
+    content: url(../../../assets/icons/new_message_button_hower.png);
 }
+
+.home_list_title_button:active{
+    content: url(../../../assets/icons/new_message_button_active.png);
+}
+
             /* ****************************************************** */    
 
 
@@ -148,7 +155,6 @@
     margin-left: 3%; 
 }
     
-
 .home_list_conversation_active{
     background-color: #fc9631;
 }
@@ -174,7 +180,7 @@
     /* ************************* Conversation *********************** */ 
 .home_conversation{
     width: 60vw;
-    min-height: 90vh;
+    min-height: 86vh;
     background-color: rgba(255, 255, 255, 0.6);
     border-color: transparent;
     border-radius: 30px;
@@ -247,7 +253,6 @@
     border-color: transparent;
     display: flex;
     align-items: center;
-
 }
 
 .home_conversation_tosend_otherfiles{
@@ -257,14 +262,14 @@
     align-items: center;
 }
 
-.home_conversation_tosend_otherfiles img {
+.home_conversation_tosend img {
     width: auto;
-    height: 80%;
-    
+    height: 80%;    
 }
 
 .home_conversation_tosend_message{
     width: 80%;
+    margin: 0% 4% 0% 1%;
 }
 
 .home_conversation_tosend_message input {
@@ -274,10 +279,20 @@
     border-radius: 5px;
 }
 
+.home_conversation_tosend_send{
+    cursor: pointer;
+}
+
+.home_conversation_tosend_send:hover{
+    content: url(../../../assets/icons/send_icon_hower.png);
+}
+
+.home_conversation_tosend_send:active {
+    content: url(../../../assets/icons/send_icon_active.png);
+ }
+
 #message {
     background-position: left 10px center; 
-    padding-left: 10px; 
-    margin-left: 3%;
     background-size: 20px 20px;
     background-color: transparent;
     border-color: transparent;

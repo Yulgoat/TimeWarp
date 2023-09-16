@@ -11,6 +11,11 @@ import { ForgotPasswordComponent } from './components/login/forgot-password/forg
 import { NewConvPopupComponent } from './components/home/new-conv-popup/new-conv-popup.component';
 import { ForgotPasswordCodeComponent } from './components/login/forgot-password/forgot-password-code/forgot-password-code.component';
 import { ForgotPasswordNewComponent } from './components/login/forgot-password/forgot-password-new/forgot-password-new.component';
+import { SettingsAccountComponent } from './components/settings/settings-account/settings-account.component';
+import { SettingsNotificationsComponent } from './components/settings/settings-notifications/settings-notifications.component';
+import { SettingsAppearanceComponent } from './components/settings/settings-appearance/settings-appearance.component';
+import { SettingsLanguageComponent } from './components/settings/settings-language/settings-language.component';
+import { SettingsAcknowlodgementsComponent } from './components/settings/settings-acknowlodgements/settings-acknowlodgements.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { ForgotPasswordNewComponent } from './components/login/forgot-password/f
     ForgotPasswordComponent,
     NewConvPopupComponent,
     ForgotPasswordCodeComponent,
-    ForgotPasswordNewComponent
+    ForgotPasswordNewComponent,
+    SettingsAccountComponent,
+    SettingsNotificationsComponent,
+    SettingsAppearanceComponent,
+    SettingsLanguageComponent,
+    SettingsAcknowlodgementsComponent
   ],
   imports: [
     BrowserModule,

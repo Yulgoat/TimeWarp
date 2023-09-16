@@ -1,0 +1,178 @@
+/* ***************** Header *********************** */
+.settings_header{
+    display: flex;
+    justify-content: space-between;
+	background-color: #f8e4d0 ;
+	padding: 0px ;
+	margin: 0px;
+    height: 8.2vh;
+    z-index: 5;
+}
+
+.settings_header_title{
+    font-size: 6vh;
+	padding: 0px ;
+	margin: 0% 0% 0% 1%;
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em 0.05em black;
+    color: #fc9631;
+    height: 100%;
+}
+
+.settings_header_div_button{
+    width: 7vh;
+	padding: auto 0% auto 0% ;
+	margin: 0% 2% 0% 0%;
+    display: flex;
+    align-items: center;
+    
+}
+
+.settings_header_button{
+    margin: 0x;
+    padding: 0px;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.settings_header_button:hover{
+    content: url(/assets/icons/home_header_button_hover.png);
+}
+
+.settings_header_button:active{
+    content: url(/assets/icons/home_header_button.png);
+}
+/* ************************************************ */
+
+
+
+
+
+
+
+/* ***************** Section ********************** */ 
+.settings_section {
+    position: relative;
+    min-height: 91.8vh;
+    background-image: url(/assets/images/blur-background-60s-1.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+    /* ********************* List Settings ************************** */    
+.settings_list{
+    width: 33vw;
+    min-height: 86vh;
+    margin-left: 2vw;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: transparent;
+    border-radius: 30px;
+    z-index: 2;
+}
+
+.settings_list_title{
+    font-size: 5.5vh;
+    width:65%;
+    margin: 6% auto 0% auto;
+    text-align: center;
+}
+
+.settings_choice_list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    min-height: 70vh;
+    margin: 6% auto 0% auto;
+}
+
+.settings_choice{
+    background-color: #ffffff;
+    border-radius: 30px;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    font-size: 3vh;    
+    cursor: pointer;
+    margin-bottom: 3vh;
+}
+
+.settings_choice_list_bis{
+    width: 100%;
+}
+
+.settings_choice_active{
+    background-color: #fc9631;
+    border-radius: 30px;
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    font-size: 3vh;    
+    cursor: pointer;
+    color : #ffffff;
+    margin-bottom: 3vh;
+}
+
+.settings_choice img{
+    height: 70%;
+    width: auto;
+    margin: 0% 6% 0% 4%;
+}
+
+.settings_choice_active img{
+    height: 70%;
+    width: auto;
+    margin: 0% 6% 0% 4%;
+}
+
+
+    /* ************************ Settings **************************** */    
+.settings_part{
+    width: 60vw;
+    min-height: 86vh;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: transparent;
+    border-radius: 30px;
+    z-index: 2;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+    /* ************************************************************** */
+/* ****************************************************************** */
+
+
+
+
+
+/* Base styles for larger screens */
+.settings_part,
+.settings_list t {
+overflow: hidden;
+}
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 1100px) {
+    .settings_part,
+    .settings_list {
+      width: 85vw;
+      margin: 2% 0% 2% 0%;
+    }
+    .settings_section{
+        flex-direction: column;
+    }
+    .settings_choice_list{
+        font-size: 10.5vw;
+    }
+    .settings_choice_active,
+    .settings_choice{
+        font-size: 5.5vw;
+    }
+}

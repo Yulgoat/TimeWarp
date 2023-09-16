@@ -3,7 +3,7 @@
     <div class ="home_header_title">TimeWarp</div>
 
     <div class="home_header_div_button">
-      <button (click)="homeToSettings()" class="home_header_button"><img src="../../../assets/icons/home_header_button.png"></button>
+      <img (click)="homeToSettings()" class="home_header_button" src="../../../assets/icons/home_header_button.png">
     </div>
   </header>
 
@@ -17,7 +17,7 @@
       <div class = "home_list_title">        
         <div class="home_list_title_txt">Discussions</div>
         <div class="home_list_title_button_div">
-          <button (click)="display_new_conv_popup()" class="home_list_title_button"><img src="../../../assets/icons/new_message_button.png"></button>
+          <img (click)="display_new_conv_popup()" class="home_list_title_button" src="../../../assets/icons/new_message_button.png">
         </div>
       </div>  
 
@@ -114,6 +114,7 @@
         <div class = "home_conversation_tosend_message" >
           <input type="text" id="message" name="Enter a message ..." placeholder="Enter a message ...">
         </div>
+        <img class="home_conversation_tosend_send" src="../../../assets/icons/send_icon.png">
       </div>
 
     
