@@ -77,7 +77,6 @@
 .settings_choice_list{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     width: 85%;
     min-height: 70vh;
