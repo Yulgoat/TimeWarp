@@ -109,6 +109,7 @@
     font-size: 3vh;    
     cursor: pointer;
     color : #ffffff;
+    margin-bottom: 1em;
 }
 
 .settings_choice img{
