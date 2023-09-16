@@ -37,6 +37,13 @@
     cursor: pointer;
 }
 
+.settings_header_button:hover{
+    content: url(/assets/icons/home_header_button_hover.png);
+}
+
+.settings_header_button:active{
+    content: url(/assets/icons/home_header_button.png);
+}
 /* ************************************************ */
 
 
