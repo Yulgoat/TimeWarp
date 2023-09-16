@@ -38,7 +38,7 @@
 }
 
 .home_header_button:hover{
-    content: url(../../../assets/icons/home_header_button_hover.png);
+    content: url(/assets/icons/home_header_button_hover.png);
 }
 
 .home_header_button:active{
