@@ -111,11 +111,11 @@
 }
 
 .home_list_title_button:hover{
-    content: url(../../../assets/icons/new_message_button_hower.png);
+    content: url(/assets/icons/new_message_button_hower.png);
 }
 
 .home_list_title_button:active{
-    content: url(../../../assets/icons/new_message_button_active.png);
+    content: url(/assets/icons/new_message_button_active.png);
 }
 
             /* ****************************************************** */    
@@ -284,11 +284,11 @@
 }
 
 .home_conversation_tosend_send:hover{
-    content: url(../../../assets/icons/send_icon_hower.png);
+    content: url(/assets/icons/send_icon_hower.png);
 }
 
 .home_conversation_tosend_send:active {
-    content: url(../../../assets/icons/send_icon_active.png);
+    content: url(/assets/icons/send_icon_active.png);
  }
 
 #message {

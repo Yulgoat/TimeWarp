@@ -7,7 +7,7 @@
     color: #000000;
     z-index: 50;
     position: relative;
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 .screen_head{
@@ -35,11 +35,11 @@
 }
 
 .back_button_img:hover{
-    content: url(../../../../assets/icons/hide_home_popup_hower.png);
+    content: url(/assets/icons/hide_home_popup_hower.png);
 }
 
 .back_button_img:active{
-    content: url(../../../../assets/icons/hide_home_popup_active.png);
+    content: url(/assets/icons/hide_home_popup_active.png);
 }
 
 .contact_who{
@@ -54,7 +54,7 @@
   width: 80%;
   font-size: 2vh;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 30px;
   border-color: transparent;
   margin: 0% auto 0% auto;
   padding-left: 4%;
