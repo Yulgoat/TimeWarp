@@ -16,6 +16,7 @@ import { SettingsNotificationsComponent } from './components/settings/settings-n
 import { SettingsAppearanceComponent } from './components/settings/settings-appearance/settings-appearance.component';
 import { SettingsLanguageComponent } from './components/settings/settings-language/settings-language.component';
 import { SettingsAcknowlodgementsComponent } from './components/settings/settings-acknowlodgements/settings-acknowlodgements.component';
+import { ImageComponent } from './components/settings/settings-appearance/image/image.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SettingsAcknowlodgementsComponent } from './components/settings/setting
     SettingsNotificationsComponent,
     SettingsAppearanceComponent,
     SettingsLanguageComponent,
-    SettingsAcknowlodgementsComponent
+    SettingsAcknowlodgementsComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
