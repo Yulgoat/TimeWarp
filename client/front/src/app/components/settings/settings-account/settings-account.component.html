@@ -1,1 +1,18 @@
-<p>settings-account works!</p>
+<div [ngStyle]="{'background-image': 'url(' + account_picture + ')'}" class="account_picture">
+</div>
+
+<div class = "account_username">
+    <div class ="account_username_title"> Username : </div>
+    <div class ="account_username_input">
+        <input [(ngModel)]="textContent" (blur)="isEditing = false" (keydown.enter)="isEditing = false" />
+    </div>
+</div>
+
+<div (click)="navigateToChgPwd()" class = "account_pwd">
+    <div class ="account_pwd_title"> Password </div>
+    <img src="/assets/icons/go_chg_pwd.png">
+</div>
+
+<div class = "account_disconnect" (click)="navigateToLogin()">
+    <a>DISCONNECT</a>
+</div>

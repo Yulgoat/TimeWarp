@@ -17,6 +17,8 @@ import { SettingsAppearanceComponent } from './components/settings/settings-appe
 import { SettingsLanguageComponent } from './components/settings/settings-language/settings-language.component';
 import { SettingsAcknowlodgementsComponent } from './components/settings/settings-acknowlodgements/settings-acknowlodgements.component';
 import { ImageComponent } from './components/settings/settings-appearance/image/image.component';
+import { FormsModule } from '@angular/forms';
+import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/settings-chgpwd.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +36,13 @@ import { ImageComponent } from './components/settings/settings-appearance/image/
     SettingsAppearanceComponent,
     SettingsLanguageComponent,
     SettingsAcknowlodgementsComponent,
-    ImageComponent
+    ImageComponent,
+    SettingsChgpwdComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
