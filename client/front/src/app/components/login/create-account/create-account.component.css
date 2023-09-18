@@ -106,9 +106,9 @@ form p {
 .button {
   background-color: #fc9631;
   color: white;
-  width: 170px; /* Add max-width for responsiveness */
+  width: 170px;
   font-size: 1.1em;
-  margin-top: 2em; /* Reduce margin for smaller screens */
+  margin-top: 2em;
   cursor: pointer;
 }
 
