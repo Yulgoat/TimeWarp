@@ -95,7 +95,7 @@
 
   <div class = "settings_part">
     <div *ngIf="account" >
-        <app-settings-account></app-settings-account>
+        <app-settings-account (go_chg_pwd)="display_chgpwd_settings()"></app-settings-account>
     </div>
 
     <div *ngIf="notifications" >
@@ -112,6 +112,10 @@
 
     <div *ngIf="acknowlodgements" >
         <app-settings-acknowlodgements></app-settings-acknowlodgements>
+    </div>
+
+    <div *ngIf="chg_pwd" >
+        <app-settings-chgpwd></app-settings-chgpwd>
     </div>
 
   </div>

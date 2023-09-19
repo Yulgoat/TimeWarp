@@ -24,6 +24,7 @@ notifications : boolean = false;
 appearance : boolean = false;
 language : boolean = false;
 acknowlodgements : boolean = false;
+chg_pwd : boolean = false;
 
 display_account_settings() {
   this.account = true;
@@ -31,6 +32,7 @@ display_account_settings() {
   this.appearance = false;
   this.language = false;
   this.acknowlodgements = false;
+  this.chg_pwd = false;
 }
 
 display_notifications_settings(){
@@ -39,6 +41,7 @@ display_notifications_settings(){
   this.appearance = false;
   this.language = false;
   this.acknowlodgements = false;
+  this.chg_pwd = false;
 }
 
 display_appearance_settings(){
@@ -47,6 +50,7 @@ display_appearance_settings(){
   this.appearance = true;
   this.language = false;
   this.acknowlodgements = false;
+  this.chg_pwd = false;
 }
 
 display_language_settings(){
@@ -55,6 +59,7 @@ display_language_settings(){
   this.appearance = false;
   this.language = true;
   this.acknowlodgements = false;
+  this.chg_pwd = false;
 }
 
 display_acknowlodgements_settings(){
@@ -63,8 +68,16 @@ display_acknowlodgements_settings(){
   this.appearance = false;
   this.language = false;
   this.acknowlodgements = true;
+  this.chg_pwd = false;
 }
 
-
+display_chgpwd_settings(){
+  this.account = false;
+  this.notifications = false;
+  this.appearance = false;
+  this.language = false;
+  this.acknowlodgements = false;
+  this.chg_pwd = true;
+}
 
 }
