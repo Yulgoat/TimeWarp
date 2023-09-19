@@ -8,5 +8,5 @@ img {
   }
 
   img.selected{
-    border-color: #fc9631;
+    border-color: var(--main-color);
 }

@@ -16,3 +16,10 @@ body, html, input {
     margin: 0;
     font-family: "Gliker";
   }
+
+  :root{
+    --main-color: #fc9631;
+    --secondary-color: #f8a95a;
+    --tertiary-color: #ffcd9a;
+    --background-color: #f8e4d0;
+  }

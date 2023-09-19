@@ -2,7 +2,7 @@
 .home_header{
     display: flex;
     justify-content: space-between;
-	background-color: #f8e4d0 ;
+	background-color: var(--background-color);
 	padding: 0px ;
 	margin: 0px;
     height: 8.2vh;
@@ -16,7 +16,7 @@
 	margin: 0% 0% 0% 1%;
     font-weight: bold;
     text-shadow: 0.1em 0.1em 0.05em black;
-    color: #fc9631;
+    color: var(--main-color);
     height: 100%;
 }
 
@@ -166,7 +166,7 @@
 }
     
 .home_list_conversation_active{
-    background-color: #fc9631;
+    background-color: var(--main-color);
 }
             /* ****************************************************** */   
 
