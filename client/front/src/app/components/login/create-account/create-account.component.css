@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fc9631;
+  color: var(--main-color);
   flex-direction: column;
   text-align: center; /* Center align text */
   box-sizing: border-box;
@@ -91,8 +91,8 @@ form div{
     background-position: left 10px center;
     padding-left: 40px;
     background-size: 20px 20px;
-    background-color: #f8e4d0;
-    color: #fc9631;
+    background-color: var(--background-color);
+    color: var(--main-color);
     font-size: 1.1em;
     width: 100%;
     box-sizing: border-box;
@@ -104,7 +104,7 @@ form p {
 
 /* Button Styles */
 .button {
-  background-color: #fc9631;
+  background-color: var(--main-color);
   color: white;
   width: 170px;
   font-size: 1.1em;
@@ -113,11 +113,11 @@ form p {
 }
 
 .button:hover {
-  background-color: #f8a95a;
+  background-color: var(--secondary-color);
 }
 
 .button:active {
-  background-color: #ffcd9a;
+  background-color: var(--tertiary-color);
 }
 
 input {

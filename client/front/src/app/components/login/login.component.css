@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fc9631;
+  color: var(--main-color);
   flex-direction: column;
   text-align: center; /* Center align text */
   overflow-y: auto;
@@ -89,8 +89,8 @@ form {
 }
 
 .form-row input {
-  background-color: #f8e4d0;
-  color: #fc9631;
+  background-color: var(--background-color);
+  color: var(--main-color);
   width: 100%;
   font-size: 1.1em;
   box-sizing: border-box;
@@ -109,14 +109,14 @@ input[type="checkbox"] + label::before {
   display: inline-block;
   width: 1em;
   height: 1em;
-  border: 2px solid #fc9631;
+  border: 2px solid var(--main-color);
   border-radius: 5px;
   margin-right: 0.2em;
   vertical-align: middle;
 }
 
 input[type="checkbox"]:checked + label::before {
-  background-color: #fc9631;
+  background-color: var(--main-color);
 }
 
 /* Form Bottom Styles */
@@ -147,7 +147,7 @@ form p {
 
 /* Button Styles */
 .button {
-  background-color: #fc9631;
+  background-color: var(--main-color);
   color: white;
   width: 170px; /* Add max-width for responsiveness */
   font-size: 1.1em;
@@ -156,11 +156,11 @@ form p {
 }
 
 .button:hover {
-  background-color: #f8a95a;
+  background-color: var(--secondary-color);
 }
 
 .button:active {
-  background-color: #ffcd9a;
+  background-color: var(--tertiary-color);
 }
 
 .form-row input, .button {

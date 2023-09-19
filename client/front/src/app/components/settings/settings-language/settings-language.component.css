@@ -26,7 +26,7 @@ input[type="radio"]{
     -moz-appearance: none;
     appearance: none;
 
-    border: 2px solid #fc9631;
+    border: 2px solid var(--main-color);
     border-radius: 50%;
     transition: 0.2s all linear;
 }
@@ -36,9 +36,9 @@ input[type="radio"] + label{
 }
 
 input[type="radio"]:checked{
-    background-color: #fc9631;
+    background-color: var(--main-color);
 }
 
 input[type="radio"]:checked + label{
-    color: #fc9631;
+    color: var(--main-color);
 }

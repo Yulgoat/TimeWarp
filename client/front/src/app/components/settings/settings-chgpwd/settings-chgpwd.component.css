@@ -1,7 +1,7 @@
 
 h1 {
     font-size: 3em;
-    color: #fc9631;
+    color: var(--main-color);
     width: 100%;
     text-align: center;
     margin-top: 1.5em;
@@ -31,7 +31,7 @@ form div{
     padding-left: 50px;
     background-size: 30px 30px;
     background-color: white;
-    color: #fc9631;
+    color: var(--main-color);
     font-size: 1.1em;
     width: 100%;
     box-sizing: border-box;
@@ -43,7 +43,7 @@ form p {
   
 /* Button Styles */
 .button {
-    background-color: #fc9631;
+    background-color: var(--main-color);
     color: white;
     width: 170px; /* Add max-width for responsiveness */
     font-size: 1.1em;
@@ -52,11 +52,11 @@ form p {
 }
   
 .button:hover {
-    background-color: #f8a95a;
+    background-color: var(--secondary-color);
 }
   
 .button:active {
-    background-color: #ffcd9a;
+    background-color: var(--tertiary-color);
 }
   
 input {
