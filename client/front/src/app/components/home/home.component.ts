@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,18 +8,27 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HomeComponent {
 
-  /*
-    Cette zone permet de réaliser le changement de page, lors qu'une des fonctions est appellé (après un click sur un bouton), elle va permettre l'envoie
-    d'une message au père (<app.component>) qui va activé la bonne fonction pour changer la page.
-  */
-  @Output() goSettings = new EventEmitter<void>();
-
+  constructor(private router:Router){}
 
   homeToSettings() : void{
-    this.goSettings.emit();
+    this.router.navigate(['/settings']);
   }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+  new_conv_popup : boolean = false;
+
+
+  display_new_conv_popup() {
+    this.new_conv_popup = true;
+  }
+  hide_new_conv_popup() {
+    this.new_conv_popup = false;
+  }
+  /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+  ownprofilpicture : string = "../../../assets/icons/pp_user1.jpg";
+  contact1 : string = "../../../assets/icons/pp_contact1.jpg";
+  contact2 : string = "../../../assets/icons/pp_contact2.jpg";
 
   
 }

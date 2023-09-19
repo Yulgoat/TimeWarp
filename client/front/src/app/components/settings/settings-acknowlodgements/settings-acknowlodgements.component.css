@@ -1,0 +1,28 @@
+.ack-div{
+    width: 92%;
+    height: 4em;
+    border-radius: 30px;
+    margin: 1em auto 1em auto;
+    background-color: #ffffff;
+    font-size: 1.5em;
+    color: #000000;
+    display: flex;
+    align-items: center;
+}
+
+#link{
+    color: #000000;
+}
+
+
+.ack_picture{    
+    margin: 0em 1em 0em 1em;
+    width: 2.5em;
+    height: 2.5em;
+    z-index: 5;    
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position : center;
+    background-size: cover;
+}
+

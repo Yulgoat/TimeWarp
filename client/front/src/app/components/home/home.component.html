@@ -1,5 +1,130 @@
-<p>home works!</p>
 
-<div class="inline">
-    <button (click)="homeToSettings()">Settings</button>
+  <header class="home_header">
+    <div class ="home_header_title">TimeWarp</div>
+
+    <div class="home_header_div_button">
+      <img (click)="homeToSettings()" class="home_header_button" src="/assets/icons/home_header_button.png">
+    </div>
+  </header>
+
+
+  <section class="home_section">
+
+
+
+    <div class = "home_list">
+
+      <div class = "home_list_title">        
+        <div class="home_list_title_txt">Discussions</div>
+        <div class="home_list_title_button_div">
+          <img (click)="display_new_conv_popup()" class="home_list_title_button" src="/assets/icons/new_message_button.png">
+        </div>
+      </div>  
+
+      <div class = "home_list_all_conversation">
+        <div class = "home_list_conversation_active">
+          <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="contact_picture"></div>
+          <a> Le Lama</a>
+        </div>
+        <div class = "home_list_conversation">
+          <div [ngStyle]="{'background-image': 'url(' + contact2 + ')'}" class="contact_picture"></div>
+          <a> Le Chameau</a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class = "home_conversation">
+
+      <div class = "home_conversation_messages">
+        <div class = "home_msg_rcv">
+            <div class = "home_msg_info">
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
+              <a>07/08<br>15h21</a>
+            </div>
+            <div class = "home_msg_content">
+              Je crois que mon chef n'a pas d'humour...
+            </div>
+        </div>
+        <div class = "home_msg_send">
+            <div class = "home_msg_content">
+              Qu'est ce que tu as sortis encore ?
+            </div>          
+            <div class = "home_msg_info">
+              <div [ngStyle]="{'background-image': 'url(' + ownprofilpicture + ')'}" class="home_msg_info_picture"></div>
+              <a>07/08<br>15h23</a>
+            </div>
+        </div>
+        <div class = "home_msg_rcv">
+            <div class = "home_msg_info">
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
+              <a>07/08<br>15h28</a>
+            </div>
+            <div class = "home_msg_content">
+              Il m'a demandé si je supportais bien la pression.
+            </div>
+        </div>
+        <div class = "home_msg_rcv">
+            <div class = "home_msg_info">
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
+              <a>07/08<br>15h29</a>
+            </div>
+            <div class = "home_msg_content">
+              Je lui ai répondu que oui, je peux en boire six ou sept avant d'être bourré! 
+            </div>
+        </div>
+        <div class = "home_msg_rcv">
+            <div class = "home_msg_info">
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
+              <a>07/08<br>15h29</a>
+            </div>
+            <div class = "home_msg_content">
+              En plus de passer pour un idiot je passe pour un alcoolique...
+            </div>
+        </div>
+        <div class = "home_msg_rcv">
+            <div class = "home_msg_info">
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
+              <a>09/06<br>17h02</a>
+            </div>
+            <div class = "home_msg_content">
+              Bon !
+            </div>
+        </div>
+        <div class = "home_msg_send">
+          <div class = "home_msg_content">
+            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+            Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des
+            morceaux de texte pour réaliser un livre spécimen de polices de texte.
+          </div>
+          <div class = "home_msg_info">
+            <div [ngStyle]="{'background-image': 'url(' + ownprofilpicture + ')'}" class="home_msg_info_picture"></div>
+            <a>14/09<br>19h38</a>
+          </div>
+        </div>
+
+    </div>
+
+      <div class = "home_conversation_tosend">
+        <div class="home_conversation_tosend_otherfiles">
+          <img src="/assets/icons/other_files_button.png">
+        </div>
+        <div class = "home_conversation_tosend_message" >
+          <input type="text" id="message" name="Enter a message ..." placeholder="Enter a message ...">
+        </div>
+        <img class="home_conversation_tosend_send" src="/assets/icons/send_icon.png">
+      </div>
+
+    
+    </div>
+
+
+  </section> 
+
+  <div *ngIf="new_conv_popup" class="new_conv_popup">
+    <app-new-conv-popup (new_conv_popup)="hide_new_conv_popup()"></app-new-conv-popup>
   </div>
+
+

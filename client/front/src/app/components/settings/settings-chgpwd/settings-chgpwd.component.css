@@ -1,0 +1,66 @@
+
+h1 {
+    font-size: 3em;
+    color: var(--main-color);
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em ;
+}
+  
+/* Form Styles */
+form {
+    margin: 0em auto 0em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 500px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+form div{
+    width: 100%;
+}
+  
+#password, #confirm-password, #old-password {
+    margin-bottom: 1em;
+    background-image: url('/assets/icons/padlock-orange.svg');
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    padding-left: 50px;
+    background-size: 30px 30px;
+    background-color: white;
+    color: var(--main-color);
+    font-size: 1.1em;
+    width: 100%;
+    box-sizing: border-box;
+}
+  
+form p {
+    margin: 0;
+}
+  
+/* Button Styles */
+.button {
+    background-color: var(--main-color);
+    color: white;
+    width: 170px; /* Add max-width for responsiveness */
+    font-size: 1.1em;
+    margin-top: 2em; /* Reduce margin for smaller screens */
+    cursor: pointer;
+}
+  
+.button:hover {
+    background-color: var(--secondary-color);
+}
+  
+.button:active {
+    background-color: var(--tertiary-color);
+}
+  
+input {
+    border: 0;
+    border-radius: 30px;
+    padding: 1em;
+}

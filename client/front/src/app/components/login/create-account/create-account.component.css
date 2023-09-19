@@ -1,0 +1,144 @@
+/* Base styles for larger screens */
+.section1,
+.section2 {
+  overflow: hidden;
+}
+
+/* Section 1 Styles */
+.section1 {
+    font-size: 30px;
+    width: 65%;
+    min-height: 100vh; /* Change height to min-height */
+    float: left;
+    background-size: cover;
+    background-position: center;
+    background-image: url('/assets/images/12498931_4965007.jpeg');
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center align vertically */
+  }
+  
+  .section1 h1,
+  .section1 p {
+    margin: 0.4em;
+    text-shadow: 0.1em 0.1em 0.05em black;
+  }
+
+/* Section 2 Styles */
+.section2 {
+  font-size: 15px;
+  width: 35%;
+  min-height: 100vh;
+  max-height: 100vh;
+  float: left;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-color);
+  flex-direction: column;
+  text-align: center; /* Center align text */
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Max width for the form and its contents within .section2 */
+.section2 form {
+  max-width: 100%;
+}
+
+.section2 h1 {
+  font-size: 3em;
+  padding-bottom: 1.2em;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 500px;
+  padding: 1em; /* Add some padding */
+  box-sizing: border-box; /* Include padding in width */
+}
+form div{
+    width: 100%;
+}
+#username {
+  margin-bottom: 1em;
+  background-image: url('/assets/icons/user-orange.svg');
+}
+#email {
+    margin-bottom: 1em;
+    background-image: url('/assets/icons/email-orange.svg');
+}
+
+#password{
+    margin-bottom: 1em;
+    background-image: url('/assets/icons/padlock-orange.svg');
+}
+
+#confirm_password {
+    background-image: url('/assets/icons/padlock-orange.svg');
+ }
+
+ #username,#email,#password,#confirm_password {
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    padding-left: 40px;
+    background-size: 20px 20px;
+    background-color: var(--background-color);
+    color: var(--main-color);
+    font-size: 1.1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+form p {
+  margin: 0;
+}
+
+/* Button Styles */
+.button {
+  background-color: var(--main-color);
+  color: white;
+  width: 170px;
+  font-size: 1.1em;
+  margin-top: 2em;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+}
+
+.button:active {
+  background-color: var(--tertiary-color);
+}
+
+input {
+  border: 0;
+  border-radius: 30px;
+  padding: 1em;
+}
+
+#back{
+  margin: 0.5em;
+}
+#back:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 768px) {
+  .section1,
+  .section2 {
+    width: 100%;
+    max-height: none;
+  }
+}

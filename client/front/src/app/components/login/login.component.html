@@ -1,5 +1,39 @@
-<p>login works!</p>
+<div class="section1">
+  <h1>Welcome to TimeWarp</h1>
+  <p>Travel through Time, one message at a Time!</p>
+</div>
 
-<div class="inline">
-    <button (click)="loginToHome()">Home</button>
-  </div>
+<div class="section2">
+  <h1>USER LOGIN</h1>
+  <form>
+    <!-- Form Row containing Username and Password input fields -->
+    <div class="form-row">
+      <div>
+        <input type="text" id="username" name="username" placeholder="Username">
+      </div>
+      <div>
+        <input type="password" id="password" name="password" placeholder="Password">
+      </div>
+    </div>
+
+    <!-- Form Bottom containing Remember Me checkbox and Forgot Password link -->
+    <div class="form-bottom">
+      <div>
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">Remember me</label>
+      </div>
+      <div>
+        <!-- Forgot Password link -->
+        <p><a id="forgot-password" (click)="navigateToForgotPassword()">Forgot password ?</a></p>
+      </div>
+    </div>
+
+    <!-- Login button -->
+    <div>
+      <input type="submit" value="LOGIN" class="button" (click)="loginToHome()">
+    </div>
+    
+    <!-- Create Account link -->
+    <p id="create-account"><a (click)="navigateToCreateAccount()">Create account</a></p>
+  </form>
+</div>

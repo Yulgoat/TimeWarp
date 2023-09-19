@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="title">The 1960s</div>
+    <div class="imgs-container">
+        <app-image
+            *ngFor="let image of images60s; let i = index"
+            [src]="image.src"
+            [isSelected]="i === selectedIndex60s"
+            (imageClicked)="selectImage(i, images60s, '60s')"
+        ></app-image>
+    </div>
+</div>
+
+<div class="container">
+    <div class="title">The 1970s</div>
+    <div class="imgs-container">
+        <app-image
+            *ngFor="let image of images70s; let i = index"
+            [src]="image.src"
+            [isSelected]="i === selectedIndex70s"
+            (imageClicked)="selectImage(i, images70s, '70s')"
+        ></app-image>
+    </div>
+</div>
