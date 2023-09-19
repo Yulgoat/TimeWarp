@@ -23,11 +23,11 @@
 
       <div class = "home_list_all_conversation">
         <div class = "home_list_conversation_active">
-          <img src={{contact1}}>
+          <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="contact_picture"></div>
           <a> Le Lama</a>
         </div>
         <div class = "home_list_conversation">
-          <img src={{contact2}}>
+          <div [ngStyle]="{'background-image': 'url(' + contact2 + ')'}" class="contact_picture"></div>
           <a> Le Chameau</a>
         </div>
       </div>
@@ -41,7 +41,7 @@
       <div class = "home_conversation_messages">
         <div class = "home_msg_rcv">
             <div class = "home_msg_info">
-              <img src={{contact1}}>
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
               <a>07/08<br>15h21</a>
             </div>
             <div class = "home_msg_content">
@@ -53,13 +53,13 @@
               Qu'est ce que tu as sortis encore ?
             </div>          
             <div class = "home_msg_info">
-              <img src={{ownprofilpicture}}>
+              <div [ngStyle]="{'background-image': 'url(' + ownprofilpicture + ')'}" class="home_msg_info_picture"></div>
               <a>07/08<br>15h23</a>
             </div>
         </div>
         <div class = "home_msg_rcv">
             <div class = "home_msg_info">
-              <img src={{contact1}}>
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
               <a>07/08<br>15h28</a>
             </div>
             <div class = "home_msg_content">
@@ -68,7 +68,7 @@
         </div>
         <div class = "home_msg_rcv">
             <div class = "home_msg_info">
-              <img src={{contact1}}>
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
               <a>07/08<br>15h29</a>
             </div>
             <div class = "home_msg_content">
@@ -77,7 +77,7 @@
         </div>
         <div class = "home_msg_rcv">
             <div class = "home_msg_info">
-              <img src={{contact1}}>
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
               <a>07/08<br>15h29</a>
             </div>
             <div class = "home_msg_content">
@@ -86,7 +86,7 @@
         </div>
         <div class = "home_msg_rcv">
             <div class = "home_msg_info">
-              <img src={{contact1}}>
+              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
               <a>09/06<br>17h02</a>
             </div>
             <div class = "home_msg_content">
@@ -100,7 +100,7 @@
             morceaux de texte pour réaliser un livre spécimen de polices de texte.
           </div>
           <div class = "home_msg_info">
-            <img src={{ownprofilpicture}}>
+            <div [ngStyle]="{'background-image': 'url(' + ownprofilpicture + ')'}" class="home_msg_info_picture"></div>
             <a>14/09<br>19h38</a>
           </div>
         </div>
@@ -126,3 +126,5 @@
   <div *ngIf="new_conv_popup" class="new_conv_popup">
     <app-new-conv-popup (new_conv_popup)="hide_new_conv_popup()"></app-new-conv-popup>
   </div>
+
+

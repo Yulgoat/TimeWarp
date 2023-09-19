@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-settings-chgpwd',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./settings-chgpwd.component.css']
 })
 export class SettingsChgpwdComponent {
+  @Output() go_account = new EventEmitter<void>();
+
+  navigateToAccount() : void{
+    this.go_account.emit();
+  }
 
 }

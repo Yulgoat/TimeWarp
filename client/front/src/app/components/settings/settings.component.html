@@ -115,7 +115,7 @@
     </div>
 
     <div *ngIf="chg_pwd" >
-        <app-settings-chgpwd></app-settings-chgpwd>
+        <app-settings-chgpwd (go_account)="display_account_settings()"></app-settings-chgpwd>
     </div>
 
   </div>
