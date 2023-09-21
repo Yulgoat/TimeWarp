@@ -90,7 +90,9 @@ components:
     UserDTO:
       type: object
       properties:
-        login:
+        username:
+          type: string
+        email:
           type: string
         password:
           type: string
