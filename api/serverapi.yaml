@@ -108,7 +108,7 @@ paths:
     get:
       tags:
         - messaging
-      summary: Get a list of all conversations
+      summary: Get a list of all discussions
       responses:
         '200':
           description: Successful response
@@ -142,7 +142,7 @@ paths:
     post:
       tags:
         - messaging
-      summary: Send a message in a conversation
+      summary: Send a message in a disccusion
       parameters:
         - name: discussion_id
           in: path
@@ -168,7 +168,7 @@ paths:
     post:
       tags:
         - messaging
-      summary: Create a new conversation
+      summary: Create a new discussion
       requestBody:
         required: true
         content:
