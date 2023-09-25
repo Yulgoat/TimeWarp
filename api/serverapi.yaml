@@ -85,6 +85,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+  /user/settings:
+    get:
+      tags:
+        - user
+      summary: Get user settings information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
                 
   /discussions:
     get:
@@ -146,7 +164,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-                
   /discussions/create:
     post:
       tags:
@@ -174,6 +191,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+                
 components:
   schemas:
     UserDTO:
@@ -184,6 +202,19 @@ components:
         email:
           type: string
         password:
+          type: string
+    UserSettingsDTO:
+      type: object
+      properties:
+        theme:
+          type: string
+        language:
+          type: string
+        UnreadBadges:
+          type: boolean
+        NotificationSound:
+          type: boolean
+        profileImage:
           type: string
     MessageDTO:
       type: object
