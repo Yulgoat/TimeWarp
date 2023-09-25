@@ -85,6 +85,95 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+                
+  /discussions:
+    get:
+      tags:
+        - messaging
+      summary: Get a list of all conversations
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscussionDTO'
+                  
+  /discussions/{discussion_id}/messages:
+    get:
+      tags:
+        - messaging
+      summary: Get all messages in a conversation
+      parameters:
+        - name: discussion_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageDTO'
+    post:
+      tags:
+        - messaging
+      summary: Send a message in a conversation
+      parameters:
+        - name: discussion_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDTO'
+      responses:
+        '200':
+          description: Message sent successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+                
+  /discussions/create:
+    post:
+      tags:
+        - messaging
+      summary: Create a new conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                participants:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - participants
+      responses:
+        '200':
+          description: Conversation created successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
 components:
   schemas:
     UserDTO:
@@ -96,6 +185,26 @@ components:
           type: string
         password:
           type: string
+    MessageDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        sender:
+          type: string
+        timestamp:
+          type: string
+    DiscussionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        participants:
+          type: array
+          items:
+            type: string
     ErrorDTO:
       type: object
       properties:
