@@ -123,6 +123,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+  /user/account/chgusername:
+    patch:
+      tags:
+        - account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/account/changepp:
+    patch:
+      tags:
+        - account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
   /user/changepwd:
     patch:
       tags : 
@@ -142,6 +187,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+  /user/disconnect:
+    post:
+      tags:
+        - account
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/notifications:
+    patch:
+      tags:
+        - notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/NotificationsDTO'
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
   /user/change-theme:
     patch:
       tags:
@@ -164,7 +242,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorDTO'               
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/language:
+    patch:
+      tags:
+        - language
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
   /discussions:
     get:
       tags:
@@ -296,19 +397,6 @@ components:
           type: array
           items:
             type: string
-    ErrorDTO:
-      type: object
-      properties:
-        timestamp:
-          type: string
-        status:
-          type: integer
-        error:
-          type: string
-        message:
-          type: string
-        path:
-          type: string
     NewPasswordDTO:
       type : object
       properties :
@@ -327,6 +415,26 @@ components:
           type : string
         new-password : 
           type : string
+    NotificationsDTO:
+      type: object
+      properties:
+        sounds:
+          type: string
+        badges:
+          type: string
+    ErrorDTO:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
   securitySchemes:
     CookieAuth:
       type: apiKey
