@@ -85,6 +85,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+  /user/forgotpwd:
+    post:
+      tags : 
+       - forgot-pwd
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/NewPasswordDTO'
+                  
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
   /user/settings:
     get:
       tags:
@@ -191,7 +211,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-                
 components:
   schemas:
     UserDTO:
@@ -249,6 +268,17 @@ components:
           type: string
         path:
           type: string
+    NewPasswordDTO:
+      type : object
+      properties :
+        email:
+          type : string
+        code :
+          type : integer
+        password :
+          type : string
+        confirm-password : 
+          type : string
   securitySchemes:
     CookieAuth:
       type: apiKey
