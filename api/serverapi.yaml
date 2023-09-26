@@ -123,7 +123,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-                
+  /user/changepwd:
+    patch:
+      tags : 
+       - change-pwd
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/ChangePasswordDTO'
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/change-theme:
+    patch:
+      tags:
+        - user
+      summary: Change user theme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                themeId:
+                  type: integer
+      responses:
+        '200':
+          description: Theme changed successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'               
   /discussions:
     get:
       tags:
@@ -278,6 +319,13 @@ components:
         password :
           type : string
         confirm-password : 
+          type : string
+    ChangePasswordDTO:
+      type : object
+      properties :
+        old-password:
+          type : string
+        new-password : 
           type : string
   securitySchemes:
     CookieAuth:
