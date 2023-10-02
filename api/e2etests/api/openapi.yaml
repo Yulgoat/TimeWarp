@@ -12,11 +12,16 @@ servers:
 security:
 - CookieAuth: []
 tags:
-- description: User authentication.
+- description: Authentication endpoints.
   name: authentication
+- description: Administration endpoints.
+  name: administration
+- description: Message management endpoints.
+  name: message
 paths:
   /user/signup:
     post:
+      description: Create a user account with provided credentials.
       requestBody:
         content:
           application/json:
@@ -26,6 +31,8 @@ paths:
       responses:
         "200":
           description: Success
+        "409":
+          description: "Conflict: a user account with the same login already exists."
         default:
           content:
             application/json:
@@ -33,12 +40,14 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       security: []
+      summary: Sign up to the service
       tags:
       - authentication
       x-content-type: application/json
       x-accepts: application/json
   /user/signin:
     post:
+      description: Sign in using provided credentials and create a user session.
       requestBody:
         content:
           application/json:
@@ -47,13 +56,16 @@ paths:
         required: true
       responses:
         "200":
-          description: Success
+          description: "Success: a user session is created and a session cookie is\
+            \ returned."
           headers:
             Set-Cookie:
               explode: false
               schema:
                 type: string
               style: simple
+        "401":
+          description: "Unauthorized: invalid login or password."
         default:
           content:
             application/json:
@@ -61,40 +73,76 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       security: []
+      summary: Sign in to the service
       tags:
       - authentication
       x-content-type: application/json
       x-accepts: application/json
   /user/signout:
     post:
+      description: Sign out and close the user session.
       responses:
         "200":
-          description: Success
+          description: "Success: the user session is closed."
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
+      summary: Sign out from the service
       tags:
       - authentication
       x-accepts: application/json
-  /user/delete:
-    post:
+  /user/{login}:
+    delete:
+      description: Delete the account of the user matching the given login. Only the
+        administrator can use this endpoint.
+      parameters:
+      - description: login of the user account to delete.
+        explode: false
+        in: path
+        name: login
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           description: Success
+        "404":
+          description: "Not found: User account not found."
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
+      summary: Delete a user account
       tags:
-      - authentication
+      - administration
       x-accepts: application/json
 components:
   schemas:
+    MessageDTO:
+      properties:
+        id:
+          format: uuid
+          type: string
+        from:
+          example: alice@acme
+          type: string
+        to:
+          example: bob@acme
+          type: string
+        type:
+          example: text/plain
+          format: mime
+          type: string
+        body:
+          example: This is the message
+          type: string
+      type: object
     UserDTO:
       example:
         password: password
@@ -103,6 +151,7 @@ components:
         login:
           type: string
         password:
+          format: password
           type: string
       type: object
     ErrorDTO:

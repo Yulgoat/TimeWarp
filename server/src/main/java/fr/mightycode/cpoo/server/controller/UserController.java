@@ -47,8 +47,9 @@ public class UserController {
     }
   }
 
-  @PostMapping(value = "delete")
-  public void delete(Principal user) {
-    userService.delete();
+  @DeleteMapping(value = "/{login}")
+  public void delete(Principal user, @PathVariable("login") String login) {
+    if (!userService.delete(login))
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
   }
 }

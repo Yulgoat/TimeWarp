@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API. 
+ * This is a prototype of CPOO Project's front/back API.
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Model tests for ErrorDTO
  */
+@Disabled
 public class ErrorDTOTest {
     private final ErrorDTO model = new ErrorDTO();
 

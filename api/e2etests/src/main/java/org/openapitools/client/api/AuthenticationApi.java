@@ -74,119 +74,6 @@ public class AuthenticationApi {
     }
 
     /**
-     * Build call for userDeletePost
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userDeletePostCall(final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/user/delete";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "CookieAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call userDeletePostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return userDeletePostCall(_callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public void userDeletePost() throws ApiException {
-        userDeletePostWithHttpInfo();
-    }
-
-    /**
-     * 
-     * 
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> userDeletePostWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = userDeletePostValidateBeforeCall(null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userDeletePostAsync(final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = userDeletePostValidateBeforeCall(_callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for userSigninPost
      * @param userDTO  (required)
      * @param _callback Callback for upload/download progress
@@ -195,7 +82,8 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -256,14 +144,15 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     * 
+     * Sign in to the service
+     * Sign in using provided credentials and create a user session.
      * @param userDTO  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -272,15 +161,16 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     * 
+     * Sign in to the service
+     * Sign in using provided credentials and create a user session.
      * @param userDTO  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -290,8 +180,8 @@ public class AuthenticationApi {
     }
 
     /**
-     *  (asynchronously)
-     * 
+     * Sign in to the service (asynchronously)
+     * Sign in using provided credentials and create a user session.
      * @param userDTO  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -299,7 +189,8 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -317,7 +208,7 @@ public class AuthenticationApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -372,13 +263,13 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     * 
+     * Sign out from the service
+     * Sign out and close the user session.
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -387,14 +278,14 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     * 
+     * Sign out from the service
+     * Sign out and close the user session.
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -404,15 +295,15 @@ public class AuthenticationApi {
     }
 
     /**
-     *  (asynchronously)
-     * 
+     * Sign out from the service (asynchronously)
+     * Sign out and close the user session.
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -432,6 +323,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -492,14 +384,15 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     * 
+     * Sign up to the service
+     * Create a user account with provided credentials.
      * @param userDTO  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -508,8 +401,8 @@ public class AuthenticationApi {
     }
 
     /**
-     * 
-     * 
+     * Sign up to the service
+     * Create a user account with provided credentials.
      * @param userDTO  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -517,6 +410,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -526,8 +420,8 @@ public class AuthenticationApi {
     }
 
     /**
-     *  (asynchronously)
-     * 
+     * Sign up to the service (asynchronously)
+     * Create a user account with provided credentials.
      * @param userDTO  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -536,6 +430,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */

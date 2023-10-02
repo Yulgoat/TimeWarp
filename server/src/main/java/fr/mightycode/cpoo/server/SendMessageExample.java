@@ -23,7 +23,7 @@ public class SendMessageExample {
   RouterService routerService;
 
   // Build Merkle blocks every 30s
-  @Scheduled(cron = "* * * * * ?")
+//  @Scheduled(cron = "* * * * * ?")
   public void ping() {
     try {
       RouterService.Message message = new RouterService.Message(UUID.randomUUID(), "alice@acme", "bob@acme",
