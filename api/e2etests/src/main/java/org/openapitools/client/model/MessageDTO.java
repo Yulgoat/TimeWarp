@@ -72,6 +72,10 @@ public class MessageDTO {
   @SerializedName(SERIALIZED_NAME_BODY)
   private String body;
 
+  public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
+  @SerializedName(SERIALIZED_NAME_TIMESTAMP)
+  private String timestamp;
+
   public MessageDTO() {
   }
 
@@ -180,6 +184,27 @@ public class MessageDTO {
   }
 
 
+  public MessageDTO timestamp(String timestamp) {
+    
+    this.timestamp = timestamp;
+    return this;
+  }
+
+   /**
+   * Get timestamp
+   * @return timestamp
+  **/
+  @javax.annotation.Nullable
+  public String getTimestamp() {
+    return timestamp;
+  }
+
+
+  public void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -194,12 +219,13 @@ public class MessageDTO {
         Objects.equals(this.from, messageDTO.from) &&
         Objects.equals(this.to, messageDTO.to) &&
         Objects.equals(this.type, messageDTO.type) &&
-        Objects.equals(this.body, messageDTO.body);
+        Objects.equals(this.body, messageDTO.body) &&
+        Objects.equals(this.timestamp, messageDTO.timestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, from, to, type, body);
+    return Objects.hash(id, from, to, type, body, timestamp);
   }
 
   @Override
@@ -211,6 +237,7 @@ public class MessageDTO {
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    body: ").append(toIndentedString(body)).append("\n");
+    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -238,6 +265,7 @@ public class MessageDTO {
     openapiFields.add("to");
     openapiFields.add("type");
     openapiFields.add("body");
+    openapiFields.add("timestamp");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -278,6 +306,9 @@ public class MessageDTO {
       }
       if ((jsonObj.get("body") != null && !jsonObj.get("body").isJsonNull()) && !jsonObj.get("body").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `body` to be a primitive type in the JSON string but got `%s`", jsonObj.get("body").toString()));
+      }
+      if ((jsonObj.get("timestamp") != null && !jsonObj.get("timestamp").isJsonNull()) && !jsonObj.get("timestamp").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `timestamp` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timestamp").toString()));
       }
   }
 

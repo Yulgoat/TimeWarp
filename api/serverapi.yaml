@@ -111,6 +111,274 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+  /user/forgotpwd:
+    post:
+      tags : 
+       - forgot-pwd
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/NewPasswordDTO'
+                  
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/settings:
+    get:
+      tags:
+        - user
+      summary: Get user settings information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/account/chgusername:
+    patch:
+      tags:
+        - account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/account/changepp:
+    patch:
+      tags:
+        - account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+  /user/changepwd:
+    patch:
+      tags : 
+       - change-pwd
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/ChangePasswordDTO'
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/disconnect:
+    post:
+      tags:
+        - account
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/notifications:
+    patch:
+      tags:
+        - notifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/NotificationsDTO'
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+  /user/change-theme:
+    patch:
+      tags:
+        - appearance
+      summary: Change user theme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                themeId:
+                  type: integer
+      responses:
+        '200':
+          description: Theme changed successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /user/language:
+    patch:
+      tags:
+        - language
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+
+  /discussions:
+    get:
+      tags:
+        - messaging
+      summary: Get a list of all discussions
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DiscussionDTO'
+                  
+  /discussions/{discussion_id}/messages:
+    get:
+      tags:
+        - messaging
+      summary: Get all messages in a conversation
+      parameters:
+        - name: discussion_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageDTO'
+    post:
+      tags:
+        - messaging
+      summary: Send a message in a disccusion
+      parameters:
+        - name: discussion_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDTO'
+      responses:
+        '200':
+          description: Message sent successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  /discussions/create:
+    post:
+      tags:
+        - messaging
+      summary: Create a new discussion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                participants:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - participants
+      responses:
+        '200':
+          description: Conversation created successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
 components:
   schemas:
     MessageDTO:
@@ -132,14 +400,65 @@ components:
         body:
           type: string
           example: This is the message
+        timestamp:
+          type: string
     UserDTO:
       type: object
       properties:
-        login:
+        username:
+          type: string
+        email:
           type: string
         password:
           type: string
-          format: password
+          format : password
+    UserSettingsDTO:
+      type: object
+      properties:
+        theme:
+          type: string
+        language:
+          type: string
+        UnreadBadges:
+          type: boolean
+        NotificationSound:
+          type: boolean
+        profileImage:
+          type: string
+    DiscussionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        participants:
+          type: array
+          items:
+            type: string
+    NewPasswordDTO:
+      type : object
+      properties :
+        email:
+          type : string
+        code :
+          type : integer
+        password :
+          type : string
+        confirm-password : 
+          type : string
+    ChangePasswordDTO:
+      type : object
+      properties :
+        old-password:
+          type : string
+        new-password : 
+          type : string
+    NotificationsDTO:
+      type: object
+      properties:
+        sounds:
+          type: string
+        badges:
+          type: string
     ErrorDTO:
       type: object
       properties:

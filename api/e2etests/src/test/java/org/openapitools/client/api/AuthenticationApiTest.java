@@ -49,7 +49,7 @@ public class AuthenticationApiTest {
     public void userSigninPostTest() throws ApiException {
 
         // Signing in with invalid credentials should fail with UNAUTHORIZED
-        UserDTO userDTO = new UserDTO().login("user").password("invalid");
+        UserDTO userDTO = new UserDTO().username("user").password("invalid");
         try {
             authenticationApi.userSigninPost(userDTO);
             Assertions.fail();
@@ -78,7 +78,7 @@ public class AuthenticationApiTest {
     public void userSignoutPostTest() throws ApiException {
 
         // Sign in
-        UserDTO userDTO = new UserDTO().login("user").password("user");
+        UserDTO userDTO = new UserDTO().username("user").password("user");
         authenticationApi.userSigninPost(userDTO);
 
         // Signing out while signed in should work
@@ -101,9 +101,9 @@ public class AuthenticationApiTest {
     public void userSignupPostTest() throws ApiException {
 
         // Delete the test account if exists
-        authenticationApi.userSigninPost(new UserDTO().login("admin").password("admin"));
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
         try {
-            administrationApi.userLoginDelete("test");
+            administrationApi.userUsernameDelete("test");
         }
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
@@ -111,7 +111,7 @@ public class AuthenticationApiTest {
         authenticationApi.userSignoutPost();
 
         // Signing up a new account should work
-        UserDTO testUser = new UserDTO().login("test").password("test");
+        UserDTO testUser = new UserDTO().username("test").email("test").password("test");
         authenticationApi.userSignupPost(testUser);
 
         // Signing up twice the same account should fail with CONFLICT

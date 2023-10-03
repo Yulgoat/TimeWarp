@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API.
+ * This is a prototype of CPOO Project's front/back API. 
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -24,34 +24,33 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for UserDTO
+ * Model tests for ChangePasswordDTO
  */
-@Disabled
-public class UserDTOTest {
-    private final UserDTO model = new UserDTO();
+public class ChangePasswordDTOTest {
+    private final ChangePasswordDTO model = new ChangePasswordDTO();
 
     /**
-     * Model tests for UserDTO
+     * Model tests for ChangePasswordDTO
      */
     @Test
-    public void testUserDTO() {
-        // TODO: test UserDTO
+    public void testChangePasswordDTO() {
+        // TODO: test ChangePasswordDTO
     }
 
     /**
-     * Test the property 'username'
+     * Test the property 'oldPassword'
      */
     @Test
-    public void usernameTest() {
-        // TODO: test username
+    public void oldPasswordTest() {
+        // TODO: test oldPassword
     }
 
     /**
-     * Test the property 'password'
+     * Test the property 'newPassword'
      */
     @Test
-    public void passwordTest() {
-        // TODO: test password
+    public void newPasswordTest() {
+        // TODO: test newPassword
     }
 
 }

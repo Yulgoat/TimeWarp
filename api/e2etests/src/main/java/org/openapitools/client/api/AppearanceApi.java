@@ -28,6 +28,7 @@ import java.io.IOException;
 
 
 import org.openapitools.client.model.ErrorDTO;
+import org.openapitools.client.model.UserChangeThemePatchRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,16 +36,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AdministrationApi {
+public class AppearanceApi {
     private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public AdministrationApi() {
+    public AppearanceApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public AdministrationApi(ApiClient apiClient) {
+    public AppearanceApi(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
@@ -73,20 +74,19 @@ public class AdministrationApi {
     }
 
     /**
-     * Build call for userUsernameDelete
-     * @param username username of the user account to delete. (required)
+     * Build call for userChangeThemePatch
+     * @param userChangeThemePatchRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not found: User account not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Theme changed successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userUsernameDeleteCall(String username, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call userChangeThemePatchCall(UserChangeThemePatchRequest userChangeThemePatchRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -100,11 +100,10 @@ public class AdministrationApi {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = userChangeThemePatchRequest;
 
         // create path and map variables
-        String localVarPath = "/user/{username}"
-            .replace("{" + "username" + "}", localVarApiClient.escapeString(username.toString()));
+        String localVarPath = "/user/change-theme";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -121,6 +120,7 @@ public class AdministrationApi {
         }
 
         final String[] localVarContentTypes = {
+            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -128,74 +128,71 @@ public class AdministrationApi {
         }
 
         String[] localVarAuthNames = new String[] { "CookieAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call userUsernameDeleteValidateBeforeCall(String username, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'username' is set
-        if (username == null) {
-            throw new ApiException("Missing the required parameter 'username' when calling userUsernameDelete(Async)");
+    private okhttp3.Call userChangeThemePatchValidateBeforeCall(UserChangeThemePatchRequest userChangeThemePatchRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userChangeThemePatchRequest' is set
+        if (userChangeThemePatchRequest == null) {
+            throw new ApiException("Missing the required parameter 'userChangeThemePatchRequest' when calling userChangeThemePatch(Async)");
         }
 
-        return userUsernameDeleteCall(username, _callback);
+        return userChangeThemePatchCall(userChangeThemePatchRequest, _callback);
 
     }
 
     /**
-     * Delete a user account
-     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
-     * @param username username of the user account to delete. (required)
+     * Change user theme
+     * 
+     * @param userChangeThemePatchRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not found: User account not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Theme changed successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void userUsernameDelete(String username) throws ApiException {
-        userUsernameDeleteWithHttpInfo(username);
+    public void userChangeThemePatch(UserChangeThemePatchRequest userChangeThemePatchRequest) throws ApiException {
+        userChangeThemePatchWithHttpInfo(userChangeThemePatchRequest);
     }
 
     /**
-     * Delete a user account
-     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
-     * @param username username of the user account to delete. (required)
+     * Change user theme
+     * 
+     * @param userChangeThemePatchRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not found: User account not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Theme changed successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> userUsernameDeleteWithHttpInfo(String username) throws ApiException {
-        okhttp3.Call localVarCall = userUsernameDeleteValidateBeforeCall(username, null);
+    public ApiResponse<Void> userChangeThemePatchWithHttpInfo(UserChangeThemePatchRequest userChangeThemePatchRequest) throws ApiException {
+        okhttp3.Call localVarCall = userChangeThemePatchValidateBeforeCall(userChangeThemePatchRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     * Delete a user account (asynchronously)
-     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
-     * @param username username of the user account to delete. (required)
+     * Change user theme (asynchronously)
+     * 
+     * @param userChangeThemePatchRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Not found: User account not found. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Theme changed successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userUsernameDeleteAsync(String username, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call userChangeThemePatchAsync(UserChangeThemePatchRequest userChangeThemePatchRequest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = userUsernameDeleteValidateBeforeCall(username, _callback);
+        okhttp3.Call localVarCall = userChangeThemePatchValidateBeforeCall(userChangeThemePatchRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

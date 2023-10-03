@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API.
+ * This is a prototype of CPOO Project's front/back API. 
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -19,39 +19,32 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for UserDTO
+ * Model tests for DiscussionsCreatePostRequest
  */
-@Disabled
-public class UserDTOTest {
-    private final UserDTO model = new UserDTO();
+public class DiscussionsCreatePostRequestTest {
+    private final DiscussionsCreatePostRequest model = new DiscussionsCreatePostRequest();
 
     /**
-     * Model tests for UserDTO
+     * Model tests for DiscussionsCreatePostRequest
      */
     @Test
-    public void testUserDTO() {
-        // TODO: test UserDTO
+    public void testDiscussionsCreatePostRequest() {
+        // TODO: test DiscussionsCreatePostRequest
     }
 
     /**
-     * Test the property 'username'
+     * Test the property 'participants'
      */
     @Test
-    public void usernameTest() {
-        // TODO: test username
-    }
-
-    /**
-     * Test the property 'password'
-     */
-    @Test
-    public void passwordTest() {
-        // TODO: test password
+    public void participantsTest() {
+        // TODO: test participants
     }
 
 }

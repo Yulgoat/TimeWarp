@@ -1,15 +1,16 @@
 
 
-# UserDTO
+# NewPasswordDTO
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**username** | **String** |  |  [optional] |
 |**email** | **String** |  |  [optional] |
+|**code** | **Integer** |  |  [optional] |
 |**password** | **String** |  |  [optional] |
+|**confirmPassword** | **String** |  |  [optional] |
 
 
 

@@ -122,9 +122,286 @@ paths:
       tags:
       - administration
       x-accepts: application/json
+  /user/forgotpwd:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPasswordDTO'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - forgot-pwd
+      x-content-type: application/json
+      x-accepts: application/json
+  /user/settings:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSettingsDTO'
+          description: Successful response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Get user settings information
+      tags:
+      - user
+      x-accepts: application/json
+  /user/account/chgusername:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_user_account_chgusername_patch_request'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - account
+      x-content-type: application/json
+      x-accepts: application/json
+  /user/account/changepp:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_user_account_changepp_patch_request'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - account
+      x-content-type: application/json
+      x-accepts: application/json
+  /user/changepwd:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordDTO'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - change-pwd
+      x-content-type: application/json
+      x-accepts: application/json
+  /user/disconnect:
+    post:
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - account
+      x-accepts: application/json
+  /user/notifications:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationsDTO'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - notifications
+      x-content-type: application/json
+      x-accepts: application/json
+  /user/change-theme:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_user_change_theme_patch_request'
+        required: true
+      responses:
+        "200":
+          description: Theme changed successfully
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Change user theme
+      tags:
+      - appearance
+      x-content-type: application/json
+      x-accepts: application/json
+  /user/language:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_user_language_patch_request'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - language
+      x-content-type: application/json
+      x-accepts: application/json
+  /discussions:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DiscussionDTO'
+                type: array
+          description: Successful response
+      summary: Get a list of all discussions
+      tags:
+      - messaging
+      x-accepts: application/json
+  /discussions/{discussion_id}/messages:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: discussion_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MessageDTO'
+                type: array
+          description: Successful response
+      summary: Get all messages in a conversation
+      tags:
+      - messaging
+      x-accepts: application/json
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: discussion_id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDTO'
+        required: true
+      responses:
+        "200":
+          description: Message sent successfully
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Send a message in a disccusion
+      tags:
+      - messaging
+      x-content-type: application/json
+      x-accepts: application/json
+  /discussions/create:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_discussions_create_post_request'
+        required: true
+      responses:
+        "200":
+          description: Conversation created successfully
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Create a new discussion
+      tags:
+      - messaging
+      x-content-type: application/json
+      x-accepts: application/json
 components:
   schemas:
     MessageDTO:
+      example:
+        from: alice@acme
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        to: bob@acme
+        type: text/plain
+        body: This is the message
+        timestamp: timestamp
       properties:
         id:
           format: uuid
@@ -142,16 +419,90 @@ components:
         body:
           example: This is the message
           type: string
+        timestamp:
+          type: string
       type: object
     UserDTO:
       example:
         password: password
-        login: login
+        email: email
+        username: username
       properties:
-        login:
+        username:
+          type: string
+        email:
           type: string
         password:
           format: password
+          type: string
+      type: object
+    UserSettingsDTO:
+      example:
+        NotificationSound: true
+        UnreadBadges: true
+        theme: theme
+        language: language
+        profileImage: profileImage
+      properties:
+        theme:
+          type: string
+        language:
+          type: string
+        UnreadBadges:
+          type: boolean
+        NotificationSound:
+          type: boolean
+        profileImage:
+          type: string
+      type: object
+    DiscussionDTO:
+      example:
+        id: 0
+        participants:
+        - participants
+        - participants
+      properties:
+        id:
+          type: integer
+        participants:
+          items:
+            type: string
+          type: array
+      type: object
+    NewPasswordDTO:
+      example:
+        password: password
+        code: 0
+        email: email
+        confirm-password: confirm-password
+      properties:
+        email:
+          type: string
+        code:
+          type: integer
+        password:
+          type: string
+        confirm-password:
+          type: string
+      type: object
+    ChangePasswordDTO:
+      example:
+        old-password: old-password
+        new-password: new-password
+      properties:
+        old-password:
+          type: string
+        new-password:
+          type: string
+      type: object
+    NotificationsDTO:
+      example:
+        badges: badges
+        sounds: sounds
+      properties:
+        sounds:
+          type: string
+        badges:
           type: string
       type: object
     ErrorDTO:
@@ -166,6 +517,35 @@ components:
           type: string
         path:
           type: string
+      type: object
+    _user_account_chgusername_patch_request:
+      properties:
+        username:
+          type: string
+      type: object
+    _user_account_changepp_patch_request:
+      properties:
+        url:
+          type: string
+      type: object
+    _user_change_theme_patch_request:
+      properties:
+        themeId:
+          type: integer
+      type: object
+    _user_language_patch_request:
+      properties:
+        language:
+          type: string
+      type: object
+    _discussions_create_post_request:
+      properties:
+        participants:
+          items:
+            type: string
+          type: array
+      required:
+      - participants
       type: object
   securitySchemes:
     CookieAuth:

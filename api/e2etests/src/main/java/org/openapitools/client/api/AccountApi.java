@@ -28,7 +28,8 @@ import java.io.IOException;
 
 
 import org.openapitools.client.model.ErrorDTO;
-import org.openapitools.client.model.UserDTO;
+import org.openapitools.client.model.UserAccountChangeppPatchRequest;
+import org.openapitools.client.model.UserAccountChgusernamePatchRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,16 +37,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AuthenticationApi {
+public class AccountApi {
     private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public AuthenticationApi() {
+    public AccountApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public AuthenticationApi(ApiClient apiClient) {
+    public AccountApi(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
@@ -74,20 +75,19 @@ public class AuthenticationApi {
     }
 
     /**
-     * Build call for userSigninPost
-     * @param userDTO  (required)
+     * Build call for userAccountChangeppPatch
+     * @param userAccountChangeppPatchRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userSigninPostCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call userAccountChangeppPatchCall(UserAccountChangeppPatchRequest userAccountChangeppPatchRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -101,10 +101,10 @@ public class AuthenticationApi {
             basePath = null;
         }
 
-        Object localVarPostBody = userDTO;
+        Object localVarPostBody = userAccountChangeppPatchRequest;
 
         // create path and map variables
-        String localVarPath = "/user/signin";
+        String localVarPath = "/user/account/changepp";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -128,91 +128,211 @@ public class AuthenticationApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call userSigninPostValidateBeforeCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userDTO' is set
-        if (userDTO == null) {
-            throw new ApiException("Missing the required parameter 'userDTO' when calling userSigninPost(Async)");
+    private okhttp3.Call userAccountChangeppPatchValidateBeforeCall(UserAccountChangeppPatchRequest userAccountChangeppPatchRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userAccountChangeppPatchRequest' is set
+        if (userAccountChangeppPatchRequest == null) {
+            throw new ApiException("Missing the required parameter 'userAccountChangeppPatchRequest' when calling userAccountChangeppPatch(Async)");
         }
 
-        return userSigninPostCall(userDTO, _callback);
+        return userAccountChangeppPatchCall(userAccountChangeppPatchRequest, _callback);
 
     }
 
     /**
-     * Sign in to the service
-     * Sign in using provided credentials and create a user session.
-     * @param userDTO  (required)
+     * 
+     * 
+     * @param userAccountChangeppPatchRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void userSigninPost(UserDTO userDTO) throws ApiException {
-        userSigninPostWithHttpInfo(userDTO);
+    public void userAccountChangeppPatch(UserAccountChangeppPatchRequest userAccountChangeppPatchRequest) throws ApiException {
+        userAccountChangeppPatchWithHttpInfo(userAccountChangeppPatchRequest);
     }
 
     /**
-     * Sign in to the service
-     * Sign in using provided credentials and create a user session.
-     * @param userDTO  (required)
+     * 
+     * 
+     * @param userAccountChangeppPatchRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> userSigninPostWithHttpInfo(UserDTO userDTO) throws ApiException {
-        okhttp3.Call localVarCall = userSigninPostValidateBeforeCall(userDTO, null);
+    public ApiResponse<Void> userAccountChangeppPatchWithHttpInfo(UserAccountChangeppPatchRequest userAccountChangeppPatchRequest) throws ApiException {
+        okhttp3.Call localVarCall = userAccountChangeppPatchValidateBeforeCall(userAccountChangeppPatchRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     * Sign in to the service (asynchronously)
-     * Sign in using provided credentials and create a user session.
-     * @param userDTO  (required)
+     *  (asynchronously)
+     * 
+     * @param userAccountChangeppPatchRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userSigninPostAsync(UserDTO userDTO, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call userAccountChangeppPatchAsync(UserAccountChangeppPatchRequest userAccountChangeppPatchRequest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = userSigninPostValidateBeforeCall(userDTO, _callback);
+        okhttp3.Call localVarCall = userAccountChangeppPatchValidateBeforeCall(userAccountChangeppPatchRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for userSignoutPost
+     * Build call for userAccountChgusernamePatch
+     * @param userAccountChgusernamePatchRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userSignoutPostCall(final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call userAccountChgusernamePatchCall(UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = userAccountChgusernamePatchRequest;
+
+        // create path and map variables
+        String localVarPath = "/user/account/chgusername";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call userAccountChgusernamePatchValidateBeforeCall(UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userAccountChgusernamePatchRequest' is set
+        if (userAccountChgusernamePatchRequest == null) {
+            throw new ApiException("Missing the required parameter 'userAccountChgusernamePatchRequest' when calling userAccountChgusernamePatch(Async)");
+        }
+
+        return userAccountChgusernamePatchCall(userAccountChgusernamePatchRequest, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param userAccountChgusernamePatchRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void userAccountChgusernamePatch(UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest) throws ApiException {
+        userAccountChgusernamePatchWithHttpInfo(userAccountChgusernamePatchRequest);
+    }
+
+    /**
+     * 
+     * 
+     * @param userAccountChgusernamePatchRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> userAccountChgusernamePatchWithHttpInfo(UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest) throws ApiException {
+        okhttp3.Call localVarCall = userAccountChgusernamePatchValidateBeforeCall(userAccountChgusernamePatchRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param userAccountChgusernamePatchRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call userAccountChgusernamePatchAsync(UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = userAccountChgusernamePatchValidateBeforeCall(userAccountChgusernamePatchRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for userDisconnectPost
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call userDisconnectPostCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -229,7 +349,7 @@ public class AuthenticationApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/user/signout";
+        String localVarPath = "/user/disconnect";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -257,172 +377,46 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call userSignoutPostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return userSignoutPostCall(_callback);
+    private okhttp3.Call userDisconnectPostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return userDisconnectPostCall(_callback);
 
     }
 
     /**
-     * Sign out from the service
-     * Sign out and close the user session.
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public void userSignoutPost() throws ApiException {
-        userSignoutPostWithHttpInfo();
-    }
-
-    /**
-     * Sign out from the service
-     * Sign out and close the user session.
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> userSignoutPostWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = userSignoutPostValidateBeforeCall(null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Sign out from the service (asynchronously)
-     * Sign out and close the user session.
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success: the user session is closed. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userSignoutPostAsync(final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = userSignoutPostValidateBeforeCall(_callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for userSignupPost
-     * @param userDTO  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userSignupPostCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = userDTO;
-
-        // create path and map variables
-        String localVarPath = "/user/signup";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call userSignupPostValidateBeforeCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userDTO' is set
-        if (userDTO == null) {
-            throw new ApiException("Missing the required parameter 'userDTO' when calling userSignupPost(Async)");
-        }
-
-        return userSignupPostCall(userDTO, _callback);
-
-    }
-
-    /**
-     * Sign up to the service
-     * Create a user account with provided credentials.
-     * @param userDTO  (required)
+     * 
+     * 
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void userSignupPost(UserDTO userDTO) throws ApiException {
-        userSignupPostWithHttpInfo(userDTO);
+    public void userDisconnectPost() throws ApiException {
+        userDisconnectPostWithHttpInfo();
     }
 
     /**
-     * Sign up to the service
-     * Create a user account with provided credentials.
-     * @param userDTO  (required)
+     * 
+     * 
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> userSignupPostWithHttpInfo(UserDTO userDTO) throws ApiException {
-        okhttp3.Call localVarCall = userSignupPostValidateBeforeCall(userDTO, null);
+    public ApiResponse<Void> userDisconnectPostWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = userDisconnectPostValidateBeforeCall(null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     * Sign up to the service (asynchronously)
-     * Create a user account with provided credentials.
-     * @param userDTO  (required)
+     *  (asynchronously)
+     * 
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -430,13 +424,12 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userSignupPostAsync(UserDTO userDTO, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call userDisconnectPostAsync(final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = userSignupPostValidateBeforeCall(userDTO, _callback);
+        okhttp3.Call localVarCall = userDisconnectPostValidateBeforeCall(_callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

@@ -12,6 +12,7 @@
 |**to** | **String** |  |  [optional] |
 |**type** | **String** |  |  [optional] |
 |**body** | **String** |  |  [optional] |
+|**timestamp** | **String** |  |  [optional] |
 
 
 
