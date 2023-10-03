@@ -13,9 +13,6 @@
 
 package org.openapitools.client.api;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
@@ -25,38 +22,24 @@ import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.model.UserDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * API tests for AuthenticationApi
  */
 public class AuthenticationApiTest {
 
-    private final AuthenticationApi api = new AuthenticationApi();
+    private final AuthenticationApi authenticationApi = new AuthenticationApi();
 
-    public class MyCookieJar implements CookieJar {
-
-        private List<Cookie> cookies;
-
-        @Override
-        public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-            this.cookies = cookies;
-        }
-
-        @Override
-        public List<Cookie> loadForRequest(HttpUrl url) {
-            if (cookies != null)
-                return cookies;
-            return new ArrayList<>();
-        }
-    }
+    private final AdministrationApi administrationApi = new AdministrationApi();
 
     @BeforeEach
     public void init() throws ApiException {
+
+        // Simulate the behavior of a web browser by remembering cookies set by the server
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
-        api.setApiClient(new ApiClient(okHttpClient));
+        ApiClient apiClient = new ApiClient(okHttpClient);
+        authenticationApi.setApiClient(apiClient);
+        administrationApi.setApiClient(apiClient);
     }
 
     /**
@@ -68,7 +51,7 @@ public class AuthenticationApiTest {
         // Signing in with invalid credentials should fail with UNAUTHORIZED
         UserDTO userDTO = new UserDTO().login("user").password("invalid");
         try {
-            api.userSigninPost(userDTO);
+            authenticationApi.userSigninPost(userDTO);
             Assertions.fail();
         }
         catch (ApiException e) {
@@ -76,11 +59,11 @@ public class AuthenticationApiTest {
         }
 
         // Signing in with valid credential should work
-        api.userSigninPost(userDTO.password("user"));
+        authenticationApi.userSigninPost(userDTO.password("user"));
 
-        // Sign in again should fail with CONFLICT
+        // Signing in again should fail with CONFLICT
         try {
-            api.userSigninPost(userDTO);
+            authenticationApi.userSigninPost(userDTO);
             Assertions.fail();
         }
         catch (ApiException e) {
@@ -96,14 +79,14 @@ public class AuthenticationApiTest {
 
         // Sign in
         UserDTO userDTO = new UserDTO().login("user").password("user");
-        api.userSigninPost(userDTO);
+        authenticationApi.userSigninPost(userDTO);
 
         // Signing out while signed in should work
-        api.userSignoutPost();
+        authenticationApi.userSignoutPost();
 
         // Signing out again should fail with FORBIDDEN
         try {
-            api.userSignoutPost();
+            authenticationApi.userSignoutPost();
             Assertions.fail();
         }
         catch (ApiException e) {
@@ -117,23 +100,30 @@ public class AuthenticationApiTest {
     @Test
     public void userSignupPostTest() throws ApiException {
 
-        // Signing up with a new account should work
-        UserDTO userDTO = new UserDTO().login("test").password("test");
-        api.userSignupPost(userDTO);
-
-        // Signing up twice with the same account should fail with CONFLICT
+        // Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().login("admin").password("admin"));
         try {
-            api.userSignupPost(userDTO);
+            administrationApi.userLoginDelete("test");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+        // Signing up a new account should work
+        UserDTO testUser = new UserDTO().login("test").password("test");
+        authenticationApi.userSignupPost(testUser);
+
+        // Signing up twice the same account should fail with CONFLICT
+        try {
+            authenticationApi.userSignupPost(testUser);
             Assertions.fail();
         }
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
         }
 
-        // Signing in with the new account should succeed
-        api.userSigninPost(userDTO);
-
-        // Delete the new account
-        api.userDeletePost();
+        // Signing in with the new account should work
+        authenticationApi.userSigninPost(testUser);
     }
 }

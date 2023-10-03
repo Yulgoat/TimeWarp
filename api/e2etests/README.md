@@ -86,7 +86,7 @@ import org.openapitools.client.ApiException;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.models.*;
-import org.openapitools.client.api.AuthenticationApi;
+import org.openapitools.client.api.AdministrationApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -99,11 +99,12 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //CookieAuth.setApiKeyPrefix("Token");
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
+    AdministrationApi apiInstance = new AdministrationApi(defaultClient);
+    String login = "login_example"; // String | login of the user account to delete.
     try {
-      apiInstance.userDeletePost();
+      apiInstance.userLoginDelete(login);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#userDeletePost");
+      System.err.println("Exception when calling AdministrationApi#userLoginDelete");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -120,15 +121,16 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AuthenticationApi* | [**userDeletePost**](docs/AuthenticationApi.md#userDeletePost) | **POST** /user/delete | 
-*AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | 
-*AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | 
-*AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | 
+*AdministrationApi* | [**userLoginDelete**](docs/AdministrationApi.md#userLoginDelete) | **DELETE** /user/{login} | Delete a user account
+*AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | Sign in to the service
+*AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | Sign out from the service
+*AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | Sign up to the service
 
 
 ## Documentation for Models
 
  - [ErrorDTO](docs/ErrorDTO.md)
+ - [MessageDTO](docs/MessageDTO.md)
  - [UserDTO](docs/UserDTO.md)
 
 

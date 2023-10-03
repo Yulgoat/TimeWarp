@@ -47,6 +47,7 @@ function sendMessage() {
     body: JSON.stringify({
       'from': ($("#from").val() || 'alice@acme'),
       'to': ($("#to").val() || 'bob@acme'),
+      'type': 'text/plain',
       'body': ($("#body").val() || 'This is the message')
     })
   });
