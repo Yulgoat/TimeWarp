@@ -33,20 +33,21 @@ public class UserService {
 
   public boolean signin(final String login, final String password) throws ServletException {
     final HttpSession session = httpServletRequest.getSession(false);
-    if (session == null) {
-      httpServletRequest.login(login, password);
-      httpServletRequest.getSession(true);
-      return true;
-    }
-    return false;
+    if (session != null)
+      return false;
+    httpServletRequest.login(login, password);
+    httpServletRequest.getSession(true);
+    return true;
   }
 
   public void signout() throws ServletException {
     httpServletRequest.logout();
   }
 
-  public void delete() {
-    String username = httpServletRequest.getUserPrincipal().getName();
-    userDetailsManager.deleteUser(username);
+  public boolean delete(String login) {
+    if (!userDetailsManager.userExists(login))
+      return false;
+    userDetailsManager.deleteUser(login);
+    return true;
   }
 }
