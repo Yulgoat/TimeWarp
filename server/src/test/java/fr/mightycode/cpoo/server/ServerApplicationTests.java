@@ -31,7 +31,7 @@ class ServerApplicationTests {
         .contentType(APPLICATION_JSON)
         .content("""
           {
-            "login": "admin",
+            "username": "admin",
             "password": "admin"
           }"""))
       .andExpect(status().isConflict());
@@ -41,7 +41,7 @@ class ServerApplicationTests {
         .contentType(APPLICATION_JSON)
         .content("""
           {
-            "login": "test",
+            "username": "test",
             "password": "test"
           }"""))
       .andExpect(status().isOk());
@@ -51,7 +51,7 @@ class ServerApplicationTests {
         .contentType(APPLICATION_JSON)
         .content("""
           {
-            "login": "test",
+            "username": "test",
             "password": "test"
           }"""))
       .andExpect(status().isConflict());
@@ -62,7 +62,7 @@ class ServerApplicationTests {
       .contentType(APPLICATION_JSON)
       .bodyValue("""
         {
-          "login": "user",
+          "username": "user",
           "password": "invalid"
         }""")
       .exchange()
@@ -74,7 +74,7 @@ class ServerApplicationTests {
       .contentType(APPLICATION_JSON)
       .bodyValue("""
         {
-          "login": "user",
+          "username": "user",
           "password": "user"
         }""")
       .exchange()

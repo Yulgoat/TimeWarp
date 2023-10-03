@@ -42,17 +42,17 @@ public class AdministrationApiTest {
     /**
      * Delete a user account
      * <p>
-     * Delete the account of the user matching the given login. Only the administrator can use this endpoint.
+     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void userLoginDeleteTest() throws ApiException {
+    public void userUsernameDeleteTest() throws ApiException {
 
         // Delete the test account if exists
-        authenticationApi.userSigninPost(new UserDTO().login("admin").password("admin"));
+        authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
         try {
-            administrationApi.userLoginDelete("test");
+            administrationApi.userUsernameDelete("test");
         }
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
@@ -60,7 +60,7 @@ public class AdministrationApiTest {
         authenticationApi.userSignoutPost();
 
         // Sign up a test user
-        UserDTO testUser = new UserDTO().login("test").password("test");
+        UserDTO testUser = new UserDTO().username("test").password("test");
         authenticationApi.userSignupPost(testUser);
 
         // Sign in as the test user
@@ -68,7 +68,7 @@ public class AdministrationApiTest {
 
         // Deleting the test account without admin rights should fail with FORBIDDEN
         try {
-            administrationApi.userLoginDelete("test");
+            administrationApi.userUsernameDelete("test");
             Assertions.fail();
         }
         catch (ApiException e) {
@@ -77,9 +77,9 @@ public class AdministrationApiTest {
 
         // Sign is as the admin
         authenticationApi.userSignoutPost();
-        authenticationApi.userSigninPost(new UserDTO().login("admin").password("admin"));
+        authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
 
         // Deleting the test account with admin rights should work
-        administrationApi.userLoginDelete("test");
+        administrationApi.userUsernameDelete("test");
     }
 }

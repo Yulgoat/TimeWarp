@@ -73,8 +73,8 @@ public class AdministrationApi {
     }
 
     /**
-     * Build call for userLoginDelete
-     * @param login login of the user account to delete. (required)
+     * Build call for userUsernameDelete
+     * @param username username of the user account to delete. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -86,7 +86,7 @@ public class AdministrationApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userLoginDeleteCall(String login, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call userUsernameDeleteCall(String username, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -103,8 +103,8 @@ public class AdministrationApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/user/{login}"
-            .replace("{" + "login" + "}", localVarApiClient.escapeString(login.toString()));
+        String localVarPath = "/user/{username}"
+            .replace("{" + "username" + "}", localVarApiClient.escapeString(username.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -132,20 +132,20 @@ public class AdministrationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call userLoginDeleteValidateBeforeCall(String login, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'login' is set
-        if (login == null) {
-            throw new ApiException("Missing the required parameter 'login' when calling userLoginDelete(Async)");
+    private okhttp3.Call userUsernameDeleteValidateBeforeCall(String username, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'username' is set
+        if (username == null) {
+            throw new ApiException("Missing the required parameter 'username' when calling userUsernameDelete(Async)");
         }
 
-        return userLoginDeleteCall(login, _callback);
+        return userUsernameDeleteCall(username, _callback);
 
     }
 
     /**
      * Delete a user account
-     * Delete the account of the user matching the given login. Only the administrator can use this endpoint.
-     * @param login login of the user account to delete. (required)
+     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
+     * @param username username of the user account to delete. (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -155,14 +155,14 @@ public class AdministrationApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void userLoginDelete(String login) throws ApiException {
-        userLoginDeleteWithHttpInfo(login);
+    public void userUsernameDelete(String username) throws ApiException {
+        userUsernameDeleteWithHttpInfo(username);
     }
 
     /**
      * Delete a user account
-     * Delete the account of the user matching the given login. Only the administrator can use this endpoint.
-     * @param login login of the user account to delete. (required)
+     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
+     * @param username username of the user account to delete. (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -173,15 +173,15 @@ public class AdministrationApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> userLoginDeleteWithHttpInfo(String login) throws ApiException {
-        okhttp3.Call localVarCall = userLoginDeleteValidateBeforeCall(login, null);
+    public ApiResponse<Void> userUsernameDeleteWithHttpInfo(String username) throws ApiException {
+        okhttp3.Call localVarCall = userUsernameDeleteValidateBeforeCall(username, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
      * Delete a user account (asynchronously)
-     * Delete the account of the user matching the given login. Only the administrator can use this endpoint.
-     * @param login login of the user account to delete. (required)
+     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
+     * @param username username of the user account to delete. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -193,9 +193,9 @@ public class AdministrationApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userLoginDeleteAsync(String login, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call userUsernameDeleteAsync(String username, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = userLoginDeleteValidateBeforeCall(login, _callback);
+        okhttp3.Call localVarCall = userUsernameDeleteValidateBeforeCall(username, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

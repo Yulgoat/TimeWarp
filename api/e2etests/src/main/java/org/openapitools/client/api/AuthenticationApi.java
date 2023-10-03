@@ -83,7 +83,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -152,7 +152,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -170,7 +170,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -190,7 +190,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success: a user session is created and a session cookie is returned. </td><td>  * Set-Cookie -  <br>  </td></tr>
-        <tr><td> 401 </td><td> Unauthorized: invalid login or password. </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized: invalid username or password. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -323,7 +323,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -392,7 +392,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -410,7 +410,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -430,7 +430,7 @@ public class AuthenticationApi {
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> Conflict: a user account with the same login already exists. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Conflict: a user account with the same username already exists. </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */

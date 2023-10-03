@@ -22,14 +22,14 @@ public class UserController {
 
   @PostMapping(value = "signup", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signup(@RequestBody final UserDTO user) {
-    if (!userService.signup(user.login(), user.password()))
+    if (!userService.signup(user.username(), user.password()))
       throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
   }
 
   @PostMapping(value = "signin", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signin(@RequestBody final UserDTO user) {
     try {
-      if (!userService.signin(user.login(), user.password()))
+      if (!userService.signin(user.username(), user.password()))
         throw new ResponseStatusException(HttpStatus.CONFLICT, "Already signed in");
     } catch (final ServletException ex) {
       if (ex.getCause() instanceof BadCredentialsException)
@@ -47,9 +47,9 @@ public class UserController {
     }
   }
 
-  @DeleteMapping(value = "/{login}")
-  public void delete(Principal user, @PathVariable("login") String login) {
-    if (!userService.delete(login))
+  @DeleteMapping(value = "/{username}")
+  public void delete(Principal user, @PathVariable("username") String username) {
+    if (!userService.delete(username))
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
   }
 }

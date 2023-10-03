@@ -39,11 +39,11 @@ public class UserDTOTest {
     }
 
     /**
-     * Test the property 'login'
+     * Test the property 'username'
      */
     @Test
-    public void loginTest() {
-        // TODO: test login
+    public void usernameTest() {
+        // TODO: test username
     }
 
     /**
