@@ -23,19 +23,19 @@ public class UserService {
 
   private final HttpServletRequest httpServletRequest;
 
-  public boolean signup(final String login, final String password) {
-    if (userDetailsManager.userExists(login))
+  public boolean signup(final String username, final String password) {
+    if (userDetailsManager.userExists(username)) //email not verified
       return false;
-    final UserDetails user = new User(login, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
+    final UserDetails user = new User(username, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     userDetailsManager.createUser(user);
     return true;
   }
 
-  public boolean signin(final String login, final String password) throws ServletException {
+  public boolean signin(final String username, final String password) throws ServletException {
     final HttpSession session = httpServletRequest.getSession(false);
     if (session != null)
       return false;
-    httpServletRequest.login(login, password);
+    httpServletRequest.login(username, password);
     httpServletRequest.getSession(true);
     return true;
   }
@@ -44,10 +44,10 @@ public class UserService {
     httpServletRequest.logout();
   }
 
-  public boolean delete(String login) {
-    if (!userDetailsManager.userExists(login))
+  public boolean delete(String username) {
+    if (!userDetailsManager.userExists(username))
       return false;
-    userDetailsManager.deleteUser(login);
+    userDetailsManager.deleteUser(username);
     return true;
   }
 }
