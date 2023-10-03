@@ -101,7 +101,7 @@ public class AuthenticationApiTest {
     public void userSignupPostTest() throws ApiException {
 
         // Delete the test account if exists
-        authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
         try {
             administrationApi.userUsernameDelete("test");
         }
@@ -111,7 +111,7 @@ public class AuthenticationApiTest {
         authenticationApi.userSignoutPost();
 
         // Signing up a new account should work
-        UserDTO testUser = new UserDTO().username("test").password("test");
+        UserDTO testUser = new UserDTO().username("test").email("test").password("test");
         authenticationApi.userSignupPost(testUser);
 
         // Signing up twice the same account should fail with CONFLICT

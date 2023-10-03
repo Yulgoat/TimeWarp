@@ -60,7 +60,7 @@ public class AdministrationApiTest {
         authenticationApi.userSignoutPost();
 
         // Sign up a test user
-        UserDTO testUser = new UserDTO().username("test").password("test");
+        UserDTO testUser = new UserDTO().username("test").email("test").password("test");
         authenticationApi.userSignupPost(testUser);
 
         // Sign in as the test user

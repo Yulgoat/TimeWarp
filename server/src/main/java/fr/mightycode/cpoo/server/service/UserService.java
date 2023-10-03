@@ -24,7 +24,7 @@ public class UserService {
   private final HttpServletRequest httpServletRequest;
 
   public boolean signup(final String username, final String password) {
-    if (userDetailsManager.userExists(username))
+    if (userDetailsManager.userExists(username)) //email not verified
       return false;
     final UserDetails user = new User(username, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     userDetailsManager.createUser(user);

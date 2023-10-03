@@ -22,7 +22,7 @@ public class UserController {
 
   @PostMapping(value = "signup", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signup(@RequestBody final UserDTO user) {
-    if (!userService.signup(user.username(), user.password()))
+    if (!userService.signup(user.username(), user.password())) //email not verified in userService
       throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
   }
 

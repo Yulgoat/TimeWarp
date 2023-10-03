@@ -26,12 +26,16 @@ class ServerApplicationTests {
   @Test
   void testSignUpSignInSignOut() throws Exception {
 
+
+    //EMAIL NOT VERIFIED in UserService (sign up)
+
     // Signing up an existing account should fail with CONFLICT
     mvc.perform(post("/user/signup")
         .contentType(APPLICATION_JSON)
         .content("""
           {
             "username": "admin",
+            "email": "admin",
             "password": "admin"
           }"""))
       .andExpect(status().isConflict());
@@ -42,6 +46,7 @@ class ServerApplicationTests {
         .content("""
           {
             "username": "test",
+            "email": "test",
             "password": "test"
           }"""))
       .andExpect(status().isOk());
@@ -52,6 +57,7 @@ class ServerApplicationTests {
         .content("""
           {
             "username": "test",
+            "email": "test",
             "password": "test"
           }"""))
       .andExpect(status().isConflict());
