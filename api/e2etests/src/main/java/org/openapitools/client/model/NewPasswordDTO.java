@@ -47,47 +47,30 @@ import java.util.Set;
 import org.openapitools.client.JSON;
 
 /**
- * UserDTO
+ * NewPasswordDTO
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class UserDTO {
-  public static final String SERIALIZED_NAME_USERNAME = "username";
-  @SerializedName(SERIALIZED_NAME_USERNAME)
-  private String username;
-
+public class NewPasswordDTO {
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
   private String email;
+
+  public static final String SERIALIZED_NAME_CODE = "code";
+  @SerializedName(SERIALIZED_NAME_CODE)
+  private Integer code;
 
   public static final String SERIALIZED_NAME_PASSWORD = "password";
   @SerializedName(SERIALIZED_NAME_PASSWORD)
   private String password;
 
-  public UserDTO() {
+  public static final String SERIALIZED_NAME_CONFIRM_PASSWORD = "confirm-password";
+  @SerializedName(SERIALIZED_NAME_CONFIRM_PASSWORD)
+  private String confirmPassword;
+
+  public NewPasswordDTO() {
   }
 
-  public UserDTO username(String username) {
-    
-    this.username = username;
-    return this;
-  }
-
-   /**
-   * Get username
-   * @return username
-  **/
-  @javax.annotation.Nullable
-  public String getUsername() {
-    return username;
-  }
-
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-
-  public UserDTO email(String email) {
+  public NewPasswordDTO email(String email) {
     
     this.email = email;
     return this;
@@ -108,7 +91,28 @@ public class UserDTO {
   }
 
 
-  public UserDTO password(String password) {
+  public NewPasswordDTO code(Integer code) {
+    
+    this.code = code;
+    return this;
+  }
+
+   /**
+   * Get code
+   * @return code
+  **/
+  @javax.annotation.Nullable
+  public Integer getCode() {
+    return code;
+  }
+
+
+  public void setCode(Integer code) {
+    this.code = code;
+  }
+
+
+  public NewPasswordDTO password(String password) {
     
     this.password = password;
     return this;
@@ -129,6 +133,27 @@ public class UserDTO {
   }
 
 
+  public NewPasswordDTO confirmPassword(String confirmPassword) {
+    
+    this.confirmPassword = confirmPassword;
+    return this;
+  }
+
+   /**
+   * Get confirmPassword
+   * @return confirmPassword
+  **/
+  @javax.annotation.Nullable
+  public String getConfirmPassword() {
+    return confirmPassword;
+  }
+
+
+  public void setConfirmPassword(String confirmPassword) {
+    this.confirmPassword = confirmPassword;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -138,24 +163,26 @@ public class UserDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDTO userDTO = (UserDTO) o;
-    return Objects.equals(this.username, userDTO.username) &&
-        Objects.equals(this.email, userDTO.email) &&
-        Objects.equals(this.password, userDTO.password);
+    NewPasswordDTO newPasswordDTO = (NewPasswordDTO) o;
+    return Objects.equals(this.email, newPasswordDTO.email) &&
+        Objects.equals(this.code, newPasswordDTO.code) &&
+        Objects.equals(this.password, newPasswordDTO.password) &&
+        Objects.equals(this.confirmPassword, newPasswordDTO.confirmPassword);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, email, password);
+    return Objects.hash(email, code, password, confirmPassword);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserDTO {\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
+    sb.append("class NewPasswordDTO {\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
+    sb.append("    confirmPassword: ").append(toIndentedString(confirmPassword)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -178,9 +205,10 @@ public class UserDTO {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("username");
     openapiFields.add("email");
+    openapiFields.add("code");
     openapiFields.add("password");
+    openapiFields.add("confirm-password");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -190,31 +218,31 @@ public class UserDTO {
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to UserDTO
+  * @throws IOException if the JSON Element is invalid with respect to NewPasswordDTO
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!UserDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in UserDTO is not found in the empty JSON string", UserDTO.openapiRequiredFields.toString()));
+        if (!NewPasswordDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in NewPasswordDTO is not found in the empty JSON string", NewPasswordDTO.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!UserDTO.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserDTO` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!NewPasswordDTO.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `NewPasswordDTO` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("username") != null && !jsonObj.get("username").isJsonNull()) && !jsonObj.get("username").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `username` to be a primitive type in the JSON string but got `%s`", jsonObj.get("username").toString()));
-      }
       if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
       }
       if ((jsonObj.get("password") != null && !jsonObj.get("password").isJsonNull()) && !jsonObj.get("password").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("password").toString()));
+      }
+      if ((jsonObj.get("confirm-password") != null && !jsonObj.get("confirm-password").isJsonNull()) && !jsonObj.get("confirm-password").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `confirm-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("confirm-password").toString()));
       }
   }
 
@@ -222,22 +250,22 @@ public class UserDTO {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!UserDTO.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'UserDTO' and its subtypes
+       if (!NewPasswordDTO.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'NewPasswordDTO' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<UserDTO> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(UserDTO.class));
+       final TypeAdapter<NewPasswordDTO> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(NewPasswordDTO.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<UserDTO>() {
+       return (TypeAdapter<T>) new TypeAdapter<NewPasswordDTO>() {
            @Override
-           public void write(JsonWriter out, UserDTO value) throws IOException {
+           public void write(JsonWriter out, NewPasswordDTO value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public UserDTO read(JsonReader in) throws IOException {
+           public NewPasswordDTO read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -248,18 +276,18 @@ public class UserDTO {
   }
 
  /**
-  * Create an instance of UserDTO given an JSON string
+  * Create an instance of NewPasswordDTO given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of UserDTO
-  * @throws IOException if the JSON string is invalid with respect to UserDTO
+  * @return An instance of NewPasswordDTO
+  * @throws IOException if the JSON string is invalid with respect to NewPasswordDTO
   */
-  public static UserDTO fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, UserDTO.class);
+  public static NewPasswordDTO fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, NewPasswordDTO.class);
   }
 
  /**
-  * Convert an instance of UserDTO to an JSON string
+  * Convert an instance of NewPasswordDTO to an JSON string
   *
   * @return JSON string
   */

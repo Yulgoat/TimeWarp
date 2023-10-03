@@ -47,26 +47,18 @@ import java.util.Set;
 import org.openapitools.client.JSON;
 
 /**
- * UserDTO
+ * UserAccountChgusernamePatchRequest
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class UserDTO {
+public class UserAccountChgusernamePatchRequest {
   public static final String SERIALIZED_NAME_USERNAME = "username";
   @SerializedName(SERIALIZED_NAME_USERNAME)
   private String username;
 
-  public static final String SERIALIZED_NAME_EMAIL = "email";
-  @SerializedName(SERIALIZED_NAME_EMAIL)
-  private String email;
-
-  public static final String SERIALIZED_NAME_PASSWORD = "password";
-  @SerializedName(SERIALIZED_NAME_PASSWORD)
-  private String password;
-
-  public UserDTO() {
+  public UserAccountChgusernamePatchRequest() {
   }
 
-  public UserDTO username(String username) {
+  public UserAccountChgusernamePatchRequest username(String username) {
     
     this.username = username;
     return this;
@@ -87,48 +79,6 @@ public class UserDTO {
   }
 
 
-  public UserDTO email(String email) {
-    
-    this.email = email;
-    return this;
-  }
-
-   /**
-   * Get email
-   * @return email
-  **/
-  @javax.annotation.Nullable
-  public String getEmail() {
-    return email;
-  }
-
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-
-  public UserDTO password(String password) {
-    
-    this.password = password;
-    return this;
-  }
-
-   /**
-   * Get password
-   * @return password
-  **/
-  @javax.annotation.Nullable
-  public String getPassword() {
-    return password;
-  }
-
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -138,24 +88,20 @@ public class UserDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDTO userDTO = (UserDTO) o;
-    return Objects.equals(this.username, userDTO.username) &&
-        Objects.equals(this.email, userDTO.email) &&
-        Objects.equals(this.password, userDTO.password);
+    UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest = (UserAccountChgusernamePatchRequest) o;
+    return Objects.equals(this.username, userAccountChgusernamePatchRequest.username);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, email, password);
+    return Objects.hash(username);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserDTO {\n");
+    sb.append("class UserAccountChgusernamePatchRequest {\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -179,8 +125,6 @@ public class UserDTO {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("username");
-    openapiFields.add("email");
-    openapiFields.add("password");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -190,31 +134,25 @@ public class UserDTO {
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to UserDTO
+  * @throws IOException if the JSON Element is invalid with respect to UserAccountChgusernamePatchRequest
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!UserDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in UserDTO is not found in the empty JSON string", UserDTO.openapiRequiredFields.toString()));
+        if (!UserAccountChgusernamePatchRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in UserAccountChgusernamePatchRequest is not found in the empty JSON string", UserAccountChgusernamePatchRequest.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!UserDTO.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserDTO` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!UserAccountChgusernamePatchRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserAccountChgusernamePatchRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("username") != null && !jsonObj.get("username").isJsonNull()) && !jsonObj.get("username").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `username` to be a primitive type in the JSON string but got `%s`", jsonObj.get("username").toString()));
-      }
-      if ((jsonObj.get("email") != null && !jsonObj.get("email").isJsonNull()) && !jsonObj.get("email").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));
-      }
-      if ((jsonObj.get("password") != null && !jsonObj.get("password").isJsonNull()) && !jsonObj.get("password").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("password").toString()));
       }
   }
 
@@ -222,22 +160,22 @@ public class UserDTO {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!UserDTO.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'UserDTO' and its subtypes
+       if (!UserAccountChgusernamePatchRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'UserAccountChgusernamePatchRequest' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<UserDTO> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(UserDTO.class));
+       final TypeAdapter<UserAccountChgusernamePatchRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(UserAccountChgusernamePatchRequest.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<UserDTO>() {
+       return (TypeAdapter<T>) new TypeAdapter<UserAccountChgusernamePatchRequest>() {
            @Override
-           public void write(JsonWriter out, UserDTO value) throws IOException {
+           public void write(JsonWriter out, UserAccountChgusernamePatchRequest value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public UserDTO read(JsonReader in) throws IOException {
+           public UserAccountChgusernamePatchRequest read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -248,18 +186,18 @@ public class UserDTO {
   }
 
  /**
-  * Create an instance of UserDTO given an JSON string
+  * Create an instance of UserAccountChgusernamePatchRequest given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of UserDTO
-  * @throws IOException if the JSON string is invalid with respect to UserDTO
+  * @return An instance of UserAccountChgusernamePatchRequest
+  * @throws IOException if the JSON string is invalid with respect to UserAccountChgusernamePatchRequest
   */
-  public static UserDTO fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, UserDTO.class);
+  public static UserAccountChgusernamePatchRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, UserAccountChgusernamePatchRequest.class);
   }
 
  /**
-  * Convert an instance of UserDTO to an JSON string
+  * Convert an instance of UserAccountChgusernamePatchRequest to an JSON string
   *
   * @return JSON string
   */

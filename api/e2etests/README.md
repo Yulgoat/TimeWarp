@@ -86,7 +86,7 @@ import org.openapitools.client.ApiException;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.models.*;
-import org.openapitools.client.api.AdministrationApi;
+import org.openapitools.client.api.AccountApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -99,12 +99,12 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //CookieAuth.setApiKeyPrefix("Token");
 
-    AdministrationApi apiInstance = new AdministrationApi(defaultClient);
-    String login = "login_example"; // String | login of the user account to delete.
+    AccountApi apiInstance = new AccountApi(defaultClient);
+    UserAccountChangeppPatchRequest userAccountChangeppPatchRequest = new UserAccountChangeppPatchRequest(); // UserAccountChangeppPatchRequest | 
     try {
-      apiInstance.userLoginDelete(login);
+      apiInstance.userAccountChangeppPatch(userAccountChangeppPatchRequest);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AdministrationApi#userLoginDelete");
+      System.err.println("Exception when calling AccountApi#userAccountChangeppPatch");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -121,17 +121,40 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AccountApi* | [**userAccountChangeppPatch**](docs/AccountApi.md#userAccountChangeppPatch) | **PATCH** /user/account/changepp | 
+*AccountApi* | [**userAccountChgusernamePatch**](docs/AccountApi.md#userAccountChgusernamePatch) | **PATCH** /user/account/chgusername | 
+*AccountApi* | [**userDisconnectPost**](docs/AccountApi.md#userDisconnectPost) | **POST** /user/disconnect | 
 *AdministrationApi* | [**userLoginDelete**](docs/AdministrationApi.md#userLoginDelete) | **DELETE** /user/{login} | Delete a user account
+*AppearanceApi* | [**userChangeThemePatch**](docs/AppearanceApi.md#userChangeThemePatch) | **PATCH** /user/change-theme | Change user theme
 *AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | Sign in to the service
 *AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | Sign out from the service
 *AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | Sign up to the service
+*ChangePwdApi* | [**userChangepwdPatch**](docs/ChangePwdApi.md#userChangepwdPatch) | **PATCH** /user/changepwd | 
+*ForgotPwdApi* | [**userForgotpwdPost**](docs/ForgotPwdApi.md#userForgotpwdPost) | **POST** /user/forgotpwd | 
+*LanguageApi* | [**userLanguagePatch**](docs/LanguageApi.md#userLanguagePatch) | **PATCH** /user/language | 
+*MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion
+*MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation
+*MessagingApi* | [**discussionsDiscussionIdMessagesPost**](docs/MessagingApi.md#discussionsDiscussionIdMessagesPost) | **POST** /discussions/{discussion_id}/messages | Send a message in a disccusion
+*MessagingApi* | [**discussionsGet**](docs/MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions
+*NotificationsApi* | [**userNotificationsPatch**](docs/NotificationsApi.md#userNotificationsPatch) | **PATCH** /user/notifications | 
+*UserApi* | [**userSettingsGet**](docs/UserApi.md#userSettingsGet) | **GET** /user/settings | Get user settings information
 
 
 ## Documentation for Models
 
+ - [ChangePasswordDTO](docs/ChangePasswordDTO.md)
+ - [DiscussionDTO](docs/DiscussionDTO.md)
+ - [DiscussionsCreatePostRequest](docs/DiscussionsCreatePostRequest.md)
  - [ErrorDTO](docs/ErrorDTO.md)
  - [MessageDTO](docs/MessageDTO.md)
+ - [NewPasswordDTO](docs/NewPasswordDTO.md)
+ - [NotificationsDTO](docs/NotificationsDTO.md)
+ - [UserAccountChangeppPatchRequest](docs/UserAccountChangeppPatchRequest.md)
+ - [UserAccountChgusernamePatchRequest](docs/UserAccountChgusernamePatchRequest.md)
+ - [UserChangeThemePatchRequest](docs/UserChangeThemePatchRequest.md)
  - [UserDTO](docs/UserDTO.md)
+ - [UserLanguagePatchRequest](docs/UserLanguagePatchRequest.md)
+ - [UserSettingsDTO](docs/UserSettingsDTO.md)
 
 
 <a id="documentation-for-authorization"></a>
