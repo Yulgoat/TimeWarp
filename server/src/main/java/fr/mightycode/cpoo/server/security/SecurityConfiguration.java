@@ -13,22 +13,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http
-      .authorizeHttpRequests(authorizeRequests ->
-        authorizeRequests
-          .requestMatchers("/user/signup").permitAll()
-          .requestMatchers("/user/signin").permitAll()
-          .requestMatchers(HttpMethod.DELETE, "/user/*").hasRole("ADMIN")
-          .requestMatchers("/error").permitAll()
-          .anyRequest().authenticated())
-      .csrf(AbstractHttpConfigurer::disable)
-      .build();
+    http.cors(withDefaults());
+    http.authorizeHttpRequests(authorizeRequests ->
+      authorizeRequests
+        .requestMatchers("/user/signup").permitAll()
+        .requestMatchers("/user/signin").permitAll()
+        .requestMatchers(HttpMethod.DELETE, "/user/*").hasRole("ADMIN")
+        .requestMatchers("/error").permitAll()
+        .anyRequest().authenticated());
+    http.csrf(AbstractHttpConfigurer::disable);
+    return http.build();
   }
 
   @Bean
