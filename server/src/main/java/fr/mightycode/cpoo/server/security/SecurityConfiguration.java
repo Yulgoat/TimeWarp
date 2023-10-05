@@ -21,7 +21,14 @@ public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    // Ensure that CORS is applied before authentication, so that OPTIONS requests can be processed unauthenticated.
     http.cors(withDefaults());
+
+    // Disable Cross Site Request Forgery protection
+    http.csrf(AbstractHttpConfigurer::disable);
+
+    // Configure endpoint protection
     http.authorizeHttpRequests(authorizeRequests ->
       authorizeRequests
         .requestMatchers("/user/signup").permitAll()
@@ -29,7 +36,7 @@ public class SecurityConfiguration {
         .requestMatchers(HttpMethod.DELETE, "/user/*").hasRole("ADMIN")
         .requestMatchers("/error").permitAll()
         .anyRequest().authenticated());
-    http.csrf(AbstractHttpConfigurer::disable);
+
     return http.build();
   }
 
