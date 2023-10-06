@@ -33,10 +33,13 @@ public class AdministrationApiTest {
 
     @BeforeEach
     public void init() throws ApiException {
+
+        // Simulate the behavior of a web browser by remembering cookies set by the server
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
-        authenticationApi.setApiClient(new ApiClient(okHttpClient));
-        administrationApi.setApiClient(new ApiClient(okHttpClient));
+        ApiClient apiClient = new ApiClient(okHttpClient);
+        authenticationApi.setApiClient(apiClient);
+        administrationApi.setApiClient(apiClient);
     }
 
     /**

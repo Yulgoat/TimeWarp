@@ -13,22 +13,31 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http
-      .authorizeHttpRequests(authorizeRequests ->
-        authorizeRequests
-          .requestMatchers("/user/signup").permitAll()
-          .requestMatchers("/user/signin").permitAll()
-          .requestMatchers(HttpMethod.DELETE, "/user/*").hasRole("ADMIN")
-          .requestMatchers("/error").permitAll()
-          .anyRequest().authenticated())
-      .csrf(AbstractHttpConfigurer::disable)
-      .build();
+
+    // Ensure that CORS is applied before authentication, so that OPTIONS requests can be processed unauthenticated.
+    http.cors(withDefaults());
+
+    // Disable Cross Site Request Forgery protection
+    http.csrf(AbstractHttpConfigurer::disable);
+
+    // Configure endpoint protection
+    http.authorizeHttpRequests(authorizeRequests ->
+      authorizeRequests
+        .requestMatchers("/user/signup").permitAll()
+        .requestMatchers("/user/signin").permitAll()
+        .requestMatchers(HttpMethod.DELETE, "/user/*").hasRole("ADMIN")
+        .requestMatchers("/error").permitAll()
+        .anyRequest().authenticated());
+
+    return http.build();
   }
 
   @Bean
