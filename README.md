@@ -4,27 +4,28 @@ This is the base project your team **MUST** FORK to implement its version of the
 
 ## Server
 
-The server is a Spring Boot app that should ne located in the /server directory.
+The server is a Spring Boot app that must be located in the /server directory.
 An embryo allowing to receive an send messages to other domains is provided.
 
 ## API and end-to-end tests
 
-The OpenAPI definition of the server API is located in the /api directory.
-The /api/e2etests contains Java end-to-end test code of the API (generated using OpenAPI code generator).
+The /api/serverapi.yml file must contain the OpenAPI specification of the server API.
+The /api/e2etests must contains Java end-to-end test code of the server API (generated using OpenAPI code generator).
 
 ## Client
 
-The client is an Angular Web app that should be located in the /client directory.
+The client is an Angular Web app that must be located directly under the /client directory.
 
 ## Mockups
 
-The static mockups of the UI (images, HTML files...) should be deliveed in the /client/mockups directory.
+The "static" mockup of the UI (images, HTML files...) must be delivered in the /client/mockups directory.
 
-The "actionable" version of the mockups should be delivered in the /client directory.
-It is recommanded but not mandatory to deliver this "actionable" version the first version of the Angular app.
+The "actionable" mockup must be delivered directly under the /client directory as an angular app embryo.
 
 ## Router
 
-The message router used by your server to send and receive messages. It is deployed at https://cpoo-router.mightycode.tech/
+The message router is a Spring Boot app located in the /router directory.
+You server will use it to send and receive messages.
+It is deployed at https://cpoo-router.mightycode.tech/.
 
 **This code is provided for information, you don't actually need it to implement your the project.**
