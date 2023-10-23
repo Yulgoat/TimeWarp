@@ -19,6 +19,7 @@ import { SettingsAcknowlodgementsComponent } from './components/settings/setting
 import { ImageComponent } from './components/settings/settings-appearance/image/image.component';
 import { FormsModule } from '@angular/forms';
 import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/settings-chgpwd.component';
+import { DiscussionComponent } from './components/home/discussion/discussion.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/s
     SettingsLanguageComponent,
     SettingsAcknowlodgementsComponent,
     ImageComponent,
-    SettingsChgpwdComponent
+    SettingsChgpwdComponent,
+    DiscussionComponent,
   ],
   imports: [
     BrowserModule,

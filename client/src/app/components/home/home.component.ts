@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { DiscussionService } from 'src/app/services/discussion.service';
+import { Discussion } from 'src/app/models/discussion';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,7 +11,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(private router:Router){}
+  discussions: Discussion[] = [];
+  selectedDiscussionId: number | null = null;
+
+  constructor(private router:Router, private discussionService: DiscussionService){
+    this.discussions = this.discussionService.getDiscussions();
+  }
 
   homeToSettings() : void{
     this.router.navigate(['/settings']);
@@ -25,6 +33,11 @@ export class HomeComponent {
     this.new_conv_popup = false;
   }
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+  selectDiscussion(discussionId: number): void {
+    this.selectedDiscussionId = discussionId;
+  }
 
   ownprofilpicture : string = "../../../assets/icons/pp_user1.jpg";
   contact1 : string = "../../../assets/icons/pp_contact1.jpg";

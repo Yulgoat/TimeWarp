@@ -22,13 +22,9 @@
       </div>  
 
       <div class = "home_list_all_conversation">
-        <div class = "home_list_conversation_active">
+        <div class = "home_list_conversation" *ngFor="let discussion of discussions" [ngClass]="{'selected-discussion': selectedDiscussionId === discussion.id}" (click)="selectDiscussion(discussion.id)">
           <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="contact_picture"></div>
-          <a> Le Lama</a>
-        </div>
-        <div class = "home_list_conversation">
-          <div [ngStyle]="{'background-image': 'url(' + contact2 + ')'}" class="contact_picture"></div>
-          <a> Le Chameau</a>
+          <a> {{ discussion.titre }} </a>
         </div>
       </div>
 
