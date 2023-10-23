@@ -21,8 +21,8 @@
         </div>
       </div>  
 
-      <div class = "home_list_all_conversation">
-        <div class = "home_list_conversation" *ngFor="let discussion of discussions" [ngClass]="{'selected-discussion': selectedDiscussionId === discussion.id}" (click)="selectDiscussion(discussion.id)">
+      <div class = "home_list_all_discussion">
+        <div class = "home_list_discussion" *ngFor="let discussion of discussions" [ngClass]="{'selected-discussion': selectedDiscussionId === discussion.id}" (click)="selectDiscussion(discussion.id)">
           <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="contact_picture"></div>
           <a> {{ discussion.titre }} </a>
         </div>
@@ -35,82 +35,31 @@
     <div class = "home_conversation">
 
       <div class = "home_conversation_messages">
-        <div class = "home_msg_rcv">
-            <div class = "home_msg_info">
+
+        <div class = "home_msg" *ngFor="let message of messages" [ngStyle]="{'justify-content': message.sentByMe ? 'flex-end' : 'flex-start'}">
+            <div class = "home_msg_info" *ngIf="message.sentByMe === false">
               <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
-              <a>07/08<br>15h21</a>
+              <a>{{message.date | date: 'dd/MM/yyyy'}}<br>{{message.date | date: 'HH:mm'}}</a>
             </div>
             <div class = "home_msg_content">
-              Je crois que mon chef n'a pas d'humour...
+              {{message.content}}
             </div>
-        </div>
-        <div class = "home_msg_send">
-            <div class = "home_msg_content">
-              Qu'est ce que tu as sortis encore ?
-            </div>          
-            <div class = "home_msg_info">
+            <div class = "home_msg_info" *ngIf="message.sentByMe === true">
               <div [ngStyle]="{'background-image': 'url(' + ownprofilpicture + ')'}" class="home_msg_info_picture"></div>
-              <a>07/08<br>15h23</a>
-            </div>
-        </div>
-        <div class = "home_msg_rcv">
-            <div class = "home_msg_info">
-              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
-              <a>07/08<br>15h28</a>
-            </div>
-            <div class = "home_msg_content">
-              Il m'a demandé si je supportais bien la pression.
-            </div>
-        </div>
-        <div class = "home_msg_rcv">
-            <div class = "home_msg_info">
-              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
-              <a>07/08<br>15h29</a>
-            </div>
-            <div class = "home_msg_content">
-              Je lui ai répondu que oui, je peux en boire six ou sept avant d'être bourré! 
-            </div>
-        </div>
-        <div class = "home_msg_rcv">
-            <div class = "home_msg_info">
-              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
-              <a>07/08<br>15h29</a>
-            </div>
-            <div class = "home_msg_content">
-              En plus de passer pour un idiot je passe pour un alcoolique...
-            </div>
-        </div>
-        <div class = "home_msg_rcv">
-            <div class = "home_msg_info">
-              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
-              <a>09/06<br>17h02</a>
-            </div>
-            <div class = "home_msg_content">
-              Bon !
-            </div>
-        </div>
-        <div class = "home_msg_send">
-          <div class = "home_msg_content">
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
-            Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des
-            morceaux de texte pour réaliser un livre spécimen de polices de texte.
-          </div>
-          <div class = "home_msg_info">
-            <div [ngStyle]="{'background-image': 'url(' + ownprofilpicture + ')'}" class="home_msg_info_picture"></div>
-            <a>14/09<br>19h38</a>
-          </div>
+              <a>{{message.date | date: 'dd/MM/yyyy'}}<br>{{message.date | date: 'HH:mm'}}</a>
+            </div>        
         </div>
 
-    </div>
+      </div>
 
-      <div class = "home_conversation_tosend">
+      <div class = "home_conversation_tosend" *ngIf="selectedDiscussionId!=-1">
         <div class="home_conversation_tosend_otherfiles">
           <img src="/assets/icons/other_files_button.png">
         </div>
         <div class = "home_conversation_tosend_message" >
-          <input type="text" id="message" name="Enter a message ..." placeholder="Enter a message ...">
+          <input type="text" id="message" name="Enter a message ..." placeholder="Enter a message ..." (keyup.enter)="addMessage()" [(ngModel)]="newMessageContent">
         </div>
-        <img class="home_conversation_tosend_send" src="/assets/icons/send_icon.png">
+        <img class="home_conversation_tosend_send" src="/assets/icons/send_icon.png" (click)="addMessage()">
       </div>
 
     

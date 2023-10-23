@@ -9,7 +9,7 @@
     </div>
 
     <div class="contact_who">        
-        <input type="text" id="username_home_popup" name="username_home_popup" placeholder="Username" [(ngModel)]="newDiscussionTitle">
+        <input type="text" id="username_home_popup" name="username_home_popup" placeholder="Username" (keyup.enter)="hide_new_conv_popup(); addDiscussion()" [(ngModel)]="newDiscussionTitle">
         
         <input type="submit" value="VALID" class="contact_who_button" (click)="hide_new_conv_popup(); addDiscussion()">
 

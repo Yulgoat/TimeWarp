@@ -10,7 +10,7 @@ export class DiscussionService {
   discussions: Discussion[] = [];
 
   addDiscussion(titre: string): void {
-    const discussion = new Discussion(this.discussions.length+1, titre);
+    const discussion = new Discussion(this.discussions.length, titre);
     this.discussions.push(discussion);
   }
 
@@ -18,11 +18,16 @@ export class DiscussionService {
     return this.discussions;
   }
 
-  addMessage(discussionId: number, messageContenu: string): void {
+  addMessage(discussionId: number, messageContent: string, sentByMe: boolean): void {
     const discussion = this.discussions.find(d => d.id === discussionId);
     if (discussion) {
-      const message = new Message(discussion.messages.length + 1, messageContenu);
+      const message = new Message(discussion.messages.length, messageContent, sentByMe, new Date);
       discussion.messages.push(message);
     }
+  }
+
+  getMessage(discussionId: number): Message[]{
+    const discussion = this.discussions.find(d => d.id === discussionId);
+    return discussion ? discussion.messages : [];
   }
 }

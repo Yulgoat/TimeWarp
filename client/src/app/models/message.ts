@@ -1,9 +1,13 @@
 export class Message {
     id: number;
-    contenu: string;
+    content: string;
+    sentByMe: boolean;
+    date: Date;
 
-    constructor(id: number, contenu: string) {
+    constructor(id: number, content: string, sentByMe: boolean, date: Date) {
         this.id = id;
-        this.contenu = contenu;
+        this.content = content;
+        this.sentByMe = sentByMe;
+        this.date = date;
       }
   }
