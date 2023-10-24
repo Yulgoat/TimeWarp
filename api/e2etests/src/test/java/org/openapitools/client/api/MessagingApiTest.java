@@ -18,6 +18,7 @@ import org.openapitools.client.model.DiscussionDTO;
 import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -41,9 +42,28 @@ public class MessagingApiTest {
      */
     @Test
     public void discussionsCreatePostTest() throws ApiException {
-        DiscussionsCreatePostRequest discussionsCreatePostRequest = null;
+        List<String> participants = new ArrayList<String>(){
+            {
+                add("user1");
+                add("user2");
+            }
+        };
+
+        DiscussionsCreatePostRequest discussionsCreatePostRequest = new DiscussionsCreatePostRequest().participants(participants);
         api.discussionsCreatePost(discussionsCreatePostRequest);
-        // TODO: test validations
+
+        List<DiscussionDTO> discussions = api.discussionsUsernameGet("user1");
+
+        Assertions.assertNotNull(discussions);
+
+        DiscussionDTO createdDiscussion = discussions.get(0);
+        Assertions.assertEquals(participants, createdDiscussion.getParticipants());
+
+        api.discussionsCreatePost(discussionsCreatePostRequest);
+
+        discussions = api.discussionsUsernameGet("user1");
+        Assertions.assertEquals(discussions.size(), 1);
+
     }
 
     /**
@@ -72,12 +92,12 @@ public class MessagingApiTest {
     }
 
     /**
-     * Get a list of all discussions
+     * Get a list of all discussions of a user
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void discussionsGetTest() throws ApiException {
+    public void discussionsUsernameGetTest() throws ApiException {
         String username = null;
         List<DiscussionDTO> response = api.discussionsUsernameGet(username);
         // TODO: test validations
