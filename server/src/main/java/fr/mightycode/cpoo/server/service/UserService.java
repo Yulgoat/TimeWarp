@@ -1,5 +1,7 @@
 package fr.mightycode.cpoo.server.service;
 
+import TimeWarp.UserDetailsTimeWarp;
+import TimeWarp.UserTimeWarp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,10 +25,10 @@ public class UserService {
 
   private final HttpServletRequest httpServletRequest;
 
-  public boolean signup(final String username, final String password) {
-    if (userDetailsManager.userExists(username)) //email not verified
+  public boolean signup(final String username, final String email, final String password) {
+    if (userDetailsManager.userExists(username)) //It is possible to have several accounts by email
       return false;
-    final UserDetails user = new User(username, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
+    final UserDetailsTimeWarp user = new UserTimeWarp(username, email, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     userDetailsManager.createUser(user);
     return true;
   }

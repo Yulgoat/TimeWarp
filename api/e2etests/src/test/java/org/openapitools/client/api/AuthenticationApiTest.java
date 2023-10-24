@@ -126,4 +126,42 @@ public class AuthenticationApiTest {
         // Signing in with the new account should work
         authenticationApi.userSigninPost(testUser);
     }
+
+    @Test
+    public void userSignupSigninTest() throws ApiException{// Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testSuSi");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+
+        authenticationApi.userSignoutPost();
+
+        // Signing up a new account should work
+        UserDTO testUser = new UserDTO().username("testSuSiUsername").email("testSuSiEmail").password("testSuSiPwd");
+        authenticationApi.userSignupPost(testUser);
+
+        // Signing up twice the same account should fail with CONFLICT
+        try {
+            authenticationApi.userSignupPost(testUser);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        // Signing in with valid credential should work
+        authenticationApi.userSigninPost(testUser);
+
+        // Signing in again should fail with CONFLICT
+        try {
+            authenticationApi.userSigninPost(testUser);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+    }
 }
