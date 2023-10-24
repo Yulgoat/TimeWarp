@@ -37,7 +37,7 @@ import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/s
     SettingsLanguageComponent,
     SettingsAcknowlodgementsComponent,
     ImageComponent,
-    SettingsChgpwdComponent
+    SettingsChgpwdComponent,
   ],
   imports: [
     BrowserModule,
