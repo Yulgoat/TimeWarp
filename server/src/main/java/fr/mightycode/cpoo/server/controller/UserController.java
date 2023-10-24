@@ -23,7 +23,7 @@ public class UserController {
   @PostMapping(value = "signup", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signup(@RequestBody final UserDTO user) {
     if (!userService.signup(user.username(),user.email(),user.password()))
-      throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists");
+      throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists"); //User or email
   }
 
   @PostMapping(value = "signin", consumes = MediaType.APPLICATION_JSON_VALUE)
