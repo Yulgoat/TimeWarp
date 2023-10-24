@@ -1,5 +1,6 @@
 package fr.mightycode.cpoo.server.service;
 
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -11,7 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -22,10 +25,14 @@ public class UserService {
   private final UserDetailsManager userDetailsManager;
 
   private final HttpServletRequest httpServletRequest;
+  private final Map<String, String> listEmails = new HashMap<String, String>();
 
-  public boolean signup(final String username, final String password) {
-    if (userDetailsManager.userExists(username)) //email not verified
+  public boolean signup(final String username, final String email, final String password) {
+    if (userDetailsManager.userExists(username))
       return false;
+    if(listEmails.containsValue(email))
+      return false;
+    listEmails.put(username,email);
     final UserDetails user = new User(username, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     userDetailsManager.createUser(user);
     return true;
@@ -48,6 +55,7 @@ public class UserService {
     if (!userDetailsManager.userExists(username))
       return false;
     userDetailsManager.deleteUser(username);
+    listEmails.remove(username);
     return true;
   }
 }
