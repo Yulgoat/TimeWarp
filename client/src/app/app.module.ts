@@ -19,6 +19,8 @@ import { SettingsAcknowlodgementsComponent } from './components/settings/setting
 import { ImageComponent } from './components/settings/settings-appearance/image/image.component';
 import { FormsModule } from '@angular/forms';
 import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/settings-chgpwd.component';
+import { CApopUpErrorsComponent } from './src/app/components/login/create-account/capop-up-errors/capop-up-errors.component';
+import { CaPopupErrorsComponent } from './components/login/create-account/ca-popup-errors/ca-popup-errors.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/s
     SettingsAcknowlodgementsComponent,
     ImageComponent,
     SettingsChgpwdComponent,
+    CApopUpErrorsComponent,
+    CaPopupErrorsComponent,
   ],
   imports: [
     BrowserModule,

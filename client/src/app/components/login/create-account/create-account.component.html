@@ -7,21 +7,26 @@
     <h1>CREATE ACCOUNT</h1>
     <form>
         <div>
-          <input type="text" id="username" name="username" placeholder="Username">
+          <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username">
         </div>
         <div>
-            <input type="email" id="email" name="email" placeholder="Email">
+            <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="Email">
           </div>
         <div>
-          <input type="password" id="password" name="password" placeholder="Password">
+          <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="Password">
         </div>
         <div>
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password">
+            <input [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password">
         </div>
   
       <div>
-        <input type="submit" value="REGISTER" class="button" (click)="navigateToLogin()">
+        <input type="submit" value="REGISTER" class="button" (click)="createAccountFonction()">
       </div>
       <p id="back"><a (click)="navigateToLogin()">Back</a></p>
     </form>
+  </div>
+
+
+  <div *ngIf="popUpErrorDisplay" class="new_conv_popup">
+    <app-ca-popup-errors [message]="popUpError" (CApopUpError)="hide_popUpError()"></app-ca-popup-errors>
   </div>
