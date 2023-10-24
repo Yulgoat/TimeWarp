@@ -21,7 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,23 +53,15 @@ import org.openapitools.client.JSON;
 public class MessageDTO {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
-  private UUID id;
+  private Integer id;
 
-  public static final String SERIALIZED_NAME_FROM = "from";
-  @SerializedName(SERIALIZED_NAME_FROM)
-  private String from;
+  public static final String SERIALIZED_NAME_CONTENT = "content";
+  @SerializedName(SERIALIZED_NAME_CONTENT)
+  private String content;
 
-  public static final String SERIALIZED_NAME_TO = "to";
-  @SerializedName(SERIALIZED_NAME_TO)
-  private String to;
-
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
-  private String type;
-
-  public static final String SERIALIZED_NAME_BODY = "body";
-  @SerializedName(SERIALIZED_NAME_BODY)
-  private String body;
+  public static final String SERIALIZED_NAME_SENDER = "sender";
+  @SerializedName(SERIALIZED_NAME_SENDER)
+  private String sender;
 
   public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
   @SerializedName(SERIALIZED_NAME_TIMESTAMP)
@@ -79,7 +70,7 @@ public class MessageDTO {
   public MessageDTO() {
   }
 
-  public MessageDTO id(UUID id) {
+  public MessageDTO id(Integer id) {
     
     this.id = id;
     return this;
@@ -90,97 +81,55 @@ public class MessageDTO {
    * @return id
   **/
   @javax.annotation.Nullable
-  public UUID getId() {
+  public Integer getId() {
     return id;
   }
 
 
-  public void setId(UUID id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
 
-  public MessageDTO from(String from) {
+  public MessageDTO content(String content) {
     
-    this.from = from;
+    this.content = content;
     return this;
   }
 
    /**
-   * Get from
-   * @return from
+   * Get content
+   * @return content
   **/
   @javax.annotation.Nullable
-  public String getFrom() {
-    return from;
+  public String getContent() {
+    return content;
   }
 
 
-  public void setFrom(String from) {
-    this.from = from;
+  public void setContent(String content) {
+    this.content = content;
   }
 
 
-  public MessageDTO to(String to) {
+  public MessageDTO sender(String sender) {
     
-    this.to = to;
+    this.sender = sender;
     return this;
   }
 
    /**
-   * Get to
-   * @return to
+   * Get sender
+   * @return sender
   **/
   @javax.annotation.Nullable
-  public String getTo() {
-    return to;
+  public String getSender() {
+    return sender;
   }
 
 
-  public void setTo(String to) {
-    this.to = to;
-  }
-
-
-  public MessageDTO type(String type) {
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * Get type
-   * @return type
-  **/
-  @javax.annotation.Nullable
-  public String getType() {
-    return type;
-  }
-
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-
-  public MessageDTO body(String body) {
-    
-    this.body = body;
-    return this;
-  }
-
-   /**
-   * Get body
-   * @return body
-  **/
-  @javax.annotation.Nullable
-  public String getBody() {
-    return body;
-  }
-
-
-  public void setBody(String body) {
-    this.body = body;
+  public void setSender(String sender) {
+    this.sender = sender;
   }
 
 
@@ -216,16 +165,14 @@ public class MessageDTO {
     }
     MessageDTO messageDTO = (MessageDTO) o;
     return Objects.equals(this.id, messageDTO.id) &&
-        Objects.equals(this.from, messageDTO.from) &&
-        Objects.equals(this.to, messageDTO.to) &&
-        Objects.equals(this.type, messageDTO.type) &&
-        Objects.equals(this.body, messageDTO.body) &&
+        Objects.equals(this.content, messageDTO.content) &&
+        Objects.equals(this.sender, messageDTO.sender) &&
         Objects.equals(this.timestamp, messageDTO.timestamp);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, from, to, type, body, timestamp);
+    return Objects.hash(id, content, sender, timestamp);
   }
 
   @Override
@@ -233,10 +180,8 @@ public class MessageDTO {
     StringBuilder sb = new StringBuilder();
     sb.append("class MessageDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    body: ").append(toIndentedString(body)).append("\n");
+    sb.append("    content: ").append(toIndentedString(content)).append("\n");
+    sb.append("    sender: ").append(toIndentedString(sender)).append("\n");
     sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -261,10 +206,8 @@ public class MessageDTO {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
-    openapiFields.add("from");
-    openapiFields.add("to");
-    openapiFields.add("type");
-    openapiFields.add("body");
+    openapiFields.add("content");
+    openapiFields.add("sender");
     openapiFields.add("timestamp");
 
     // a set of required properties/fields (JSON key names)
@@ -292,20 +235,11 @@ public class MessageDTO {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      if ((jsonObj.get("content") != null && !jsonObj.get("content").isJsonNull()) && !jsonObj.get("content").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `content` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content").toString()));
       }
-      if ((jsonObj.get("from") != null && !jsonObj.get("from").isJsonNull()) && !jsonObj.get("from").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `from` to be a primitive type in the JSON string but got `%s`", jsonObj.get("from").toString()));
-      }
-      if ((jsonObj.get("to") != null && !jsonObj.get("to").isJsonNull()) && !jsonObj.get("to").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `to` to be a primitive type in the JSON string but got `%s`", jsonObj.get("to").toString()));
-      }
-      if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      if ((jsonObj.get("body") != null && !jsonObj.get("body").isJsonNull()) && !jsonObj.get("body").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `body` to be a primitive type in the JSON string but got `%s`", jsonObj.get("body").toString()));
+      if ((jsonObj.get("sender") != null && !jsonObj.get("sender").isJsonNull()) && !jsonObj.get("sender").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `sender` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sender").toString()));
       }
       if ((jsonObj.get("timestamp") != null && !jsonObj.get("timestamp").isJsonNull()) && !jsonObj.get("timestamp").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `timestamp` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timestamp").toString()));

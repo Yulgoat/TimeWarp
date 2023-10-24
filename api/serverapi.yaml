@@ -13,16 +13,10 @@ security:
   - CookieAuth: [ ]
 tags:
   - name: authentication
-    description: Authentication endpoints.
-  - name: administration
-    description: Administration endpoints.
-  - name: message
-    description: Message management endpoints.
+    description: User authentication.
 paths:
   /user/signup:
     post:
-      summary: Sign up to the service
-      description: Create a user account with provided credentials.
       security: [ ]
       tags:
         - authentication
@@ -35,8 +29,6 @@ paths:
       responses:
         '200':
           description: Success
-        '409':
-          description: 'Conflict: a user account with the same login already exists.'
         default:
           description: Error
           content:
@@ -45,8 +37,6 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
   /user/signin:
     post:
-      summary: Sign in to the service
-      description: Sign in using provided credentials and create a user session.
       security: [ ]
       tags:
         - authentication
@@ -58,13 +48,11 @@ paths:
               $ref: '#/components/schemas/UserDTO'
       responses:
         '200':
-          description: 'Success: a user session is created and a session cookie is returned.'
+          description: Success
           headers:
             Set-Cookie:
               schema:
                 type: string
-        '401':
-          description: 'Unauthorized: invalid login or password.'
         default:
           description: Error
           content:
@@ -73,38 +61,24 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
   /user/signout:
     post:
-      summary: Sign out from the service
-      description: Sign out and close the user session.
       tags:
         - authentication
       responses:
         '200':
-          description: 'Success: the user session is closed.'
+          description: Success
         default:
           description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-  /user/{login}:
-    delete:
-      summary: Delete a user account
-      description: Delete the account of the user matching the given login.
-        Only the administrator can use this endpoint.
+  /user/delete:
+    post:
       tags:
-        - administration
-      parameters:
-        - description: login of the user account to delete.
-          in: path
-          name: login
-          required: true
-          schema:
-            type: string
+        - authentication
       responses:
         '200':
           description: Success
-        '404':
-          description: 'Not found: User account not found.'
         default:
           description: Error
           content:
@@ -249,7 +223,7 @@ paths:
   /user/change-theme:
     patch:
       tags:
-        - appearance
+        - Appearance
       summary: Change user theme
       requestBody:
         required: true
@@ -292,11 +266,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
 
-  /discussions:
+  /discussions/{username}:
     get:
       tags:
         - messaging
-      summary: Get a list of all discussions
+      summary: Get a list of all discussions of a user
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Successful response
@@ -381,27 +361,6 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
 components:
   schemas:
-    MessageDTO:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        from:
-          type: string
-          example: alice@acme
-        to:
-          type: string
-          example: bob@acme
-        type:
-          type: string
-          format: mime
-          example: text/plain
-        body:
-          type: string
-          example: This is the message
-        timestamp:
-          type: string
     UserDTO:
       type: object
       properties:
@@ -411,7 +370,6 @@ components:
           type: string
         password:
           type: string
-          format : password
     UserSettingsDTO:
       type: object
       properties:
@@ -424,6 +382,17 @@ components:
         NotificationSound:
           type: boolean
         profileImage:
+          type: string
+    MessageDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        sender:
+          type: string
+        timestamp:
           type: string
     DiscussionDTO:
       type: object

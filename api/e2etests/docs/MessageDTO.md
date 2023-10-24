@@ -7,11 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **UUID** |  |  [optional] |
-|**from** | **String** |  |  [optional] |
-|**to** | **String** |  |  [optional] |
-|**type** | **String** |  |  [optional] |
-|**body** | **String** |  |  [optional] |
+|**id** | **Integer** |  |  [optional] |
+|**content** | **String** |  |  [optional] |
+|**sender** | **String** |  |  [optional] |
 |**timestamp** | **String** |  |  [optional] |
 
 

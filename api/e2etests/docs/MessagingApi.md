@@ -7,7 +7,7 @@ All URIs are relative to *http://localhost:8080*
 | [**discussionsCreatePost**](MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion |
 | [**discussionsDiscussionIdMessagesGet**](MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation |
 | [**discussionsDiscussionIdMessagesPost**](MessagingApi.md#discussionsDiscussionIdMessagesPost) | **POST** /discussions/{discussion_id}/messages | Send a message in a disccusion |
-| [**discussionsGet**](MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions |
+| [**discussionsUsernameGet**](MessagingApi.md#discussionsUsernameGet) | **GET** /discussions/{username} | Get a list of all discussions of a user |
 
 
 <a id="discussionsCreatePost"></a>
@@ -213,11 +213,11 @@ null (empty response body)
 | **200** | Message sent successfully |  -  |
 | **0** | Error |  -  |
 
-<a id="discussionsGet"></a>
-# **discussionsGet**
-> List&lt;DiscussionDTO&gt; discussionsGet()
+<a id="discussionsUsernameGet"></a>
+# **discussionsUsernameGet**
+> List&lt;DiscussionDTO&gt; discussionsUsernameGet(username)
 
-Get a list of all discussions
+Get a list of all discussions of a user
 
 ### Example
 ```java
@@ -241,11 +241,12 @@ public class Example {
     //CookieAuth.setApiKeyPrefix("Token");
 
     MessagingApi apiInstance = new MessagingApi(defaultClient);
+    String username = "username_example"; // String | 
     try {
-      List<DiscussionDTO> result = apiInstance.discussionsGet();
+      List<DiscussionDTO> result = apiInstance.discussionsUsernameGet(username);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MessagingApi#discussionsGet");
+      System.err.println("Exception when calling MessagingApi#discussionsUsernameGet");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -256,7 +257,10 @@ public class Example {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **username** | **String**|  | |
 
 ### Return type
 

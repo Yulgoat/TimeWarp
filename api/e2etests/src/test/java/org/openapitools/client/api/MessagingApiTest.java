@@ -78,7 +78,8 @@ public class MessagingApiTest {
      */
     @Test
     public void discussionsGetTest() throws ApiException {
-        List<DiscussionDTO> response = api.discussionsGet();
+        String username = null;
+        List<DiscussionDTO> response = api.discussionsUsernameGet(username);
         // TODO: test validations
     }
 

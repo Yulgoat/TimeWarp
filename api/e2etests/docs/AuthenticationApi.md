@@ -4,18 +4,80 @@ All URIs are relative to *http://localhost:8080*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**userSigninPost**](AuthenticationApi.md#userSigninPost) | **POST** /user/signin | Sign in to the service |
-| [**userSignoutPost**](AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | Sign out from the service |
-| [**userSignupPost**](AuthenticationApi.md#userSignupPost) | **POST** /user/signup | Sign up to the service |
+| [**userDeletePost**](AuthenticationApi.md#userDeletePost) | **POST** /user/delete |  |
+| [**userSigninPost**](AuthenticationApi.md#userSigninPost) | **POST** /user/signin |  |
+| [**userSignoutPost**](AuthenticationApi.md#userSignoutPost) | **POST** /user/signout |  |
+| [**userSignupPost**](AuthenticationApi.md#userSignupPost) | **POST** /user/signup |  |
 
+
+<a id="userDeletePost"></a>
+# **userDeletePost**
+> userDeletePost()
+
+
+
+### Example
+```java
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.AuthenticationApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080");
+    
+    // Configure API key authorization: CookieAuth
+    ApiKeyAuth CookieAuth = (ApiKeyAuth) defaultClient.getAuthentication("CookieAuth");
+    CookieAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //CookieAuth.setApiKeyPrefix("Token");
+
+    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
+    try {
+      apiInstance.userDeletePost();
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AuthenticationApi#userDeletePost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[CookieAuth](../README.md#CookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Success |  -  |
+| **0** | Error |  -  |
 
 <a id="userSigninPost"></a>
 # **userSigninPost**
 > userSigninPost(userDTO)
 
-Sign in to the service
 
-Sign in using provided credentials and create a user session.
 
 ### Example
 ```java
@@ -68,17 +130,14 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Success: a user session is created and a session cookie is returned. |  * Set-Cookie -  <br>  |
-| **401** | Unauthorized: invalid login or password. |  -  |
+| **200** | Success |  * Set-Cookie -  <br>  |
 | **0** | Error |  -  |
 
 <a id="userSignoutPost"></a>
 # **userSignoutPost**
 > userSignoutPost()
 
-Sign out from the service
 
-Sign out and close the user session.
 
 ### Example
 ```java
@@ -134,16 +193,14 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Success: the user session is closed. |  -  |
+| **200** | Success |  -  |
 | **0** | Error |  -  |
 
 <a id="userSignupPost"></a>
 # **userSignupPost**
 > userSignupPost(userDTO)
 
-Sign up to the service
 
-Create a user account with provided credentials.
 
 ### Example
 ```java
@@ -197,6 +254,5 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Success |  -  |
-| **409** | Conflict: a user account with the same login already exists. |  -  |
 | **0** | Error |  -  |
 
