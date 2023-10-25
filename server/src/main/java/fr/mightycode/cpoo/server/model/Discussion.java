@@ -16,7 +16,11 @@ public class Discussion {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     
-    @ElementCollection
-    private List<String> participants;
+    @Column(name = "user1", nullable = false)
+    private String user1;
+
+    @Column(name = "user2", nullable = false)
+    private String user2;
+
 
 }

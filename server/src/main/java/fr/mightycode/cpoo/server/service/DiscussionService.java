@@ -1,37 +1,35 @@
 package fr.mightycode.cpoo.server.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.mightycode.cpoo.server.model.Discussion;
 import fr.mightycode.cpoo.server.repository.DiscussionRepository;
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
 public class DiscussionService {
     
     private final DiscussionRepository discussionRepository;
 
-    @Autowired
-    public DiscussionService(DiscussionRepository discussionRepository) {
-        this.discussionRepository = discussionRepository;
-    }
-
-    public Discussion createDiscussion(List<String> participants) {
-        List<Discussion> existingDiscussions = discussionRepository.findDiscussionsByParticipants(participants);
+    public Discussion createDiscussion(String user1, String user2) {
+        List<Discussion> existingDiscussions = discussionRepository.findDiscussionsByUser1AndUser2(user1, user2);
         if (!existingDiscussions.isEmpty()) {
             return existingDiscussions.get(0);
         } else {
             Discussion discussion = new Discussion();
-            discussion.setParticipants(participants);
+            discussion.setUser1(user1);
+            discussion.setUser2(user2);
             return discussionRepository.save(discussion);
         }
     }
     
 
     public List<Discussion> getDiscussionsForUser(String username) {
-        return discussionRepository.findDiscussionsByParticipantsContains(username);
+        return discussionRepository.findDiscussionsByUser1OrUser2(username, username);
     }
 
     public Discussion getDiscussionById(UUID id) {

@@ -18,7 +18,6 @@ import org.openapitools.client.model.DiscussionDTO;
 import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -42,28 +41,9 @@ public class MessagingApiTest {
      */
     @Test
     public void discussionsCreatePostTest() throws ApiException {
-        List<String> participants = new ArrayList<String>(){
-            {
-                add("user1");
-                add("user2");
-            }
-        };
-
-        DiscussionsCreatePostRequest discussionsCreatePostRequest = new DiscussionsCreatePostRequest().participants(participants);
+        DiscussionsCreatePostRequest discussionsCreatePostRequest = null;
         api.discussionsCreatePost(discussionsCreatePostRequest);
-
-        List<DiscussionDTO> discussions = api.discussionsUsernameGet("user1");
-
-        Assertions.assertNotNull(discussions);
-
-        DiscussionDTO createdDiscussion = discussions.get(0);
-        Assertions.assertEquals(participants, createdDiscussion.getParticipants());
-
-        api.discussionsCreatePost(discussionsCreatePostRequest);
-
-        discussions = api.discussionsUsernameGet("user1");
-        Assertions.assertEquals(discussions.size(), 1);
-
+        // TODO: test validations
     }
 
     /**

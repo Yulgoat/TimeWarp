@@ -20,9 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,39 +51,56 @@ import org.openapitools.client.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class DiscussionsCreatePostRequest {
-  public static final String SERIALIZED_NAME_PARTICIPANTS = "participants";
-  @SerializedName(SERIALIZED_NAME_PARTICIPANTS)
-  private List<String> participants = new ArrayList<>();
+  public static final String SERIALIZED_NAME_USER1 = "user1";
+  @SerializedName(SERIALIZED_NAME_USER1)
+  private String user1;
+
+  public static final String SERIALIZED_NAME_USER2 = "user2";
+  @SerializedName(SERIALIZED_NAME_USER2)
+  private String user2;
 
   public DiscussionsCreatePostRequest() {
   }
 
-  public DiscussionsCreatePostRequest participants(List<String> participants) {
+  public DiscussionsCreatePostRequest user1(String user1) {
     
-    this.participants = participants;
-    return this;
-  }
-
-  public DiscussionsCreatePostRequest addParticipantsItem(String participantsItem) {
-    if (this.participants == null) {
-      this.participants = new ArrayList<>();
-    }
-    this.participants.add(participantsItem);
+    this.user1 = user1;
     return this;
   }
 
    /**
-   * Get participants
-   * @return participants
+   * Get user1
+   * @return user1
   **/
   @javax.annotation.Nonnull
-  public List<String> getParticipants() {
-    return participants;
+  public String getUser1() {
+    return user1;
   }
 
 
-  public void setParticipants(List<String> participants) {
-    this.participants = participants;
+  public void setUser1(String user1) {
+    this.user1 = user1;
+  }
+
+
+  public DiscussionsCreatePostRequest user2(String user2) {
+    
+    this.user2 = user2;
+    return this;
+  }
+
+   /**
+   * Get user2
+   * @return user2
+  **/
+  @javax.annotation.Nonnull
+  public String getUser2() {
+    return user2;
+  }
+
+
+  public void setUser2(String user2) {
+    this.user2 = user2;
   }
 
 
@@ -99,19 +114,21 @@ public class DiscussionsCreatePostRequest {
       return false;
     }
     DiscussionsCreatePostRequest discussionsCreatePostRequest = (DiscussionsCreatePostRequest) o;
-    return Objects.equals(this.participants, discussionsCreatePostRequest.participants);
+    return Objects.equals(this.user1, discussionsCreatePostRequest.user1) &&
+        Objects.equals(this.user2, discussionsCreatePostRequest.user2);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(participants);
+    return Objects.hash(user1, user2);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DiscussionsCreatePostRequest {\n");
-    sb.append("    participants: ").append(toIndentedString(participants)).append("\n");
+    sb.append("    user1: ").append(toIndentedString(user1)).append("\n");
+    sb.append("    user2: ").append(toIndentedString(user2)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -134,11 +151,13 @@ public class DiscussionsCreatePostRequest {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("participants");
+    openapiFields.add("user1");
+    openapiFields.add("user2");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("participants");
+    openapiRequiredFields.add("user1");
+    openapiRequiredFields.add("user2");
   }
 
  /**
@@ -169,11 +188,11 @@ public class DiscussionsCreatePostRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the required json array is present
-      if (jsonObj.get("participants") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("participants").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `participants` to be an array in the JSON string but got `%s`", jsonObj.get("participants").toString()));
+      if (!jsonObj.get("user1").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `user1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user1").toString()));
+      }
+      if (!jsonObj.get("user2").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `user2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user2").toString()));
       }
   }
 

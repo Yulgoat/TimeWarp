@@ -423,17 +423,16 @@ components:
       type: object
     DiscussionDTO:
       example:
+        user1: user1
+        user2: user2
         id: 0
-        participants:
-        - participants
-        - participants
       properties:
         id:
           type: integer
-        participants:
-          items:
-            type: string
-          type: array
+        user1:
+          type: string
+        user2:
+          type: string
       type: object
     NewPasswordDTO:
       example:
@@ -506,12 +505,13 @@ components:
       type: object
     _discussions_create_post_request:
       properties:
-        participants:
-          items:
-            type: string
-          type: array
+        user1:
+          type: string
+        user2:
+          type: string
       required:
-      - participants
+      - user1
+      - user2
       type: object
   securitySchemes:
     CookieAuth:

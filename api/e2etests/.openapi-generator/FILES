@@ -76,5 +76,3 @@ src/main/java/org/openapitools/client/model/UserDTO.java
 src/main/java/org/openapitools/client/model/UserLanguagePatchRequest.java
 src/main/java/org/openapitools/client/model/UserSettingsDTO.java
 src/test/java/org/openapitools/client/api/MessagingApiTest.java
-src/test/java/org/openapitools/client/model/DiscussionDTOTest.java
-src/test/java/org/openapitools/client/model/DiscussionsCreatePostRequestTest.java

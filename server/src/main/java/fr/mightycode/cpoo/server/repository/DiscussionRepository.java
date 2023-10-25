@@ -9,6 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface DiscussionRepository extends JpaRepository<Discussion, UUID>{
-    List<Discussion> findDiscussionsByParticipantsContains(String username);
-    List<Discussion> findDiscussionsByParticipants(List<String> participants);
+    List<Discussion> findDiscussionsByUser1OrUser2(String user1, String user2);
+    List<Discussion> findDiscussionsByUser1AndUser2(String user1, String user2);
 }
