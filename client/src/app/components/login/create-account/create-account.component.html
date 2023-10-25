@@ -6,56 +6,35 @@
   <div class="section2">
     <h1>CREATE ACCOUNT</h1>
     <form>
-        <div *ngIf="EmptyUser==false">
-          <div *ngIf="userOK; else elseUser">
-            <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username">
-          </div>
-          <ng-template #elseUser>
-            <input class="error_fields" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username Already Exist">
-          </ng-template>
-        </div>
-        <div *ngIf="EmptyUser">
-          <input class="error_fields" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Field Empty">
-        </div>
-        
-        <div *ngIf="EmptyEmail==false">
-          <div *ngIf="emailOK; else elseEmail">
-              <input class="no_error" [(ngModel)]="email" type="email" id="email" name="email" placeholder="Email">
-          </div>
-          <ng-template #elseEmail>
-            <input class="error_fields" [(ngModel)]="email" type="email" id="email" name="email" placeholder="Not a correct Email">
-          </ng-template>
-        </div>
-        <div *ngIf="EmptyEmail">
-          <input class="error_fields" [(ngModel)]="email" type="email" id="email" name="email" placeholder="Field Empty">
-        </div>
-        
-        <div *ngIf="EmptyPwd==false">
-          <div *ngIf="pwdOk; else elsePwd">
-            <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Password">
-          </div>
-          <ng-template #elsePwd>
-            <input class="error_fields" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Not the Same Password">
-          </ng-template>
-        </div>
-        <div *ngIf="EmptyPwd">
-          <input class="error_fields" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Field Empty">
-        </div>
-        
-        <div *ngIf="EmptyCfmPwd==false">    
-          <div *ngIf="CfmPwdOK; else elseCfmPwd">
-              <input class="no_error" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password">
-          </div>
-          <ng-template #elseCfmPwd  >
-            <input class="error_fields" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="Not the Same Password">
-          </ng-template>
-        </div>        
-        <div *ngIf="EmptyCfmPwd">
-            <input class="error_fields" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="Field Empty">
-        </div>
+      <div *ngIf="userError==false; else elseUser">
+        <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username">
+      </div>
+      <ng-template #elseUser>
+        <input class="error_fields" [(ngModel)]="username" type="text" id="username" name="username" placeholder={{userErrorMessage}}>
+      </ng-template>
+
+      <div *ngIf="emailError==false; else elseEmail">
+        <input class="no_error" [(ngModel)]="email" type="email" id="email" name="username" placeholder="Email">
+      </div>
+      <ng-template #elseEmail>
+        <input class="error_fields" [(ngModel)]="email" type="email" id="email" name="username" placeholder={{emailErrorMessage}}>
+      </ng-template>
+
+      <div *ngIf="pwdError==false; else elsePwd">
+        <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Password">
+      </div>
+      <ng-template #elsePwd>
+        <input class="error_fields" [(ngModel)]="password" type="password" id="password" name="password" placeholder={{pwdErrorMessage}}>
+      </ng-template>
+
+      <div *ngIf="cfpwdError==false; else elseCfmPwd">
+        <input class="no_error" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password">
+      </div>
+      <ng-template #elseCfmPwd>
+        <input class="error_fields" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder={{cfpwdErrorMessage}}>
+      </ng-template>
 
 
-  
       <div>
         <input type="submit" value="REGISTER" class="button" (click)="createAccountFonction()">
       </div>
