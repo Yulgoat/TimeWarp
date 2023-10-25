@@ -6,10 +6,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./ca-popup-errors.component.css']
 })
 export class CaPopupErrorsComponent {
-  @Output() CApopUpError = new EventEmitter<void>();
+  @Output() CApopUpError = new EventEmitter<void>();    
 
-  @Input() message: string ="";
+  @Input() message: string ="";           // Recept the error message of create-account 
 
+  /* Send to create-account that the popup must close */
   hide_popUpError() {
    this.CApopUpError.emit();
  }
