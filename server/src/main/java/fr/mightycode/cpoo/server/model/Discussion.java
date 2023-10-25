@@ -2,7 +2,6 @@ package fr.mightycode.cpoo.server.model;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;

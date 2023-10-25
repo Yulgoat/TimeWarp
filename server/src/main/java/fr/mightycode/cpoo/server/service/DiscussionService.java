@@ -16,10 +16,13 @@ public class DiscussionService {
     private final DiscussionRepository discussionRepository;
 
     public Discussion createDiscussion(String user1, String user2) {
-        List<Discussion> existingDiscussions = discussionRepository.findDiscussionsByUser1AndUser2(user1, user2);
-        if (!existingDiscussions.isEmpty()) {
-            return existingDiscussions.get(0);
-        } else {
+        List<Discussion> existingDiscussions1 = discussionRepository.findDiscussionsByUser1AndUser2(user1, user2);
+        List<Discussion> existingDiscussions2 = discussionRepository.findDiscussionsByUser1AndUser2(user2, user1);
+        if (!existingDiscussions1.isEmpty()) {
+            return existingDiscussions1.get(0);
+        } else if(!existingDiscussions2.isEmpty()){
+            return existingDiscussions2.get(0);
+        } else{
             Discussion discussion = new Discussion();
             discussion.setUser1(user1);
             discussion.setUser2(user2);

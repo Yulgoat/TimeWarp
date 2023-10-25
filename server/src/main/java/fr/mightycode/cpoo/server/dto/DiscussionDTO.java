@@ -1,5 +1,7 @@
 package fr.mightycode.cpoo.server.dto;
 
-public record DiscussionDTO(long id, String user1, String user2) {
+import java.util.UUID;
+
+public record DiscussionDTO(UUID id, String user1, String user2) {
     
 }

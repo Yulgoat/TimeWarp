@@ -19,7 +19,7 @@ public class DiscussionController {
 
     private final DiscussionService discussionService;
 
-    @GetMapping("value = /{username}")
+    @GetMapping("/{username}")
     public ResponseEntity<List<Discussion>> getDiscussionsForUser(@PathVariable String username) {
         List<Discussion> discussions = discussionService.getDiscussionsForUser(username);
         return new ResponseEntity<>(discussions, HttpStatus.OK);

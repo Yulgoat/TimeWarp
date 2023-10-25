@@ -19,6 +19,7 @@ import { SettingsAcknowlodgementsComponent } from './components/settings/setting
 import { ImageComponent } from './components/settings/settings-appearance/image/image.component';
 import { FormsModule } from '@angular/forms';
 import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/settings-chgpwd.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/s
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -408,12 +408,13 @@ components:
     MessageDTO:
       example:
         sender: sender
-        id: 0
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         content: content
         timestamp: timestamp
       properties:
         id:
-          type: integer
+          format: uuid
+          type: string
         content:
           type: string
         sender:
@@ -425,10 +426,11 @@ components:
       example:
         user1: user1
         user2: user2
-        id: 0
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
-          type: integer
+          format: uuid
+          type: string
         user1:
           type: string
         user2:

@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +54,7 @@ import org.openapitools.client.JSON;
 public class DiscussionDTO {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
-  private Integer id;
+  private UUID id;
 
   public static final String SERIALIZED_NAME_USER1 = "user1";
   @SerializedName(SERIALIZED_NAME_USER1)
@@ -66,7 +67,7 @@ public class DiscussionDTO {
   public DiscussionDTO() {
   }
 
-  public DiscussionDTO id(Integer id) {
+  public DiscussionDTO id(UUID id) {
     
     this.id = id;
     return this;
@@ -77,12 +78,12 @@ public class DiscussionDTO {
    * @return id
   **/
   @javax.annotation.Nullable
-  public Integer getId() {
+  public UUID getId() {
     return id;
   }
 
 
-  public void setId(Integer id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -207,6 +208,9 @@ public class DiscussionDTO {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
       if ((jsonObj.get("user1") != null && !jsonObj.get("user1").isJsonNull()) && !jsonObj.get("user1").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `user1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user1").toString()));
       }
