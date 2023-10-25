@@ -27,15 +27,15 @@ public class UserService {
   private final HttpServletRequest httpServletRequest;
   private final Map<String, String> listEmails = new HashMap<String, String>();
 
-  public boolean signup(final String username, final String email, final String password) {
+  public int signup(final String username, final String email, final String password) {
     if (userDetailsManager.userExists(username))
-      return false;
+      return 0;
     if(listEmails.containsValue(email))
-      return false;
+      return 1;
     listEmails.put(username,email);
     final UserDetails user = new User(username, passwordEncoder.encode(password), List.of(new SimpleGrantedAuthority("ROLE_USER")));
     userDetailsManager.createUser(user);
-    return true;
+    return 2;
   }
 
   public boolean signin(final String username, final String password) throws ServletException {

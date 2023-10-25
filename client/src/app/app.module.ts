@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/settings-chgpwd.component';
 import { CApopUpErrorsComponent } from './src/app/components/login/create-account/capop-up-errors/capop-up-errors.component';
 import { CaPopupErrorsComponent } from './components/login/create-account/ca-popup-errors/ca-popup-errors.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CaPopupErrorsComponent } from './components/login/create-account/ca-pop
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [],

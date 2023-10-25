@@ -1,11 +1,13 @@
 package fr.mightycode.cpoo.server.controller;
 
+import fr.mightycode.cpoo.server.dto.ErrorDTO;
 import fr.mightycode.cpoo.server.dto.UserDTO;
 import fr.mightycode.cpoo.server.service.UserService;
 import jakarta.servlet.ServletException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,10 +23,34 @@ public class UserController {
   private final UserService userService;
 
   @PostMapping(value = "signup", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void signup(@RequestBody final UserDTO user) {
-    if (!userService.signup(user.username(),user.email(),user.password()))
-      throw new ResponseStatusException(HttpStatus.CONFLICT, "User already exists"); //User or email
+  public ResponseEntity<Object> signup(@RequestBody final UserDTO user) {
+    int res = userService.signup(user.username(), user.email(), user.password());
+    if (res == 2) {
+      ErrorDTO success = new ErrorDTO();
+      success.setStatus(HttpStatus.OK.value());
+      success.setError("Success");
+      success.setMessage("Successful Registration");
+      return ResponseEntity.status(HttpStatus.OK).body(success); // Success (200)
+    }
+    else if (res == 0) {
+      ErrorDTO error = new ErrorDTO();
+      error.setStatus(HttpStatus.CONFLICT.value());
+      error.setError("Conflict");
+      error.setMessage("Username already exists");
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(error);// Username Already Exists (409)
+    }
+    else if (res == 1) {
+      ErrorDTO error = new ErrorDTO();
+      error.setStatus(HttpStatus.CONFLICT.value());
+      error.setError("Conflict");
+      error.setMessage("Email already exists");
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(error);// Username Already Exists (409)
+    }
+    else {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Another error has occurred");
+    }
   }
+
 
   @PostMapping(value = "signin", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void signin(@RequestBody final UserDTO user) {
