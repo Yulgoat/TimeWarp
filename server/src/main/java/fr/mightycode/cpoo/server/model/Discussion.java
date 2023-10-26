@@ -20,6 +20,5 @@ public class Discussion {
 
     @Column(name = "user2", nullable = false)
     private String user2;
-
-
+    
 }

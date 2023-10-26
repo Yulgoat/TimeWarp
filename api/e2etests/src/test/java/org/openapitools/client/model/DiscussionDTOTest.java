@@ -19,8 +19,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import org.openapitools.client.model.MessageDTO;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -60,6 +63,14 @@ public class DiscussionDTOTest {
     @Test
     public void user2Test() {
         // TODO: test user2
+    }
+
+    /**
+     * Test the property 'messages'
+     */
+    @Test
+    public void messagesTest() {
+        // TODO: test messages
     }
 
 }

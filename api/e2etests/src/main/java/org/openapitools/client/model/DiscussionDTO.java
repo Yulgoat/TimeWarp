@@ -20,8 +20,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import org.openapitools.client.model.MessageDTO;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,6 +66,10 @@ public class DiscussionDTO {
   public static final String SERIALIZED_NAME_USER2 = "user2";
   @SerializedName(SERIALIZED_NAME_USER2)
   private String user2;
+
+  public static final String SERIALIZED_NAME_MESSAGES = "messages";
+  @SerializedName(SERIALIZED_NAME_MESSAGES)
+  private List<MessageDTO> messages;
 
   public DiscussionDTO() {
   }
@@ -130,6 +137,35 @@ public class DiscussionDTO {
   }
 
 
+  public DiscussionDTO messages(List<MessageDTO> messages) {
+    
+    this.messages = messages;
+    return this;
+  }
+
+  public DiscussionDTO addMessagesItem(MessageDTO messagesItem) {
+    if (this.messages == null) {
+      this.messages = new ArrayList<>();
+    }
+    this.messages.add(messagesItem);
+    return this;
+  }
+
+   /**
+   * Get messages
+   * @return messages
+  **/
+  @javax.annotation.Nullable
+  public List<MessageDTO> getMessages() {
+    return messages;
+  }
+
+
+  public void setMessages(List<MessageDTO> messages) {
+    this.messages = messages;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -142,12 +178,13 @@ public class DiscussionDTO {
     DiscussionDTO discussionDTO = (DiscussionDTO) o;
     return Objects.equals(this.id, discussionDTO.id) &&
         Objects.equals(this.user1, discussionDTO.user1) &&
-        Objects.equals(this.user2, discussionDTO.user2);
+        Objects.equals(this.user2, discussionDTO.user2) &&
+        Objects.equals(this.messages, discussionDTO.messages);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, user1, user2);
+    return Objects.hash(id, user1, user2, messages);
   }
 
   @Override
@@ -157,6 +194,7 @@ public class DiscussionDTO {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    user1: ").append(toIndentedString(user1)).append("\n");
     sb.append("    user2: ").append(toIndentedString(user2)).append("\n");
+    sb.append("    messages: ").append(toIndentedString(messages)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -182,6 +220,7 @@ public class DiscussionDTO {
     openapiFields.add("id");
     openapiFields.add("user1");
     openapiFields.add("user2");
+    openapiFields.add("messages");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -216,6 +255,20 @@ public class DiscussionDTO {
       }
       if ((jsonObj.get("user2") != null && !jsonObj.get("user2").isJsonNull()) && !jsonObj.get("user2").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `user2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user2").toString()));
+      }
+      if (jsonObj.get("messages") != null && !jsonObj.get("messages").isJsonNull()) {
+        JsonArray jsonArraymessages = jsonObj.getAsJsonArray("messages");
+        if (jsonArraymessages != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("messages").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `messages` to be an array in the JSON string but got `%s`", jsonObj.get("messages").toString()));
+          }
+
+          // validate the optional field `messages` (array)
+          for (int i = 0; i < jsonArraymessages.size(); i++) {
+            MessageDTO.validateJsonElement(jsonArraymessages.get(i));
+          };
+        }
       }
   }
 

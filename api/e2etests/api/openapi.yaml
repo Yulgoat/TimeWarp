@@ -426,6 +426,15 @@ components:
       example:
         user1: user1
         user2: user2
+        messages:
+        - sender: sender
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          content: content
+          timestamp: timestamp
+        - sender: sender
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          content: content
+          timestamp: timestamp
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
@@ -435,6 +444,10 @@ components:
           type: string
         user2:
           type: string
+        messages:
+          items:
+            $ref: '#/components/schemas/MessageDTO'
+          type: array
       type: object
     NewPasswordDTO:
       example:

@@ -307,22 +307,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MessageDTO'
+                  
+  /discussions/message:
     post:
       tags:
         - messaging
       summary: Send a message in a disccusion
-      parameters:
-        - name: discussion_id
-          in: path
-          required: true
-          schema:
-            type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageDTO'
+              $ref: '#/components/schemas/PostMessageDTO'
       responses:
         '200':
           description: Message sent successfully
@@ -384,18 +380,41 @@ components:
           type: boolean
         profileImage:
           type: string
-    MessageDTO:
+    PostMessageDTO:
+      description: Message to send
       type: object
+      required:
+        - to
+        - type
+        - body
       properties:
-        id:
+        to:
           type: string
-          format: uuid
-        content:
+          example: bob@acme
+        type:
           type: string
-        sender:
+          format: mime
+          example: text/plain
+        body:
           type: string
-        timestamp:
-          type: string
+          example: This is the message
+    MessageDTO:
+      allOf: # Combines the BasicErrorModel and the inline model
+        - $ref: '#/components/schemas/PostMessageDTO'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: 667bdc23-3de4-482f-a0f4-3391452a7742
+            timestamp:
+              type: integer
+              format: int64
+              example: 1720294759999
+            from:
+              type: string
+              example: alice@acme
+
     DiscussionDTO:
       type: object
       properties:
