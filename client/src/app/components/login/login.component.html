@@ -7,13 +7,19 @@
   <h1>USER LOGIN</h1>
   <form>
     <!-- Form Row containing Username and Password input fields -->
-    <div class="form-row">
-      <div>
-        <input type="text" id="username" name="username" placeholder="Username">
+    <div class="form-row">      
+      <div *ngIf="userError==false; else elseUser">
+        <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username">
       </div>
-      <div>
-        <input type="password" id="password" name="password" placeholder="Password">
+      <ng-template #elseUser>
+        <input class="error_fields" [(ngModel)]="username" type="text" id="username" name="username" placeholder={{userErrorMessage}}>
+      </ng-template>
+      <div *ngIf="pwdError==false; else elsePwd">
+        <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Password">
       </div>
+      <ng-template #elsePwd>
+        <input class="error_fields" [(ngModel)]="password" type="password" id="password" name="password" placeholder={{pwdErrorMessage}}>
+      </ng-template>
     </div>
 
     <!-- Form Bottom containing Remember Me checkbox and Forgot Password link -->
@@ -30,7 +36,7 @@
 
     <!-- Login button -->
     <div>
-      <input type="submit" value="LOGIN" class="button" (click)="loginToHome()">
+      <input type="submit" value="LOGIN" class="button" (click)="login()">
     </div>
     
     <!-- Create Account link -->

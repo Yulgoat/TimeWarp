@@ -51,23 +51,53 @@ public class UserController {
     }
   }
 
-
   @PostMapping(value = "signin", consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void signin(@RequestBody final UserDTO user) {
+  public ResponseEntity<Object> signin(@RequestBody final UserDTO user) {
+    ErrorDTO retour = new ErrorDTO();
     try {
-      if (!userService.signin(user.username(), user.password()))
-        throw new ResponseStatusException(HttpStatus.CONFLICT, "Already signed in");
+      if (!userService.signin(user.username(), user.password())) {
+        retour.setStatus(HttpStatus.CONFLICT.value());
+        retour.setError("Conflict");
+        retour.setMessage("Already signed in");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(retour);// Already signed in (409)
+      }
+      else{
+        retour.setStatus(HttpStatus.OK.value());
+        retour.setError("Success");
+        retour.setMessage("Successful Login");
+        return ResponseEntity.status(HttpStatus.OK).body(retour); // Success (200)
+      }
     } catch (final ServletException ex) {
-      if (ex.getCause() instanceof BadCredentialsException)
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bad credentials");
-      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+      if (ex.getCause() instanceof BadCredentialsException) {
+        retour.setStatus(HttpStatus.UNAUTHORIZED.value());
+        retour.setError("UNAUTHORIZED");
+        retour.setMessage("Bad credentials");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(retour);// UNAUTHORIZED (401)
+      }
     }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Another error has occurred");
   }
 
   @PostMapping(value = "signout")
   public void signout() {
     try {
       userService.signout();
+    }
+    catch (final ServletException ex) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+    }
+  }
+
+  /*** Disconnect function, alternative to the signout version. We send a return 200 if it succeeds ***/
+  @PostMapping(value = "signout2", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<ErrorDTO> signout2(@RequestBody final UserDTO user)  {
+    try {
+      userService.signout2(user.username());
+      ErrorDTO success = new ErrorDTO();
+      success.setStatus(HttpStatus.OK.value());
+      success.setError("Success");
+      success.setMessage("Successful Registration");
+      return ResponseEntity.status(HttpStatus.OK).body(success); // Success (200)
     } catch (final ServletException ex) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
