@@ -320,20 +320,13 @@ paths:
       tags:
       - messaging
       x-accepts: application/json
+  /discussions/message:
     post:
-      parameters:
-      - explode: false
-        in: path
-        name: discussion_id
-        required: true
-        schema:
-          type: integer
-        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageDTO'
+              $ref: '#/components/schemas/PostMessageDTO'
         required: true
       responses:
         "200":
@@ -405,36 +398,48 @@ components:
         profileImage:
           type: string
       type: object
-    MessageDTO:
+    PostMessageDTO:
+      description: Message to send
       example:
-        sender: sender
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        content: content
-        timestamp: timestamp
+        to: bob@acme
+        type: text/plain
+        body: This is the message
       properties:
-        id:
-          format: uuid
+        to:
+          example: bob@acme
           type: string
-        content:
+        type:
+          example: text/plain
+          format: mime
           type: string
-        sender:
+        body:
+          example: This is the message
           type: string
-        timestamp:
-          type: string
+      required:
+      - body
+      - to
+      - type
       type: object
+    MessageDTO:
+      allOf:
+      - $ref: '#/components/schemas/PostMessageDTO'
+      - properties:
+          id:
+            example: 667bdc23-3de4-482f-a0f4-3391452a7742
+            format: uuid
+            type: string
+          timestamp:
+            example: 1720294759999
+            format: int64
+            type: integer
+          from:
+            example: alice@acme
+            type: string
+        type: object
     DiscussionDTO:
       example:
         user1: user1
         user2: user2
-        messages:
-        - sender: sender
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          content: content
-          timestamp: timestamp
-        - sender: sender
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          content: content
-          timestamp: timestamp
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         id:
@@ -444,10 +449,6 @@ components:
           type: string
         user2:
           type: string
-        messages:
-          items:
-            $ref: '#/components/schemas/MessageDTO'
-          type: array
       type: object
     NewPasswordDTO:
       example:

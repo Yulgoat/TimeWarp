@@ -1,7 +1,8 @@
 
 
-# MessageDTO
+# PostMessageDTO
 
+Message to send
 
 ## Properties
 
@@ -10,9 +11,6 @@
 |**to** | **String** |  |  |
 |**type** | **String** |  |  |
 |**body** | **String** |  |  |
-|**id** | **UUID** |  |  [optional] |
-|**timestamp** | **Long** |  |  [optional] |
-|**from** | **String** |  |  [optional] |
 
 
 

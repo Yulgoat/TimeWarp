@@ -134,7 +134,7 @@ Class | Method | HTTP request | Description
 *LanguageApi* | [**userLanguagePatch**](docs/LanguageApi.md#userLanguagePatch) | **PATCH** /user/language | 
 *MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion
 *MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation
-*MessagingApi* | [**discussionsDiscussionIdMessagesPost**](docs/MessagingApi.md#discussionsDiscussionIdMessagesPost) | **POST** /discussions/{discussion_id}/messages | Send a message in a disccusion
+*MessagingApi* | [**discussionsMessagePost**](docs/MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion
 *MessagingApi* | [**discussionsUsernameGet**](docs/MessagingApi.md#discussionsUsernameGet) | **GET** /discussions/{username} | Get a list of all discussions of a user
 *NotificationsApi* | [**userNotificationsPatch**](docs/NotificationsApi.md#userNotificationsPatch) | **PATCH** /user/notifications | 
 *UserApi* | [**userSettingsGet**](docs/UserApi.md#userSettingsGet) | **GET** /user/settings | Get user settings information
@@ -149,6 +149,7 @@ Class | Method | HTTP request | Description
  - [MessageDTO](docs/MessageDTO.md)
  - [NewPasswordDTO](docs/NewPasswordDTO.md)
  - [NotificationsDTO](docs/NotificationsDTO.md)
+ - [PostMessageDTO](docs/PostMessageDTO.md)
  - [UserAccountChangeppPatchRequest](docs/UserAccountChangeppPatchRequest.md)
  - [UserAccountChgusernamePatchRequest](docs/UserAccountChgusernamePatchRequest.md)
  - [UserChangeThemePatchRequest](docs/UserChangeThemePatchRequest.md)

@@ -20,6 +20,7 @@ docs/MessagingApi.md
 docs/NewPasswordDTO.md
 docs/NotificationsApi.md
 docs/NotificationsDTO.md
+docs/PostMessageDTO.md
 docs/UserAccountChangeppPatchRequest.md
 docs/UserAccountChgusernamePatchRequest.md
 docs/UserApi.md
@@ -69,6 +70,7 @@ src/main/java/org/openapitools/client/model/ErrorDTO.java
 src/main/java/org/openapitools/client/model/MessageDTO.java
 src/main/java/org/openapitools/client/model/NewPasswordDTO.java
 src/main/java/org/openapitools/client/model/NotificationsDTO.java
+src/main/java/org/openapitools/client/model/PostMessageDTO.java
 src/main/java/org/openapitools/client/model/UserAccountChangeppPatchRequest.java
 src/main/java/org/openapitools/client/model/UserAccountChgusernamePatchRequest.java
 src/main/java/org/openapitools/client/model/UserChangeThemePatchRequest.java
@@ -77,4 +79,6 @@ src/main/java/org/openapitools/client/model/UserLanguagePatchRequest.java
 src/main/java/org/openapitools/client/model/UserSettingsDTO.java
 src/test/java/org/openapitools/client/api/MessagingApiTest.java
 src/test/java/org/openapitools/client/model/DiscussionDTOTest.java
+src/test/java/org/openapitools/client/model/DiscussionsCreatePostRequestTest.java
 src/test/java/org/openapitools/client/model/MessageDTOTest.java
+src/test/java/org/openapitools/client/model/PostMessageDTOTest.java

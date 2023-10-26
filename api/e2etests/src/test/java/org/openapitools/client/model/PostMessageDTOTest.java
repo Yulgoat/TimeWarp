@@ -20,46 +20,45 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for DiscussionDTO
+ * Model tests for PostMessageDTO
  */
-public class DiscussionDTOTest {
-    private final DiscussionDTO model = new DiscussionDTO();
+public class PostMessageDTOTest {
+    private final PostMessageDTO model = new PostMessageDTO();
 
     /**
-     * Model tests for DiscussionDTO
+     * Model tests for PostMessageDTO
      */
     @Test
-    public void testDiscussionDTO() {
-        // TODO: test DiscussionDTO
+    public void testPostMessageDTO() {
+        // TODO: test PostMessageDTO
     }
 
     /**
-     * Test the property 'id'
+     * Test the property 'to'
      */
     @Test
-    public void idTest() {
-        // TODO: test id
+    public void toTest() {
+        // TODO: test to
     }
 
     /**
-     * Test the property 'user1'
+     * Test the property 'type'
      */
     @Test
-    public void user1Test() {
-        // TODO: test user1
+    public void typeTest() {
+        // TODO: test type
     }
 
     /**
-     * Test the property 'user2'
+     * Test the property 'body'
      */
     @Test
-    public void user2Test() {
-        // TODO: test user2
+    public void bodyTest() {
+        // TODO: test body
     }
 
 }

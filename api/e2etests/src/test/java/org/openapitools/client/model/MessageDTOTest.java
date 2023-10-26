@@ -39,6 +39,30 @@ public class MessageDTOTest {
     }
 
     /**
+     * Test the property 'to'
+     */
+    @Test
+    public void toTest() {
+        // TODO: test to
+    }
+
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
+    }
+
+    /**
+     * Test the property 'body'
+     */
+    @Test
+    public void bodyTest() {
+        // TODO: test body
+    }
+
+    /**
      * Test the property 'id'
      */
     @Test
@@ -47,27 +71,19 @@ public class MessageDTOTest {
     }
 
     /**
-     * Test the property 'content'
-     */
-    @Test
-    public void contentTest() {
-        // TODO: test content
-    }
-
-    /**
-     * Test the property 'sender'
-     */
-    @Test
-    public void senderTest() {
-        // TODO: test sender
-    }
-
-    /**
      * Test the property 'timestamp'
      */
     @Test
     public void timestampTest() {
         // TODO: test timestamp
+    }
+
+    /**
+     * Test the property 'from'
+     */
+    @Test
+    public void fromTest() {
+        // TODO: test from
     }
 
 }

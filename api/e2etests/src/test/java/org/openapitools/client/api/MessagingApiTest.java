@@ -18,6 +18,8 @@ import org.openapitools.client.model.DiscussionDTO;
 import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
+import org.openapitools.client.model.PostMessageDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +43,6 @@ public class MessagingApiTest {
      */
     @Test
     public void discussionsCreatePostTest() throws ApiException {
-        // TODO: test validations
-
         /*String user1 = "user1";
         String user2 = "user2";
 
@@ -72,7 +72,6 @@ public class MessagingApiTest {
         discussions = api.discussionsUsernameGet("user1");
 
         Assertions.assertEquals(discussions.size(), 1);*/
-
     }
 
     /**
@@ -93,10 +92,9 @@ public class MessagingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void discussionsDiscussionIdMessagesPostTest() throws ApiException {
-        Integer discussionId = null;
-        MessageDTO messageDTO = null;
-        api.discussionsDiscussionIdMessagesPost(discussionId, messageDTO);
+    public void discussionsMessagePostTest() throws ApiException {
+        PostMessageDTO postMessageDTO = null;
+        api.discussionsMessagePost(postMessageDTO);
         // TODO: test validations
     }
 
