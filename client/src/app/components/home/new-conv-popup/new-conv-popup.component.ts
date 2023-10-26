@@ -10,7 +10,7 @@ import { DiscussionService } from 'src/app/services/discussion.service';
 export class NewConvPopupComponent {
    @Output() new_conv_popup = new EventEmitter<void>();
 
-   newDiscussionTitle: string = '';
+   newDiscussionUsername: string = '';
 
    constructor(private discussionService: DiscussionService) {}
 
@@ -18,8 +18,14 @@ export class NewConvPopupComponent {
     this.new_conv_popup.emit();
   }
 
-  addDiscussion(): void {
-    this.discussionService.addDiscussion(this.newDiscussionTitle);
-    this.newDiscussionTitle = '';
+  createDiscussion(): void {
+    this.discussionService.createDiscussion("alice", this.newDiscussionUsername).subscribe( //TODO: Remplacer alice
+      {
+        error: (e) => console.error('Error createDiscussion: ', e),
+        complete: () => console.info('Create discussion complete')
+      }
+    );
+    console.info('ok c bon');
+    this.newDiscussionUsername = '';
   }
 }

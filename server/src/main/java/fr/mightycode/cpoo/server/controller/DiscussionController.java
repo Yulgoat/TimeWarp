@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/discussions")
 @RequiredArgsConstructor
+@CrossOrigin
 public class DiscussionController {
 
     private final DiscussionService discussionService;

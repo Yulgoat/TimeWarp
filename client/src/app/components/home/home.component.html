@@ -24,7 +24,10 @@
       <div class = "home_list_all_discussion">
         <div class = "home_list_discussion" *ngFor="let discussion of discussions" [ngClass]="{'selected-discussion': selectedDiscussionId === discussion.id}" (click)="selectDiscussion(discussion.id)">
           <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="contact_picture"></div>
-          <a> {{ discussion.titre }} </a>
+          <a *ngIf="discussion.user1 == loggedUser; else elseBlock"> {{discussion.user2}} </a>
+          <ng-template #elseBlock>
+            <a>{{discussion.user1}}</a>
+          </ng-template>
         </div>
       </div>
 
@@ -52,7 +55,7 @@
 
       </div>
 
-      <div class = "home_conversation_tosend" *ngIf="selectedDiscussionId!=-1">
+      <div class = "home_conversation_tosend" *ngIf="selectedDiscussionId!=''">
         <div class="home_conversation_tosend_otherfiles">
           <img src="/assets/icons/other_files_button.png">
         </div>

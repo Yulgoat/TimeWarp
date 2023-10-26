@@ -15,11 +15,24 @@ export class HomeComponent {
 
   discussions: Discussion[] = [];
   messages: Message[] = [];
-  selectedDiscussionId: number = -1;
+  selectedDiscussionId: string = '';
   newMessageContent: string = '';
 
+  loggedUser: string = 'alice';
+
   constructor(private router:Router, private discussionService: DiscussionService, private elementRef: ElementRef){
-    this.discussions = this.discussionService.getDiscussions();
+    this.discussions=this.discussionService.discussions;
+    this.discussionService.getDiscussions(this.loggedUser).subscribe(
+      {
+        next: (discussions) => {
+          discussions.forEach((discussion) => {
+            this.discussions.unshift(discussion);
+          });
+        },
+        error: (e) => console.error('An error has occured: ', e),
+        complete: () => console.info('Get discussions complete')
+      }
+    );
   }
 
   homeToSettings() : void{
@@ -39,7 +52,7 @@ export class HomeComponent {
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
 
-  selectDiscussion(discussionId: number): void {
+  selectDiscussion(discussionId: string): void {
     this.selectedDiscussionId = discussionId;
     this.messages = this.discussionService.getMessage(this.selectedDiscussionId);
 
@@ -49,7 +62,7 @@ export class HomeComponent {
   }
 
   addMessage(): void {
-    if (this.discussions[this.selectedDiscussionId]) {
+    if (this.selectedDiscussionId!='') {
       this.discussionService.addMessage(this.selectedDiscussionId, this.newMessageContent, true);
       this.newMessageContent = '';
     }
