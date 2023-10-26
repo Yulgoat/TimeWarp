@@ -28,6 +28,7 @@ import org.openapitools.client.model.UserDTO;
 public class AuthenticationApiTest {
 
     private final AuthenticationApi authenticationApi = new AuthenticationApi();
+    private final AuthenticationApi authenticationApi2 = new AuthenticationApi();
 
     private final AdministrationApi administrationApi = new AdministrationApi();
 
@@ -78,7 +79,8 @@ public class AuthenticationApiTest {
     public void userSignoutPostTest() throws ApiException {
 
         // Sign in
-        UserDTO userDTO = new UserDTO().username("user").password("user");
+        UserDTO userDTO = new UserDTO().username("testSignout").password("testSignout");
+        authenticationApi.userSignupPost(userDTO);
         authenticationApi.userSigninPost(userDTO);
 
         // Signing out while signed in should work
@@ -92,6 +94,7 @@ public class AuthenticationApiTest {
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
         }
+
     }
 
     /**
