@@ -1,0 +1,57 @@
+/* Base styles for the screen container */
+.screen {
+    height: 200px;
+    width: 500px;
+    background-color: var(--main-color);
+    z-index: 50;
+    border-radius: 30px;
+    color: #ffffff;
+}
+
+/* Styles for the header section within the screen */
+.screen_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1% 0 4%;
+    padding-top: 1em;
+}
+
+/* Styles for the title in the header */
+.title {
+    font-size: 3em;
+}
+
+/* Styles for the back button in the header */
+.back_button {
+    width: 6%;
+    margin-right: 2%;
+}
+
+/* Styles for the back button image */
+.back_button_img {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Styles for the back button image on hover */
+.back_button_img:hover {
+    content: url(/assets/icons/hide_home_popup_hower.png);
+}
+
+/* Styles for the back button image when active */
+.back_button_img:active {
+    content: url(/assets/icons/hide_home_popup_active.png);
+}
+
+
+.error_message{
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
