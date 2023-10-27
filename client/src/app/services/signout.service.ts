@@ -12,14 +12,14 @@ interface UserNameDTO {
 })
 export class SignOutService {
 
-  private baseUrl = 'http://localhost:8080'; 
+  private baseUrl = 'http://localhost:4200/serverapi/'; 
 
  
   constructor(private http: HttpClient) { }
 
-  signOut(userDTO: any): Observable<any> {
-    const url = `${this.baseUrl}/user/signout2`;    
-    return this.http.post(url, userDTO);
+  signOut(): Observable<any> {
+    const url = `${this.baseUrl}/user/signout`;    
+    return this.http.post(url, null);
   }
 
 

@@ -26,9 +26,6 @@ export class LoginComponent {
   already_an_user : UserNameDTO={ // Object which contains the current user 
     user_name: ''
   };
-  Futur_user : UserNameDTO ={   // Object which contains the information of the futur current user, if signin is successful
-    user_name: ''
-  };
   
   userDTO : UserDTO = {         // Object which contains the information that will be sent to the server
     username : '',
@@ -36,13 +33,17 @@ export class LoginComponent {
     password:''
   }  
   
-  constructor(private router:Router, private signinService: SigninServiceService){
-    //Get the current user, if it exist we skip login
-    this.already_an_user = this.signinService.actual_user;
-    if(!(this.already_an_user.user_name==='')){
-      console.log("User Already Connect");
-      this.loginToHome();
-    }
+  constructor(private router: Router, private signinService: SigninServiceService) {
+    // Get the current user, if it exists, we skip login
+    this.signinService.getActualUser().subscribe(already_an_user => {
+      console.log("Actual user Login");
+      console.log(already_an_user);
+        
+      if (already_an_user.user_name !== '') {
+        console.log("User Already Connect");
+        this.loginToHome();
+      }
+    });
   }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
@@ -114,8 +115,6 @@ export class LoginComponent {
         /* Post returns a success (code 200) */
         if (response.status === 200) {
           console.log('Successful Login');
-          this.Futur_user.user_name = this.userDTO.username;
-          this.signinService.setActualUser(this.Futur_user);
           this.loginToHome();
         }
         /* Post returns an error (code 409) */

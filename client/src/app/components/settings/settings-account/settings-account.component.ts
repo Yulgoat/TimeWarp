@@ -19,17 +19,12 @@ export class SettingsAccountComponent {
   textContent = "Pierre";
   isEditing = false;
 
-  actual_user : UserNameDTO = {   //Object to get the current user
-    user_name:''
-  };
 
   none_actual_user : UserNameDTO = {  //Object to put to default the current user
     user_name:''
   };
 
   constructor(private router:Router, private signinService: SigninServiceService, private signoutService : SignOutService){
-    //Retrieve the current user
-    this.actual_user = this.signinService.actual_user;
   }
   
   @Output() go_chg_pwd = new EventEmitter<void>();
@@ -45,19 +40,9 @@ export class SettingsAccountComponent {
 
   /* Disconnect the current user */
   disconnect() : void{
-    this.signoutService.signOut(this.actual_user).subscribe(
-      (response) => {
-        /* Post returns a success (code 200) */
-        if (response.status === 200)           
-          console.log('Successful Login');    
-          this.signinService.setActualUser(this.none_actual_user); /* We put the current user to a default user */
-          this.navigateToLogin();      
-      },
-      (error) => {
-          console.log('Error Signout');          
-      }
-      );
-
+    this.signoutService.signOut().subscribe();
+    this.signinService.setActualUserToDefault();          //Set the current user to default beacause there is no user
+    this.navigateToLogin(); 
   }
 
 

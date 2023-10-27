@@ -88,8 +88,22 @@ public class UserController {
     }
   }
 
+/*** Get the current user (Yes it's a Post request we will see that later) ***/
+  @PostMapping(value= "currentuser")
+  public ResponseEntity<UserDTO> currentuser(Principal user) {
+    try {
+      UserDTO udto = new UserDTO(user.getName(),"","");
+      return ResponseEntity.status(HttpStatus.OK).body(udto);
+    }
+    catch (final Exception ex) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+    }
+  }
+
+
   /*** Disconnect function, alternative to the signout version. We send a return 200 if it succeeds ***/
-  @PostMapping(value = "signout2", consumes = MediaType.APPLICATION_JSON_VALUE)
+  /*
+ @PostMapping(value = "signout2", consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ErrorDTO> signout2(@RequestBody final UserDTO user)  {
     try {
       userService.signout2(user.username());
@@ -102,6 +116,7 @@ public class UserController {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
   }
+  */
 
   @DeleteMapping(value = "/{username}")
   public void delete(Principal user, @PathVariable("username") String username) {

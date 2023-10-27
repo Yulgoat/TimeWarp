@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
 export class SignupServiceService {
   /*** Service that sends a post request to the server for the SignUp function ***/
 
-  private baseUrl = 'http://localhost:8080'; 
+  private baseUrl = 'http://localhost:4200/serverapi/'; 
 
   constructor(private http: HttpClient) { }
 
