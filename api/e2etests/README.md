@@ -124,18 +124,18 @@ Class | Method | HTTP request | Description
 *AccountApi* | [**userAccountChangeppPatch**](docs/AccountApi.md#userAccountChangeppPatch) | **PATCH** /user/account/changepp | 
 *AccountApi* | [**userAccountChgusernamePatch**](docs/AccountApi.md#userAccountChgusernamePatch) | **PATCH** /user/account/chgusername | 
 *AccountApi* | [**userDisconnectPost**](docs/AccountApi.md#userDisconnectPost) | **POST** /user/disconnect | 
-*AdministrationApi* | [**userLoginDelete**](docs/AdministrationApi.md#userLoginDelete) | **DELETE** /user/{login} | Delete a user account
 *AppearanceApi* | [**userChangeThemePatch**](docs/AppearanceApi.md#userChangeThemePatch) | **PATCH** /user/change-theme | Change user theme
-*AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | Sign in to the service
-*AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | Sign out from the service
-*AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | Sign up to the service
+*AuthenticationApi* | [**userDeletePost**](docs/AuthenticationApi.md#userDeletePost) | **POST** /user/delete | 
+*AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | 
+*AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | 
+*AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | 
 *ChangePwdApi* | [**userChangepwdPatch**](docs/ChangePwdApi.md#userChangepwdPatch) | **PATCH** /user/changepwd | 
 *ForgotPwdApi* | [**userForgotpwdPost**](docs/ForgotPwdApi.md#userForgotpwdPost) | **POST** /user/forgotpwd | 
 *LanguageApi* | [**userLanguagePatch**](docs/LanguageApi.md#userLanguagePatch) | **PATCH** /user/language | 
 *MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion
 *MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation
-*MessagingApi* | [**discussionsDiscussionIdMessagesPost**](docs/MessagingApi.md#discussionsDiscussionIdMessagesPost) | **POST** /discussions/{discussion_id}/messages | Send a message in a disccusion
-*MessagingApi* | [**discussionsGet**](docs/MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions
+*MessagingApi* | [**discussionsMessagePost**](docs/MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion
+*MessagingApi* | [**discussionsUsernameGet**](docs/MessagingApi.md#discussionsUsernameGet) | **GET** /discussions/{username} | Get a list of all discussions of a user
 *NotificationsApi* | [**userNotificationsPatch**](docs/NotificationsApi.md#userNotificationsPatch) | **PATCH** /user/notifications | 
 *UserApi* | [**userSettingsGet**](docs/UserApi.md#userSettingsGet) | **GET** /user/settings | Get user settings information
 
@@ -149,6 +149,7 @@ Class | Method | HTTP request | Description
  - [MessageDTO](docs/MessageDTO.md)
  - [NewPasswordDTO](docs/NewPasswordDTO.md)
  - [NotificationsDTO](docs/NotificationsDTO.md)
+ - [PostMessageDTO](docs/PostMessageDTO.md)
  - [UserAccountChangeppPatchRequest](docs/UserAccountChangeppPatchRequest.md)
  - [UserAccountChgusernamePatchRequest](docs/UserAccountChgusernamePatchRequest.md)
  - [UserChangeThemePatchRequest](docs/UserChangeThemePatchRequest.md)

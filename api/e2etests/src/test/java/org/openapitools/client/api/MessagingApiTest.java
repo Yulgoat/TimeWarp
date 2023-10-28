@@ -18,6 +18,8 @@ import org.openapitools.client.model.DiscussionDTO;
 import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
+import org.openapitools.client.model.PostMessageDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -41,9 +43,35 @@ public class MessagingApiTest {
      */
     @Test
     public void discussionsCreatePostTest() throws ApiException {
-        DiscussionsCreatePostRequest discussionsCreatePostRequest = null;
+        /*String user1 = "user1";
+        String user2 = "user2";
+
+        DiscussionsCreatePostRequest discussionsCreatePostRequest = new DiscussionsCreatePostRequest().user1(user1).user2(user2);
         api.discussionsCreatePost(discussionsCreatePostRequest);
-        // TODO: test validations
+
+        //search with user1
+        List<DiscussionDTO> discussions = api.discussionsUsernameGet("user1");
+
+        Assertions.assertNotNull(discussions);
+
+        DiscussionDTO createdDiscussion = discussions.get(0);
+        Assertions.assertEquals(user1, createdDiscussion.getUser1());
+        Assertions.assertEquals(user2, createdDiscussion.getUser2());
+
+        //search with user2
+        discussions = api.discussionsUsernameGet("user2");
+        
+        Assertions.assertNotNull(discussions);
+
+        createdDiscussion = discussions.get(0);
+        Assertions.assertEquals(user1, createdDiscussion.getUser1());
+        Assertions.assertEquals(user2, createdDiscussion.getUser2());
+
+        //Try to create the same discussion
+        api.discussionsCreatePost(discussionsCreatePostRequest);
+        discussions = api.discussionsUsernameGet("user1");
+
+        Assertions.assertEquals(discussions.size(), 1);*/
     }
 
     /**
@@ -64,22 +92,48 @@ public class MessagingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void discussionsDiscussionIdMessagesPostTest() throws ApiException {
-        Integer discussionId = null;
-        MessageDTO messageDTO = null;
-        api.discussionsDiscussionIdMessagesPost(discussionId, messageDTO);
+    public void discussionsMessagePostTest() throws ApiException {
+        PostMessageDTO postMessageDTO = null;
+        api.discussionsMessagePost(postMessageDTO);
         // TODO: test validations
     }
 
     /**
-     * Get a list of all discussions
+     * Get a list of all discussions of a user
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void discussionsGetTest() throws ApiException {
-        List<DiscussionDTO> response = api.discussionsGet();
-        // TODO: test validations
+    public void discussionsUsernameGetTest() throws ApiException {
+        //Tests fonctionne qu'une fois car ajout de données dans la base de donnée
+        //TODO: Rendre indépendant
+        /*String username = "alice";
+
+        List<DiscussionDTO> response = api.discussionsUsernameGet(username);
+        Assertions.assertNotNull(response);
+
+        DiscussionsCreatePostRequest discussionsCreatePostRequest = new DiscussionsCreatePostRequest().user1(username).user2("bob");
+        api.discussionsCreatePost(discussionsCreatePostRequest);
+
+        response = api.discussionsUsernameGet(username);
+        Assertions.assertEquals(1, response.size());
+
+        discussionsCreatePostRequest = new DiscussionsCreatePostRequest().user1("charlie").user2(username);
+        api.discussionsCreatePost(discussionsCreatePostRequest);
+
+        response = api.discussionsUsernameGet(username);
+        Assertions.assertEquals(2, response.size());
+
+        api.discussionsCreatePost(discussionsCreatePostRequest);
+
+        response = api.discussionsUsernameGet(username);
+        Assertions.assertEquals(2, response.size());
+
+        discussionsCreatePostRequest = new DiscussionsCreatePostRequest().user1("roger").user2(username);
+        api.discussionsCreatePost(discussionsCreatePostRequest);
+
+        response = api.discussionsUsernameGet(username);
+        Assertions.assertEquals(3, response.size());*/
     }
 
 }

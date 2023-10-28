@@ -31,6 +31,7 @@ import org.openapitools.client.model.DiscussionDTO;
 import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
+import org.openapitools.client.model.PostMessageDTO;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -322,9 +323,8 @@ public class MessagingApi {
         return localVarCall;
     }
     /**
-     * Build call for discussionsDiscussionIdMessagesPost
-     * @param discussionId  (required)
-     * @param messageDTO  (required)
+     * Build call for discussionsMessagePost
+     * @param postMessageDTO  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -335,7 +335,7 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsDiscussionIdMessagesPostCall(Integer discussionId, MessageDTO messageDTO, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call discussionsMessagePostCall(PostMessageDTO postMessageDTO, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -349,11 +349,10 @@ public class MessagingApi {
             basePath = null;
         }
 
-        Object localVarPostBody = messageDTO;
+        Object localVarPostBody = postMessageDTO;
 
         // create path and map variables
-        String localVarPath = "/discussions/{discussion_id}/messages"
-            .replace("{" + "discussion_id" + "}", localVarApiClient.escapeString(discussionId.toString()));
+        String localVarPath = "/discussions/message";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -382,26 +381,20 @@ public class MessagingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call discussionsDiscussionIdMessagesPostValidateBeforeCall(Integer discussionId, MessageDTO messageDTO, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'discussionId' is set
-        if (discussionId == null) {
-            throw new ApiException("Missing the required parameter 'discussionId' when calling discussionsDiscussionIdMessagesPost(Async)");
+    private okhttp3.Call discussionsMessagePostValidateBeforeCall(PostMessageDTO postMessageDTO, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'postMessageDTO' is set
+        if (postMessageDTO == null) {
+            throw new ApiException("Missing the required parameter 'postMessageDTO' when calling discussionsMessagePost(Async)");
         }
 
-        // verify the required parameter 'messageDTO' is set
-        if (messageDTO == null) {
-            throw new ApiException("Missing the required parameter 'messageDTO' when calling discussionsDiscussionIdMessagesPost(Async)");
-        }
-
-        return discussionsDiscussionIdMessagesPostCall(discussionId, messageDTO, _callback);
+        return discussionsMessagePostCall(postMessageDTO, _callback);
 
     }
 
     /**
      * Send a message in a disccusion
      * 
-     * @param discussionId  (required)
-     * @param messageDTO  (required)
+     * @param postMessageDTO  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -410,15 +403,14 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void discussionsDiscussionIdMessagesPost(Integer discussionId, MessageDTO messageDTO) throws ApiException {
-        discussionsDiscussionIdMessagesPostWithHttpInfo(discussionId, messageDTO);
+    public void discussionsMessagePost(PostMessageDTO postMessageDTO) throws ApiException {
+        discussionsMessagePostWithHttpInfo(postMessageDTO);
     }
 
     /**
      * Send a message in a disccusion
      * 
-     * @param discussionId  (required)
-     * @param messageDTO  (required)
+     * @param postMessageDTO  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -428,16 +420,15 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> discussionsDiscussionIdMessagesPostWithHttpInfo(Integer discussionId, MessageDTO messageDTO) throws ApiException {
-        okhttp3.Call localVarCall = discussionsDiscussionIdMessagesPostValidateBeforeCall(discussionId, messageDTO, null);
+    public ApiResponse<Void> discussionsMessagePostWithHttpInfo(PostMessageDTO postMessageDTO) throws ApiException {
+        okhttp3.Call localVarCall = discussionsMessagePostValidateBeforeCall(postMessageDTO, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
      * Send a message in a disccusion (asynchronously)
      * 
-     * @param discussionId  (required)
-     * @param messageDTO  (required)
+     * @param postMessageDTO  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -448,14 +439,15 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsDiscussionIdMessagesPostAsync(Integer discussionId, MessageDTO messageDTO, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call discussionsMessagePostAsync(PostMessageDTO postMessageDTO, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = discussionsDiscussionIdMessagesPostValidateBeforeCall(discussionId, messageDTO, _callback);
+        okhttp3.Call localVarCall = discussionsMessagePostValidateBeforeCall(postMessageDTO, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for discussionsGet
+     * Build call for discussionsUsernameGet
+     * @param username  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -465,7 +457,7 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsGetCall(final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call discussionsUsernameGetCall(String username, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -482,7 +474,8 @@ public class MessagingApi {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/discussions";
+        String localVarPath = "/discussions/{username}"
+            .replace("{" + "username" + "}", localVarApiClient.escapeString(username.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -510,14 +503,20 @@ public class MessagingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call discussionsGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return discussionsGetCall(_callback);
+    private okhttp3.Call discussionsUsernameGetValidateBeforeCall(String username, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'username' is set
+        if (username == null) {
+            throw new ApiException("Missing the required parameter 'username' when calling discussionsUsernameGet(Async)");
+        }
+
+        return discussionsUsernameGetCall(username, _callback);
 
     }
 
     /**
-     * Get a list of all discussions
+     * Get a list of all discussions of a user
      * 
+     * @param username  (required)
      * @return List&lt;DiscussionDTO&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -526,14 +525,15 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public List<DiscussionDTO> discussionsGet() throws ApiException {
-        ApiResponse<List<DiscussionDTO>> localVarResp = discussionsGetWithHttpInfo();
+    public List<DiscussionDTO> discussionsUsernameGet(String username) throws ApiException {
+        ApiResponse<List<DiscussionDTO>> localVarResp = discussionsUsernameGetWithHttpInfo(username);
         return localVarResp.getData();
     }
 
     /**
-     * Get a list of all discussions
+     * Get a list of all discussions of a user
      * 
+     * @param username  (required)
      * @return ApiResponse&lt;List&lt;DiscussionDTO&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -542,15 +542,16 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<DiscussionDTO>> discussionsGetWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = discussionsGetValidateBeforeCall(null);
+    public ApiResponse<List<DiscussionDTO>> discussionsUsernameGetWithHttpInfo(String username) throws ApiException {
+        okhttp3.Call localVarCall = discussionsUsernameGetValidateBeforeCall(username, null);
         Type localVarReturnType = new TypeToken<List<DiscussionDTO>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Get a list of all discussions (asynchronously)
+     * Get a list of all discussions of a user (asynchronously)
      * 
+     * @param username  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -560,9 +561,9 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsGetAsync(final ApiCallback<List<DiscussionDTO>> _callback) throws ApiException {
+    public okhttp3.Call discussionsUsernameGetAsync(String username, final ApiCallback<List<DiscussionDTO>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = discussionsGetValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = discussionsUsernameGetValidateBeforeCall(username, _callback);
         Type localVarReturnType = new TypeToken<List<DiscussionDTO>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

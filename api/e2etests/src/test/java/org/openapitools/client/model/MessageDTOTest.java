@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API.
+ * This is a prototype of CPOO Project's front/back API. 
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Test;
 /**
  * Model tests for MessageDTO
  */
-@Disabled
 public class MessageDTOTest {
     private final MessageDTO model = new MessageDTO();
 
@@ -37,22 +36,6 @@ public class MessageDTOTest {
     @Test
     public void testMessageDTO() {
         // TODO: test MessageDTO
-    }
-
-    /**
-     * Test the property 'id'
-     */
-    @Test
-    public void idTest() {
-        // TODO: test id
-    }
-
-    /**
-     * Test the property 'from'
-     */
-    @Test
-    public void fromTest() {
-        // TODO: test from
     }
 
     /**
@@ -77,6 +60,30 @@ public class MessageDTOTest {
     @Test
     public void bodyTest() {
         // TODO: test body
+    }
+
+    /**
+     * Test the property 'id'
+     */
+    @Test
+    public void idTest() {
+        // TODO: test id
+    }
+
+    /**
+     * Test the property 'timestamp'
+     */
+    @Test
+    public void timestampTest() {
+        // TODO: test timestamp
+    }
+
+    /**
+     * Test the property 'from'
+     */
+    @Test
+    public void fromTest() {
+        // TODO: test from
     }
 
 }

@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**participants** | **List&lt;String&gt;** |  |  |
+|**user1** | **String** |  |  |
+|**user2** | **String** |  |  |
 
 
 

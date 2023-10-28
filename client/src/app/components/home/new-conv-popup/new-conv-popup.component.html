@@ -9,9 +9,9 @@
     </div>
 
     <div class="contact_who">        
-        <input type="text" id="username_home_popup" name="username_home_popup" placeholder="Username" (keyup.enter)="hide_new_conv_popup(); addDiscussion()" [(ngModel)]="newDiscussionTitle">
+        <input type="text" id="username_home_popup" name="username_home_popup" placeholder="Username" (keyup.enter)="hide_new_conv_popup(); createDiscussion()" [(ngModel)]="newDiscussionUsername">
         
-        <input type="submit" value="VALID" class="contact_who_button" (click)="hide_new_conv_popup(); addDiscussion()">
+        <input type="submit" value="VALID" class="contact_who_button" (click)="hide_new_conv_popup(); createDiscussion()">
 
     </div>
 </div>

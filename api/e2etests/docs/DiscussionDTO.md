@@ -7,8 +7,9 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **Integer** |  |  [optional] |
-|**participants** | **List&lt;String&gt;** |  |  [optional] |
+|**id** | **UUID** |  |  [optional] |
+|**user1** | **String** |  |  [optional] |
+|**user2** | **String** |  |  [optional] |
 
 
 

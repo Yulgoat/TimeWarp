@@ -47,60 +47,85 @@ import java.util.Set;
 import org.openapitools.client.JSON;
 
 /**
- * DiscussionsCreatePostRequest
+ * Message to send
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class DiscussionsCreatePostRequest {
-  public static final String SERIALIZED_NAME_USER1 = "user1";
-  @SerializedName(SERIALIZED_NAME_USER1)
-  private String user1;
+public class PostMessageDTO {
+  public static final String SERIALIZED_NAME_TO = "to";
+  @SerializedName(SERIALIZED_NAME_TO)
+  private String to;
 
-  public static final String SERIALIZED_NAME_USER2 = "user2";
-  @SerializedName(SERIALIZED_NAME_USER2)
-  private String user2;
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
+  private String type;
 
-  public DiscussionsCreatePostRequest() {
+  public static final String SERIALIZED_NAME_BODY = "body";
+  @SerializedName(SERIALIZED_NAME_BODY)
+  private String body;
+
+  public PostMessageDTO() {
   }
 
-  public DiscussionsCreatePostRequest user1(String user1) {
+  public PostMessageDTO to(String to) {
     
-    this.user1 = user1;
+    this.to = to;
     return this;
   }
 
    /**
-   * Get user1
-   * @return user1
+   * Get to
+   * @return to
   **/
   @javax.annotation.Nonnull
-  public String getUser1() {
-    return user1;
+  public String getTo() {
+    return to;
   }
 
 
-  public void setUser1(String user1) {
-    this.user1 = user1;
+  public void setTo(String to) {
+    this.to = to;
   }
 
 
-  public DiscussionsCreatePostRequest user2(String user2) {
+  public PostMessageDTO type(String type) {
     
-    this.user2 = user2;
+    this.type = type;
     return this;
   }
 
    /**
-   * Get user2
-   * @return user2
+   * Get type
+   * @return type
   **/
   @javax.annotation.Nonnull
-  public String getUser2() {
-    return user2;
+  public String getType() {
+    return type;
   }
 
 
-  public void setUser2(String user2) {
-    this.user2 = user2;
+  public void setType(String type) {
+    this.type = type;
+  }
+
+
+  public PostMessageDTO body(String body) {
+    
+    this.body = body;
+    return this;
+  }
+
+   /**
+   * Get body
+   * @return body
+  **/
+  @javax.annotation.Nonnull
+  public String getBody() {
+    return body;
+  }
+
+
+  public void setBody(String body) {
+    this.body = body;
   }
 
 
@@ -113,22 +138,24 @@ public class DiscussionsCreatePostRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DiscussionsCreatePostRequest discussionsCreatePostRequest = (DiscussionsCreatePostRequest) o;
-    return Objects.equals(this.user1, discussionsCreatePostRequest.user1) &&
-        Objects.equals(this.user2, discussionsCreatePostRequest.user2);
+    PostMessageDTO postMessageDTO = (PostMessageDTO) o;
+    return Objects.equals(this.to, postMessageDTO.to) &&
+        Objects.equals(this.type, postMessageDTO.type) &&
+        Objects.equals(this.body, postMessageDTO.body);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(user1, user2);
+    return Objects.hash(to, type, body);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DiscussionsCreatePostRequest {\n");
-    sb.append("    user1: ").append(toIndentedString(user1)).append("\n");
-    sb.append("    user2: ").append(toIndentedString(user2)).append("\n");
+    sb.append("class PostMessageDTO {\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    body: ").append(toIndentedString(body)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -151,48 +178,53 @@ public class DiscussionsCreatePostRequest {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("user1");
-    openapiFields.add("user2");
+    openapiFields.add("to");
+    openapiFields.add("type");
+    openapiFields.add("body");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("user1");
-    openapiRequiredFields.add("user2");
+    openapiRequiredFields.add("to");
+    openapiRequiredFields.add("type");
+    openapiRequiredFields.add("body");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to DiscussionsCreatePostRequest
+  * @throws IOException if the JSON Element is invalid with respect to PostMessageDTO
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!DiscussionsCreatePostRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in DiscussionsCreatePostRequest is not found in the empty JSON string", DiscussionsCreatePostRequest.openapiRequiredFields.toString()));
+        if (!PostMessageDTO.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PostMessageDTO is not found in the empty JSON string", PostMessageDTO.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!DiscussionsCreatePostRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DiscussionsCreatePostRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!PostMessageDTO.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PostMessageDTO` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : DiscussionsCreatePostRequest.openapiRequiredFields) {
+      for (String requiredField : PostMessageDTO.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("user1").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `user1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user1").toString()));
+      if (!jsonObj.get("to").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `to` to be a primitive type in the JSON string but got `%s`", jsonObj.get("to").toString()));
       }
-      if (!jsonObj.get("user2").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `user2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user2").toString()));
+      if (!jsonObj.get("type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
+      }
+      if (!jsonObj.get("body").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `body` to be a primitive type in the JSON string but got `%s`", jsonObj.get("body").toString()));
       }
   }
 
@@ -200,22 +232,22 @@ public class DiscussionsCreatePostRequest {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!DiscussionsCreatePostRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'DiscussionsCreatePostRequest' and its subtypes
+       if (!PostMessageDTO.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PostMessageDTO' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<DiscussionsCreatePostRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(DiscussionsCreatePostRequest.class));
+       final TypeAdapter<PostMessageDTO> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PostMessageDTO.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<DiscussionsCreatePostRequest>() {
+       return (TypeAdapter<T>) new TypeAdapter<PostMessageDTO>() {
            @Override
-           public void write(JsonWriter out, DiscussionsCreatePostRequest value) throws IOException {
+           public void write(JsonWriter out, PostMessageDTO value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public DiscussionsCreatePostRequest read(JsonReader in) throws IOException {
+           public PostMessageDTO read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -226,18 +258,18 @@ public class DiscussionsCreatePostRequest {
   }
 
  /**
-  * Create an instance of DiscussionsCreatePostRequest given an JSON string
+  * Create an instance of PostMessageDTO given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of DiscussionsCreatePostRequest
-  * @throws IOException if the JSON string is invalid with respect to DiscussionsCreatePostRequest
+  * @return An instance of PostMessageDTO
+  * @throws IOException if the JSON string is invalid with respect to PostMessageDTO
   */
-  public static DiscussionsCreatePostRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, DiscussionsCreatePostRequest.class);
+  public static PostMessageDTO fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PostMessageDTO.class);
   }
 
  /**
-  * Convert an instance of DiscussionsCreatePostRequest to an JSON string
+  * Convert an instance of PostMessageDTO to an JSON string
   *
   * @return JSON string
   */
