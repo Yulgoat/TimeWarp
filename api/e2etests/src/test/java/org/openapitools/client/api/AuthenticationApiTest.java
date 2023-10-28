@@ -28,6 +28,7 @@ import org.openapitools.client.model.UserDTO;
 public class AuthenticationApiTest {
 
     private final AuthenticationApi authenticationApi = new AuthenticationApi();
+    private final AuthenticationApi authenticationApi2 = new AuthenticationApi();
 
     private final AdministrationApi administrationApi = new AdministrationApi();
 
@@ -78,7 +79,8 @@ public class AuthenticationApiTest {
     public void userSignoutPostTest() throws ApiException {
 
         // Sign in
-        UserDTO userDTO = new UserDTO().username("user").password("user");
+        UserDTO userDTO = new UserDTO().username("testSignout").password("testSignout");
+        authenticationApi.userSignupPost(userDTO);
         authenticationApi.userSigninPost(userDTO);
 
         // Signing out while signed in should work
@@ -92,6 +94,7 @@ public class AuthenticationApiTest {
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
         }
+
     }
 
     /**
@@ -126,4 +129,82 @@ public class AuthenticationApiTest {
         // Signing in with the new account should work
         authenticationApi.userSigninPost(testUser);
     }
+
+    @Test
+    public void userSignupSigninTest() throws ApiException{
+        // Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testSuSi");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+
+        authenticationApi.userSignoutPost();
+
+        // Signing up a new account should work
+        UserDTO testUser = new UserDTO().username("testSuSiUsername").email("testSuSiEmail").password("testSuSiPwd");
+        authenticationApi.userSignupPost(testUser);
+
+        // Signing up twice the same account should fail with CONFLICT
+        try {
+            authenticationApi.userSignupPost(testUser);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        // Signing in with valid credential should work
+        authenticationApi.userSigninPost(testUser);
+
+        // Signing in again should fail with CONFLICT
+        try {
+            authenticationApi.userSigninPost(testUser);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        UserDTO testUserEmail = new UserDTO().username("test2").email("testSuSiEmail").password("test");
+        try {
+            authenticationApi.userSignupPost(testUserEmail);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+    }
+    @Test
+    public void userDelete() throws ApiException{
+        UserDTO testUserDelete1 = new UserDTO().username("testUserDelete1").email("testUserDelete").password("testUserDelete");
+        UserDTO testUserDelete2 = new UserDTO().username("testUserDelete2").email("testUserDelete").password("testUserDelete");
+        UserDTO testUserDelete3 = new UserDTO().username("testUserDelete3").email("testUserDelete").password("testUserDelete");
+        authenticationApi.userSignupPost(testUserDelete1);
+
+        //Should fail because testUserDelete2 have an email which already exist
+        try {
+            authenticationApi.userSignupPost(testUserDelete2);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        //Delete testUserDelete1
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testUserDelete1");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+        //Shoudl Work because testUserDelete1 doesn't exist anymore
+        authenticationApi.userSignupPost(testUserDelete3);
+    }
+
 }

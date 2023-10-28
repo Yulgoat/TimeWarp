@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ApiModule } from './api.module';
+import { Configuration } from './configuration';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SettingsComponent } from './components/settings/settings.component';
@@ -19,6 +21,8 @@ import { SettingsAcknowlodgementsComponent } from './components/settings/setting
 import { ImageComponent } from './components/settings/settings-appearance/image/image.component';
 import { FormsModule } from '@angular/forms';
 import { SettingsChgpwdComponent } from './components/settings/settings-chgpwd/settings-chgpwd.component';
+import { CApopUpErrorsComponent } from './src/app/components/login/create-account/capop-up-errors/capop-up-errors.component';
+import { CaPopupErrorsComponent } from './components/login/create-account/ca-popup-errors/ca-popup-errors.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -39,13 +43,20 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     SettingsAcknowlodgementsComponent,
     ImageComponent,
     SettingsChgpwdComponent,
+    CApopUpErrorsComponent,
+    CaPopupErrorsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    HttpClientModule
+    // To avoid CORS issues and limitations, we use an Angular reverse proxy to access the server API
+    // (see proxy-config.json: it specifies that all HTTP calls to /serverapi/* URLs should be redirected to the server API at http://localhost:8080/*)
+    // Here we configure the generated API client for it to use this base path.
+    ApiModule.forRoot(() => new Configuration({ basePath: '/serverapi' }))
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
