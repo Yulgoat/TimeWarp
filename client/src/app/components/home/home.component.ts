@@ -5,6 +5,8 @@ import { DiscussionService } from 'src/app/services/discussion.service';
 import { Discussion } from 'src/app/models/discussion';
 import { Message } from 'src/app/models/message';
 import { delay } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-home',
@@ -17,19 +19,20 @@ export class HomeComponent {
   selectedDiscussionId: string = '';
   newMessageContent: string = '';
 
-  loggedUser: string = 'alice'; // The username of the currently logged-in user
+  loggedUser: string = ''; // The username of the currently logged-in user
   recipient: string = ''; // The recipient for new messages
 
   constructor(
     private router: Router,
     private discussionService: DiscussionService,
+    private userService: UserService,
     private elementRef: ElementRef
   ) {
     // Initialize discussions with data from the service
     this.discussions = this.discussionService.discussions;
 
     // Fetch discussions from the service for the logged-in user
-    this.discussionService.getDiscussions(this.loggedUser).subscribe({
+    this.discussionService.getDiscussions().subscribe({
       next: (discussions) => {
         discussions.forEach((discussion) => {
           this.discussions.unshift(discussion);
@@ -37,6 +40,15 @@ export class HomeComponent {
       },
       error: (e) => console.error('An error has occurred for getDiscussions: ', e),
       complete: () => console.info('Get discussions complete')
+    });
+
+    this.userService.getCurrentUser().subscribe({
+      next: (user: User) => {
+        this.loggedUser = user.username;
+      },
+      error: (e) => {
+        console.error('An error has occurred for getCurrentUser : ', e);
+      }
     });
   }
 

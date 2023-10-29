@@ -11,7 +11,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class DiscussionService {
 
-  private baseUrl = 'http://localhost:8080/discussions';
+  private baseUrl = 'http://localhost:4200/serverapi/discussions';
 
   discussions: Discussion[] = [];
   messages: Message[] = [];
@@ -20,12 +20,8 @@ export class DiscussionService {
 
   // Create a new discussion between two users
   createDiscussion(loggedUser: string, recipient: string): Observable<any> {
-    const users: any = {
-      "user1": loggedUser,
-      "user2": recipient
-    };
 
-    return this.http.post(this.baseUrl + '/create', users, { observe: 'response' }).pipe(
+    return this.http.post(this.baseUrl + '/create', recipient, { observe: 'response' }).pipe(
       tap((response: HttpResponse<any>) => {
         if (response.status === 201) {
           const discussion = new Discussion(response.body.id, loggedUser, recipient);
@@ -36,8 +32,8 @@ export class DiscussionService {
   }
 
   // Get discussions for a specific user
-  getDiscussions(loggedUser: string): Observable<Discussion[]> {
-    return this.http.get<Discussion[]>(this.baseUrl + '/' + loggedUser);
+  getDiscussions(): Observable<Discussion[]> {
+    return this.http.get<Discussion[]>(this.baseUrl);
   }
 
   // Post a new message to a discussion

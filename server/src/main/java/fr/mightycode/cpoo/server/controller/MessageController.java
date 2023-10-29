@@ -48,12 +48,12 @@ public class MessageController {
 
   //TODO: Remove and decomment the other as soon as the connection is functional and try router
   @PostMapping(value = "message",consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Message> messagePost(@RequestBody final PostMessageDTO postMessage) {
+  public ResponseEntity<Message> messagePost(final Principal user, @RequestBody final PostMessageDTO postMessage) {
 
     // Build a router message from the DTO
     RouterService.Message message = new RouterService.Message(
       UUID.randomUUID(),
-      "alice", //+ "@" + serverDomain,
+      user.getName(), //+ "@" + serverDomain,
       postMessage.to(),
       postMessage.type(),
       postMessage.body()
