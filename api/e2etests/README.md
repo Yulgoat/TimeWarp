@@ -132,10 +132,10 @@ Class | Method | HTTP request | Description
 *ChangePwdApi* | [**userChangepwdPatch**](docs/ChangePwdApi.md#userChangepwdPatch) | **PATCH** /user/changepwd | 
 *ForgotPwdApi* | [**userForgotpwdPost**](docs/ForgotPwdApi.md#userForgotpwdPost) | **POST** /user/forgotpwd | 
 *LanguageApi* | [**userLanguagePatch**](docs/LanguageApi.md#userLanguagePatch) | **PATCH** /user/language | 
-*MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion
+*MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion with a user
 *MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation
+*MessagingApi* | [**discussionsGet**](docs/MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions of the current user
 *MessagingApi* | [**discussionsMessagePost**](docs/MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion
-*MessagingApi* | [**discussionsUsernameGet**](docs/MessagingApi.md#discussionsUsernameGet) | **GET** /discussions/{username} | Get a list of all discussions of a user
 *NotificationsApi* | [**userNotificationsPatch**](docs/NotificationsApi.md#userNotificationsPatch) | **PATCH** /user/notifications | 
 *UserApi* | [**userSettingsGet**](docs/UserApi.md#userSettingsGet) | **GET** /user/settings | Get user settings information
 

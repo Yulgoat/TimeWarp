@@ -266,17 +266,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
 
-  /discussions/{username}:
+  /discussions:
     get:
       tags:
         - messaging
-      summary: Get a list of all discussions of a user
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: Get a list of all discussions of the current user
       responses:
         '200':
           description: Successful response
@@ -332,7 +326,7 @@ paths:
     post:
       tags:
         - messaging
-      summary: Create a new discussion
+      summary: Create a new discussion with a user
       requestBody:
         required: true
         content:
@@ -340,13 +334,10 @@ paths:
             schema:
               type: object
               properties:
-                user1:
-                  type: string
-                user2:
+                user:
                   type: string
               required:
-                - user1
-                - user2
+                - user
       responses:
         '200':
           description: Conversation created successfully

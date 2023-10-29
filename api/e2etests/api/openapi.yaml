@@ -274,16 +274,8 @@ paths:
       - language
       x-content-type: application/json
       x-accepts: application/json
-  /discussions/{username}:
+  /discussions:
     get:
-      parameters:
-      - explode: false
-        in: path
-        name: username
-        required: true
-        schema:
-          type: string
-        style: simple
       responses:
         "200":
           content:
@@ -293,7 +285,7 @@ paths:
                   $ref: '#/components/schemas/DiscussionDTO'
                 type: array
           description: Successful response
-      summary: Get a list of all discussions of a user
+      summary: Get a list of all discussions of the current user
       tags:
       - messaging
       x-accepts: application/json
@@ -359,7 +351,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
-      summary: Create a new discussion
+      summary: Create a new discussion with a user
       tags:
       - messaging
       x-content-type: application/json
@@ -521,13 +513,10 @@ components:
       type: object
     _discussions_create_post_request:
       properties:
-        user1:
-          type: string
-        user2:
+        user:
           type: string
       required:
-      - user1
-      - user2
+      - user
       type: object
   securitySchemes:
     CookieAuth:

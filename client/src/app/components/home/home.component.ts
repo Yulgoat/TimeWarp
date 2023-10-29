@@ -121,7 +121,6 @@ export class HomeComponent {
     }
   }
 
-  ownprofilpicture: string = '../../../assets/icons/pp_user1.jpg';
-  contact1: string = '../../../assets/icons/pp_contact1.jpg';
-  contact2: string = '../../../assets/icons/pp_contact2.jpg';
+  ownprofilpicture: string = '../../../assets/images/pp_user1.jpg';
+  contact: string = '../../../assets/images/light_contact.svg';
 }

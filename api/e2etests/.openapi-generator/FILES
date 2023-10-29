@@ -81,4 +81,3 @@ src/test/java/org/openapitools/client/api/MessagingApiTest.java
 src/test/java/org/openapitools/client/model/DiscussionDTOTest.java
 src/test/java/org/openapitools/client/model/DiscussionsCreatePostRequestTest.java
 src/test/java/org/openapitools/client/model/MessageDTOTest.java
-src/test/java/org/openapitools/client/model/PostMessageDTOTest.java
