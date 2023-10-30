@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { Discussion } from 'src/app/models/discussion';
 import { Message } from 'src/app/models/message';
-import { delay } from 'rxjs';
+import { Subject, delay } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 
@@ -22,6 +22,8 @@ export class HomeComponent {
   loggedUser: string = ''; // The username of the currently logged-in user
   recipient: string = ''; // The recipient for new messages
 
+  private stopPolling = new Subject<void>();
+
   constructor(
     private router: Router,
     private discussionService: DiscussionService,
@@ -30,7 +32,9 @@ export class HomeComponent {
   ) {
     // Initialize discussions with data from the service
     this.discussions = this.discussionService.discussions;
+  }
 
+  ngOnInit() {
     // Fetch discussions from the service for the logged-in user
     this.discussionService.getDiscussions().subscribe({
       next: (discussions) => {
@@ -50,7 +54,17 @@ export class HomeComponent {
         console.error('An error has occurred for getCurrentUser : ', e);
       }
     });
+
+    // Start polling new messages and updating discussions
+    this.discussionService.startPollingNewMessages(this.stopPolling);
   }
+
+  ngOnDestroy(): void {
+
+    // Stop polling messages
+    this.stopPolling.next(void 0);
+  }
+
 
   // Redirect to the settings page
   homeToSettings(): void {
@@ -81,7 +95,7 @@ export class HomeComponent {
     // Clear and load messages for the selected discussion
     this.messages = this.discussionService.messages = [];
     this.messages = this.discussionService.messages;
-    this.discussionService.getMessage(this.selectedDiscussionId).subscribe({
+    this.discussionService.getMessages(this.selectedDiscussionId).subscribe({
       next: (messages) => {
         messages.forEach((message) => {
           this.messages.push(message);

@@ -32,7 +32,7 @@ export class NewConvPopupComponent {
 
    // Function to create a new discussion
    createDiscussion(): void {
-     this.discussionService.createDiscussion(this.loggedUser, this.newDiscussionUsername).subscribe( //TODO: Replace 'alice' with a dynamic value
+     this.discussionService.createDiscussion(this.loggedUser, this.newDiscussionUsername).subscribe(
        {
          error: (e) => console.error('Error createDiscussion: ', e), // Log any error that occurs during discussion creation
          complete: () => console.info('Create discussion complete') // Log when the discussion creation is complete

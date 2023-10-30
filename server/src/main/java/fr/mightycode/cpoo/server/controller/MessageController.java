@@ -18,7 +18,7 @@ import java.security.Principal;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("discussions")
+@RequestMapping("discussions/message")
 @RequiredArgsConstructor
 @CrossOrigin
 public class MessageController {
@@ -30,49 +30,30 @@ public class MessageController {
 
   private final MessageService messageService;
 
-  /*@PostMapping(value = "message",consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void messagePost(final Principal user, @RequestBody final PostMessageDTO postMessage) {
-
-    // Build a router message from the DTO
-    RouterService.Message message = new RouterService.Message(
-      UUID.randomUUID(),
-      user.getName() + "@" + serverDomain,
-      postMessage.to(),
-      postMessage.type(),
-      postMessage.body()
-    );
-
-    // Route the message
-    routerService.routeMessage(message);
-  }*/
-
-  //TODO: Remove and decomment the other as soon as the connection is functional and try router
-  @PostMapping(value = "message",consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Message> messagePost(final Principal user, @RequestBody final PostMessageDTO postMessage) {
 
     // Build a router message from the DTO
     RouterService.Message message = new RouterService.Message(
       UUID.randomUUID(),
-      user.getName(), //+ "@" + serverDomain,
+      user.getName(), // + "@" + serverDomain,
       postMessage.to(),
       postMessage.type(),
       postMessage.body()
     );
-    Message msg = new Message(message);
-
-    Message envoi = messageService.storeMessage(msg);
-    return new ResponseEntity<>(envoi, HttpStatus.CREATED);
-
-
     // Route the message
-    //routerService.routeMessage(message);
+    routerService.routeMessage(message);
+
+    Message envoi = messageService.storeMessage(new Message(message));
+    return new ResponseEntity<>(envoi, HttpStatus.CREATED);
   }
 
-  /*@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public DeferredResult<ResponseEntity<Message>> messageGet(final Principal user) {
     DeferredResult<ResponseEntity<Message>> deferredResult = new DeferredResult<>();
     try {
-      Message message = messageService.getNextMessage(user.getName() + "@" + serverDomain);
+      Message message = messageService.getNextMessage(user.getName()); //+ "@" + serverDomain);
       if (message == null)
         deferredResult.setResult(new ResponseEntity<>(HttpStatus.ACCEPTED));
       else
@@ -82,5 +63,5 @@ public class MessageController {
     catch (final InterruptedException ex) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
-  }*/
+  }
 }
