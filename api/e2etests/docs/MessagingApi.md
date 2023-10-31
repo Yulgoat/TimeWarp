@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost:8080*
 | [**discussionsCreatePost**](MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion with a user |
 | [**discussionsDiscussionIdMessagesGet**](MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation |
 | [**discussionsGet**](MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions of the current user |
+| [**discussionsMessageGet**](MessagingApi.md#discussionsMessageGet) | **GET** /discussions/message | Receive a message |
 | [**discussionsMessagePost**](MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion |
 
 
@@ -105,7 +106,7 @@ public class Example {
     //CookieAuth.setApiKeyPrefix("Token");
 
     MessagingApi apiInstance = new MessagingApi(defaultClient);
-    Integer discussionId = 56; // Integer | 
+    UUID discussionId = UUID.randomUUID(); // UUID | 
     try {
       List<MessageDTO> result = apiInstance.discussionsDiscussionIdMessagesGet(discussionId);
       System.out.println(result);
@@ -124,7 +125,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **discussionId** | **Integer**|  | |
+| **discussionId** | **UUID**|  | |
 
 ### Return type
 
@@ -206,6 +207,70 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful response |  -  |
+
+<a id="discussionsMessageGet"></a>
+# **discussionsMessageGet**
+> List&lt;MessageDTO&gt; discussionsMessageGet()
+
+Receive a message
+
+### Example
+```java
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.MessagingApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080");
+    
+    // Configure API key authorization: CookieAuth
+    ApiKeyAuth CookieAuth = (ApiKeyAuth) defaultClient.getAuthentication("CookieAuth");
+    CookieAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //CookieAuth.setApiKeyPrefix("Token");
+
+    MessagingApi apiInstance = new MessagingApi(defaultClient);
+    try {
+      List<MessageDTO> result = apiInstance.discussionsMessageGet();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MessagingApi#discussionsMessageGet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;MessageDTO&gt;**](MessageDTO.md)
+
+### Authorization
+
+[CookieAuth](../README.md#CookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful response |  -  |
+| **0** | Error |  -  |
 
 <a id="discussionsMessagePost"></a>
 # **discussionsMessagePost**

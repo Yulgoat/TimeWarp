@@ -63,10 +63,6 @@ public class NewPasswordDTO {
   @SerializedName(SERIALIZED_NAME_PASSWORD)
   private String password;
 
-  public static final String SERIALIZED_NAME_CONFIRM_PASSWORD = "confirm-password";
-  @SerializedName(SERIALIZED_NAME_CONFIRM_PASSWORD)
-  private String confirmPassword;
-
   public NewPasswordDTO() {
   }
 
@@ -133,27 +129,6 @@ public class NewPasswordDTO {
   }
 
 
-  public NewPasswordDTO confirmPassword(String confirmPassword) {
-    
-    this.confirmPassword = confirmPassword;
-    return this;
-  }
-
-   /**
-   * Get confirmPassword
-   * @return confirmPassword
-  **/
-  @javax.annotation.Nullable
-  public String getConfirmPassword() {
-    return confirmPassword;
-  }
-
-
-  public void setConfirmPassword(String confirmPassword) {
-    this.confirmPassword = confirmPassword;
-  }
-
-
 
   @Override
   public boolean equals(Object o) {
@@ -166,13 +141,12 @@ public class NewPasswordDTO {
     NewPasswordDTO newPasswordDTO = (NewPasswordDTO) o;
     return Objects.equals(this.email, newPasswordDTO.email) &&
         Objects.equals(this.code, newPasswordDTO.code) &&
-        Objects.equals(this.password, newPasswordDTO.password) &&
-        Objects.equals(this.confirmPassword, newPasswordDTO.confirmPassword);
+        Objects.equals(this.password, newPasswordDTO.password);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, code, password, confirmPassword);
+    return Objects.hash(email, code, password);
   }
 
   @Override
@@ -182,7 +156,6 @@ public class NewPasswordDTO {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    password: ").append(toIndentedString(password)).append("\n");
-    sb.append("    confirmPassword: ").append(toIndentedString(confirmPassword)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -208,7 +181,6 @@ public class NewPasswordDTO {
     openapiFields.add("email");
     openapiFields.add("code");
     openapiFields.add("password");
-    openapiFields.add("confirm-password");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -240,9 +212,6 @@ public class NewPasswordDTO {
       }
       if ((jsonObj.get("password") != null && !jsonObj.get("password").isJsonNull()) && !jsonObj.get("password").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("password").toString()));
-      }
-      if ((jsonObj.get("confirm-password") != null && !jsonObj.get("confirm-password").isJsonNull()) && !jsonObj.get("confirm-password").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `confirm-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("confirm-password").toString()));
       }
   }
 

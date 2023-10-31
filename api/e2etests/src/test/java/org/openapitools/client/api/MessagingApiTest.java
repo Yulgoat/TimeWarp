@@ -13,12 +13,20 @@
 
 package org.openapitools.client.api;
 
+import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.model.DiscussionDTO;
 import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
 import org.openapitools.client.model.PostMessageDTO;
+import org.openapitools.client.model.UserDTO;
+
+import okhttp3.OkHttpClient;
+
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -26,14 +34,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * API tests for MessagingApi
  */
-@Disabled
 public class MessagingApiTest {
 
-    private final MessagingApi api = new MessagingApi();
+    private final AuthenticationApi authenticationApi = new AuthenticationApi();
+    private final MessagingApi messageApi = new MessagingApi();
+
+    @BeforeEach
+    public void init() {
+
+    // Simulate the behavior of a web browser by remembering cookies set by the server
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
+    ApiClient apiClient = new ApiClient(okHttpClient);
+    messageApi.setApiClient(apiClient);
+    authenticationApi.setApiClient(apiClient);
+  }
 
     /**
      * Create a new discussion with a user
@@ -41,9 +61,10 @@ public class MessagingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
+    @Disabled
     public void discussionsCreatePostTest() throws ApiException {
         DiscussionsCreatePostRequest discussionsCreatePostRequest = null;
-        api.discussionsCreatePost(discussionsCreatePostRequest);
+        messageApi.discussionsCreatePost(discussionsCreatePostRequest);
         // TODO: test validations
     }
 
@@ -53,9 +74,10 @@ public class MessagingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
+    @Disabled
     public void discussionsDiscussionIdMessagesGetTest() throws ApiException {
-        Integer discussionId = null;
-        List<MessageDTO> response = api.discussionsDiscussionIdMessagesGet(discussionId);
+        UUID discussionId = null;
+        List<MessageDTO> response = messageApi.discussionsDiscussionIdMessagesGet(discussionId);
         // TODO: test validations
     }
 
@@ -65,8 +87,21 @@ public class MessagingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
+    @Disabled
     public void discussionsGetTest() throws ApiException {
-        List<DiscussionDTO> response = api.discussionsGet();
+        List<DiscussionDTO> response = messageApi.discussionsGet();
+        // TODO: test validations
+    }
+
+    /**
+     * Receive a message
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    @Disabled
+    public void discussionsMessageGetTest() throws ApiException {
+        List<MessageDTO> response = messageApi.discussionsMessageGet();
         // TODO: test validations
     }
 
@@ -77,9 +112,60 @@ public class MessagingApiTest {
      */
     @Test
     public void discussionsMessagePostTest() throws ApiException {
-        PostMessageDTO postMessageDTO = null;
-        api.discussionsMessagePost(postMessageDTO);
-        // TODO: test validations
+        // Posting messages while not signed in should fail with FORBIDDEN
+    /*try {
+        messageApi.discussionsMessagePost(new PostMessageDTO().to("bob@acme").type("text/plain").body("This is a test"));
+        Assertions.fail();
+      }
+      catch (ApiException e) {
+        Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
+      }*/
+  
+      // Sign in
+      authenticationApi.userSigninPost(new UserDTO().username("user").password("user"));
+      
+      //Get all discussions
+      List<DiscussionDTO> discussionsBefore = messageApi.discussionsGet();
+      // Get all messages
+      List<MessageDTO> messagesBefore = null;
+      for (DiscussionDTO discussionDTO : discussionsBefore) {
+        messagesBefore.addAll(messageApi.discussionsDiscussionIdMessagesGet(discussionDTO.getId()));
+      }
+      
+  
+      // Post a new message
+      PostMessageDTO newMessage = new PostMessageDTO().to("bob@acme").type("text/plain").body("This is a test");
+      messageApi.discussionsMessagePost(newMessage);
+  
+      // Wait for the message to be delivered
+      try {
+        Thread.sleep(1000L);
+        // Reste du code
+    } catch (InterruptedException e) {
+        // Gérer l'exception, par exemple, imprimer un message d'erreur
+        e.printStackTrace();
     }
-
+  
+      //Get all discussions
+      List<DiscussionDTO> discussionsAfter = messageApi.discussionsGet();
+      // Get all messages
+      List<MessageDTO> messagesAfter = null;
+      for (DiscussionDTO discussionDTO : discussionsBefore) {
+        messagesBefore.addAll(messageApi.discussionsDiscussionIdMessagesGet(discussionDTO.getId()));
+  
+      // We should have one more message
+      Assertions.assertEquals(messagesAfter.size(), messagesBefore.size() + 1);
+  
+      // The first message should be our new message (since it is the most recent)
+      MessageDTO firstMessage = messagesAfter.get(0);
+      Assertions.assertEquals("user@acme", firstMessage.getFrom());
+      Assertions.assertEquals(newMessage.getTo(), firstMessage.getTo());
+      Assertions.assertEquals(newMessage.getType(), firstMessage.getType());
+      Assertions.assertEquals(newMessage.getBody(), firstMessage.getBody());
+      Assertions.assertNotNull(firstMessage.getId());
+      Assertions.assertTrue(firstMessage.getTimestamp() > System.currentTimeMillis() - 2000L
+        && firstMessage.getTimestamp() < System.currentTimeMillis() + 2000L);
+  
+      }
+    }
 }

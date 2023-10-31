@@ -2,16 +2,17 @@
 
 # ErrorDTO
 
+Error information
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**timestamp** | **String** |  |  [optional] |
-|**status** | **Integer** |  |  [optional] |
-|**error** | **String** |  |  [optional] |
-|**message** | **String** |  |  [optional] |
-|**path** | **String** |  |  [optional] |
+|**timestamp** | **String** | Timestamp of the error |  [optional] |
+|**status** | **Integer** | HTTP response status |  [optional] |
+|**error** | **String** | HTTP response error |  [optional] |
+|**message** | **String** | HTTP response message |  [optional] |
+|**path** | **String** | Path of the endpoint called |  [optional] |
 
 
 
