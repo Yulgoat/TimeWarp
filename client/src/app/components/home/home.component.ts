@@ -35,6 +35,7 @@ export class HomeComponent {
   }
 
   ngOnInit() {
+    this.discussionService.discussions=[];
     // Fetch discussions from the service for the logged-in user
     this.discussionService.getDiscussions().subscribe({
       next: (discussions) => {
@@ -94,7 +95,6 @@ export class HomeComponent {
 
     // Clear and load messages for the selected discussion
     this.messages = this.discussionService.messages = [];
-    this.messages = this.discussionService.messages;
     this.discussionService.getMessages(this.selectedDiscussionId).subscribe({
       next: (messages) => {
         messages.forEach((message) => {
