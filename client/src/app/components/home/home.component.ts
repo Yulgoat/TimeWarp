@@ -35,7 +35,7 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.discussionService.discussions=[];
+    this.discussionService.discussions.length=0;
     // Fetch discussions from the service for the logged-in user
     this.discussionService.getDiscussions().subscribe({
       next: (discussions) => {

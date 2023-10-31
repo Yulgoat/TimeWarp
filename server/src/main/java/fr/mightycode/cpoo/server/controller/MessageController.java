@@ -1,7 +1,6 @@
 package fr.mightycode.cpoo.server.controller;
 
 import fr.mightycode.cpoo.server.dto.PostMessageDTO;
-import fr.mightycode.cpoo.server.model.Discussion;
 import fr.mightycode.cpoo.server.model.Message;
 import fr.mightycode.cpoo.server.service.MessageService;
 import fr.mightycode.cpoo.server.service.RouterService;
@@ -36,13 +35,14 @@ public class MessageController {
     // Build a router message from the DTO
     RouterService.Message message = new RouterService.Message(
       UUID.randomUUID(),
-      user.getName(), // + "@" + serverDomain,
+      user.getName() + "@" + serverDomain,
       postMessage.to(),
       postMessage.type(),
       postMessage.body()
     );
     // Route the message
     routerService.routeMessage(message);
+    System.out.println("le message est router : " + message);
 
     Message envoi = messageService.storeMessage(new Message(message));
     return new ResponseEntity<>(envoi, HttpStatus.CREATED);
@@ -53,7 +53,7 @@ public class MessageController {
   public DeferredResult<ResponseEntity<Message>> messageGet(final Principal user) {
     DeferredResult<ResponseEntity<Message>> deferredResult = new DeferredResult<>();
     try {
-      Message message = messageService.getNextMessage(user.getName()); //+ "@" + serverDomain);
+      Message message = messageService.getNextMessage(user.getName() + "@" + serverDomain);
       if (message == null)
         deferredResult.setResult(new ResponseEntity<>(HttpStatus.ACCEPTED));
       else
