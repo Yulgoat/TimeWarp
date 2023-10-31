@@ -7,11 +7,11 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**theme** | **String** |  |  [optional] |
-|**language** | **String** |  |  [optional] |
-|**unreadBadges** | **Boolean** |  |  [optional] |
-|**notificationSound** | **Boolean** |  |  [optional] |
-|**profileImage** | **String** |  |  [optional] |
+|**theme** | **Integer** |  |  |
+|**language** | **String** |  |  |
+|**unreadBadges** | **Boolean** |  |  |
+|**notificationSound** | **Boolean** |  |  |
+|**profileImage** | **String** |  |  |
 
 
 

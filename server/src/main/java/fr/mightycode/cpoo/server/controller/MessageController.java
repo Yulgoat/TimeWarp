@@ -1,7 +1,6 @@
 package fr.mightycode.cpoo.server.controller;
 
 import fr.mightycode.cpoo.server.dto.PostMessageDTO;
-import fr.mightycode.cpoo.server.model.Discussion;
 import fr.mightycode.cpoo.server.model.Message;
 import fr.mightycode.cpoo.server.service.MessageService;
 import fr.mightycode.cpoo.server.service.RouterService;
@@ -18,7 +17,7 @@ import java.security.Principal;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("discussions")
+@RequestMapping("discussions/message")
 @RequiredArgsConstructor
 @CrossOrigin
 public class MessageController {
@@ -30,8 +29,8 @@ public class MessageController {
 
   private final MessageService messageService;
 
-  /*@PostMapping(value = "message",consumes = MediaType.APPLICATION_JSON_VALUE)
-  public void messagePost(final Principal user, @RequestBody final PostMessageDTO postMessage) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Message> messagePost(final Principal user, @RequestBody final PostMessageDTO postMessage) {
 
     // Build a router message from the DTO
     RouterService.Message message = new RouterService.Message(
@@ -41,34 +40,16 @@ public class MessageController {
       postMessage.type(),
       postMessage.body()
     );
-
     // Route the message
     routerService.routeMessage(message);
-  }*/
+    System.out.println("le message est router : " + message);
 
-  //TODO: Remove and decomment the other as soon as the connection is functional and try router
-  @PostMapping(value = "message",consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Message> messagePost(@RequestBody final PostMessageDTO postMessage) {
-
-    // Build a router message from the DTO
-    RouterService.Message message = new RouterService.Message(
-      UUID.randomUUID(),
-      "alice", //+ "@" + serverDomain,
-      postMessage.to(),
-      postMessage.type(),
-      postMessage.body()
-    );
-    Message msg = new Message(message);
-
-    Message envoi = messageService.storeMessage(msg);
+    Message envoi = messageService.storeMessage(new Message(message));
     return new ResponseEntity<>(envoi, HttpStatus.CREATED);
-
-
-    // Route the message
-    //routerService.routeMessage(message);
   }
 
-  /*@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public DeferredResult<ResponseEntity<Message>> messageGet(final Principal user) {
     DeferredResult<ResponseEntity<Message>> deferredResult = new DeferredResult<>();
     try {
@@ -82,5 +63,5 @@ public class MessageController {
     catch (final InterruptedException ex) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
     }
-  }*/
+  }
 }

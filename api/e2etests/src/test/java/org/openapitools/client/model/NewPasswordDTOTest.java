@@ -61,12 +61,4 @@ public class NewPasswordDTOTest {
         // TODO: test password
     }
 
-    /**
-     * Test the property 'confirmPassword'
-     */
-    @Test
-    public void confirmPasswordTest() {
-        // TODO: test confirmPassword
-    }
-
 }

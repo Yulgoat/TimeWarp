@@ -32,6 +32,7 @@ import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
 import org.openapitools.client.model.PostMessageDTO;
+import java.util.UUID;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -146,7 +147,7 @@ public class MessagingApi {
     }
 
     /**
-     * Create a new discussion
+     * Create a new discussion with a user
      * 
      * @param discussionsCreatePostRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -162,7 +163,7 @@ public class MessagingApi {
     }
 
     /**
-     * Create a new discussion
+     * Create a new discussion with a user
      * 
      * @param discussionsCreatePostRequest  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -180,7 +181,7 @@ public class MessagingApi {
     }
 
     /**
-     * Create a new discussion (asynchronously)
+     * Create a new discussion with a user (asynchronously)
      * 
      * @param discussionsCreatePostRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -211,7 +212,7 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsDiscussionIdMessagesGetCall(Integer discussionId, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call discussionsDiscussionIdMessagesGetCall(UUID discussionId, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -257,7 +258,7 @@ public class MessagingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call discussionsDiscussionIdMessagesGetValidateBeforeCall(Integer discussionId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call discussionsDiscussionIdMessagesGetValidateBeforeCall(UUID discussionId, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'discussionId' is set
         if (discussionId == null) {
             throw new ApiException("Missing the required parameter 'discussionId' when calling discussionsDiscussionIdMessagesGet(Async)");
@@ -279,7 +280,7 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public List<MessageDTO> discussionsDiscussionIdMessagesGet(Integer discussionId) throws ApiException {
+    public List<MessageDTO> discussionsDiscussionIdMessagesGet(UUID discussionId) throws ApiException {
         ApiResponse<List<MessageDTO>> localVarResp = discussionsDiscussionIdMessagesGetWithHttpInfo(discussionId);
         return localVarResp.getData();
     }
@@ -296,7 +297,7 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<MessageDTO>> discussionsDiscussionIdMessagesGetWithHttpInfo(Integer discussionId) throws ApiException {
+    public ApiResponse<List<MessageDTO>> discussionsDiscussionIdMessagesGetWithHttpInfo(UUID discussionId) throws ApiException {
         okhttp3.Call localVarCall = discussionsDiscussionIdMessagesGetValidateBeforeCall(discussionId, null);
         Type localVarReturnType = new TypeToken<List<MessageDTO>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
@@ -315,9 +316,239 @@ public class MessagingApi {
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsDiscussionIdMessagesGetAsync(Integer discussionId, final ApiCallback<List<MessageDTO>> _callback) throws ApiException {
+    public okhttp3.Call discussionsDiscussionIdMessagesGetAsync(UUID discussionId, final ApiCallback<List<MessageDTO>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = discussionsDiscussionIdMessagesGetValidateBeforeCall(discussionId, _callback);
+        Type localVarReturnType = new TypeToken<List<MessageDTO>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for discussionsGet
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsGetCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/discussions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call discussionsGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return discussionsGetCall(_callback);
+
+    }
+
+    /**
+     * Get a list of all discussions of the current user
+     * 
+     * @return List&lt;DiscussionDTO&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<DiscussionDTO> discussionsGet() throws ApiException {
+        ApiResponse<List<DiscussionDTO>> localVarResp = discussionsGetWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get a list of all discussions of the current user
+     * 
+     * @return ApiResponse&lt;List&lt;DiscussionDTO&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<DiscussionDTO>> discussionsGetWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = discussionsGetValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<List<DiscussionDTO>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get a list of all discussions of the current user (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsGetAsync(final ApiCallback<List<DiscussionDTO>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = discussionsGetValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<List<DiscussionDTO>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for discussionsMessageGet
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsMessageGetCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/discussions/message";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call discussionsMessageGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return discussionsMessageGetCall(_callback);
+
+    }
+
+    /**
+     * Receive a message
+     * 
+     * @return List&lt;MessageDTO&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<MessageDTO> discussionsMessageGet() throws ApiException {
+        ApiResponse<List<MessageDTO>> localVarResp = discussionsMessageGetWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Receive a message
+     * 
+     * @return ApiResponse&lt;List&lt;MessageDTO&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<MessageDTO>> discussionsMessageGetWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = discussionsMessageGetValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<List<MessageDTO>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Receive a message (asynchronously)
+     * 
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsMessageGetAsync(final ApiCallback<List<MessageDTO>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = discussionsMessageGetValidateBeforeCall(_callback);
         Type localVarReturnType = new TypeToken<List<MessageDTO>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -443,129 +674,6 @@ public class MessagingApi {
 
         okhttp3.Call localVarCall = discussionsMessagePostValidateBeforeCall(postMessageDTO, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for discussionsUsernameGet
-     * @param username  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call discussionsUsernameGetCall(String username, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/discussions/{username}"
-            .replace("{" + "username" + "}", localVarApiClient.escapeString(username.toString()));
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "CookieAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call discussionsUsernameGetValidateBeforeCall(String username, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'username' is set
-        if (username == null) {
-            throw new ApiException("Missing the required parameter 'username' when calling discussionsUsernameGet(Async)");
-        }
-
-        return discussionsUsernameGetCall(username, _callback);
-
-    }
-
-    /**
-     * Get a list of all discussions of a user
-     * 
-     * @param username  (required)
-     * @return List&lt;DiscussionDTO&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<DiscussionDTO> discussionsUsernameGet(String username) throws ApiException {
-        ApiResponse<List<DiscussionDTO>> localVarResp = discussionsUsernameGetWithHttpInfo(username);
-        return localVarResp.getData();
-    }
-
-    /**
-     * Get a list of all discussions of a user
-     * 
-     * @param username  (required)
-     * @return ApiResponse&lt;List&lt;DiscussionDTO&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<DiscussionDTO>> discussionsUsernameGetWithHttpInfo(String username) throws ApiException {
-        okhttp3.Call localVarCall = discussionsUsernameGetValidateBeforeCall(username, null);
-        Type localVarReturnType = new TypeToken<List<DiscussionDTO>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * Get a list of all discussions of a user (asynchronously)
-     * 
-     * @param username  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call discussionsUsernameGetAsync(String username, final ApiCallback<List<DiscussionDTO>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = discussionsUsernameGetValidateBeforeCall(username, _callback);
-        Type localVarReturnType = new TypeToken<List<DiscussionDTO>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

@@ -5,6 +5,9 @@ import fr.mightycode.cpoo.server.dto.UserDTO;
 import fr.mightycode.cpoo.server.service.UserService;
 import jakarta.servlet.ServletException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +19,12 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("user")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @CrossOrigin
 public class UserController {
+
+  @Value("${cpoo.server.domain}")
+  private String serverDomain;
 
   private final UserService userService;
 
@@ -92,7 +98,7 @@ public class UserController {
   @PostMapping(value= "currentuser")
   public ResponseEntity<UserDTO> currentuser(Principal user) {
     try {
-      UserDTO udto = new UserDTO(user.getName(),"","");
+      UserDTO udto = new UserDTO(user.getName() + "@" + serverDomain,"","");
       return ResponseEntity.status(HttpStatus.OK).body(udto);
     }
     catch (final Exception ex) {

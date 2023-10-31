@@ -10,7 +10,6 @@
 |**email** | **String** |  |  [optional] |
 |**code** | **Integer** |  |  [optional] |
 |**password** | **String** |  |  [optional] |
-|**confirmPassword** | **String** |  |  [optional] |
 
 
 

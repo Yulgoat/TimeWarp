@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API.
+ * This is a prototype of CPOO Project's front/back API. 
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -13,14 +13,24 @@
 
 package org.openapitools.client.api;
 
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.model.ErrorDTO;
+import org.openapitools.client.model.NewPasswordDTO;
+import org.openapitools.client.model.UserDTO;
+
 import okhttp3.OkHttpClient;
+
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.model.UserDTO;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for AuthenticationApi
@@ -47,8 +57,19 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void userSigninPostTest() throws ApiException {
+    @Disabled
+    public void userForgotpwdPostTest() throws ApiException {
+        NewPasswordDTO newPasswordDTO = null;
+        authenticationApi.userForgotpwdPost(newPasswordDTO);
+        // TODO: test validations
+    }
 
+    /**
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void userSigninPostTest() throws ApiException {
+        
         // Signing in with invalid credentials should fail with UNAUTHORIZED
         UserDTO userDTO = new UserDTO().username("user").password("invalid");
         try {
@@ -77,7 +98,7 @@ public class AuthenticationApiTest {
      */
     @Test
     public void userSignoutPostTest() throws ApiException {
-
+        
         // Sign in
         UserDTO userDTO = new UserDTO().username("testSignout").password("testSignout");
         authenticationApi.userSignupPost(userDTO);
@@ -94,7 +115,6 @@ public class AuthenticationApiTest {
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
         }
-
     }
 
     /**
@@ -102,7 +122,7 @@ public class AuthenticationApiTest {
      */
     @Test
     public void userSignupPostTest() throws ApiException {
-
+        
         // Delete the test account if exists
         authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
         try {
@@ -177,6 +197,17 @@ public class AuthenticationApiTest {
             Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
         }
     }
+
+    /**
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    @Disabled
+    public void userDeletePostTest() throws ApiException {
+        authenticationApi.userDeletePost();
+        // TODO: test validations
+    }
+
     @Test
     public void userDelete() throws ApiException{
         UserDTO testUserDelete1 = new UserDTO().username("testUserDelete1").email("testUserDelete").password("testUserDelete");
@@ -206,5 +237,4 @@ public class AuthenticationApiTest {
         //Shoudl Work because testUserDelete1 doesn't exist anymore
         authenticationApi.userSignupPost(testUserDelete3);
     }
-
 }

@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**sounds** | **String** |  |  [optional] |
-|**badges** | **String** |  |  [optional] |
+|**sounds** | **Boolean** |  |  [optional] |
+|**badges** | **Boolean** |  |  [optional] |
 
 
 

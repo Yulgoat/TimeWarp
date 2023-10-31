@@ -23,7 +23,7 @@
 
       <div class = "home_list_all_discussion">
         <div class = "home_list_discussion" *ngFor="let discussion of discussions" [ngClass]="{'selected-discussion': selectedDiscussionId === discussion.id}" (click)="selectDiscussion(discussion.id, discussion.user1, discussion.user2)">
-          <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="contact_picture"></div>
+          <div [ngStyle]="{'background-image': 'url(' + contact + ')'}" class="contact_picture"></div>
           <a *ngIf="discussion.user1 == loggedUser; else elseBlock"> {{discussion.user2}} </a>
           <ng-template #elseBlock>
             <a>{{discussion.user1}}</a>
@@ -41,7 +41,7 @@
 
         <div class = "home_msg" *ngFor="let message of messages" [ngStyle]="{'justify-content': message.from == loggedUser ? 'flex-end' : 'flex-start'}">
             <div class = "home_msg_info" *ngIf="message.from != loggedUser">
-              <div [ngStyle]="{'background-image': 'url(' + contact1 + ')'}" class="home_msg_info_picture"></div>
+              <div [ngStyle]="{'background-image': 'url(' + contact + ')'}" class="home_msg_info_picture"></div>
               <a>{{message.timestamp | date: 'dd/MM/yyyy'}}<br>{{message.timestamp | date: 'HH:mm'}}</a>
             </div>
             <div class = "home_msg_content">

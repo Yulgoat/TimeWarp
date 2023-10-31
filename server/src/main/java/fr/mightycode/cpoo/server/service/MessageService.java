@@ -70,8 +70,8 @@ public class MessageService {
    */
   public List<Message> getMessages(UUID discussionId) {
     Discussion discussion = discussionService.getDiscussionById(discussionId);
-    String user1 = discussion.getUser1();// + "@" + serverDomain;
-    String user2 = discussion.getUser2();// + "@" + serverDomain;
+    String user1 = discussion.getUser1();
+    String user2 = discussion.getUser2();
     //return messageRepository.findByFromOrToIgnoreCaseOrderByTimestampAsc(user1, user2);
     return messageRepository.findMessagesBetweenUsers(user1, user2);
   }

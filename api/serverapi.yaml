@@ -88,7 +88,7 @@ paths:
   /user/forgotpwd:
     post:
       tags : 
-       - forgot-pwd
+       - authentication
       requestBody:
         required: true
         content:
@@ -108,7 +108,7 @@ paths:
   /user/settings:
     get:
       tags:
-        - user
+        - user settings
       summary: Get user settings information
       responses:
         '200':
@@ -126,7 +126,7 @@ paths:
   /user/account/chgusername:
     patch:
       tags:
-        - account
+        - user settings
       requestBody:
         required: true
         content:
@@ -148,7 +148,7 @@ paths:
   /user/account/changepp:
     patch:
       tags:
-        - account
+        - user settings
       requestBody:
         required: true
         content:
@@ -171,7 +171,7 @@ paths:
   /user/changepwd:
     patch:
       tags : 
-       - change-pwd
+       - user settings
       requestBody:
         required: true
         content:
@@ -190,7 +190,7 @@ paths:
   /user/disconnect:
     post:
       tags:
-        - account
+        - user settings
       responses:
         '200':
           description: Success
@@ -203,7 +203,7 @@ paths:
   /user/notifications:
     patch:
       tags:
-        - notifications
+        - user settings
       requestBody:
         required: true
         content:
@@ -223,7 +223,7 @@ paths:
   /user/change-theme:
     patch:
       tags:
-        - Appearance
+        - user settings
       summary: Change user theme
       requestBody:
         required: true
@@ -246,7 +246,7 @@ paths:
   /user/language:
     patch:
       tags:
-        - language
+        - user settings
       requestBody:
         required: true
         content:
@@ -266,17 +266,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
 
-  /discussions/{username}:
+  /discussions:
     get:
       tags:
         - messaging
-      summary: Get a list of all discussions of a user
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: Get a list of all discussions of the current user
       responses:
         '200':
           description: Successful response
@@ -297,7 +291,8 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Successful response
@@ -328,11 +323,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+    get:
+      tags:
+        - messaging
+      summary: Receive a message
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MessageDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
   /discussions/create:
     post:
       tags:
         - messaging
-      summary: Create a new discussion
+      summary: Create a new discussion with a user
       requestBody:
         required: true
         content:
@@ -340,13 +353,10 @@ paths:
             schema:
               type: object
               properties:
-                user1:
-                  type: string
-                user2:
+                user:
                   type: string
               required:
-                - user1
-                - user2
+                - user
       responses:
         '200':
           description: Conversation created successfully
@@ -360,23 +370,38 @@ components:
   schemas:
     UserDTO:
       type: object
+      required:
+        - username
+        - email
+        - password
       properties:
         username:
           type: string
+          example: alice
         email:
           type: string
+          example: alice@mymail.com
         password:
           type: string
+          example: pass
     UserSettingsDTO:
       type: object
+      required:
+        - theme
+        - language
+        - unreadBadges
+        - notificationSound
+        - profileImage
       properties:
         theme:
-          type: string
+          type: integer
+          example: 2
         language:
           type: string
-        UnreadBadges:
+          example: english
+        unreadBadges:
           type: boolean
-        NotificationSound:
+        notificationSound:
           type: boolean
         profileImage:
           type: string
@@ -421,48 +446,65 @@ components:
         id:
           type: string
           format: uuid
+          example: 667bdc23-3de4-482f-a0f4-3391452a7742
         user1:
           type: string
+          example: alice@acme
         user2:
           type: string
+          example: bob@acme
     NewPasswordDTO:
       type : object
       properties :
         email:
           type : string
+          example: alice@mymail.com
         code :
           type : integer
+          example: 1549
         password :
           type : string
-        confirm-password : 
-          type : string
+          example: pass
     ChangePasswordDTO:
       type : object
       properties :
         old-password:
           type : string
+          example: oldpassword
         new-password : 
           type : string
+          example: newpassword
     NotificationsDTO:
       type: object
       properties:
         sounds:
-          type: string
+          type: boolean
         badges:
-          type: string
+          type: boolean
     ErrorDTO:
+      description: Error information
       type: object
       properties:
         timestamp:
           type: string
+          description: Timestamp of the error
+          example: 2023-10-03T14:53:59.870+00:00
         status:
           type: integer
+          description: HTTP response status
+          example: 401
         error:
           type: string
+          description: HTTP response error
+          example: Unauthorized
         message:
           type: string
+          description: HTTP response message
+          example: Bad credentials
         path:
           type: string
+          description: Path of the endpoint called
+          example: /user/signin
   securitySchemes:
     CookieAuth:
       type: apiKey

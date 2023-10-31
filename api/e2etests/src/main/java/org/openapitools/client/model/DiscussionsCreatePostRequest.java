@@ -51,56 +51,31 @@ import org.openapitools.client.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class DiscussionsCreatePostRequest {
-  public static final String SERIALIZED_NAME_USER1 = "user1";
-  @SerializedName(SERIALIZED_NAME_USER1)
-  private String user1;
-
-  public static final String SERIALIZED_NAME_USER2 = "user2";
-  @SerializedName(SERIALIZED_NAME_USER2)
-  private String user2;
+  public static final String SERIALIZED_NAME_USER = "user";
+  @SerializedName(SERIALIZED_NAME_USER)
+  private String user;
 
   public DiscussionsCreatePostRequest() {
   }
 
-  public DiscussionsCreatePostRequest user1(String user1) {
+  public DiscussionsCreatePostRequest user(String user) {
     
-    this.user1 = user1;
+    this.user = user;
     return this;
   }
 
    /**
-   * Get user1
-   * @return user1
+   * Get user
+   * @return user
   **/
   @javax.annotation.Nonnull
-  public String getUser1() {
-    return user1;
+  public String getUser() {
+    return user;
   }
 
 
-  public void setUser1(String user1) {
-    this.user1 = user1;
-  }
-
-
-  public DiscussionsCreatePostRequest user2(String user2) {
-    
-    this.user2 = user2;
-    return this;
-  }
-
-   /**
-   * Get user2
-   * @return user2
-  **/
-  @javax.annotation.Nonnull
-  public String getUser2() {
-    return user2;
-  }
-
-
-  public void setUser2(String user2) {
-    this.user2 = user2;
+  public void setUser(String user) {
+    this.user = user;
   }
 
 
@@ -114,21 +89,19 @@ public class DiscussionsCreatePostRequest {
       return false;
     }
     DiscussionsCreatePostRequest discussionsCreatePostRequest = (DiscussionsCreatePostRequest) o;
-    return Objects.equals(this.user1, discussionsCreatePostRequest.user1) &&
-        Objects.equals(this.user2, discussionsCreatePostRequest.user2);
+    return Objects.equals(this.user, discussionsCreatePostRequest.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(user1, user2);
+    return Objects.hash(user);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DiscussionsCreatePostRequest {\n");
-    sb.append("    user1: ").append(toIndentedString(user1)).append("\n");
-    sb.append("    user2: ").append(toIndentedString(user2)).append("\n");
+    sb.append("    user: ").append(toIndentedString(user)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -151,13 +124,11 @@ public class DiscussionsCreatePostRequest {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("user1");
-    openapiFields.add("user2");
+    openapiFields.add("user");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("user1");
-    openapiRequiredFields.add("user2");
+    openapiRequiredFields.add("user");
   }
 
  /**
@@ -188,11 +159,8 @@ public class DiscussionsCreatePostRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("user1").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `user1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user1").toString()));
-      }
-      if (!jsonObj.get("user2").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `user2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user2").toString()));
+      if (!jsonObj.get("user").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `user` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user").toString()));
       }
   }
 

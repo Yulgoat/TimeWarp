@@ -38,19 +38,11 @@ public class DiscussionsCreatePostRequestTest {
     }
 
     /**
-     * Test the property 'user1'
+     * Test the property 'user'
      */
     @Test
-    public void user1Test() {
-        // TODO: test user1
-    }
-
-    /**
-     * Test the property 'user2'
-     */
-    @Test
-    public void user2Test() {
-        // TODO: test user2
+    public void userTest() {
+        // TODO: test user
     }
 
 }

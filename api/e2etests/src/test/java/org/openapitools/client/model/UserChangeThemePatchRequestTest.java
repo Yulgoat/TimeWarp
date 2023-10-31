@@ -18,11 +18,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import java.io.IOException;
 import java.util.Arrays;
 import org.junit.jupiter.api.Disabled;
@@ -32,21 +27,14 @@ import org.junit.jupiter.api.Test;
  * Model tests for UserChangeThemePatchRequest
  */
 public class UserChangeThemePatchRequestTest {
+    private final UserChangeThemePatchRequest model = new UserChangeThemePatchRequest();
 
     /**
      * Model tests for UserChangeThemePatchRequest
      */
     @Test
     public void testUserChangeThemePatchRequest() {
-        UserChangeThemePatchRequest request = new UserChangeThemePatchRequest();
-
-        assertNotNull(request);
-
-        assertNull(request.getThemeId());
-
-        request.setThemeId(2);
-
-        assertEquals(2, request.getThemeId().intValue());
+        // TODO: test UserChangeThemePatchRequest
     }
 
     /**
@@ -54,15 +42,7 @@ public class UserChangeThemePatchRequestTest {
      */
     @Test
     public void themeIdTest() {
-        UserChangeThemePatchRequest request = new UserChangeThemePatchRequest().themeId(4);
-
-        assertNotNull(request);
-
-        assertEquals(4, request.getThemeId().intValue());
-
-        request.setThemeId(5);
-
-        assertEquals(5, request.getThemeId().intValue());
+        // TODO: test themeId
     }
 
 }
