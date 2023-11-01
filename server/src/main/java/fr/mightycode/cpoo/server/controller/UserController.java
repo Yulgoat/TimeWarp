@@ -1,5 +1,6 @@
 package fr.mightycode.cpoo.server.controller;
 
+import fr.mightycode.cpoo.server.dto.ChangePasswordDTO;
 import fr.mightycode.cpoo.server.dto.ErrorDTO;
 import fr.mightycode.cpoo.server.dto.UserDTO;
 import fr.mightycode.cpoo.server.service.UserService;
@@ -129,4 +130,41 @@ public class UserController {
     if (!userService.delete(username))
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist");
   }
+
+  @PatchMapping(value = "changepwd", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Object> changepwd(@RequestBody final ChangePasswordDTO pwd, Principal user) {
+    try {
+      ErrorDTO reponse = new ErrorDTO();
+      int i = userService.changePwd(pwd.oldpassword(),pwd.newpassword());
+      if(i==0) {
+        reponse.setStatus(HttpStatus.OK.value());
+        reponse.setError("Success");
+        reponse.setMessage("Password change is a success");
+        return ResponseEntity.status(HttpStatus.OK).body(reponse); // Success (200)
+      }
+      else if(i==1) {
+        reponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+        reponse.setError("UNAUTHORIZED");
+        reponse.setMessage("User not logged in");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(reponse); // User not logged in
+      }
+      else if(i==2){
+        reponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+        reponse.setError("UNAUTHORIZED");
+        reponse.setMessage("Incorrect old password");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(reponse); // Incorrect old password
+      }
+      else{
+        reponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        reponse.setError("INTERNAL_SERVER_ERROR");
+        reponse.setMessage("Others Issues");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(reponse); // Others Issues
+      }
+    }
+    catch (final Exception ex) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+    }
+  }
+
+
 }
