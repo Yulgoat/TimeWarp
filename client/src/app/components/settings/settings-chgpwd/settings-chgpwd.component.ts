@@ -61,6 +61,14 @@ export class SettingsChgpwdComponent {
     return (this.newPwd===this.confirmNewPwd);
   }
 
+  /* Update the oldPwd field with "Incorrect password", obtained in the post request */
+  oldPwd_notcorrect() : void {
+    this.oldPwd = ''; 
+    this.oldPwdError = true;
+    this.oldPwdErrorMessage = "Incorrect password";
+  }
+
+
   /* Request to the server and response study */
   request_changePwd(data : ChangePwdDTO) : void{
     this.changePwdService.changepwd(data).subscribe(
@@ -74,7 +82,13 @@ export class SettingsChgpwdComponent {
       },
       /* Errors */ 
       (error) => {
-        console.log(error);
+        if (error.status === 401) {
+          if (error.error && error.error.message) {
+            if (error.error.message === 'Incorrect old password') {
+              this.oldPwd_notcorrect();
+            }
+          }
+        }
       }
     );
   }
