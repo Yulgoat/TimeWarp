@@ -89,7 +89,7 @@ export class HomeComponent {
 
   // Select a discussion and set the recipient based on user1 and user2
   selectDiscussion(discussionId: string, user1: string, user2: string): void {
-    this.selectedDiscussionId = discussionId;
+    this.selectedDiscussionId = this.discussionService.selectedDiscussionId = discussionId;
     if (user1 == this.loggedUser) this.recipient = user2;
     else this.recipient = user1;
 

@@ -33,19 +33,27 @@ public class MessageController {
   public ResponseEntity<Message> messagePost(final Principal user, @RequestBody final PostMessageDTO postMessage) {
 
     // Build a router message from the DTO
-    RouterService.Message message = new RouterService.Message(
+    RouterService.Message routerMessage = new RouterService.Message(
       UUID.randomUUID(),
       user.getName() + "@" + serverDomain,
       postMessage.to(),
       postMessage.type(),
       postMessage.body()
     );
-    // Route the message
-    routerService.routeMessage(message);
-    System.out.println("le message est router : " + message);
 
-    Message envoi = messageService.storeMessage(new Message(message));
-    return new ResponseEntity<>(envoi, HttpStatus.CREATED);
+    // Build a model message from the router message
+    Message message = new Message(routerMessage);
+
+
+    // Route the message
+    routerService.routeMessage(routerMessage);
+
+    // Store the message only if the recipient is on another domain
+    // (otherwise, the message will be routed back to the server, and will be stored at that time)
+    if (!routerMessage.to().contains("@" + serverDomain))
+      messageService.storeMessage(message);
+
+    return new ResponseEntity<>(message, HttpStatus.CREATED);
   }
 
 

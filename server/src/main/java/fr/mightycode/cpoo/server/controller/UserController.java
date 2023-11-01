@@ -4,7 +4,6 @@ import fr.mightycode.cpoo.server.dto.ErrorDTO;
 import fr.mightycode.cpoo.server.dto.UserDTO;
 import fr.mightycode.cpoo.server.service.UserService;
 import jakarta.servlet.ServletException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
