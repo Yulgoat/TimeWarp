@@ -31,7 +31,6 @@ form div{
     padding-left: 50px;
     background-size: 30px 30px;
     background-color: white;
-    color: var(--main-color);
     font-size: 1.1em;
     width: 100%;
     box-sizing: border-box;
@@ -39,6 +38,16 @@ form div{
   
 form p {
     margin: 0;
+}
+
+.error_fields{
+    border: solid;
+    border-color: red;
+    color: red;
+}
+  
+.no_error{
+    color: var(--main-color);
 }
   
 /* Button Styles */
