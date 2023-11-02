@@ -21,8 +21,9 @@ export class SettingsChgpwdComponent {
   oldPwd : string = "";
   newPwd : string = "";
   confirmNewPwd : string ="";
-
-  changePwdDTO : ChangePwdDTO = {           // Json which contains the information that will be sent to the server
+  
+/* Json which contains the information that will be sent to the server */
+  changePwdDTO : ChangePwdDTO = {          
     oldpassword : '',
     newpassword :''
   }  
@@ -56,7 +57,7 @@ export class SettingsChgpwdComponent {
     else{return false;}
   }
 
-  /* Verify that password and confirmPwd are identical */
+  /* Verify that newPwd and confirmNewPwd are identical */
   samePwd():boolean{
     return (this.newPwd===this.confirmNewPwd);
   }
@@ -74,7 +75,6 @@ export class SettingsChgpwdComponent {
     this.changePwdService.changepwd(data).subscribe(
       /* Classic Response */ 
       (response) => {
-        /* Post returns a success (code 200) */
         if (response.status === 200) {
           console.log('Successful registration');
           this.navigateToAccount();
@@ -82,13 +82,10 @@ export class SettingsChgpwdComponent {
       },
       /* Errors */ 
       (error) => {
-        if (error.status === 401) {
-          if (error.error && error.error.message) {
-            if (error.error.message === 'Incorrect old password') {
-              this.oldPwd_notcorrect();
-            }
-          }
-        }
+        if (error.status === 401) 
+          if (error.error && error.error.message) 
+            if (error.error.message === 'Incorrect old password') 
+              this.oldPwd_notcorrect();                  
       }
     );
   }
