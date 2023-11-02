@@ -279,7 +279,7 @@ paths:
     get:
       tags:
         - messaging
-      summary: Get all messages in a conversation
+      summary: Get all messages in a discussion
       parameters:
         - name: discussion_id
           in: path

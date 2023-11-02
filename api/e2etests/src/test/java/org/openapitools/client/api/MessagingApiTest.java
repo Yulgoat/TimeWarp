@@ -30,8 +30,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +86,7 @@ public class MessagingApiTest {
     }
 
     /**
-     * Get all messages in a conversation
+     * Get all messages in a discussion
      *
      * @throws ApiException if the Api call fails
      */
