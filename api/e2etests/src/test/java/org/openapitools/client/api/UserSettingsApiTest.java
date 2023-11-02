@@ -17,10 +17,7 @@ import org.openapitools.client.ApiException;
 import org.openapitools.client.model.ChangePasswordDTO;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.NotificationsDTO;
-import org.openapitools.client.model.UserAccountChangeppPatchRequest;
-import org.openapitools.client.model.UserAccountChgusernamePatchRequest;
 import org.openapitools.client.model.UserChangeThemePatchRequest;
-import org.openapitools.client.model.UserLanguagePatchRequest;
 import org.openapitools.client.model.UserSettingsDTO;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -43,8 +40,8 @@ public class UserSettingsApiTest {
      */
     @Test
     public void userAccountChangeppPatchTest() throws ApiException {
-        UserAccountChangeppPatchRequest userAccountChangeppPatchRequest = null;
-        api.userAccountChangeppPatch(userAccountChangeppPatchRequest);
+        String body = null;
+        api.userAccountChangeppPatch(body);
         // TODO: test validations
     }
 
@@ -53,8 +50,8 @@ public class UserSettingsApiTest {
      */
     @Test
     public void userAccountChgusernamePatchTest() throws ApiException {
-        UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest = null;
-        api.userAccountChgusernamePatch(userAccountChgusernamePatchRequest);
+        String body = null;
+        api.userAccountChgusernamePatch(body);
         // TODO: test validations
     }
 
@@ -94,8 +91,8 @@ public class UserSettingsApiTest {
      */
     @Test
     public void userLanguagePatchTest() throws ApiException {
-        UserLanguagePatchRequest userLanguagePatchRequest = null;
-        api.userLanguagePatch(userLanguagePatchRequest);
+        String body = null;
+        api.userLanguagePatch(body);
         // TODO: test validations
     }
 

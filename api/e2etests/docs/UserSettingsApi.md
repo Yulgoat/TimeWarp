@@ -16,7 +16,7 @@ All URIs are relative to *http://localhost:8080*
 
 <a id="userAccountChangeppPatch"></a>
 # **userAccountChangeppPatch**
-> userAccountChangeppPatch(userAccountChangeppPatchRequest)
+> userAccountChangeppPatch(body)
 
 
 
@@ -42,9 +42,9 @@ public class Example {
     //CookieAuth.setApiKeyPrefix("Token");
 
     UserSettingsApi apiInstance = new UserSettingsApi(defaultClient);
-    UserAccountChangeppPatchRequest userAccountChangeppPatchRequest = new UserAccountChangeppPatchRequest(); // UserAccountChangeppPatchRequest | 
+    String body = "body_example"; // String | 
     try {
-      apiInstance.userAccountChangeppPatch(userAccountChangeppPatchRequest);
+      apiInstance.userAccountChangeppPatch(body);
     } catch (ApiException e) {
       System.err.println("Exception when calling UserSettingsApi#userAccountChangeppPatch");
       System.err.println("Status code: " + e.getCode());
@@ -60,7 +60,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userAccountChangeppPatchRequest** | [**UserAccountChangeppPatchRequest**](UserAccountChangeppPatchRequest.md)|  | |
+| **body** | **String**|  | |
 
 ### Return type
 
@@ -72,7 +72,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: text/plain
  - **Accept**: application/json
 
 ### HTTP response details
@@ -83,7 +83,7 @@ null (empty response body)
 
 <a id="userAccountChgusernamePatch"></a>
 # **userAccountChgusernamePatch**
-> userAccountChgusernamePatch(userAccountChgusernamePatchRequest)
+> userAccountChgusernamePatch(body)
 
 
 
@@ -109,9 +109,9 @@ public class Example {
     //CookieAuth.setApiKeyPrefix("Token");
 
     UserSettingsApi apiInstance = new UserSettingsApi(defaultClient);
-    UserAccountChgusernamePatchRequest userAccountChgusernamePatchRequest = new UserAccountChgusernamePatchRequest(); // UserAccountChgusernamePatchRequest | 
+    String body = "body_example"; // String | 
     try {
-      apiInstance.userAccountChgusernamePatch(userAccountChgusernamePatchRequest);
+      apiInstance.userAccountChgusernamePatch(body);
     } catch (ApiException e) {
       System.err.println("Exception when calling UserSettingsApi#userAccountChgusernamePatch");
       System.err.println("Status code: " + e.getCode());
@@ -127,7 +127,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userAccountChgusernamePatchRequest** | [**UserAccountChgusernamePatchRequest**](UserAccountChgusernamePatchRequest.md)|  | |
+| **body** | **String**|  | |
 
 ### Return type
 
@@ -139,7 +139,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: text/plain
  - **Accept**: application/json
 
 ### HTTP response details
@@ -347,7 +347,7 @@ null (empty response body)
 
 <a id="userLanguagePatch"></a>
 # **userLanguagePatch**
-> userLanguagePatch(userLanguagePatchRequest)
+> userLanguagePatch(body)
 
 
 
@@ -373,9 +373,9 @@ public class Example {
     //CookieAuth.setApiKeyPrefix("Token");
 
     UserSettingsApi apiInstance = new UserSettingsApi(defaultClient);
-    UserLanguagePatchRequest userLanguagePatchRequest = new UserLanguagePatchRequest(); // UserLanguagePatchRequest | 
+    String body = "body_example"; // String | 
     try {
-      apiInstance.userLanguagePatch(userLanguagePatchRequest);
+      apiInstance.userLanguagePatch(body);
     } catch (ApiException e) {
       System.err.println("Exception when calling UserSettingsApi#userLanguagePatch");
       System.err.println("Status code: " + e.getCode());
@@ -391,7 +391,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userLanguagePatchRequest** | [**UserLanguagePatchRequest**](UserLanguagePatchRequest.md)|  | |
+| **body** | **String**|  | |
 
 ### Return type
 
@@ -403,7 +403,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: text/plain
  - **Accept**: application/json
 
 ### HTTP response details

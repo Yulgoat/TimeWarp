@@ -28,7 +28,6 @@ import java.io.IOException;
 
 
 import org.openapitools.client.model.DiscussionDTO;
-import org.openapitools.client.model.DiscussionsCreatePostRequest;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
 import org.openapitools.client.model.PostMessageDTO;
@@ -79,7 +78,7 @@ public class MessagingApi {
 
     /**
      * Build call for discussionsCreatePost
-     * @param discussionsCreatePostRequest  (required)
+     * @param body  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -90,7 +89,7 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsCreatePostCall(DiscussionsCreatePostRequest discussionsCreatePostRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call discussionsCreatePostCall(String body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -104,7 +103,7 @@ public class MessagingApi {
             basePath = null;
         }
 
-        Object localVarPostBody = discussionsCreatePostRequest;
+        Object localVarPostBody = body;
 
         // create path and map variables
         String localVarPath = "/discussions/create";
@@ -124,7 +123,7 @@ public class MessagingApi {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
+            "text/plain"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -136,20 +135,20 @@ public class MessagingApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call discussionsCreatePostValidateBeforeCall(DiscussionsCreatePostRequest discussionsCreatePostRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'discussionsCreatePostRequest' is set
-        if (discussionsCreatePostRequest == null) {
-            throw new ApiException("Missing the required parameter 'discussionsCreatePostRequest' when calling discussionsCreatePost(Async)");
+    private okhttp3.Call discussionsCreatePostValidateBeforeCall(String body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling discussionsCreatePost(Async)");
         }
 
-        return discussionsCreatePostCall(discussionsCreatePostRequest, _callback);
+        return discussionsCreatePostCall(body, _callback);
 
     }
 
     /**
      * Create a new discussion with a user
      * 
-     * @param discussionsCreatePostRequest  (required)
+     * @param body  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -158,14 +157,14 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void discussionsCreatePost(DiscussionsCreatePostRequest discussionsCreatePostRequest) throws ApiException {
-        discussionsCreatePostWithHttpInfo(discussionsCreatePostRequest);
+    public void discussionsCreatePost(String body) throws ApiException {
+        discussionsCreatePostWithHttpInfo(body);
     }
 
     /**
      * Create a new discussion with a user
      * 
-     * @param discussionsCreatePostRequest  (required)
+     * @param body  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -175,15 +174,15 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> discussionsCreatePostWithHttpInfo(DiscussionsCreatePostRequest discussionsCreatePostRequest) throws ApiException {
-        okhttp3.Call localVarCall = discussionsCreatePostValidateBeforeCall(discussionsCreatePostRequest, null);
+    public ApiResponse<Void> discussionsCreatePostWithHttpInfo(String body) throws ApiException {
+        okhttp3.Call localVarCall = discussionsCreatePostValidateBeforeCall(body, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
      * Create a new discussion with a user (asynchronously)
      * 
-     * @param discussionsCreatePostRequest  (required)
+     * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -194,9 +193,9 @@ public class MessagingApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsCreatePostAsync(DiscussionsCreatePostRequest discussionsCreatePostRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call discussionsCreatePostAsync(String body, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = discussionsCreatePostValidateBeforeCall(discussionsCreatePostRequest, _callback);
+        okhttp3.Call localVarCall = discussionsCreatePostValidateBeforeCall(body, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -444,7 +443,8 @@ public class MessagingApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: a message is available </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Accepted: no message available yet </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -501,35 +501,37 @@ public class MessagingApi {
     /**
      * Receive a message
      * 
-     * @return List&lt;MessageDTO&gt;
+     * @return MessageDTO
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: a message is available </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Accepted: no message available yet </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public List<MessageDTO> discussionsMessageGet() throws ApiException {
-        ApiResponse<List<MessageDTO>> localVarResp = discussionsMessageGetWithHttpInfo();
+    public MessageDTO discussionsMessageGet() throws ApiException {
+        ApiResponse<MessageDTO> localVarResp = discussionsMessageGetWithHttpInfo();
         return localVarResp.getData();
     }
 
     /**
      * Receive a message
      * 
-     * @return ApiResponse&lt;List&lt;MessageDTO&gt;&gt;
+     * @return ApiResponse&lt;MessageDTO&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: a message is available </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Accepted: no message available yet </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<MessageDTO>> discussionsMessageGetWithHttpInfo() throws ApiException {
+    public ApiResponse<MessageDTO> discussionsMessageGetWithHttpInfo() throws ApiException {
         okhttp3.Call localVarCall = discussionsMessageGetValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<List<MessageDTO>>(){}.getType();
+        Type localVarReturnType = new TypeToken<MessageDTO>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -542,14 +544,15 @@ public class MessagingApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Success: a message is available </td><td>  -  </td></tr>
+        <tr><td> 202 </td><td> Accepted: no message available yet </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsMessageGetAsync(final ApiCallback<List<MessageDTO>> _callback) throws ApiException {
+    public okhttp3.Call discussionsMessageGetAsync(final ApiCallback<MessageDTO> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = discussionsMessageGetValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<List<MessageDTO>>(){}.getType();
+        Type localVarReturnType = new TypeToken<MessageDTO>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

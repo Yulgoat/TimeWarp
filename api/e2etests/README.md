@@ -144,17 +144,13 @@ Class | Method | HTTP request | Description
 
  - [ChangePasswordDTO](docs/ChangePasswordDTO.md)
  - [DiscussionDTO](docs/DiscussionDTO.md)
- - [DiscussionsCreatePostRequest](docs/DiscussionsCreatePostRequest.md)
  - [ErrorDTO](docs/ErrorDTO.md)
  - [MessageDTO](docs/MessageDTO.md)
  - [NewPasswordDTO](docs/NewPasswordDTO.md)
  - [NotificationsDTO](docs/NotificationsDTO.md)
  - [PostMessageDTO](docs/PostMessageDTO.md)
- - [UserAccountChangeppPatchRequest](docs/UserAccountChangeppPatchRequest.md)
- - [UserAccountChgusernamePatchRequest](docs/UserAccountChgusernamePatchRequest.md)
  - [UserChangeThemePatchRequest](docs/UserChangeThemePatchRequest.md)
  - [UserDTO](docs/UserDTO.md)
- - [UserLanguagePatchRequest](docs/UserLanguagePatchRequest.md)
  - [UserSettingsDTO](docs/UserSettingsDTO.md)
 
 

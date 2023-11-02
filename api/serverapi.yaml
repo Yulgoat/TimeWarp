@@ -130,12 +130,10 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
+              title: username
+              type: string
       responses:
         '200':
           description: Success
@@ -152,12 +150,10 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                url:
-                  type: string
+              title: url
+              type: string
       responses:
         '200':
           description: Success
@@ -250,12 +246,10 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                language:
-                  type: string
+              title: language
+              type: string
       responses:
         '200':
           description: Success
@@ -329,12 +323,13 @@ paths:
       summary: Receive a message
       responses:
         '200':
-          description: Successful response
+          description: 'Success: a message is available'
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/MessageDTO'
+                $ref: '#/components/schemas/MessageDTO'
+        '202':
+          description: 'Accepted: no message available yet'
         default:
           description: Error
           content:
@@ -349,14 +344,10 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                user:
-                  type: string
-              required:
-                - user
+              title: user
+              type: string
       responses:
         '200':
           description: Conversation created successfully
