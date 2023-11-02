@@ -13,7 +13,7 @@ All URIs are relative to *http://localhost:8080*
 
 <a id="discussionsCreatePost"></a>
 # **discussionsCreatePost**
-> discussionsCreatePost(discussionsCreatePostRequest)
+> discussionsCreatePost(body)
 
 Create a new discussion with a user
 
@@ -39,9 +39,9 @@ public class Example {
     //CookieAuth.setApiKeyPrefix("Token");
 
     MessagingApi apiInstance = new MessagingApi(defaultClient);
-    DiscussionsCreatePostRequest discussionsCreatePostRequest = new DiscussionsCreatePostRequest(); // DiscussionsCreatePostRequest | 
+    String body = "body_example"; // String | 
     try {
-      apiInstance.discussionsCreatePost(discussionsCreatePostRequest);
+      apiInstance.discussionsCreatePost(body);
     } catch (ApiException e) {
       System.err.println("Exception when calling MessagingApi#discussionsCreatePost");
       System.err.println("Status code: " + e.getCode());
@@ -57,7 +57,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **discussionsCreatePostRequest** | [**DiscussionsCreatePostRequest**](DiscussionsCreatePostRequest.md)|  | |
+| **body** | **String**|  | |
 
 ### Return type
 
@@ -69,7 +69,7 @@ null (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: text/plain
  - **Accept**: application/json
 
 ### HTTP response details
@@ -210,7 +210,7 @@ This endpoint does not need any parameter.
 
 <a id="discussionsMessageGet"></a>
 # **discussionsMessageGet**
-> List&lt;MessageDTO&gt; discussionsMessageGet()
+> MessageDTO discussionsMessageGet()
 
 Receive a message
 
@@ -237,7 +237,7 @@ public class Example {
 
     MessagingApi apiInstance = new MessagingApi(defaultClient);
     try {
-      List<MessageDTO> result = apiInstance.discussionsMessageGet();
+      MessageDTO result = apiInstance.discussionsMessageGet();
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling MessagingApi#discussionsMessageGet");
@@ -255,7 +255,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List&lt;MessageDTO&gt;**](MessageDTO.md)
+[**MessageDTO**](MessageDTO.md)
 
 ### Authorization
 
@@ -269,7 +269,8 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successful response |  -  |
+| **200** | Success: a message is available |  -  |
+| **202** | Accepted: no message available yet |  -  |
 | **0** | Error |  -  |
 
 <a id="discussionsMessagePost"></a>

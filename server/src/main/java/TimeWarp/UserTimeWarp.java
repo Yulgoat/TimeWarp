@@ -2,10 +2,8 @@ package TimeWarp;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.util.Assert;
 
 import java.util.Collection;
-import java.util.Collections;
 
 /***
  * Interface that has the same features as org.springframework.security.core.userdetails.User

@@ -4,6 +4,8 @@ import fr.mightycode.cpoo.server.model.Discussion;
 import fr.mightycode.cpoo.server.model.Message;
 import fr.mightycode.cpoo.server.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MessageService {
 
   @Value("${cpoo.server.domain}")
@@ -59,6 +62,7 @@ public class MessageService {
    * @param message The message to queue
    */
   public void queueMessage(Message message) {
+    log.info("Queueing message {}", message);
     getQueue(message.getTo()).add(message);
   }
 
@@ -84,6 +88,6 @@ public class MessageService {
    * @return the message
    */
   public Message getNextMessage(String to) throws InterruptedException {
-    return getQueue(to).poll(1, TimeUnit.SECONDS);
+    return getQueue(to).poll(5, TimeUnit.SECONDS);
   }
 }

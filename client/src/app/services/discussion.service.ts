@@ -16,6 +16,8 @@ export class DiscussionService {
   discussions: Discussion[] = [];
   messages: Message[] = [];
 
+  selectedDiscussionId: string = '';
+
   constructor(private http: HttpClient) { }
 
   // Create a new discussion between two users
@@ -86,6 +88,7 @@ export class DiscussionService {
         }
 
         // Add the message to the discussion
+        if(discussion?.id == this.selectedDiscussionId)
         this.messages.push(message);
       }),
       repeat(), // on success, repeat immediately
@@ -94,5 +97,4 @@ export class DiscussionService {
       takeUntil(stopPolling) // stop polling if an event is sent on control observable
     ).subscribe();
   }
-
 }

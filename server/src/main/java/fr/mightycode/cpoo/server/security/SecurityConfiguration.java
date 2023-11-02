@@ -34,9 +34,9 @@ public class SecurityConfiguration {
         .requestMatchers("/user/signup").permitAll()
         .requestMatchers("/user/signin").permitAll()
         //.requestMatchers("/user/signout").permitAll()
-        .requestMatchers("/user/currentuser").permitAll()
+        //.requestMatchers("/user/currentuser").permitAll()
         .requestMatchers(HttpMethod.DELETE, "/user/*").hasRole("ADMIN")
-        .requestMatchers("/discussions/**").permitAll()
+        //.requestMatchers("/discussions/**").permitAll()
         .requestMatchers("/error").permitAll()
         .anyRequest().authenticated());
 

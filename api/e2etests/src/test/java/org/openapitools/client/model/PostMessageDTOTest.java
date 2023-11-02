@@ -13,28 +13,30 @@
 
 package org.openapitools.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.junit.jupiter.api.Disabled;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for PostMessageDTO
  */
 public class PostMessageDTOTest {
-    private final PostMessageDTO model = new PostMessageDTO();
 
     /**
      * Model tests for PostMessageDTO
      */
     @Test
     public void testPostMessageDTO() {
-        // TODO: test PostMessageDTO
+        // Create an instance of PostMessageDTO with example values
+        PostMessageDTO message = new PostMessageDTO();
+        message.setTo("bob@acme");
+        message.setType("text/plain");
+        message.setBody("This is the message");
+
+        // Check that the properties have been correctly set
+        assertEquals("bob@acme", message.getTo());
+        assertEquals("text/plain", message.getType());
+        assertEquals("This is the message", message.getBody());
     }
 
     /**
@@ -42,7 +44,12 @@ public class PostMessageDTOTest {
      */
     @Test
     public void toTest() {
-        // TODO: test to
+        // Create an instance of PostMessageDTO and set the 'to' property
+        PostMessageDTO message = new PostMessageDTO();
+        message.setTo("bob@acme");
+
+        // Check that the 'to' property has been correctly set
+        assertEquals("bob@acme", message.getTo());
     }
 
     /**
@@ -50,7 +57,12 @@ public class PostMessageDTOTest {
      */
     @Test
     public void typeTest() {
-        // TODO: test type
+        // Create an instance of PostMessageDTO and set the 'type' property
+        PostMessageDTO message = new PostMessageDTO();
+        message.setType("text/plain");
+
+        // Check that the 'type' property has been correctly set
+        assertEquals("text/plain", message.getType());
     }
 
     /**
@@ -58,7 +70,12 @@ public class PostMessageDTOTest {
      */
     @Test
     public void bodyTest() {
-        // TODO: test body
+        // Create an instance of PostMessageDTO and set the 'body' property
+        PostMessageDTO message = new PostMessageDTO();
+        message.setBody("This is the message");
+
+        // Check that the 'body' property has been correctly set
+        assertEquals("This is the message", message.getBody());
     }
 
 }

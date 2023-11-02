@@ -137,9 +137,10 @@ paths:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_account_chgusername_patch_request'
+              title: username
+              type: string
         required: true
       responses:
         "200":
@@ -152,15 +153,16 @@ paths:
           description: Error
       tags:
       - user settings
-      x-content-type: application/json
+      x-content-type: text/plain
       x-accepts: application/json
   /user/account/changepp:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_account_changepp_patch_request'
+              title: url
+              type: string
         required: true
       responses:
         "200":
@@ -173,7 +175,7 @@ paths:
           description: Error
       tags:
       - user settings
-      x-content-type: application/json
+      x-content-type: text/plain
       x-accepts: application/json
   /user/changepwd:
     patch:
@@ -257,9 +259,10 @@ paths:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_language_patch_request'
+              title: language
+              type: string
         required: true
       responses:
         "200":
@@ -272,7 +275,7 @@ paths:
           description: Error
       tags:
       - user settings
-      x-content-type: application/json
+      x-content-type: text/plain
       x-accepts: application/json
   /discussions:
     get:
@@ -320,10 +323,10 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/MessageDTO'
-                type: array
-          description: Successful response
+                $ref: '#/components/schemas/MessageDTO'
+          description: "Success: a message is available"
+        "202":
+          description: "Accepted: no message available yet"
         default:
           content:
             application/json:
@@ -359,9 +362,10 @@ paths:
     post:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_discussions_create_post_request'
+              title: user
+              type: string
         required: true
       responses:
         "200":
@@ -375,7 +379,7 @@ paths:
       summary: Create a new discussion with a user
       tags:
       - messaging
-      x-content-type: application/json
+      x-content-type: text/plain
       x-accepts: application/json
 components:
   schemas:
@@ -543,32 +547,10 @@ components:
           example: /user/signin
           type: string
       type: object
-    _user_account_chgusername_patch_request:
-      properties:
-        username:
-          type: string
-      type: object
-    _user_account_changepp_patch_request:
-      properties:
-        url:
-          type: string
-      type: object
     _user_change_theme_patch_request:
       properties:
         themeId:
           type: integer
-      type: object
-    _user_language_patch_request:
-      properties:
-        language:
-          type: string
-      type: object
-    _discussions_create_post_request:
-      properties:
-        user:
-          type: string
-      required:
-      - user
       type: object
   securitySchemes:
     CookieAuth:
