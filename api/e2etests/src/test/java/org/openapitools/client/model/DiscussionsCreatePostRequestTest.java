@@ -13,28 +13,26 @@
 
 package org.openapitools.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import org.junit.jupiter.api.Disabled;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for DiscussionsCreatePostRequest
  */
 public class DiscussionsCreatePostRequestTest {
-    private final DiscussionsCreatePostRequest model = new DiscussionsCreatePostRequest();
 
     /**
      * Model tests for DiscussionsCreatePostRequest
      */
     @Test
     public void testDiscussionsCreatePostRequest() {
-        // TODO: test DiscussionsCreatePostRequest
+        // Create an instance of DiscussionsCreatePostRequest with example values
+        DiscussionsCreatePostRequest request = new DiscussionsCreatePostRequest();
+        request.setUser("alice@acme");
+
+        // Check that the 'user' property has been set correctly
+        assertEquals("alice@acme", request.getUser());
     }
 
     /**
@@ -42,7 +40,12 @@ public class DiscussionsCreatePostRequestTest {
      */
     @Test
     public void userTest() {
-        // TODO: test user
+        // Create an instance of DiscussionsCreatePostRequest and set the 'user' property to
+        DiscussionsCreatePostRequest request = new DiscussionsCreatePostRequest();
+        request.setUser("alice@acme");
+
+        // Check that the 'user' property has been set correctly
+        assertEquals("alice@acme", request.getUser());
     }
 
 }
