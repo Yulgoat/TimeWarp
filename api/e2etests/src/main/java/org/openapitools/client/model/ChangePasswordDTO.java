@@ -51,11 +51,11 @@ import org.openapitools.client.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ChangePasswordDTO {
-  public static final String SERIALIZED_NAME_OLD_PASSWORD = "old-password";
+  public static final String SERIALIZED_NAME_OLD_PASSWORD = "oldpassword";
   @SerializedName(SERIALIZED_NAME_OLD_PASSWORD)
   private String oldPassword;
 
-  public static final String SERIALIZED_NAME_NEW_PASSWORD = "new-password";
+  public static final String SERIALIZED_NAME_NEW_PASSWORD = "newpassword";
   @SerializedName(SERIALIZED_NAME_NEW_PASSWORD)
   private String newPassword;
 
@@ -151,8 +151,8 @@ public class ChangePasswordDTO {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("old-password");
-    openapiFields.add("new-password");
+    openapiFields.add("oldpassword");
+    openapiFields.add("newpassword");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -179,11 +179,11 @@ public class ChangePasswordDTO {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("old-password") != null && !jsonObj.get("old-password").isJsonNull()) && !jsonObj.get("old-password").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `old-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("old-password").toString()));
+      if ((jsonObj.get("oldpassword") != null && !jsonObj.get("oldpassword").isJsonNull()) && !jsonObj.get("oldpassword").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `old-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("oldpassword").toString()));
       }
-      if ((jsonObj.get("new-password") != null && !jsonObj.get("new-password").isJsonNull()) && !jsonObj.get("new-password").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `new-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("new-password").toString()));
+      if ((jsonObj.get("newpassword") != null && !jsonObj.get("newpassword").isJsonNull()) && !jsonObj.get("newpassword").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `new-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("newpassword").toString()));
       }
   }
 

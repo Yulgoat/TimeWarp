@@ -13,12 +13,13 @@
 
 package org.openapitools.client.api;
 
+import okhttp3.OkHttpClient;
+import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.model.ChangePasswordDTO;
-import org.openapitools.client.model.ErrorDTO;
-import org.openapitools.client.model.NotificationsDTO;
-import org.openapitools.client.model.UserChangeThemePatchRequest;
-import org.openapitools.client.model.UserSettingsDTO;
+import org.openapitools.client.model.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,25 @@ import java.util.Map;
 @Disabled
 public class UserSettingsApiTest {
 
-    private final UserSettingsApi api = new UserSettingsApi();
+    private final UserSettingsApi UserSettingsapi = new UserSettingsApi();
+
+    private final AuthenticationApi authenticationApi = new AuthenticationApi();
+
+    private final AdministrationApi administrationApi = new AdministrationApi();
+
+
+    @BeforeEach
+    public void init() throws ApiException {
+
+        // Simulate the behavior of a web browser by remembering cookies set by the server
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
+        ApiClient apiClient = new ApiClient(okHttpClient);
+        authenticationApi.setApiClient(apiClient);
+        administrationApi.setApiClient(apiClient);
+        UserSettingsapi.setApiClient(apiClient);
+    }
+
 
     /**
      * @throws ApiException if the Api call fails
@@ -41,7 +60,7 @@ public class UserSettingsApiTest {
     @Test
     public void userAccountChangeppPatchTest() throws ApiException {
         String body = null;
-        api.userAccountChangeppPatch(body);
+        UserSettingsapi.userAccountChangeppPatch(body);
         // TODO: test validations
     }
 
@@ -51,7 +70,7 @@ public class UserSettingsApiTest {
     @Test
     public void userAccountChgusernamePatchTest() throws ApiException {
         String body = null;
-        api.userAccountChgusernamePatch(body);
+        UserSettingsapi.userAccountChgusernamePatch(body);
         // TODO: test validations
     }
 
@@ -63,7 +82,7 @@ public class UserSettingsApiTest {
     @Test
     public void userChangeThemePatchTest() throws ApiException {
         UserChangeThemePatchRequest userChangeThemePatchRequest = null;
-        api.userChangeThemePatch(userChangeThemePatchRequest);
+        UserSettingsapi.userChangeThemePatch(userChangeThemePatchRequest);
         // TODO: test validations
     }
 
@@ -72,9 +91,56 @@ public class UserSettingsApiTest {
      */
     @Test
     public void userChangepwdPatchTest() throws ApiException {
-        ChangePasswordDTO changePasswordDTO = null;
-        api.userChangepwdPatch(changePasswordDTO);
-        // TODO: test validations
+        //Signout if a user altready Signin
+        try{
+            authenticationApi.userSignoutPost();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(403, e.getCode());
+        }
+
+        // Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testchangepwd");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+
+        UserDTO user = new UserDTO().username("testchangepwd").email("TestChangePassword").password("Pwd1");
+        authenticationApi.userSignupPost(user);
+
+        //SignIn with First Password should work
+        authenticationApi.userSigninPost(user);
+
+        //Change Password
+        ChangePasswordDTO cpDto = new ChangePasswordDTO().oldPassword(user.getPassword()).newPassword("Pwd2");
+        UserSettingsapi.userChangepwdPatch(cpDto);
+        authenticationApi.userSignoutPost();
+
+        //SignIn with ancient password should fail
+        try {
+            authenticationApi.userSigninPost(user);
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_UNAUTHORIZED, e.getCode());
+        }
+
+        //SignIn with new password should work
+        authenticationApi.userSigninPost(new UserDTO().username("testchangepwd").email("TestChangePassword").password("Pwd2"));
+
+        //ChangePassword with incorrect old password should fail
+        try {
+            ChangePasswordDTO cpDto2 = new ChangePasswordDTO().oldPassword("Hello").newPassword("Pwd3");
+            UserSettingsapi.userChangepwdPatch(cpDto2);
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_UNAUTHORIZED, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
     }
 
     /**
@@ -82,7 +148,7 @@ public class UserSettingsApiTest {
      */
     @Test
     public void userDisconnectPostTest() throws ApiException {
-        api.userDisconnectPost();
+        UserSettingsapi.userDisconnectPost();
         // TODO: test validations
     }
 
@@ -92,7 +158,7 @@ public class UserSettingsApiTest {
     @Test
     public void userLanguagePatchTest() throws ApiException {
         String body = null;
-        api.userLanguagePatch(body);
+        UserSettingsapi.userLanguagePatch(body);
         // TODO: test validations
     }
 
@@ -102,7 +168,7 @@ public class UserSettingsApiTest {
     @Test
     public void userNotificationsPatchTest() throws ApiException {
         NotificationsDTO notificationsDTO = null;
-        api.userNotificationsPatch(notificationsDTO);
+        UserSettingsapi.userNotificationsPatch(notificationsDTO);
         // TODO: test validations
     }
 
@@ -113,7 +179,7 @@ public class UserSettingsApiTest {
      */
     @Test
     public void userSettingsGetTest() throws ApiException {
-        UserSettingsDTO response = api.userSettingsGet();
+        UserSettingsDTO response = UserSettingsapi.userSettingsGet();
         // TODO: test validations
     }
 

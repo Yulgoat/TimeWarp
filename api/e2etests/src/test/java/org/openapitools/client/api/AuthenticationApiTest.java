@@ -39,7 +39,6 @@ import java.util.Map;
 public class AuthenticationApiTest {
 
     private final AuthenticationApi authenticationApi = new AuthenticationApi();
-    private final AuthenticationApi authenticationApi2 = new AuthenticationApi();
 
     private final AdministrationApi administrationApi = new AdministrationApi();
 

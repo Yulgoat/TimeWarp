@@ -119,6 +119,7 @@ public class UserService {
     if (!(passwordEncoder.matches(oldPwd, storedUserDetails.getPassword()))) {
       return 2; // Incorrect old password
     }
+    System.out.println("------------------------------------\n"+username+"\n--------------------------------");
 
     userDetailsManager.changePassword(passwordEncoder.encode(oldPwd), passwordEncoder.encode(newPwd));
 
