@@ -57,4 +57,3 @@ src/main/java/org/openapitools/client/model/PostMessageDTO.java
 src/main/java/org/openapitools/client/model/UserChangeThemePatchRequest.java
 src/main/java/org/openapitools/client/model/UserDTO.java
 src/main/java/org/openapitools/client/model/UserSettingsDTO.java
-src/test/java/org/openapitools/client/api/UserSettingsApiTest.java
