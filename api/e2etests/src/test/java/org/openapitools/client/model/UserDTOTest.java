@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API.
+ * This is a prototype of CPOO Project's front/back API. 
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test;
 /**
  * Model tests for UserDTO
  */
-@Disabled
 public class UserDTOTest {
     private final UserDTO model = new UserDTO();
 
@@ -44,6 +43,14 @@ public class UserDTOTest {
     @Test
     public void usernameTest() {
         // TODO: test username
+    }
+
+    /**
+     * Test the property 'email'
+     */
+    @Test
+    public void emailTest() {
+        // TODO: test email
     }
 
     /**

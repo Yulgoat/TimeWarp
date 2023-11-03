@@ -1,12 +1,15 @@
 import { Message } from './message';
 
 export class Discussion {
-    id: number;
-    titre: string;
-    messages: Message[] = [];
+    id: string;
+    user1: string;
+    user2: string;
+    messages: Message[];
 
-    constructor(id: number, titre: string) {
+    constructor(id: string, user1: string, user2: string) {
         this.id = id;
-        this.titre = titre;
+        this.user1 = user1;
+        this.user2 = user2;
+        this.messages = [];
       }
   }

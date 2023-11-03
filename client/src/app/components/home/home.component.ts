@@ -1,10 +1,12 @@
-import { Component, ElementRef} from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DiscussionService } from 'src/app/services/discussion.service';
 import { Discussion } from 'src/app/models/discussion';
 import { Message } from 'src/app/models/message';
-import { delay } from 'rxjs';
+import { Subject, delay } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-home',
@@ -12,64 +14,127 @@ import { delay } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
   discussions: Discussion[] = [];
   messages: Message[] = [];
-  selectedDiscussionId: number = -1;
+  selectedDiscussionId: string = '';
   newMessageContent: string = '';
 
-  constructor(private router:Router, private discussionService: DiscussionService, private elementRef: ElementRef){
-    this.discussions = this.discussionService.getDiscussions();
+  loggedUser: string = ''; // The username of the currently logged-in user
+  recipient: string = ''; // The recipient for new messages
+
+  private stopPolling = new Subject<void>();
+
+  constructor(
+    private router: Router,
+    private discussionService: DiscussionService,
+    private userService: UserService,
+    private elementRef: ElementRef
+  ) {
+    // Initialize discussions with data from the service
+    this.discussions = this.discussionService.discussions;
   }
 
-  homeToSettings() : void{
+  ngOnInit() {
+    this.discussionService.discussions.length=0;
+    // Fetch discussions from the service for the logged-in user
+    this.discussionService.getDiscussions().subscribe({
+      next: (discussions) => {
+        discussions.forEach((discussion) => {
+          this.discussions.unshift(discussion);
+        });
+      },
+      error: (e) => console.error('An error has occurred for getDiscussions: ', e),
+      complete: () => console.info('Get discussions complete')
+    });
+
+    this.userService.getCurrentUser().subscribe({
+      next: (user: User) => {
+        this.loggedUser = user.username;
+      },
+      error: (e) => {
+        console.error('An error has occurred for getCurrentUser : ', e);
+      }
+    });
+
+    // Start polling new messages and updating discussions
+    this.discussionService.startPollingNewMessages(this.stopPolling);
+  }
+
+  ngOnDestroy(): void {
+
+    // Stop polling messages
+    this.stopPolling.next(void 0);
+  }
+
+
+  // Redirect to the settings page
+  homeToSettings(): void {
     this.router.navigate(['/settings']);
   }
 
-  /* ----------------------------------------------------------------------------------------------------------------------------------------- */
-  new_conv_popup : boolean = false;
+  /* ----- New Conversation Popup Management ----------------------------------------- */
 
+  new_conv_popup: boolean = false;
 
+  // Display the new conversation popup
   display_new_conv_popup() {
     this.new_conv_popup = true;
   }
+
+  // Hide the new conversation popup
   hide_new_conv_popup() {
     this.new_conv_popup = false;
   }
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
 
+  // Select a discussion and set the recipient based on user1 and user2
+  selectDiscussion(discussionId: string, user1: string, user2: string): void {
+    this.selectedDiscussionId = this.discussionService.selectedDiscussionId = discussionId;
+    if (user1 == this.loggedUser) this.recipient = user2;
+    else this.recipient = user1;
 
-  selectDiscussion(discussionId: number): void {
-    this.selectedDiscussionId = discussionId;
-    this.messages = this.discussionService.getMessage(this.selectedDiscussionId);
-
-    setTimeout(() => {
-      this.scrollToBottom();
+    // Clear and load messages for the selected discussion
+    this.messages = this.discussionService.messages = [];
+    this.discussionService.getMessages(this.selectedDiscussionId).subscribe({
+      next: (messages) => {
+        messages.forEach((message) => {
+          this.messages.push(message);
+        });
+      },
+      error: (e) => console.error('An error has occurred: ', e),
+      complete: () => {
+        setTimeout(() => {
+          this.scrollToBottom();
+        });
+        console.info('Get messages complete');
+      }
     });
   }
 
-  addMessage(): void {
-    if (this.discussions[this.selectedDiscussionId]) {
-      this.discussionService.addMessage(this.selectedDiscussionId, this.newMessageContent, true);
+  // Post a new message to the recipient
+  postMessage(): void {
+    if (this.recipient != '') {
+      this.discussionService.postMessage(this.recipient, this.newMessageContent).subscribe({
+        error: (e) => console.error('Error postMessage: ', e),
+        complete: () => {
+          setTimeout(() => {
+            this.scrollToBottom();
+          }); // Without the delay (of 0 here), it does not take into account the last message
+          console.info('PostMessage complete');
+        }
+      });
       this.newMessageContent = '';
     }
-
-    setTimeout(() => {
-      this.scrollToBottom();
-    }); //without the delay (of 0 here) it does not take into account the last message
   }
 
+  // Scroll to the bottom of the messages container
   scrollToBottom() {
     const messagesContainer = this.elementRef.nativeElement.querySelector('.home_conversation_messages');
     if (messagesContainer) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
   }
-  
 
-  ownprofilpicture : string = "../../../assets/icons/pp_user1.jpg";
-  contact1 : string = "../../../assets/icons/pp_contact1.jpg";
-  contact2 : string = "../../../assets/icons/pp_contact2.jpg";
-
-  
+  ownprofilpicture: string = '../../../assets/images/pp_user1.jpg';
+  contact: string = '../../../assets/images/light_contact.svg';
 }

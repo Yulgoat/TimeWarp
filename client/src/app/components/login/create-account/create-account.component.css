@@ -86,13 +86,23 @@ form div{
     background-image: url('/assets/icons/padlock-orange.svg');
  }
 
+
+.error_fields{
+  border: solid;
+  border-color: red;
+  color: red;
+}
+
+.no_error{
+  color: var(--main-color);
+}
+
  #username,#email,#password,#confirm_password {
     background-repeat: no-repeat;
     background-position: left 10px center;
     padding-left: 40px;
     background-size: 20px 20px;
     background-color: var(--background-color);
-    color: var(--main-color);
     font-size: 1.1em;
     width: 100%;
     box-sizing: border-box;
@@ -142,3 +152,5 @@ input {
     max-height: none;
   }
 }
+
+

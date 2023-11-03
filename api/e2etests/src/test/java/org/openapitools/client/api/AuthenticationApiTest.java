@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API.
+ * This is a prototype of CPOO Project's front/back API. 
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -13,14 +13,25 @@
 
 package org.openapitools.client.api;
 
+import org.junit.Assert;
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.model.ErrorDTO;
+import org.openapitools.client.model.NewPasswordDTO;
+import org.openapitools.client.model.UserDTO;
+
 import okhttp3.OkHttpClient;
+
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.model.UserDTO;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * API tests for AuthenticationApi
@@ -46,8 +57,19 @@ public class AuthenticationApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void userSigninPostTest() throws ApiException {
+    @Disabled
+    public void userForgotpwdPostTest() throws ApiException {
+        NewPasswordDTO newPasswordDTO = null;
+        authenticationApi.userForgotpwdPost(newPasswordDTO);
+        // TODO: test validations
+    }
 
+    /**
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void userSigninPostTest() throws ApiException {
+        
         // Signing in with invalid credentials should fail with UNAUTHORIZED
         UserDTO userDTO = new UserDTO().username("user").password("invalid");
         try {
@@ -69,6 +91,8 @@ public class AuthenticationApiTest {
         catch (ApiException e) {
             Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
         }
+
+        authenticationApi.userSignoutPost();
     }
 
     /**
@@ -76,9 +100,20 @@ public class AuthenticationApiTest {
      */
     @Test
     public void userSignoutPostTest() throws ApiException {
+        UserDTO userDTO = new UserDTO().username("testSignout").password("testSignout");
+
+        // Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testSignout");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
 
         // Sign in
-        UserDTO userDTO = new UserDTO().username("user").password("user");
+        authenticationApi.userSignupPost(userDTO);
         authenticationApi.userSigninPost(userDTO);
 
         // Signing out while signed in should work
@@ -99,7 +134,7 @@ public class AuthenticationApiTest {
      */
     @Test
     public void userSignupPostTest() throws ApiException {
-
+        
         // Delete the test account if exists
         authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
         try {
@@ -125,5 +160,154 @@ public class AuthenticationApiTest {
 
         // Signing in with the new account should work
         authenticationApi.userSigninPost(testUser);
+
+        authenticationApi.userSignoutPost();
+    }
+
+    @Test
+    public void userSignupSigninTest() throws ApiException{
+        // Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testSuSiUsername");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+        // Signing up a new account should work
+        UserDTO testUser = new UserDTO().username("testSuSiUsername").email("testSuSiEmail").password("testSuSiPwd");
+        authenticationApi.userSignupPost(testUser);
+
+        // Signing up twice the same account should fail with CONFLICT
+        try {
+            authenticationApi.userSignupPost(testUser);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        // Signing in with valid credential should work
+        authenticationApi.userSigninPost(testUser);
+
+        // Signing in again should fail with CONFLICT
+        try {
+            authenticationApi.userSigninPost(testUser);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        UserDTO testUserEmail = new UserDTO().username("test2").email("testSuSiEmail").password("test");
+        try {
+            authenticationApi.userSignupPost(testUserEmail);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        authenticationApi.userSignoutPost();
+    }
+
+    /**
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void userDelete() throws ApiException{
+        //Signout if a user altready Signin
+        try{
+            authenticationApi.userSignoutPost();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(403, e.getCode());
+        }
+
+        // Delete the tests account if they  exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testUserDelete1");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        try {
+            administrationApi.userUsernameDelete("testUserDelete2");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        try {
+            administrationApi.userUsernameDelete("testUserDelete3");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+
+        UserDTO testUserDelete1 = new UserDTO().username("testUserDelete1").email("testUserDelete").password("testUserDelete");
+        UserDTO testUserDelete2 = new UserDTO().username("testUserDelete2").email("testUserDelete").password("testUserDelete");
+        UserDTO testUserDelete3 = new UserDTO().username("testUserDelete3").email("testUserDelete").password("testUserDelete");
+        authenticationApi.userSignupPost(testUserDelete1);
+
+        //Should fail because testUserDelete2 have an email which already exist
+        try {
+            authenticationApi.userSignupPost(testUserDelete2);
+            Assertions.fail();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_CONFLICT, e.getCode());
+        }
+
+        //Delete testUserDelete1
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testUserDelete1");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+        //Shoudl Work because testUserDelete1 doesn't exist anymore
+        authenticationApi.userSignupPost(testUserDelete3);
+    }
+
+
+    @Test
+    public void currentUser() throws ApiException{
+        //Signout if a user altready Signin
+        try{
+            authenticationApi.userSignoutPost();
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(403, e.getCode());
+        }
+
+        // Delete the test account if exists
+        authenticationApi.userSigninPost(new UserDTO().username("admin").email("admin").password("admin"));
+        try {
+            administrationApi.userUsernameDelete("testCurrentUser");
+        }
+        catch (ApiException e) {
+            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+        }
+        authenticationApi.userSignoutPost();
+
+        //Create User
+        UserDTO testCurrentUserDTO = new UserDTO().username("testCurrentUser").email("testCurrentUser").password("testCurrentUser");
+        UserDTO testRetourCurrentUser = new UserDTO().username("testCurrentUser@timewarp").email("").password("");
+
+        authenticationApi.userSignupPost(testCurrentUserDTO);
+        authenticationApi.userSigninPost(testCurrentUserDTO);
+
+        //Should Return the current User, so testCurrentUserDTO Username and no email and no password
+        UserDTO retour = authenticationApi.userCurrentuserPost();
+        Assertions.assertEquals(retour, testRetourCurrentUser);
+
     }
 }

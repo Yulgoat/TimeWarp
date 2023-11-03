@@ -53,16 +53,16 @@ import org.openapitools.client.JSON;
 public class NotificationsDTO {
   public static final String SERIALIZED_NAME_SOUNDS = "sounds";
   @SerializedName(SERIALIZED_NAME_SOUNDS)
-  private String sounds;
+  private Boolean sounds;
 
   public static final String SERIALIZED_NAME_BADGES = "badges";
   @SerializedName(SERIALIZED_NAME_BADGES)
-  private String badges;
+  private Boolean badges;
 
   public NotificationsDTO() {
   }
 
-  public NotificationsDTO sounds(String sounds) {
+  public NotificationsDTO sounds(Boolean sounds) {
     
     this.sounds = sounds;
     return this;
@@ -73,17 +73,17 @@ public class NotificationsDTO {
    * @return sounds
   **/
   @javax.annotation.Nullable
-  public String getSounds() {
+  public Boolean getSounds() {
     return sounds;
   }
 
 
-  public void setSounds(String sounds) {
+  public void setSounds(Boolean sounds) {
     this.sounds = sounds;
   }
 
 
-  public NotificationsDTO badges(String badges) {
+  public NotificationsDTO badges(Boolean badges) {
     
     this.badges = badges;
     return this;
@@ -94,12 +94,12 @@ public class NotificationsDTO {
    * @return badges
   **/
   @javax.annotation.Nullable
-  public String getBadges() {
+  public Boolean getBadges() {
     return badges;
   }
 
 
-  public void setBadges(String badges) {
+  public void setBadges(Boolean badges) {
     this.badges = badges;
   }
 
@@ -179,12 +179,6 @@ public class NotificationsDTO {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("sounds") != null && !jsonObj.get("sounds").isJsonNull()) && !jsonObj.get("sounds").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `sounds` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sounds").toString()));
-      }
-      if ((jsonObj.get("badges") != null && !jsonObj.get("badges").isJsonNull()) && !jsonObj.get("badges").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `badges` to be a primitive type in the JSON string but got `%s`", jsonObj.get("badges").toString()));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

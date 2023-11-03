@@ -53,17 +53,17 @@ import org.openapitools.client.JSON;
 public class UserSettingsDTO {
   public static final String SERIALIZED_NAME_THEME = "theme";
   @SerializedName(SERIALIZED_NAME_THEME)
-  private String theme;
+  private Integer theme;
 
   public static final String SERIALIZED_NAME_LANGUAGE = "language";
   @SerializedName(SERIALIZED_NAME_LANGUAGE)
   private String language;
 
-  public static final String SERIALIZED_NAME_UNREAD_BADGES = "UnreadBadges";
+  public static final String SERIALIZED_NAME_UNREAD_BADGES = "unreadBadges";
   @SerializedName(SERIALIZED_NAME_UNREAD_BADGES)
   private Boolean unreadBadges;
 
-  public static final String SERIALIZED_NAME_NOTIFICATION_SOUND = "NotificationSound";
+  public static final String SERIALIZED_NAME_NOTIFICATION_SOUND = "notificationSound";
   @SerializedName(SERIALIZED_NAME_NOTIFICATION_SOUND)
   private Boolean notificationSound;
 
@@ -74,7 +74,7 @@ public class UserSettingsDTO {
   public UserSettingsDTO() {
   }
 
-  public UserSettingsDTO theme(String theme) {
+  public UserSettingsDTO theme(Integer theme) {
     
     this.theme = theme;
     return this;
@@ -84,13 +84,13 @@ public class UserSettingsDTO {
    * Get theme
    * @return theme
   **/
-  @javax.annotation.Nullable
-  public String getTheme() {
+  @javax.annotation.Nonnull
+  public Integer getTheme() {
     return theme;
   }
 
 
-  public void setTheme(String theme) {
+  public void setTheme(Integer theme) {
     this.theme = theme;
   }
 
@@ -105,7 +105,7 @@ public class UserSettingsDTO {
    * Get language
    * @return language
   **/
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getLanguage() {
     return language;
   }
@@ -126,7 +126,7 @@ public class UserSettingsDTO {
    * Get unreadBadges
    * @return unreadBadges
   **/
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public Boolean getUnreadBadges() {
     return unreadBadges;
   }
@@ -147,7 +147,7 @@ public class UserSettingsDTO {
    * Get notificationSound
    * @return notificationSound
   **/
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public Boolean getNotificationSound() {
     return notificationSound;
   }
@@ -168,7 +168,7 @@ public class UserSettingsDTO {
    * Get profileImage
    * @return profileImage
   **/
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public String getProfileImage() {
     return profileImage;
   }
@@ -234,12 +234,17 @@ public class UserSettingsDTO {
     openapiFields = new HashSet<String>();
     openapiFields.add("theme");
     openapiFields.add("language");
-    openapiFields.add("UnreadBadges");
-    openapiFields.add("NotificationSound");
+    openapiFields.add("unreadBadges");
+    openapiFields.add("notificationSound");
     openapiFields.add("profileImage");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("theme");
+    openapiRequiredFields.add("language");
+    openapiRequiredFields.add("unreadBadges");
+    openapiRequiredFields.add("notificationSound");
+    openapiRequiredFields.add("profileImage");
   }
 
  /**
@@ -262,14 +267,18 @@ public class UserSettingsDTO {
           throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `UserSettingsDTO` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("theme") != null && !jsonObj.get("theme").isJsonNull()) && !jsonObj.get("theme").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `theme` to be a primitive type in the JSON string but got `%s`", jsonObj.get("theme").toString()));
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : UserSettingsDTO.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
       }
-      if ((jsonObj.get("language") != null && !jsonObj.get("language").isJsonNull()) && !jsonObj.get("language").isJsonPrimitive()) {
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("language").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("language").toString()));
       }
-      if ((jsonObj.get("profileImage") != null && !jsonObj.get("profileImage").isJsonNull()) && !jsonObj.get("profileImage").isJsonPrimitive()) {
+      if (!jsonObj.get("profileImage").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `profileImage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("profileImage").toString()));
       }
   }

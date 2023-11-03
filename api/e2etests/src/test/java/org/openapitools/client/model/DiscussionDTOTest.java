@@ -13,30 +13,31 @@
 
 package org.openapitools.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.junit.jupiter.api.Disabled;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for DiscussionDTO
  */
 public class DiscussionDTOTest {
-    private final DiscussionDTO model = new DiscussionDTO();
 
     /**
      * Model tests for DiscussionDTO
      */
     @Test
     public void testDiscussionDTO() {
-        // TODO: test DiscussionDTO
+        // Create an instance of DiscussionDTO with sample values
+        DiscussionDTO discussion = new DiscussionDTO();
+        discussion.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
+        discussion.setUser1("alice@acme");
+        discussion.setUser2("bob@acme");
+
+        // Check that properties have been correctly defined
+        assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", discussion.getId().toString());
+        assertEquals("alice@acme", discussion.getUser1());
+        assertEquals("bob@acme", discussion.getUser2());
     }
 
     /**
@@ -44,15 +45,38 @@ public class DiscussionDTOTest {
      */
     @Test
     public void idTest() {
-        // TODO: test id
+        // Create an instance of DiscussionDTO and define the 'id' property
+        DiscussionDTO discussion = new DiscussionDTO();
+        discussion.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
+
+        // Check that the 'id' property has been set correctly
+        assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", discussion.getId().toString());
     }
 
     /**
-     * Test the property 'participants'
+     * Test the property 'user1'
      */
     @Test
-    public void participantsTest() {
-        // TODO: test participants
+    public void user1Test() {
+        // Create an instance of DiscussionDTO and define the 'user1' property
+        DiscussionDTO discussion = new DiscussionDTO();
+        discussion.setUser1("alice@acme");
+
+        // Check that the 'user1' property has been set correctly
+        assertEquals("alice@acme", discussion.getUser1());
+    }
+
+    /**
+     * Test the property 'user2'
+     */
+    @Test
+    public void user2Test() {
+        // Create an instance of DiscussionDTO and define the 'user2' property
+        DiscussionDTO discussion = new DiscussionDTO();
+        discussion.setUser2("bob@acme");
+
+        // Check that the 'user2' property has been set correctly
+        assertEquals("bob@acme", discussion.getUser2());
     }
 
 }

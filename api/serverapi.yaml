@@ -13,16 +13,10 @@ security:
   - CookieAuth: [ ]
 tags:
   - name: authentication
-    description: Authentication endpoints.
-  - name: administration
-    description: Administration endpoints.
-  - name: message
-    description: Message management endpoints.
+    description: User authentication.
 paths:
   /user/signup:
     post:
-      summary: Sign up to the service
-      description: Create a user account with provided credentials.
       security: [ ]
       tags:
         - authentication
@@ -35,8 +29,6 @@ paths:
       responses:
         '200':
           description: Success
-        '409':
-          description: 'Conflict: a user account with the same login already exists.'
         default:
           description: Error
           content:
@@ -45,8 +37,6 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
   /user/signin:
     post:
-      summary: Sign in to the service
-      description: Sign in using provided credentials and create a user session.
       security: [ ]
       tags:
         - authentication
@@ -58,13 +48,11 @@ paths:
               $ref: '#/components/schemas/UserDTO'
       responses:
         '200':
-          description: 'Success: a user session is created and a session cookie is returned.'
+          description: Success
           headers:
             Set-Cookie:
               schema:
                 type: string
-        '401':
-          description: 'Unauthorized: invalid login or password.'
         default:
           description: Error
           content:
@@ -73,38 +61,24 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
   /user/signout:
     post:
-      summary: Sign out from the service
-      description: Sign out and close the user session.
       tags:
         - authentication
       responses:
         '200':
-          description: 'Success: the user session is closed.'
+          description: Success
         default:
           description: Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-  /user/{login}:
-    delete:
-      summary: Delete a user account
-      description: Delete the account of the user matching the given login.
-        Only the administrator can use this endpoint.
+  /user/delete:
+    post:
       tags:
-        - administration
-      parameters:
-        - description: login of the user account to delete.
-          in: path
-          name: login
-          required: true
-          schema:
-            type: string
+        - authentication
       responses:
         '200':
           description: Success
-        '404':
-          description: 'Not found: User account not found.'
         default:
           description: Error
           content:
@@ -114,7 +88,7 @@ paths:
   /user/forgotpwd:
     post:
       tags : 
-       - forgot-pwd
+       - authentication
       requestBody:
         required: true
         content:
@@ -131,10 +105,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
+  /user/currentuser:
+    post:
+      tags : 
+       - authentication                  
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
   /user/settings:
     get:
       tags:
-        - user
+        - user settings
       summary: Get user settings information
       responses:
         '200':
@@ -152,16 +143,14 @@ paths:
   /user/account/chgusername:
     patch:
       tags:
-        - account
+        - user settings
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
+              title: username
+              type: string
       responses:
         '200':
           description: Success
@@ -174,16 +163,14 @@ paths:
   /user/account/changepp:
     patch:
       tags:
-        - account
+        - user settings
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                url:
-                  type: string
+              title: url
+              type: string
       responses:
         '200':
           description: Success
@@ -197,7 +184,7 @@ paths:
   /user/changepwd:
     patch:
       tags : 
-       - change-pwd
+       - user settings
       requestBody:
         required: true
         content:
@@ -216,7 +203,7 @@ paths:
   /user/disconnect:
     post:
       tags:
-        - account
+        - user settings
       responses:
         '200':
           description: Success
@@ -229,7 +216,7 @@ paths:
   /user/notifications:
     patch:
       tags:
-        - notifications
+        - user settings
       requestBody:
         required: true
         content:
@@ -249,7 +236,7 @@ paths:
   /user/change-theme:
     patch:
       tags:
-        - appearance
+        - user settings
       summary: Change user theme
       requestBody:
         required: true
@@ -272,16 +259,14 @@ paths:
   /user/language:
     patch:
       tags:
-        - language
+        - user settings
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                language:
-                  type: string
+              title: language
+              type: string
       responses:
         '200':
           description: Success
@@ -296,7 +281,7 @@ paths:
     get:
       tags:
         - messaging
-      summary: Get a list of all discussions
+      summary: Get a list of all discussions of the current user
       responses:
         '200':
           description: Successful response
@@ -311,13 +296,14 @@ paths:
     get:
       tags:
         - messaging
-      summary: Get all messages in a conversation
+      summary: Get all messages in a discussion
       parameters:
         - name: discussion_id
           in: path
           required: true
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Successful response
@@ -327,25 +313,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MessageDTO'
+                  
+  /discussions/message:
     post:
       tags:
         - messaging
       summary: Send a message in a disccusion
-      parameters:
-        - name: discussion_id
-          in: path
-          required: true
-          schema:
-            type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageDTO'
+              $ref: '#/components/schemas/PostMessageDTO'
       responses:
         '200':
           description: Message sent successfully
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+    get:
+      tags:
+        - messaging
+      summary: Receive a message
+      responses:
+        '200':
+          description: 'Success: a message is available'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+        '202':
+          description: 'Accepted: no message available yet'
         default:
           description: Error
           content:
@@ -356,20 +357,14 @@ paths:
     post:
       tags:
         - messaging
-      summary: Create a new discussion
+      summary: Create a new discussion with a user
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
-              type: object
-              properties:
-                participants:
-                  type: array
-                  items:
-                    type: string
-              required:
-                - participants
+              title: user
+              type: string
       responses:
         '200':
           description: Conversation created successfully
@@ -381,15 +376,51 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
 components:
   schemas:
-    MessageDTO:
+    UserDTO:
       type: object
+      required:
+        - username
+        - email
+        - password
       properties:
-        id:
+        username:
           type: string
-          format: uuid
-        from:
+          example: alice
+        email:
           type: string
-          example: alice@acme
+          example: alice@mymail.com
+        password:
+          type: string
+          example: pass
+    UserSettingsDTO:
+      type: object
+      required:
+        - theme
+        - language
+        - unreadBadges
+        - notificationSound
+        - profileImage
+      properties:
+        theme:
+          type: integer
+          example: 2
+        language:
+          type: string
+          example: english
+        unreadBadges:
+          type: boolean
+        notificationSound:
+          type: boolean
+        profileImage:
+          type: string
+    PostMessageDTO:
+      description: Message to send
+      type: object
+      required:
+        - to
+        - type
+        - body
+      properties:
         to:
           type: string
           example: bob@acme
@@ -400,78 +431,88 @@ components:
         body:
           type: string
           example: This is the message
-        timestamp:
-          type: string
-    UserDTO:
-      type: object
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-          format : password
-    UserSettingsDTO:
-      type: object
-      properties:
-        theme:
-          type: string
-        language:
-          type: string
-        UnreadBadges:
-          type: boolean
-        NotificationSound:
-          type: boolean
-        profileImage:
-          type: string
+    MessageDTO:
+      allOf: # Combines the BasicErrorModel and the inline model
+        - $ref: '#/components/schemas/PostMessageDTO'
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: 667bdc23-3de4-482f-a0f4-3391452a7742
+            timestamp:
+              type: integer
+              format: int64
+              example: 1720294759999
+            from:
+              type: string
+              example: alice@acme
+
     DiscussionDTO:
       type: object
       properties:
         id:
-          type: integer
-        participants:
-          type: array
-          items:
-            type: string
+          type: string
+          format: uuid
+          example: 667bdc23-3de4-482f-a0f4-3391452a7742
+        user1:
+          type: string
+          example: alice@acme
+        user2:
+          type: string
+          example: bob@acme
     NewPasswordDTO:
       type : object
       properties :
         email:
           type : string
+          example: alice@mymail.com
         code :
           type : integer
+          example: 1549
         password :
           type : string
-        confirm-password : 
-          type : string
+          example: pass
     ChangePasswordDTO:
       type : object
       properties :
         old-password:
           type : string
+          example: oldpassword
         new-password : 
           type : string
+          example: newpassword
     NotificationsDTO:
       type: object
       properties:
         sounds:
-          type: string
+          type: boolean
         badges:
-          type: string
+          type: boolean
     ErrorDTO:
+      description: Error information
       type: object
       properties:
         timestamp:
           type: string
+          description: Timestamp of the error
+          example: 2023-10-03T14:53:59.870+00:00
         status:
           type: integer
+          description: HTTP response status
+          example: 401
         error:
           type: string
+          description: HTTP response error
+          example: Unauthorized
         message:
           type: string
+          description: HTTP response message
+          example: Bad credentials
         path:
           type: string
+          description: Path of the endpoint called
+          example: /user/signin
   securitySchemes:
     CookieAuth:
       type: apiKey

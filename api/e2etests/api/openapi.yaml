@@ -12,16 +12,11 @@ servers:
 security:
 - CookieAuth: []
 tags:
-- description: Authentication endpoints.
+- description: User authentication.
   name: authentication
-- description: Administration endpoints.
-  name: administration
-- description: Message management endpoints.
-  name: message
 paths:
   /user/signup:
     post:
-      description: Create a user account with provided credentials.
       requestBody:
         content:
           application/json:
@@ -31,8 +26,6 @@ paths:
       responses:
         "200":
           description: Success
-        "409":
-          description: "Conflict: a user account with the same login already exists."
         default:
           content:
             application/json:
@@ -40,14 +33,12 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       security: []
-      summary: Sign up to the service
       tags:
       - authentication
       x-content-type: application/json
       x-accepts: application/json
   /user/signin:
     post:
-      description: Sign in using provided credentials and create a user session.
       requestBody:
         content:
           application/json:
@@ -56,16 +47,13 @@ paths:
         required: true
       responses:
         "200":
-          description: "Success: a user session is created and a session cookie is\
-            \ returned."
+          description: Success
           headers:
             Set-Cookie:
               explode: false
               schema:
                 type: string
               style: simple
-        "401":
-          description: "Unauthorized: invalid login or password."
         default:
           content:
             application/json:
@@ -73,54 +61,37 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       security: []
-      summary: Sign in to the service
       tags:
       - authentication
       x-content-type: application/json
       x-accepts: application/json
   /user/signout:
     post:
-      description: Sign out and close the user session.
-      responses:
-        "200":
-          description: "Success: the user session is closed."
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDTO'
-          description: Error
-      summary: Sign out from the service
-      tags:
-      - authentication
-      x-accepts: application/json
-  /user/{login}:
-    delete:
-      description: Delete the account of the user matching the given login. Only the
-        administrator can use this endpoint.
-      parameters:
-      - description: login of the user account to delete.
-        explode: false
-        in: path
-        name: login
-        required: true
-        schema:
-          type: string
-        style: simple
       responses:
         "200":
           description: Success
-        "404":
-          description: "Not found: User account not found."
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
-      summary: Delete a user account
       tags:
-      - administration
+      - authentication
+      x-accepts: application/json
+  /user/delete:
+    post:
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - authentication
       x-accepts: application/json
   /user/forgotpwd:
     post:
@@ -140,8 +111,26 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - forgot-pwd
+      - authentication
       x-content-type: application/json
+      x-accepts: application/json
+  /user/currentuser:
+    post:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - authentication
       x-accepts: application/json
   /user/settings:
     get:
@@ -160,15 +149,16 @@ paths:
           description: Error
       summary: Get user settings information
       tags:
-      - user
+      - user settings
       x-accepts: application/json
   /user/account/chgusername:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_account_chgusername_patch_request'
+              title: username
+              type: string
         required: true
       responses:
         "200":
@@ -180,16 +170,17 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - account
-      x-content-type: application/json
+      - user settings
+      x-content-type: text/plain
       x-accepts: application/json
   /user/account/changepp:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_account_changepp_patch_request'
+              title: url
+              type: string
         required: true
       responses:
         "200":
@@ -201,8 +192,8 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - account
-      x-content-type: application/json
+      - user settings
+      x-content-type: text/plain
       x-accepts: application/json
   /user/changepwd:
     patch:
@@ -222,7 +213,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - change-pwd
+      - user settings
       x-content-type: application/json
       x-accepts: application/json
   /user/disconnect:
@@ -237,7 +228,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - account
+      - user settings
       x-accepts: application/json
   /user/notifications:
     patch:
@@ -257,7 +248,7 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - notifications
+      - user settings
       x-content-type: application/json
       x-accepts: application/json
   /user/change-theme:
@@ -279,16 +270,17 @@ paths:
           description: Error
       summary: Change user theme
       tags:
-      - appearance
+      - user settings
       x-content-type: application/json
       x-accepts: application/json
   /user/language:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_language_patch_request'
+              title: language
+              type: string
         required: true
       responses:
         "200":
@@ -300,8 +292,8 @@ paths:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
       tags:
-      - language
-      x-content-type: application/json
+      - user settings
+      x-content-type: text/plain
       x-accepts: application/json
   /discussions:
     get:
@@ -314,7 +306,7 @@ paths:
                   $ref: '#/components/schemas/DiscussionDTO'
                 type: array
           description: Successful response
-      summary: Get a list of all discussions
+      summary: Get a list of all discussions of the current user
       tags:
       - messaging
       x-accepts: application/json
@@ -326,7 +318,8 @@ paths:
         name: discussion_id
         required: true
         schema:
-          type: integer
+          format: uuid
+          type: string
         style: simple
       responses:
         "200":
@@ -337,24 +330,37 @@ paths:
                   $ref: '#/components/schemas/MessageDTO'
                 type: array
           description: Successful response
-      summary: Get all messages in a conversation
+      summary: Get all messages in a discussion
+      tags:
+      - messaging
+      x-accepts: application/json
+  /discussions/message:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
+          description: "Success: a message is available"
+        "202":
+          description: "Accepted: no message available yet"
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Receive a message
       tags:
       - messaging
       x-accepts: application/json
     post:
-      parameters:
-      - explode: false
-        in: path
-        name: discussion_id
-        required: true
-        schema:
-          type: integer
-        style: simple
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MessageDTO'
+              $ref: '#/components/schemas/PostMessageDTO'
         required: true
       responses:
         "200":
@@ -374,9 +380,10 @@ paths:
     post:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_discussions_create_post_request'
+              title: user
+              type: string
         required: true
       responses:
         "200":
@@ -387,28 +394,67 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
-      summary: Create a new discussion
+      summary: Create a new discussion with a user
       tags:
       - messaging
-      x-content-type: application/json
+      x-content-type: text/plain
       x-accepts: application/json
 components:
   schemas:
-    MessageDTO:
+    UserDTO:
       example:
-        from: alice@acme
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        password: pass
+        email: alice@mymail.com
+        username: alice
+      properties:
+        username:
+          example: alice
+          type: string
+        email:
+          example: alice@mymail.com
+          type: string
+        password:
+          example: pass
+          type: string
+      required:
+      - email
+      - password
+      - username
+      type: object
+    UserSettingsDTO:
+      example:
+        notificationSound: true
+        theme: 2
+        language: english
+        profileImage: profileImage
+        unreadBadges: true
+      properties:
+        theme:
+          example: 2
+          type: integer
+        language:
+          example: english
+          type: string
+        unreadBadges:
+          type: boolean
+        notificationSound:
+          type: boolean
+        profileImage:
+          type: string
+      required:
+      - language
+      - notificationSound
+      - profileImage
+      - theme
+      - unreadBadges
+      type: object
+    PostMessageDTO:
+      description: Message to send
+      example:
         to: bob@acme
         type: text/plain
         body: This is the message
-        timestamp: timestamp
       properties:
-        id:
-          format: uuid
-          type: string
-        from:
-          example: alice@acme
-          type: string
         to:
           example: bob@acme
           type: string
@@ -419,133 +465,110 @@ components:
         body:
           example: This is the message
           type: string
-        timestamp:
-          type: string
+      required:
+      - body
+      - to
+      - type
       type: object
-    UserDTO:
-      example:
-        password: password
-        email: email
-        username: username
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-        password:
-          format: password
-          type: string
-      type: object
-    UserSettingsDTO:
-      example:
-        NotificationSound: true
-        UnreadBadges: true
-        theme: theme
-        language: language
-        profileImage: profileImage
-      properties:
-        theme:
-          type: string
-        language:
-          type: string
-        UnreadBadges:
-          type: boolean
-        NotificationSound:
-          type: boolean
-        profileImage:
-          type: string
-      type: object
+    MessageDTO:
+      allOf:
+      - $ref: '#/components/schemas/PostMessageDTO'
+      - properties:
+          id:
+            example: 667bdc23-3de4-482f-a0f4-3391452a7742
+            format: uuid
+            type: string
+          timestamp:
+            example: 1720294759999
+            format: int64
+            type: integer
+          from:
+            example: alice@acme
+            type: string
+        type: object
     DiscussionDTO:
       example:
-        id: 0
-        participants:
-        - participants
-        - participants
+        user1: alice@acme
+        user2: bob@acme
+        id: 667bdc23-3de4-482f-a0f4-3391452a7742
       properties:
         id:
-          type: integer
-        participants:
-          items:
-            type: string
-          type: array
+          example: 667bdc23-3de4-482f-a0f4-3391452a7742
+          format: uuid
+          type: string
+        user1:
+          example: alice@acme
+          type: string
+        user2:
+          example: bob@acme
+          type: string
       type: object
     NewPasswordDTO:
       example:
-        password: password
-        code: 0
-        email: email
-        confirm-password: confirm-password
+        password: pass
+        code: 1549
+        email: alice@mymail.com
       properties:
         email:
+          example: alice@mymail.com
           type: string
         code:
+          example: 1549
           type: integer
         password:
-          type: string
-        confirm-password:
+          example: pass
           type: string
       type: object
     ChangePasswordDTO:
       example:
-        old-password: old-password
-        new-password: new-password
+        old-password: oldpassword
+        new-password: newpassword
       properties:
         old-password:
+          example: oldpassword
           type: string
         new-password:
+          example: newpassword
           type: string
       type: object
     NotificationsDTO:
       example:
-        badges: badges
-        sounds: sounds
+        badges: true
+        sounds: true
       properties:
         sounds:
-          type: string
+          type: boolean
         badges:
-          type: string
+          type: boolean
       type: object
     ErrorDTO:
+      description: Error information
       properties:
         timestamp:
+          description: Timestamp of the error
+          example: 2023-10-03T14:53:59.870+00:00
           type: string
         status:
+          description: HTTP response status
+          example: 401
           type: integer
         error:
+          description: HTTP response error
+          example: Unauthorized
           type: string
         message:
+          description: HTTP response message
+          example: Bad credentials
           type: string
         path:
-          type: string
-      type: object
-    _user_account_chgusername_patch_request:
-      properties:
-        username:
-          type: string
-      type: object
-    _user_account_changepp_patch_request:
-      properties:
-        url:
+          description: Path of the endpoint called
+          example: /user/signin
           type: string
       type: object
     _user_change_theme_patch_request:
       properties:
         themeId:
           type: integer
-      type: object
-    _user_language_patch_request:
-      properties:
-        language:
-          type: string
-      type: object
-    _discussions_create_post_request:
-      properties:
-        participants:
-          items:
-            type: string
-          type: array
-      required:
-      - participants
       type: object
   securitySchemes:
     CookieAuth:

@@ -47,7 +47,7 @@ import java.util.Set;
 import org.openapitools.client.JSON;
 
 /**
- * ErrorDTO
+ * Error information
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ErrorDTO {
@@ -81,7 +81,7 @@ public class ErrorDTO {
   }
 
    /**
-   * Get timestamp
+   * Timestamp of the error
    * @return timestamp
   **/
   @javax.annotation.Nullable
@@ -102,7 +102,7 @@ public class ErrorDTO {
   }
 
    /**
-   * Get status
+   * HTTP response status
    * @return status
   **/
   @javax.annotation.Nullable
@@ -123,7 +123,7 @@ public class ErrorDTO {
   }
 
    /**
-   * Get error
+   * HTTP response error
    * @return error
   **/
   @javax.annotation.Nullable
@@ -144,7 +144,7 @@ public class ErrorDTO {
   }
 
    /**
-   * Get message
+   * HTTP response message
    * @return message
   **/
   @javax.annotation.Nullable
@@ -165,7 +165,7 @@ public class ErrorDTO {
   }
 
    /**
-   * Get path
+   * Path of the endpoint called
    * @return path
   **/
   @javax.annotation.Nullable
