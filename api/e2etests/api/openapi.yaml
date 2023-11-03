@@ -114,6 +114,24 @@ paths:
       - authentication
       x-content-type: application/json
       x-accepts: application/json
+  /user/currentuser:
+    post:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      tags:
+      - authentication
+      x-accepts: application/json
   /user/settings:
     get:
       responses:
@@ -312,7 +330,7 @@ paths:
                   $ref: '#/components/schemas/MessageDTO'
                 type: array
           description: Successful response
-      summary: Get all messages in a conversation
+      summary: Get all messages in a discussion
       tags:
       - messaging
       x-accepts: application/json

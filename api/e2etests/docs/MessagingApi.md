@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost:8080*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**discussionsCreatePost**](MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion with a user |
-| [**discussionsDiscussionIdMessagesGet**](MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation |
+| [**discussionsDiscussionIdMessagesGet**](MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a discussion |
 | [**discussionsGet**](MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions of the current user |
 | [**discussionsMessageGet**](MessagingApi.md#discussionsMessageGet) | **GET** /discussions/message | Receive a message |
 | [**discussionsMessagePost**](MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion |
@@ -82,7 +82,7 @@ null (empty response body)
 # **discussionsDiscussionIdMessagesGet**
 > List&lt;MessageDTO&gt; discussionsDiscussionIdMessagesGet(discussionId)
 
-Get all messages in a conversation
+Get all messages in a discussion
 
 ### Example
 ```java

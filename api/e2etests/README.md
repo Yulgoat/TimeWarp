@@ -101,9 +101,10 @@ public class Example {
 
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     try {
-      apiInstance.userDeletePost();
+      UserDTO result = apiInstance.userCurrentuserPost();
+      System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#userDeletePost");
+      System.err.println("Exception when calling AuthenticationApi#userCurrentuserPost");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -120,13 +121,14 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AuthenticationApi* | [**userCurrentuserPost**](docs/AuthenticationApi.md#userCurrentuserPost) | **POST** /user/currentuser | 
 *AuthenticationApi* | [**userDeletePost**](docs/AuthenticationApi.md#userDeletePost) | **POST** /user/delete | 
 *AuthenticationApi* | [**userForgotpwdPost**](docs/AuthenticationApi.md#userForgotpwdPost) | **POST** /user/forgotpwd | 
 *AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | 
 *AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | 
 *AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | 
 *MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion with a user
-*MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a conversation
+*MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a discussion
 *MessagingApi* | [**discussionsGet**](docs/MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions of the current user
 *MessagingApi* | [**discussionsMessageGet**](docs/MessagingApi.md#discussionsMessageGet) | **GET** /discussions/message | Receive a message
 *MessagingApi* | [**discussionsMessagePost**](docs/MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion

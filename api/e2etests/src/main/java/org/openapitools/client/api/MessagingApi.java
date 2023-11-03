@@ -268,7 +268,7 @@ public class MessagingApi {
     }
 
     /**
-     * Get all messages in a conversation
+     * Get all messages in a discussion
      * 
      * @param discussionId  (required)
      * @return List&lt;MessageDTO&gt;
@@ -285,7 +285,7 @@ public class MessagingApi {
     }
 
     /**
-     * Get all messages in a conversation
+     * Get all messages in a discussion
      * 
      * @param discussionId  (required)
      * @return ApiResponse&lt;List&lt;MessageDTO&gt;&gt;
@@ -303,7 +303,7 @@ public class MessagingApi {
     }
 
     /**
-     * Get all messages in a conversation (asynchronously)
+     * Get all messages in a discussion (asynchronously)
      * 
      * @param discussionId  (required)
      * @param _callback The callback to be executed when the API call finishes
