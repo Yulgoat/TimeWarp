@@ -1,15 +1,17 @@
 package fr.mightycode.cpoo.server;
 
 import fr.mightycode.cpoo.server.service.RouterService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class DomainMessageListener implements RouterService.MessageListener {
-
-  private static final Logger logger = LoggerFactory.getLogger(DomainMessageListener.class);
 
   @Value("${cpoo.server.domain}")
   private String serverDomain;
@@ -29,6 +31,6 @@ public class DomainMessageListener implements RouterService.MessageListener {
 
   @Override
   public void onMessageReceived(RouterService.Message message) {
-    logger.info("onMessageReceived {}", message);
+    log.info("onMessageReceived {}", message);
   }
 }
