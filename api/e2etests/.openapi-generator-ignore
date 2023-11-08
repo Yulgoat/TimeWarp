@@ -23,3 +23,16 @@
 #!docs/README.md
 
 pom.xml
+build.gradle
+build.sbt
+gradle
+gradle.properties
+gradlew
+gradlew.bat
+git_push.sh
+.github
+.travis.yml
+
+
+
+
