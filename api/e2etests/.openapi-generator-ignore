@@ -23,3 +23,18 @@
 #!docs/README.md
 
 pom.xml
+build.gradle
+build.sbt
+gradle
+gradle.properties
+gradlew
+gradlew.bat
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+git_push.sh
+.github/workflows/maven.yml
+.travis.yml
+
+
+
+

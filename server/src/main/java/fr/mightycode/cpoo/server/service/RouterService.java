@@ -2,14 +2,14 @@ package fr.mightycode.cpoo.server.service;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
@@ -19,19 +19,19 @@ import java.lang.reflect.Type;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class RouterService {
-
-  private static final Logger logger = LoggerFactory.getLogger(RouterService.class);
 
   /**
    * Type of messages exchanged between domain servers.
    */
   public record Message(
-    UUID id,      // unique id of the message
-    String from,  // sender address
-    String to,    // recipient address
-    String type,  // MIME type of the body
-    String body   // body (BASE64 encoded for binary types)
+    UUID id,        // unique id of the message
+    long timestamp, // timestamp of the message
+    String from,    // sender address
+    String to,      // recipient address
+    String type,    // MIME type of the body
+    String body     // body (BASE64 encoded for binary types)
   ) {
   }
 
@@ -61,9 +61,8 @@ public class RouterService {
   }
 
   @SuppressWarnings("NullableProblems")
+  @Slf4j
   public static class RouterStompSessionHandler extends StompSessionHandlerAdapter {
-
-    private static final Logger logger = LoggerFactory.getLogger(RouterStompSessionHandler.class);
 
     private final WebSocketStompClient webSocketStompClient;
     private final MessageListener messageListener;
@@ -72,6 +71,10 @@ public class RouterService {
     private StompSession stompSession;
 
     RouterStompSessionHandler(WebSocketStompClient webSocketStompClient, MessageListener messageListener) {
+      ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+      taskScheduler.afterPropertiesSet();
+      webSocketStompClient.setTaskScheduler(taskScheduler); // for heartbeats
+      webSocketStompClient.setDefaultHeartbeat(new long[]{10000, 10000});
       this.webSocketStompClient = webSocketStompClient;
       this.messageListener = messageListener;
     }
@@ -85,30 +88,31 @@ public class RouterService {
 
     @Override
     public void afterConnected(StompSession stompSession, StompHeaders headers) {
-      logger.info("Client connected: headers {}", headers);
+      log.info("Client connected: stompSession{} headers {}", stompSession, headers);
       this.stompSession = stompSession;
-      stompSession.subscribe("/domain/" + messageListener.getServerDomain() + "/messages", this);
+      String destination = "/domain/" + messageListener.getServerDomain() + "/messages";
+      log.info("Subscribing to destination {}", destination);
+      stompSession.subscribe(destination, this);
     }
 
     @Override
     public void handleFrame(StompHeaders headers, @Nullable Object payload) {
-      logger.debug("Client received: payload {}, headers {}", payload, headers);
+      log.debug("Client received: headers {} payload {}", payload, headers);
       messageListener.onMessageReceived((Message) payload);
-//      stompSession.acknowledge(headers, true);
     }
 
     @Override
     public void handleException(StompSession stompSession, @Nullable StompCommand command, StompHeaders headers, byte[] payload, Throwable exception) {
-      logger.error("Client error: exception {}, command {}, payload {}, headers {}", exception.getMessage(), command, payload, headers);
+      log.error("Client error: exception {}, command {}, payload {}, headers {}", exception.getMessage(), command, payload, headers);
     }
 
     @SneakyThrows
     @Override
     public void handleTransportError(StompSession stompSession, Throwable exception) {
-      logger.error("Client transport error: error {}", exception.getMessage());
+      log.error("Client transport error: error {}", exception.getMessage());
       if (!stompSession.isConnected()) {
         Thread.sleep(2000);
-        logger.info("Trying to reconnect router {}...", messageListener.getRouterUrl());
+        log.info("Trying to reconnect router {}...", messageListener.getRouterUrl());
         webSocketStompClient.connectAsync(messageListener.getRouterUrl(), this);
       }
     }
@@ -122,21 +126,21 @@ public class RouterService {
     routerStompSessionHandler = new RouterStompSessionHandler(webSocketStompClient, messageListener);
 
     // Start connection attempts immediately
-    logger.info("Trying to connect to router {}...", messageListener.getRouterUrl());
+    log.info("Trying to connect to router {}...", messageListener.getRouterUrl());
     webSocketStompClient.connectAsync(messageListener.getRouterUrl(), routerStompSessionHandler);
   }
 
   /**
-   * Route a message to its recipient's domain server
+   * Route a message to the recipient's domain server
    * (i.e. the domain specified in the 'to' property of the message).
    *
    * @param message The message to route
    */
   public void routeMessage(Message message) {
-    logger.info("Routing message {}", message);
+    log.info("Routing message {}", message);
     StompSession stompSession = routerStompSessionHandler.getStompSession();
     if (stompSession == null || !stompSession.isConnected()) {
-      logger.error("Not connected to router");
+      log.error("Not connected to router");
       return;
     }
     stompSession.send("/router/route", message);
