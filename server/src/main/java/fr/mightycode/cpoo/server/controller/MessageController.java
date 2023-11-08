@@ -35,6 +35,7 @@ public class MessageController {
     // Build a router message from the DTO
     RouterService.Message routerMessage = new RouterService.Message(
       UUID.randomUUID(),
+      System.currentTimeMillis(),
       user.getName() + "@" + serverDomain,
       postMessage.to(),
       postMessage.type(),
