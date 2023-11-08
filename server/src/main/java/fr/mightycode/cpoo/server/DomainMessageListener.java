@@ -5,12 +5,6 @@ import fr.mightycode.cpoo.server.service.MessageService;
 import fr.mightycode.cpoo.server.service.RouterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-<<<<<<< HEAD
-
-=======
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
->>>>>>> 55d158234987cd01568ce87e81a0012129036061
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +32,6 @@ public class DomainMessageListener implements RouterService.MessageListener {
   }
 
   @Override
-<<<<<<< HEAD
   public void onMessageReceived(RouterService.Message routerMessage) {
     log.info("onMessageReceived {}", routerMessage);
 
@@ -47,9 +40,5 @@ public class DomainMessageListener implements RouterService.MessageListener {
 
     // Queue the message in recipient's queue
     messageService.queueMessage(message);
-=======
-  public void onMessageReceived(RouterService.Message message) {
-    log.info("onMessageReceived {}", message);
->>>>>>> 55d158234987cd01568ce87e81a0012129036061
   }
 }
