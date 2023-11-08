@@ -32,7 +32,7 @@ gradlew.bat
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 git_push.sh
-.github
+.github/workflows/maven.yml
 .travis.yml
 
 
