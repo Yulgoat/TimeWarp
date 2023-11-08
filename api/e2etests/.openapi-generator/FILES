@@ -7,8 +7,6 @@ docs/AuthenticationApi.md
 docs/ErrorDTO.md
 docs/MessageDTO.md
 docs/UserDTO.md
-gradle/wrapper/gradle-wrapper.jar
-gradle/wrapper/gradle-wrapper.properties
 settings.gradle
 src/main/AndroidManifest.xml
 src/main/java/org/openapitools/client/ApiCallback.java
