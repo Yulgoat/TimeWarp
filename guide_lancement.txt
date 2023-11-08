@@ -1,3 +1,11 @@
-mvn spring-boot:run
+$ cd ./server
+$ mvn spring-boot:run
 
-mvn test
+$ cd ..
+$ cd ./client
+$ npm install //the first time
+$ npm start 
+
+$ cd ..
+$ cd ./api/e2etests
+$ mvn test
