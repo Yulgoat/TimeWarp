@@ -1,34 +1,34 @@
 <div class="section1">
-    <h1>Welcome to TimeWarp</h1>
-    <p>Travel through Time, one message at a Time!</p>
+    <h1>{{'Welcome' | translate}}</h1>
+    <p>{{ 'Slogan' | translate}}</p>
   </div>
 
   <div class="section2">
-    <h1>CREATE ACCOUNT</h1>
+    <h1>{{'CreateAccount' | translate | uppercase}}</h1>
     <form>
-      <div *ngIf="userError==false; else elseUser">
-        <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username">
+      <div *ngIf="userError===false; else elseUser">
+        <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="{{ 'Username' | translate}}">
       </div>
       <ng-template #elseUser>
         <input class="error_fields" [(ngModel)]="username" type="text" id="username" name="username" placeholder={{userErrorMessage}}>
       </ng-template>
 
-      <div *ngIf="emailError==false; else elseEmail">
-        <input class="no_error" [(ngModel)]="email" type="email" id="email" name="username" placeholder="Email">
+      <div *ngIf="emailError===false; else elseEmail">
+        <input class="no_error" [(ngModel)]="email" type="email" id="email" name="username" placeholder="{{'Email' | translate}}">
       </div>
       <ng-template #elseEmail>
         <input class="error_fields" [(ngModel)]="email" type="email" id="email" name="username" placeholder={{emailErrorMessage}}>
       </ng-template>
 
-      <div *ngIf="pwdError==false; else elsePwd">
-        <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Password">
+      <div *ngIf="pwdError===false; else elsePwd">
+        <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="{{'Password' | translate}}">
       </div>
       <ng-template #elsePwd>
         <input class="error_fields" [(ngModel)]="password" type="password" id="password" name="password" placeholder={{pwdErrorMessage}}>
       </ng-template>
 
-      <div *ngIf="cfpwdError==false; else elseCfmPwd">
-        <input class="no_error" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password">
+      <div *ngIf="cfpwdError===false; else elseCfmPwd">
+        <input class="no_error" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder="{{'Confirm password' | translate}}">
       </div>
       <ng-template #elseCfmPwd>
         <input class="error_fields" [(ngModel)]="confirmPwd" type="password" id="confirm_password" name="confirm_password" placeholder={{cfpwdErrorMessage}}>
@@ -36,8 +36,8 @@
 
 
       <div>
-        <input type="submit" value="REGISTER" class="button" (click)="createAccountFonction()">
+        <input type="submit" value="{{'Register' | translate}}" class="button" (click)="createAccountFonction()">
       </div>
-      <p id="back"><a (click)="navigateToLogin()">Back</a></p>
+      <p id="back"><a (click)="navigateToLogin()">{{'Back' | translate}}</a></p>
     </form>
   </div>

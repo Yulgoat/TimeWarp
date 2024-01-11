@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignupServiceService } from 'src/app/services/signup-service.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -10,26 +11,26 @@ import { SignupServiceService } from 'src/app/services/signup-service.service';
 })
 export class CreateAccountComponent {
 
-  constructor(private router:Router, private signupService: SignupServiceService){}
+  constructor(private router:Router, private signupService: SignupServiceService, private translate: TranslateService){}
 
-  username : string = "";
-  email : string = "";
-  password : string = "";
-  confirmPwd : string ="";
+  username  = "";
+  email  = "";
+  password  = "";
+  confirmPwd  ="";
 
   UserDTO : JSON = <JSON><unknown>{}   // Json which contains the information that will be sent to the server
 
   /* Message that will display the corresponding field in case of error */
-  userErrorMessage : string ="";
-  emailErrorMessage : string ="";
-  pwdErrorMessage : string ="";
-  cfpwdErrorMessage : string ="";
+  userErrorMessage  ="";
+  emailErrorMessage  ="";
+  pwdErrorMessage  ="";
+  cfpwdErrorMessage  ="";
 
   /* Will be true if the corresponding field contain an error, else false */
-  userError : boolean = false;
-  emailError : boolean = false;
-  pwdError : boolean = false;
-  cfpwdError : boolean = false;
+  userError  = false;
+  emailError  = false;
+  pwdError  = false;
+  cfpwdError  = false;
 
 
 
@@ -46,25 +47,25 @@ export class CreateAccountComponent {
 
   /* Using a regex we check if what the user enters in email looks like an email address */
   validation_email() : boolean{
-    let sampleRegEx: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const sampleRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return sampleRegEx.test(this.email);
   }
 
   /* Checks if the different fields are empty */
   username_empty (): boolean{
-    if(this.username==="") {this.userErrorMessage = "Field Empty";return true; }
+    if(this.username==="") {this.userErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
   email_empty (): boolean{
-    if(this.email==="") {this.emailErrorMessage = "Field Empty";return true; }
+    if(this.email==="") {this.emailErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
   pwd_empty (): boolean{
-    if(this.password==="") {this.pwdErrorMessage = "Field Empty";return true; }
+    if(this.password==="") {this.pwdErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
   cfmPwd_empty (): boolean{
-    if(this.confirmPwd==="") {this.cfpwdErrorMessage = "Field Empty";return true; }
+    if(this.confirmPwd==="") {this.cfpwdErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
 
@@ -72,14 +73,14 @@ export class CreateAccountComponent {
   username_exist() : void {
     this.username = ''; 
     this.userError = true;
-    this.userErrorMessage = "Username Already Exists";
+    this.userErrorMessage = this.translate.instant('UsernameAlreadyExists');
   }
 
   /* Update the Email field with "Email already exists", obtained in the post request */
   email_exist() : void {
     this.email = '';  
     this.emailError = true;
-    this.emailErrorMessage = "Email Already Exists";
+    this.emailErrorMessage = this.translate.instant('EmailAlreadyExists');
   }
 
 
@@ -125,22 +126,20 @@ export class CreateAccountComponent {
 
 
 
-
-
-
   /* Main Fonction */
   createAccountFonction() : void{
+    this.username = this.username.toLowerCase();
     if (this.username_empty()) this.userError = true; else this.userError = false;
     if (this.email_empty()) this.emailError = true; else this.emailError = false;
     if (this.pwd_empty()) this.pwdError = true; else this.pwdError = false;
     if (this.cfmPwd_empty()) this.cfpwdError = true; else this.cfpwdError = false;
 
-    let isSamePassword = this.samePwd();
-    let isCorrectEmail = this.validation_email();
+    const isSamePassword = this.samePwd();
+    const isCorrectEmail = this.validation_email();
 
-    if(!this.pwdError && !isSamePassword){ this.pwdError = true; this.pwdErrorMessage = "Not the Same Password";}
-    if(!this.cfpwdError && !isSamePassword){this.cfpwdError = true; this.cfpwdErrorMessage = "Not the Same Password";}
-    if(!this.emailError&&!isCorrectEmail){this.emailError=true; this.emailErrorMessage = "Not a correct Email";}
+    if(!this.pwdError && !isSamePassword){ this.pwdError = true; this.pwdErrorMessage = this.translate.instant('NotTheSamePassword');}
+    if(!this.cfpwdError && !isSamePassword){this.cfpwdError = true; this.cfpwdErrorMessage = this.translate.instant('NotTheSamePassword');}
+    if(!this.emailError&&!isCorrectEmail){this.emailError=true; this.emailErrorMessage = this.translate.instant('NotACorrectEmail');}
    
     if(this.userError)
       this.username = ''; 

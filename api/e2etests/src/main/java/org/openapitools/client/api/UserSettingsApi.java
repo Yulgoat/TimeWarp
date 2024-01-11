@@ -30,7 +30,7 @@ import java.io.IOException;
 import org.openapitools.client.model.ChangePasswordDTO;
 import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.NotificationsDTO;
-import org.openapitools.client.model.UserChangeThemePatchRequest;
+import org.openapitools.client.model.UserDTO;
 import org.openapitools.client.model.UserSettingsDTO;
 
 import java.lang.reflect.Type;
@@ -201,7 +201,7 @@ public class UserSettingsApi {
     }
     /**
      * Build call for userAccountChgusernamePatch
-     * @param body  (required)
+     * @param userDTO  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -212,7 +212,130 @@ public class UserSettingsApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userAccountChgusernamePatchCall(String body, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call userAccountChgusernamePatchCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = userDTO;
+
+        // create path and map variables
+        String localVarPath = "/user/account/chgusername";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call userAccountChgusernamePatchValidateBeforeCall(UserDTO userDTO, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userDTO' is set
+        if (userDTO == null) {
+            throw new ApiException("Missing the required parameter 'userDTO' when calling userAccountChgusernamePatch(Async)");
+        }
+
+        return userAccountChgusernamePatchCall(userDTO, _callback);
+
+    }
+
+    /**
+     * 
+     * 
+     * @param userDTO  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void userAccountChgusernamePatch(UserDTO userDTO) throws ApiException {
+        userAccountChgusernamePatchWithHttpInfo(userDTO);
+    }
+
+    /**
+     * 
+     * 
+     * @param userDTO  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> userAccountChgusernamePatchWithHttpInfo(UserDTO userDTO) throws ApiException {
+        okhttp3.Call localVarCall = userAccountChgusernamePatchValidateBeforeCall(userDTO, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     *  (asynchronously)
+     * 
+     * @param userDTO  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call userAccountChgusernamePatchAsync(UserDTO userDTO, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = userAccountChgusernamePatchValidateBeforeCall(userDTO, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for userChangeThemePatch
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Theme changed successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call userChangeThemePatchCall(Object body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -229,7 +352,7 @@ public class UserSettingsApi {
         Object localVarPostBody = body;
 
         // create path and map variables
-        String localVarPath = "/user/account/chgusername";
+        String localVarPath = "/user/change-theme";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -258,143 +381,20 @@ public class UserSettingsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call userAccountChgusernamePatchValidateBeforeCall(String body, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call userChangeThemePatchValidateBeforeCall(Object body, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling userAccountChgusernamePatch(Async)");
+            throw new ApiException("Missing the required parameter 'body' when calling userChangeThemePatch(Async)");
         }
 
-        return userAccountChgusernamePatchCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public void userAccountChgusernamePatch(String body) throws ApiException {
-        userAccountChgusernamePatchWithHttpInfo(body);
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> userAccountChgusernamePatchWithHttpInfo(String body) throws ApiException {
-        okhttp3.Call localVarCall = userAccountChgusernamePatchValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userAccountChgusernamePatchAsync(String body, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = userAccountChgusernamePatchValidateBeforeCall(body, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for userChangeThemePatch
-     * @param userChangeThemePatchRequest  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Theme changed successfully </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userChangeThemePatchCall(UserChangeThemePatchRequest userChangeThemePatchRequest, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = userChangeThemePatchRequest;
-
-        // create path and map variables
-        String localVarPath = "/user/change-theme";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "CookieAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call userChangeThemePatchValidateBeforeCall(UserChangeThemePatchRequest userChangeThemePatchRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userChangeThemePatchRequest' is set
-        if (userChangeThemePatchRequest == null) {
-            throw new ApiException("Missing the required parameter 'userChangeThemePatchRequest' when calling userChangeThemePatch(Async)");
-        }
-
-        return userChangeThemePatchCall(userChangeThemePatchRequest, _callback);
+        return userChangeThemePatchCall(body, _callback);
 
     }
 
     /**
      * Change user theme
      * 
-     * @param userChangeThemePatchRequest  (required)
+     * @param body  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -403,14 +403,14 @@ public class UserSettingsApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void userChangeThemePatch(UserChangeThemePatchRequest userChangeThemePatchRequest) throws ApiException {
-        userChangeThemePatchWithHttpInfo(userChangeThemePatchRequest);
+    public void userChangeThemePatch(Object body) throws ApiException {
+        userChangeThemePatchWithHttpInfo(body);
     }
 
     /**
      * Change user theme
      * 
-     * @param userChangeThemePatchRequest  (required)
+     * @param body  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -420,15 +420,15 @@ public class UserSettingsApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> userChangeThemePatchWithHttpInfo(UserChangeThemePatchRequest userChangeThemePatchRequest) throws ApiException {
-        okhttp3.Call localVarCall = userChangeThemePatchValidateBeforeCall(userChangeThemePatchRequest, null);
+    public ApiResponse<Void> userChangeThemePatchWithHttpInfo(Object body) throws ApiException {
+        okhttp3.Call localVarCall = userChangeThemePatchValidateBeforeCall(body, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
      * Change user theme (asynchronously)
      * 
-     * @param userChangeThemePatchRequest  (required)
+     * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -439,9 +439,9 @@ public class UserSettingsApi {
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call userChangeThemePatchAsync(UserChangeThemePatchRequest userChangeThemePatchRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call userChangeThemePatchAsync(Object body, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = userChangeThemePatchValidateBeforeCall(userChangeThemePatchRequest, _callback);
+        okhttp3.Call localVarCall = userChangeThemePatchValidateBeforeCall(body, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -565,119 +565,6 @@ public class UserSettingsApi {
     public okhttp3.Call userChangepwdPatchAsync(ChangePasswordDTO changePasswordDTO, final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = userChangepwdPatchValidateBeforeCall(changePasswordDTO, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for userDisconnectPost
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userDisconnectPostCall(final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/user/disconnect";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "CookieAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call userDisconnectPostValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return userDisconnectPostCall(_callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public void userDisconnectPost() throws ApiException {
-        userDisconnectPostWithHttpInfo();
-    }
-
-    /**
-     * 
-     * 
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> userDisconnectPostWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = userDisconnectPostValidateBeforeCall(null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call userDisconnectPostAsync(final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = userDisconnectPostValidateBeforeCall(_callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

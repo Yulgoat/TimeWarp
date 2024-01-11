@@ -1,17 +1,28 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+</head>
+  
 <div [ngStyle]="{'background-image': 'url(' + account_picture + ')'}" class="account_picture"></div>
 
 <div class = "account_username">
-    <div class ="account_username_title"> Username : </div>
+    <div class ="account_username_title"> {{'Username' | translate}} : </div>
     <div class ="account_username_input">
-        <input [(ngModel)]="textContent" (blur)="isEditing = false" (keydown.enter)="isEditing = false" />
+        <input [(ngModel)]="actual_username"/>
     </div>
+    <span class="material-symbols-rounded" (click)="chg_username()">
+      done
+    </span>
+</div>
+
+<div *ngIf="username_already_exists===true;" class="change_username_already_exist">
+    {{'UsernameAlreadyExists' | translate}}
 </div>
 
 <div (click)="navigateToChgPwd()" class = "account_pwd">
-    <div class ="account_pwd_title"> Password </div>
+    <div class ="account_pwd_title"> {{'Password' | translate}} </div>
     <img src="/assets/icons/go_chg_pwd.png">
 </div>
 
 <div class = "account_disconnect" (click)="disconnect()">
-    <a>DISCONNECT</a>
+    <a>{{'Disconnect' | translate | uppercase}}</a>
 </div>

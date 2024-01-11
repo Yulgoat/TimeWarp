@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ChangePwdService } from 'src/app/services/change-pwd.service';
+import { TranslateService } from '@ngx-translate/core';
+import { UserSettingsService } from 'src/app/services/user-settings.service';
 
 interface ChangePwdDTO {
   oldpassword: string;
@@ -13,14 +14,14 @@ interface ChangePwdDTO {
 })
 export class SettingsChgpwdComponent {
 
-  constructor(private changePwdService: ChangePwdService){}
+  constructor(private userSettingsService: UserSettingsService, private translate: TranslateService){}
   
   @Output() go_account = new EventEmitter<void>();
 
 
-  oldPwd : string = "";
-  newPwd : string = "";
-  confirmNewPwd : string ="";
+  oldPwd  = "";
+  newPwd  = "";
+  confirmNewPwd  ="";
   
 /* Json which contains the information that will be sent to the server */
   changePwdDTO : ChangePwdDTO = {          
@@ -29,14 +30,14 @@ export class SettingsChgpwdComponent {
   }  
 
   /* Message that will display the corresponding field in case of error */
-  oldPwdErrorMessage : string ="";
-  newPwdErrorMessage : string ="";
-  confirmNewPwdErrorMessage : string ="";
+  oldPwdErrorMessage  ="";
+  newPwdErrorMessage  ="";
+  confirmNewPwdErrorMessage  ="";
 
   /* Will be true if the corresponding field contain an error, else false */
-  oldPwdError : boolean = false;
-  newPwdError : boolean = false;
-  confirmNewPwdError : boolean = false;
+  oldPwdError  = false;
+  newPwdError  = false;
+  confirmNewPwdError  = false;
 
 
   navigateToAccount() : void{
@@ -45,15 +46,15 @@ export class SettingsChgpwdComponent {
 
   /* Checks if the different fields are empty */
   oldPwd_empty (): boolean{
-    if(this.oldPwd==="") {this.oldPwdErrorMessage = "Field Empty";return true; }
+    if(this.oldPwd==="") {this.oldPwdErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
   newPwd_empty (): boolean{
-    if(this.newPwd==="") {this.newPwdErrorMessage = "Field Empty";return true; }
+    if(this.newPwd==="") {this.newPwdErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
   confirmNewPwd_empty (): boolean{
-    if(this.confirmNewPwd==="") {this.confirmNewPwdErrorMessage = "Field Empty";return true; }
+    if(this.confirmNewPwd==="") {this.confirmNewPwdErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
 
@@ -66,13 +67,13 @@ export class SettingsChgpwdComponent {
   oldPwd_notcorrect() : void {
     this.oldPwd = ''; 
     this.oldPwdError = true;
-    this.oldPwdErrorMessage = "Incorrect password";
+    this.oldPwdErrorMessage = this.translate.instant('IncorrectPassword');
   }
 
 
   /* Request to the server and response study */
   request_changePwd(data : ChangePwdDTO) : void{
-    this.changePwdService.changepwd(data).subscribe(
+    this.userSettingsService.changepwd(data).subscribe(
       /* Classic Response */ 
       (response) => {
         if (response.status === 200) {
@@ -97,10 +98,10 @@ export class SettingsChgpwdComponent {
     if (this.newPwd_empty()) this.newPwdError = true; else this.newPwdError = false;
     if (this.confirmNewPwd_empty()) this.confirmNewPwdError = true; else this.confirmNewPwdError = false;
 
-    let isSamePassword = this.samePwd();
+    const isSamePassword = this.samePwd();
 
-    if(!this.newPwdError && !isSamePassword){ this.newPwdError = true; this.newPwdErrorMessage = "Not the Same Password";}
-    if(!this.confirmNewPwdError && !isSamePassword){this.confirmNewPwdError = true; this.confirmNewPwdErrorMessage = "Not the Same Password";}
+    if(!this.newPwdError && !isSamePassword){ this.newPwdError = true; this.newPwdErrorMessage = this.translate.instant('NotTheSamePassword');}
+    if(!this.confirmNewPwdError && !isSamePassword){this.confirmNewPwdError = true; this.confirmNewPwdErrorMessage = this.translate.instant('NotTheSamePassword');}
   
     if(this.oldPwdError)
       this.oldPwd = ''; 

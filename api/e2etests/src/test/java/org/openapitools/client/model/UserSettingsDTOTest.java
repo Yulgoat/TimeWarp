@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API. 
+ * This is a prototype of CPOO Project's front/back API.
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -18,63 +18,88 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 import java.util.Arrays;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Model tests for UserSettingsDTO
  */
 public class UserSettingsDTOTest {
-    private final UserSettingsDTO model = new UserSettingsDTO();
+  private final UserSettingsDTO model = new UserSettingsDTO();
 
-    /**
-     * Model tests for UserSettingsDTO
-     */
-    @Test
-    public void testUserSettingsDTO() {
-        // TODO: test UserSettingsDTO
-    }
+  /**
+   * Model tests for UserSettingsDTO
+   */
+  @Test
+  public void testUserSettingsDTO() {
+    UserSettingsDTO user = new UserSettingsDTO();
+    user.setLanguage("testL");
+    user.setTheme(1);
+    user.setProfileImage("testPI");
+    user.setNotificationSound(true);
+    user.setUnreadBadges(false);
 
-    /**
-     * Test the property 'theme'
-     */
-    @Test
-    public void themeTest() {
-        // TODO: test theme
-    }
+    assertEquals(false, user.getUnreadBadges());
+    assertEquals(true, user.getNotificationSound());
+    assertEquals("testPI", user.getProfileImage());
+    assertEquals(1, user.getTheme());
+    assertEquals("testL", user.getLanguage());
+  }
 
-    /**
-     * Test the property 'language'
-     */
-    @Test
-    public void languageTest() {
-        // TODO: test language
-    }
+  /**
+   * Test the property 'theme'
+   */
+  @Test
+  public void themeTest() {
+    UserSettingsDTO user = new UserSettingsDTO();
+    user.setTheme(2);
+    assertEquals(2, user.getTheme());
+  }
 
-    /**
-     * Test the property 'unreadBadges'
-     */
-    @Test
-    public void unreadBadgesTest() {
-        // TODO: test unreadBadges
-    }
+  /**
+   * Test the property 'language'
+   */
+  @Test
+  public void languageTest() {
+    UserSettingsDTO user = new UserSettingsDTO();
+    user.setLanguage("testL");
+    assertEquals("testL", user.getLanguage());
+  }
 
-    /**
-     * Test the property 'notificationSound'
-     */
-    @Test
-    public void notificationSoundTest() {
-        // TODO: test notificationSound
-    }
+  /**
+   * Test the property 'unreadBadges'
+   */
+  @Test
+  public void unreadBadgesTest() {
+    UserSettingsDTO user = new UserSettingsDTO();
+    user.setUnreadBadges(true);
+    assertEquals(true, user.getUnreadBadges());
+  }
 
-    /**
-     * Test the property 'profileImage'
-     */
-    @Test
-    public void profileImageTest() {
-        // TODO: test profileImage
-    }
+  /**
+   * Test the property 'notificationSound'
+   */
+  @Test
+  public void notificationSoundTest() {
+    UserSettingsDTO user = new UserSettingsDTO();
+    user.setNotificationSound(false);
+    assertEquals(false, user.getNotificationSound());
+  }
+
+  /**
+   * Test the property 'profileImage'
+   */
+  @Test
+  public void profileImageTest() {
+    UserSettingsDTO user = new UserSettingsDTO();
+    user.setProfileImage("testPI");
+    assertEquals("testPI", user.getProfileImage());
+  }
 
 }

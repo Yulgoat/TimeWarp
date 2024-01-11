@@ -27,7 +27,7 @@ public class Message {
   @Column(name = "type", nullable = false)
   private String type;    // MIME type of the body
 
-  @Column(name = "body", nullable = false)
+  @Column(name = "body", nullable = false, length = 2000)
   private String body;    // body (BASE64 encoded for binary types)
 
   public Message() {

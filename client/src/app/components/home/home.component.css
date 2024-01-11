@@ -1,3 +1,29 @@
+/* Styles généraux pour masquer les barres de défilement */
+body, html {
+    overflow: hidden;
+  }
+  
+  /* Styles spécifiques pour Chrome, Safari et autres navigateurs basés sur WebKit */
+  ::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Couleur de la poignée de défilement */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* Couleur de la piste de défilement */
+  }
+  
+  /* Pour Firefox */
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent; /* Couleur de la poignée et de la piste de défilement */
+  }
+  
+
+
 /* ***************** Header *********************** */
 .home_header{
     display: flex;
@@ -20,29 +46,35 @@
     height: 100%;
 }
 
-.home_header_div_button{
-    width: 7vh;
+.home_header_button{
+    width: 6vh;
+    height: 6vh;
 	padding: auto 0% auto 0% ;
 	margin: 0% 2% 0% 0%;
     display: flex;
     align-items: center;
-    
-}
+    justify-content: center;
+    align-self: center;
 
-.home_header_button{
-    margin: 0x;
-    padding: 0px;
-    width: 100%;
-    height: auto;
+    background-color: white;
+    border-radius: 50%;
+
+    color: var(--main-color);
     cursor: pointer;
 }
 
+.home_header_button span{
+    font-size: 4.5vh;
+}
+
 .home_header_button:hover{
-    content: url(/assets/icons/home_header_button_hover.png);
+    background-color: var(--secondary-color);
+    color: white;
 }
 
 .home_header_button:active{
-    content: url(/assets/icons/home_header_button_active.png);
+    background-color: var(--tertiary-color);
+    color: white;
 }
 
 /* ************************************************ */
@@ -57,7 +89,6 @@
 .home_section {
     position: relative;
     min-height: 91.8vh;
-    background-image: url(/assets/images/blur-background-60s-1.jpg);
     background-size: cover;
     display: flex;
     justify-content: space-around;
@@ -80,7 +111,7 @@
     display: flex;
     justify-content: space-between;
 	margin: 6% 0% 0% 6%;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .home_list_title_txt{
@@ -92,7 +123,7 @@
     
 }
 
-.home_list_title_button_div{
+.home_list_title_button{
     width: 50px;
     height: auto;
 	margin: 0% 8% 0% 0%;
@@ -100,21 +131,17 @@
     align-items: center;
 }
 
-.home_list_title_button{
-    width: 100%;
-    height: auto;
-    margin: 0x;
-    padding: 0px;
+.home_list_title_button span{
     cursor: pointer;
-    z-index: 1;
+    font-size: 50px;
 }
 
 .home_list_title_button:hover{
-    content: url(/assets/icons/new_message_button_hower.png);
+    color: var(--secondary-color);
 }
 
 .home_list_title_button:active{
-    content: url(/assets/icons/new_message_button_active.png);
+    color: var(--tertiary-color);
 }
 
             /* ****************************************************** */    
@@ -133,7 +160,7 @@
 .home_list_discussion{
     width: 100%;
     min-height: 100px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-color: transparent;
     border-radius: 30px;
     display: flex;
@@ -143,24 +170,43 @@
 }
 
 .home_list_discussion a{
-    width: 60%;
+    width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .contact_picture{
-    margin: auto 0.5em auto 0.5em;
+    margin: auto 0em auto 0.5em;
     width: 2.8em;
-    height: 2.8em;  
-    z-index: 5;    
+    height: 2.8em;   
     border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position : center;
-    background-size: cover;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+
+.contact_picture .material-symbols-rounded{
+    font-size: 2.8em;
+    color: var(--tertiary-color);
 }
 
 .home_list_discussion a{
     margin-left: 3%; 
 }
+
+.unread-indicator {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: 3%;
+  }
+
     
 .selected-discussion{
     background-color: var(--main-color);
@@ -249,14 +295,23 @@
 
 .home_msg_info_picture{    
     width: 5em;
-    height: 5em;     
-    z-index: 5;    
+    height: 5em; 
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position : center;
     background-size: cover;
-    background-color: #ffffff;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.home_msg_info_picture .material-symbols-rounded{
+    font-size: 5em;
+    color: var(--tertiary-color);
+}
+
              /* ***************************************************** */
 
 
@@ -297,19 +352,23 @@
     border-radius: 30px;
 }
 
-.home_conversation_tosend_send {
-    cursor: pointer;
+.home_conversation_tosend_message input::placeholder {
+    color: #000000;
+}
+
+.home_conversation_tosend .material-symbols-rounded{
     margin-right: 10px;
+    cursor: pointer;
+    font-size: 40px;
 }
 
-
-.home_conversation_tosend_send:hover{
-    content: url(/assets/icons/send_icon_hower.png);
+.home_conversation_tosend .material-symbols-rounded:hover{
+    color: var(--secondary-color);
 }
 
-.home_conversation_tosend_send:active {
-    content: url(/assets/icons/send_icon_active.png);
- }
+.home_conversation_tosend .material-symbols-rounded:active{
+    color: var(--tertiary-color);
+}
 
 #message {
     background-position: left 10px center; 
@@ -317,11 +376,111 @@
     background-color: transparent;
     border-color: transparent;
   }
+
+
             /* ****************************************************** */ 
     /* ************************************************************** */              
 /* ****************************************************************** */ 
 
+/*********************new-conv-popup**********************/
 
+
+/* Base styles for the screen container */
+.screen {
+    height: 500px;
+    width: 700px;
+    background-color: #ffffff;
+    z-index: 50;
+    border-radius: 30px;
+}
+
+/* Styles for the header section within the screen */
+.screen_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1% 0 4%;
+    padding-top: 1em;
+}
+
+/* Styles for the title in the header */
+.title {
+    font-size: 3em;
+}
+
+/* Styles for the back button in the header */
+.back_button {
+    width: 50px;
+    margin-right: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back_button span{
+    cursor: pointer;
+    font-size: 50px;
+}
+
+.back_button:hover {
+    color: var(--secondary-color);
+}
+
+.back_button:active {
+    color: var(--tertiary-color);
+}
+
+/* Styles for the username input field */
+#username_home_popup {
+    background-color: var(--background-color);
+    color: var(--main-color);
+    width: 80%;
+    font-size: 1.5em;
+    box-sizing: border-box;
+    border-radius: 30px;
+    border-color: transparent;
+    padding: 0.5em 1em; /* Adjust padding for vertical centering */
+}
+
+#username_home_popup::placeholder {
+    color: var(--main-color);
+}
+
+
+
+/* Styles for the contact_who container */
+.contact_who {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    margin-top: 3em;
+}
+
+/* Styles for the contact_who button */
+.contact_who_button {
+    position: absolute;
+    bottom: 20px; /* Position the button at the bottom of the container */
+    background-color: var(--main-color);
+    color: white;
+    width: 30%;
+    font-size: 1.5em;
+    cursor: pointer;
+    border: 0;
+    border-radius: 30px;
+    padding: 0.5em;
+}
+
+/* Styles for the contact_who button on hover */
+.contact_who_button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Styles for the contact_who button when active */
+.contact_who_button:active {
+    background-color: var(--tertiary-color);
+}
+/*************************************************************/
+    
 /* Media queries for smaller screens */
 @media screen and (max-width: 1100px) {
     .home_conversation,
@@ -355,7 +514,7 @@
         font-size: 0.6em;
     }
 }
-    
+
 @media screen and (min-width: 1101px) and (max-width : 1500px){
     .home_list_conversation,
     .home_list_conversation_active{

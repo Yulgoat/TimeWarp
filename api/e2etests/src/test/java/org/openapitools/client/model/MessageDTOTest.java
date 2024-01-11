@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API. 
+ * This is a prototype of CPOO Project's front/back API.
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -16,6 +16,7 @@ package org.openapitools.client.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,105 +24,105 @@ import org.junit.jupiter.api.Test;
  */
 public class MessageDTOTest {
 
-    /**
-     * Model tests for MessageDTO
-     */
-    @Test
-    public void testMessageDTO() {
-        // Create a MessageDTO instance with sample values
-        MessageDTO message = new MessageDTO();
-        message.setTo("bob@acme");
-        message.setType("text/plain");
-        message.setBody("This is the message");
-        message.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
-        message.setTimestamp(1720294759999L);
-        message.setFrom("alice@acme");
+  /**
+   * Model tests for MessageDTO
+   */
+  @Test
+  public void testMessageDTO() {
+    // Create a MessageDTO instance with sample values
+    MessageDTO message = new MessageDTO();
+    message.setTo("bob@acme");
+    message.setType("text/plain");
+    message.setBody("This is the message");
+    message.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
+    message.setTimestamp(1720294759999L);
+    message.setFrom("alice@acme");
 
-        // Check that properties have been correctly defined
-        assertEquals("bob@acme", message.getTo());
-        assertEquals("text/plain", message.getType());
-        assertEquals("This is the message", message.getBody());
-        assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", message.getId().toString());
-        assertEquals(1720294759999L, message.getTimestamp());
-        assertEquals("alice@acme", message.getFrom());
-    }
+    // Check that properties have been correctly defined
+    assertEquals("bob@acme", message.getTo());
+    assertEquals("text/plain", message.getType());
+    assertEquals("This is the message", message.getBody());
+    assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", message.getId().toString());
+    assertEquals(1720294759999L, message.getTimestamp());
+    assertEquals("alice@acme", message.getFrom());
+  }
 
-    /**
-     * Test the property 'to'
-     */
-    @Test
-    public void toTest() {
-        // Create an instance of MessageDTO and define the 'to' property
-        MessageDTO message = new MessageDTO();
-        message.setTo("bob@acme");
+  /**
+   * Test the property 'to'
+   */
+  @Test
+  public void toTest() {
+    // Create an instance of MessageDTO and define the 'to' property
+    MessageDTO message = new MessageDTO();
+    message.setTo("bob@acme");
 
-        // Check that the 'to' property has been set correctly
-        assertEquals("bob@acme", message.getTo());
-    }
+    // Check that the 'to' property has been set correctly
+    assertEquals("bob@acme", message.getTo());
+  }
 
-    /**
-     * Test the property 'type'
-     */
-    @Test
-    public void typeTest() {
-        // Create an instance of MessageDTO and set the 'type' property to
-        MessageDTO message = new MessageDTO();
-        message.setType("text/plain");
+  /**
+   * Test the property 'type'
+   */
+  @Test
+  public void typeTest() {
+    // Create an instance of MessageDTO and set the 'type' property to
+    MessageDTO message = new MessageDTO();
+    message.setType("text/plain");
 
-        // Check that the 'type' property has been set correctly
-        assertEquals("text/plain", message.getType());
-    }
+    // Check that the 'type' property has been set correctly
+    assertEquals("text/plain", message.getType());
+  }
 
-    /**
-     * Test the property 'body'
-     */
-    @Test
-    public void bodyTest() {
-        // Create an instance of MessageDTO and define the 'body' property
-        MessageDTO message = new MessageDTO();
-        message.setBody("This is the message");
+  /**
+   * Test the property 'body'
+   */
+  @Test
+  public void bodyTest() {
+    // Create an instance of MessageDTO and define the 'body' property
+    MessageDTO message = new MessageDTO();
+    message.setBody("This is the message");
 
-        // Check that the 'body' property has been correctly defined
-        assertEquals("This is the message", message.getBody());
-    }
+    // Check that the 'body' property has been correctly defined
+    assertEquals("This is the message", message.getBody());
+  }
 
-    /**
-     * Test the property 'id'
-     */
-    @Test
-    public void idTest() {
-        // Create an instance of MessageDTO and set the 'id' property
-        MessageDTO message = new MessageDTO();
-        message.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
+  /**
+   * Test the property 'id'
+   */
+  @Test
+  public void idTest() {
+    // Create an instance of MessageDTO and set the 'id' property
+    MessageDTO message = new MessageDTO();
+    message.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
 
-        // Check that the 'id' property has been set correctly
-        assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", message.getId().toString());
-    }
+    // Check that the 'id' property has been set correctly
+    assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", message.getId().toString());
+  }
 
-    /**
-     * Test the property 'timestamp'
-     */
-    @Test
-    public void timestampTest() {
-        // Create an instance of MessageDTO and define the 'timestamp' property
-        MessageDTO message = new MessageDTO();
-        message.setTimestamp(1720294759999L);
+  /**
+   * Test the property 'timestamp'
+   */
+  @Test
+  public void timestampTest() {
+    // Create an instance of MessageDTO and define the 'timestamp' property
+    MessageDTO message = new MessageDTO();
+    message.setTimestamp(1720294759999L);
 
-        // Check that the 'timestamp' property has been set correctly
-        assertEquals(1720294759999L, message.getTimestamp());
-    }
+    // Check that the 'timestamp' property has been set correctly
+    assertEquals(1720294759999L, message.getTimestamp());
+  }
 
-    /**
-     * Test the property 'from'
-     */
-    @Test
-    public void fromTest() {
-        // Create an instance of MessageDTO and define the 'from' property
-        MessageDTO message = new MessageDTO();
-        message.setFrom("alice@acme");
+  /**
+   * Test the property 'from'
+   */
+  @Test
+  public void fromTest() {
+    // Create an instance of MessageDTO and define the 'from' property
+    MessageDTO message = new MessageDTO();
+    message.setFrom("alice@acme");
 
-        // Check that the 'from' property has been set correctly
-        assertEquals("alice@acme", message.getFrom());
-    }
+    // Check that the 'from' property has been set correctly
+    assertEquals("alice@acme", message.getFrom());
+  }
 
 }

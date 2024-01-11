@@ -86,7 +86,7 @@ import org.openapitools.client.ApiException;
 import org.openapitools.client.Configuration;
 import org.openapitools.client.auth.*;
 import org.openapitools.client.models.*;
-import org.openapitools.client.api.AuthenticationApi;
+import org.openapitools.client.api.AdministrationApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -99,12 +99,12 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //CookieAuth.setApiKeyPrefix("Token");
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
+    AdministrationApi apiInstance = new AdministrationApi(defaultClient);
+    String username = "username_example"; // String | username of the user account to delete.
     try {
-      UserDTO result = apiInstance.userCurrentuserPost();
-      System.out.println(result);
+      apiInstance.userUsernameDelete(username);
     } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#userCurrentuserPost");
+      System.err.println("Exception when calling AdministrationApi#userUsernameDelete");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -121,22 +121,23 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AdministrationApi* | [**userUsernameDelete**](docs/AdministrationApi.md#userUsernameDelete) | **DELETE** /user/{username} | Delete a user account
 *AuthenticationApi* | [**userCurrentuserPost**](docs/AuthenticationApi.md#userCurrentuserPost) | **POST** /user/currentuser | 
-*AuthenticationApi* | [**userDeletePost**](docs/AuthenticationApi.md#userDeletePost) | **POST** /user/delete | 
 *AuthenticationApi* | [**userForgotpwdPost**](docs/AuthenticationApi.md#userForgotpwdPost) | **POST** /user/forgotpwd | 
 *AuthenticationApi* | [**userSigninPost**](docs/AuthenticationApi.md#userSigninPost) | **POST** /user/signin | 
 *AuthenticationApi* | [**userSignoutPost**](docs/AuthenticationApi.md#userSignoutPost) | **POST** /user/signout | 
 *AuthenticationApi* | [**userSignupPost**](docs/AuthenticationApi.md#userSignupPost) | **POST** /user/signup | 
-*MessagingApi* | [**discussionsCreatePost**](docs/MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion with a user
 *MessagingApi* | [**discussionsDiscussionIdMessagesGet**](docs/MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a discussion
 *MessagingApi* | [**discussionsGet**](docs/MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions of the current user
 *MessagingApi* | [**discussionsMessageGet**](docs/MessagingApi.md#discussionsMessageGet) | **GET** /discussions/message | Receive a message
 *MessagingApi* | [**discussionsMessagePost**](docs/MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion
+*MessagingApi* | [**discussionsPatch**](docs/MessagingApi.md#discussionsPatch) | **PATCH** /discussions | Set timestamp to actual time
+*MessagingApi* | [**discussionsPost**](docs/MessagingApi.md#discussionsPost) | **POST** /discussions | Create a new discussion with a user
+*MessagingApi* | [**discussionsUnreadmessagePatch**](docs/MessagingApi.md#discussionsUnreadmessagePatch) | **PATCH** /discussions/unreadmessage | Change unread message parameter
 *UserSettingsApi* | [**userAccountChangeppPatch**](docs/UserSettingsApi.md#userAccountChangeppPatch) | **PATCH** /user/account/changepp | 
 *UserSettingsApi* | [**userAccountChgusernamePatch**](docs/UserSettingsApi.md#userAccountChgusernamePatch) | **PATCH** /user/account/chgusername | 
 *UserSettingsApi* | [**userChangeThemePatch**](docs/UserSettingsApi.md#userChangeThemePatch) | **PATCH** /user/change-theme | Change user theme
 *UserSettingsApi* | [**userChangepwdPatch**](docs/UserSettingsApi.md#userChangepwdPatch) | **PATCH** /user/changepwd | 
-*UserSettingsApi* | [**userDisconnectPost**](docs/UserSettingsApi.md#userDisconnectPost) | **POST** /user/disconnect | 
 *UserSettingsApi* | [**userLanguagePatch**](docs/UserSettingsApi.md#userLanguagePatch) | **PATCH** /user/language | 
 *UserSettingsApi* | [**userNotificationsPatch**](docs/UserSettingsApi.md#userNotificationsPatch) | **PATCH** /user/notifications | 
 *UserSettingsApi* | [**userSettingsGet**](docs/UserSettingsApi.md#userSettingsGet) | **GET** /user/settings | Get user settings information
@@ -151,7 +152,7 @@ Class | Method | HTTP request | Description
  - [NewPasswordDTO](docs/NewPasswordDTO.md)
  - [NotificationsDTO](docs/NotificationsDTO.md)
  - [PostMessageDTO](docs/PostMessageDTO.md)
- - [UserChangeThemePatchRequest](docs/UserChangeThemePatchRequest.md)
+ - [UnreadMessageDTO](docs/UnreadMessageDTO.md)
  - [UserDTO](docs/UserDTO.md)
  - [UserSettingsDTO](docs/UserSettingsDTO.md)
 

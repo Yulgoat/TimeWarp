@@ -32,6 +32,7 @@ import org.openapitools.client.model.ErrorDTO;
 import org.openapitools.client.model.MessageDTO;
 import org.openapitools.client.model.PostMessageDTO;
 import java.util.UUID;
+import org.openapitools.client.model.UnreadMessageDTO;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -76,129 +77,6 @@ public class MessagingApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    /**
-     * Build call for discussionsCreatePost
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Conversation created successfully </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call discussionsCreatePostCall(String body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/discussions/create";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "text/plain"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "CookieAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call discussionsCreatePostValidateBeforeCall(String body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling discussionsCreatePost(Async)");
-        }
-
-        return discussionsCreatePostCall(body, _callback);
-
-    }
-
-    /**
-     * Create a new discussion with a user
-     * 
-     * @param body  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Conversation created successfully </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public void discussionsCreatePost(String body) throws ApiException {
-        discussionsCreatePostWithHttpInfo(body);
-    }
-
-    /**
-     * Create a new discussion with a user
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Conversation created successfully </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> discussionsCreatePostWithHttpInfo(String body) throws ApiException {
-        okhttp3.Call localVarCall = discussionsCreatePostValidateBeforeCall(body, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     * Create a new discussion with a user (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Conversation created successfully </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call discussionsCreatePostAsync(String body, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = discussionsCreatePostValidateBeforeCall(body, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
     /**
      * Build call for discussionsDiscussionIdMessagesGet
      * @param discussionId  (required)
@@ -565,7 +443,7 @@ public class MessagingApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Message sent successfully </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Message sent successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
@@ -629,34 +507,37 @@ public class MessagingApi {
      * Send a message in a disccusion
      * 
      * @param postMessageDTO  (required)
+     * @return MessageDTO
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Message sent successfully </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Message sent successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public void discussionsMessagePost(PostMessageDTO postMessageDTO) throws ApiException {
-        discussionsMessagePostWithHttpInfo(postMessageDTO);
+    public MessageDTO discussionsMessagePost(PostMessageDTO postMessageDTO) throws ApiException {
+        ApiResponse<MessageDTO> localVarResp = discussionsMessagePostWithHttpInfo(postMessageDTO);
+        return localVarResp.getData();
     }
 
     /**
      * Send a message in a disccusion
      * 
      * @param postMessageDTO  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;MessageDTO&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Message sent successfully </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Message sent successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> discussionsMessagePostWithHttpInfo(PostMessageDTO postMessageDTO) throws ApiException {
+    public ApiResponse<MessageDTO> discussionsMessagePostWithHttpInfo(PostMessageDTO postMessageDTO) throws ApiException {
         okhttp3.Call localVarCall = discussionsMessagePostValidateBeforeCall(postMessageDTO, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<MessageDTO>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -669,13 +550,392 @@ public class MessagingApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Message sent successfully </td><td>  -  </td></tr>
+        <tr><td> 201 </td><td> Message sent successfully </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call discussionsMessagePostAsync(PostMessageDTO postMessageDTO, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call discussionsMessagePostAsync(PostMessageDTO postMessageDTO, final ApiCallback<MessageDTO> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = discussionsMessagePostValidateBeforeCall(postMessageDTO, _callback);
+        Type localVarReturnType = new TypeToken<MessageDTO>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for discussionsPatch
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Timestamp change successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsPatchCall(String body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/discussions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "text/plain"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call discussionsPatchValidateBeforeCall(String body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling discussionsPatch(Async)");
+        }
+
+        return discussionsPatchCall(body, _callback);
+
+    }
+
+    /**
+     * Set timestamp to actual time
+     * 
+     * @param body  (required)
+     * @return Long
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Timestamp change successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public Long discussionsPatch(String body) throws ApiException {
+        ApiResponse<Long> localVarResp = discussionsPatchWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Set timestamp to actual time
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;Long&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Timestamp change successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Long> discussionsPatchWithHttpInfo(String body) throws ApiException {
+        okhttp3.Call localVarCall = discussionsPatchValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Long>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Set timestamp to actual time (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Timestamp change successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsPatchAsync(String body, final ApiCallback<Long> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = discussionsPatchValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Long>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for discussionsPost
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Conversation created successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsPostCall(String body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/discussions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "text/plain"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call discussionsPostValidateBeforeCall(String body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling discussionsPost(Async)");
+        }
+
+        return discussionsPostCall(body, _callback);
+
+    }
+
+    /**
+     * Create a new discussion with a user
+     * 
+     * @param body  (required)
+     * @return DiscussionDTO
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Conversation created successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public DiscussionDTO discussionsPost(String body) throws ApiException {
+        ApiResponse<DiscussionDTO> localVarResp = discussionsPostWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create a new discussion with a user
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;DiscussionDTO&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Conversation created successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<DiscussionDTO> discussionsPostWithHttpInfo(String body) throws ApiException {
+        okhttp3.Call localVarCall = discussionsPostValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<DiscussionDTO>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create a new discussion with a user (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 201 </td><td> Conversation created successfully </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsPostAsync(String body, final ApiCallback<DiscussionDTO> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = discussionsPostValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<DiscussionDTO>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for discussionsUnreadmessagePatch
+     * @param unreadMessageDTO  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsUnreadmessagePatchCall(UnreadMessageDTO unreadMessageDTO, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = unreadMessageDTO;
+
+        // create path and map variables
+        String localVarPath = "/discussions/unreadmessage";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "CookieAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call discussionsUnreadmessagePatchValidateBeforeCall(UnreadMessageDTO unreadMessageDTO, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'unreadMessageDTO' is set
+        if (unreadMessageDTO == null) {
+            throw new ApiException("Missing the required parameter 'unreadMessageDTO' when calling discussionsUnreadmessagePatch(Async)");
+        }
+
+        return discussionsUnreadmessagePatchCall(unreadMessageDTO, _callback);
+
+    }
+
+    /**
+     * Change unread message parameter
+     * 
+     * @param unreadMessageDTO  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public void discussionsUnreadmessagePatch(UnreadMessageDTO unreadMessageDTO) throws ApiException {
+        discussionsUnreadmessagePatchWithHttpInfo(unreadMessageDTO);
+    }
+
+    /**
+     * Change unread message parameter
+     * 
+     * @param unreadMessageDTO  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> discussionsUnreadmessagePatchWithHttpInfo(UnreadMessageDTO unreadMessageDTO) throws ApiException {
+        okhttp3.Call localVarCall = discussionsUnreadmessagePatchValidateBeforeCall(unreadMessageDTO, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Change unread message parameter (asynchronously)
+     * 
+     * @param unreadMessageDTO  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call discussionsUnreadmessagePatchAsync(UnreadMessageDTO unreadMessageDTO, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = discussionsUnreadmessagePatchValidateBeforeCall(unreadMessageDTO, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

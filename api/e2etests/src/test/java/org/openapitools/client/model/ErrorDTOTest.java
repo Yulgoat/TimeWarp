@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API. 
+ * This is a prototype of CPOO Project's front/back API.
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -18,63 +18,92 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 import java.util.Arrays;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Model tests for ErrorDTO
  */
 public class ErrorDTOTest {
-    private final ErrorDTO model = new ErrorDTO();
+  private final ErrorDTO model = new ErrorDTO();
 
-    /**
-     * Model tests for ErrorDTO
-     */
-    @Test
-    public void testErrorDTO() {
-        // TODO: test ErrorDTO
-    }
+  /**
+   * Model tests for ErrorDTO
+   */
+  @Test
+  public void testErrorDTO() {
+    ErrorDTO err = new ErrorDTO();
+    err.setError("test1");
+    err.setMessage("test2");
+    err.setPath("test3");
+    err.setStatus(200);
+    err.setTimestamp("test4");
 
-    /**
-     * Test the property 'timestamp'
-     */
-    @Test
-    public void timestampTest() {
-        // TODO: test timestamp
-    }
+    assertEquals("test1", err.getError());
+    assertEquals("test2", err.getMessage());
+    assertEquals("test3", err.getPath());
+    assertEquals(200, err.getStatus());
+    assertEquals("test4", err.getTimestamp());
+  }
 
-    /**
-     * Test the property 'status'
-     */
-    @Test
-    public void statusTest() {
-        // TODO: test status
-    }
+  /**
+   * Test the property 'timestamp'
+   */
+  @Test
+  public void timestampTest() {
+    ErrorDTO err = new ErrorDTO();
+    err.setTimestamp("test");
 
-    /**
-     * Test the property 'error'
-     */
-    @Test
-    public void errorTest() {
-        // TODO: test error
-    }
+    assertEquals("test", err.getTimestamp());
+  }
 
-    /**
-     * Test the property 'message'
-     */
-    @Test
-    public void messageTest() {
-        // TODO: test message
-    }
+  /**
+   * Test the property 'status'
+   */
+  @Test
+  public void statusTest() {
+    ErrorDTO err = new ErrorDTO();
+    err.setStatus(401);
 
-    /**
-     * Test the property 'path'
-     */
-    @Test
-    public void pathTest() {
-        // TODO: test path
-    }
+    assertEquals(401, err.getStatus());
+  }
+
+  /**
+   * Test the property 'error'
+   */
+  @Test
+  public void errorTest() {
+    ErrorDTO err = new ErrorDTO();
+    err.setError("test");
+
+    assertEquals("test", err.getError());
+  }
+
+  /**
+   * Test the property 'message'
+   */
+  @Test
+  public void messageTest() {
+    ErrorDTO err = new ErrorDTO();
+    err.setMessage("test");
+    assertEquals("test", err.getMessage());
+  }
+
+  /**
+   * Test the property 'path'
+   */
+  @Test
+  public void pathTest() {
+    ErrorDTO err = new ErrorDTO();
+    err.setPath("test");
+
+    assertEquals("test", err.getPath());
+  }
 
 }

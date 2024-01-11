@@ -14,7 +14,7 @@ interface UserNameDTO {
 
 export class SigninServiceService {
 
-  private baseUrl = 'http://localhost:4200/serverapi/'; 
+  private baseUrl = '/serverapi/'; 
 
   user: UserNameDTO={
     user_name: ''

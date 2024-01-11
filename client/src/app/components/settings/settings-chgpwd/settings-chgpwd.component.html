@@ -1,29 +1,47 @@
-<h1>CREATE NEW PASSWORD</h1>
+<h1>{{'CreateNewPassword' | translate | uppercase}}</h1>
 <form>
-    <div *ngIf="oldPwdError==false; else elseOldPwd">
-        <input class="no_error" [(ngModel)]="oldPwd" type="password" id="old-password" name="old-password" placeholder="Old Password">
+    <div *ngIf="oldPwdError===false; else elseOldPwd">
+      <div class="input-container">
+        <input class="no_error" [(ngModel)]="oldPwd" type="password" id="old-password" name="old-password" placeholder="{{'OldPassword' | translate}}">
+        <span class="material-symbols-rounded">lock</span>
+      </div>
       </div>
       <ng-template #elseOldPwd>
-        <input class="error_fields" [(ngModel)]="oldPwd" type="password" id="old-password" name="old-password" placeholder={{oldPwdErrorMessage}}>
+        <div class="input-container">
+          <input class="error_fields" [(ngModel)]="oldPwd" type="password" id="old-password" name="old-password" placeholder={{oldPwdErrorMessage}}>
+          <span class="material-symbols-rounded">lock</span>
+        </div>
       </ng-template>
 
-      <div *ngIf="newPwdError==false; else elseNewPwd">
-        <input class="no_error" [(ngModel)]="newPwd" type="password" id="password" name="password" placeholder="Password">
+      <div *ngIf="newPwdError===false; else elseNewPwd">
+        <div class="input-container">
+          <input class="no_error" [(ngModel)]="newPwd" type="password" id="password" name="password" placeholder="{{'Password' | translate}}">
+          <span class="material-symbols-rounded">lock</span>
+        </div>
       </div>
       <ng-template #elseNewPwd>
-        <input class="error_fields" [(ngModel)]="newPwd" type="password" id="password" name="password" placeholder={{newPwdErrorMessage}}>
+        <div class="input-container">
+          <input class="error_fields" [(ngModel)]="newPwd" type="password" id="password" name="password" placeholder={{newPwdErrorMessage}}>
+          <span class="material-symbols-rounded">lock</span>
+        </div>
       </ng-template>
 
-      <div *ngIf="confirmNewPwdError==false; else elseconfirmNewPwd">
-        <input class="no_error" [(ngModel)]="confirmNewPwd" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
+      <div *ngIf="confirmNewPwdError===false; else elseconfirmNewPwd">
+        <div class="input-container">
+          <input class="no_error" [(ngModel)]="confirmNewPwd" type="password" id="confirm-password" name="confirm-password" placeholder="{{'ConfirmPassword' | translate}}">
+          <span class="material-symbols-rounded">lock</span>
+        </div>
       </div>
       <ng-template #elseconfirmNewPwd>
-        <input class="error_fields" [(ngModel)]="confirmNewPwd" type="password" id="confirm-password" name="confirm-password" placeholder={{confirmNewPwdErrorMessage}}>
+        <div class="input-container">
+          <input class="error_fields" [(ngModel)]="confirmNewPwd" type="password" id="confirm-password" name="confirm-password" placeholder={{confirmNewPwdErrorMessage}}>
+          <span class="material-symbols-rounded">lock</span>
+        </div>
       </ng-template>
 
         
     <!-- Confirm button -->
     <div>
-        <input type="submit" value="CONFIRM" class="button" (click)="changePwd()">
+        <input type="submit" value="{{'Confirm' | translate | uppercase}}" class="button" (click)="changePwd()">
     </div>
 </form>

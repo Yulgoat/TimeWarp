@@ -1,14 +1,21 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserSettingsService } from 'src/app/services/user-settings.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit{
 
-  constructor(private router:Router){}
+  constructor(private router:Router, public userSettingsService: UserSettingsService, private userService: UserService){}
+
+  ngOnInit(): void {
+    // Fetch user settings from the server
+    this.userSettingsService.getUserSettings();
+  }
 
   settingsToHome() : void{
     this.router.navigate(['/home']);
@@ -19,12 +26,12 @@ export class SettingsComponent {
   }
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------- */
-account : boolean = false;
-notifications : boolean = false;
-appearance : boolean = false;
-language : boolean = false;
-acknowlodgements : boolean = false;
-chg_pwd : boolean = false;
+account  = false;
+notifications  = false;
+appearance  = false;
+language  = false;
+acknowlodgements  = false;
+chg_pwd  = false;
 
 display_account_settings() {
   this.account = true;

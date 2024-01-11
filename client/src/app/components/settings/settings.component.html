@@ -1,91 +1,67 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+</head>
+
 <header class="settings_header">
   <div class ="settings_header_title">TimeWarp</div>
 
-  <div class="settings_header_div_button">
-    <img (click)="settingsToHome()" class="settings_header_button" src="/assets/icons/home_header_button_active.png">
+  <div class="settings_header_button">
+    <span class="material-symbols-rounded" (click)="settingsToHome()">
+      tune
+    </span>
   </div>
 </header>
 
 
 
 
-<section class="settings_section">
+<section class="settings_section" [ngStyle]="{'background-image': 'url(' + userSettingsService.getSelectedImageSrc() + ')'}">
 
   <div class = "settings_list">
       <div class = "settings_list_title">    
-        <a>Settings</a>
+        <a>{{'Settings' | translate}}</a>
       </div>  
 
 
       <div class="settings_choice_list">
-          <div class="settings_choice_list_bis" *ngIf="account;else elseAccount" >
-              <div class = "settings_choice_active" (click)="display_account_settings()">
-                  <img src = "../../../assets/icons/account_settings_white.png">
-                  <a> Account </a>
-              </div>
-          </div>
-          <ng-template #elseAccount>
-              <div class = "settings_choice" (click)="display_account_settings()">
-                  <img src = "../../../assets/icons/account_settings_orange.png">
-                  <a> Account </a>
-              </div>
-          </ng-template>
+            <div class = "settings_choice" (click)="display_account_settings()" [ngClass]="{'maincolor-to-white': account}">
+                <span class="material-symbols-rounded">
+                    Person
+                </span>
+                <a> {{'Account' | translate}} </a>
+            </div>
 
 
-          <div class="settings_choice_list_bis" *ngIf="notifications;else elseNotifications" >
-              <div class = "settings_choice_active" (click)="display_notifications_settings()">
-                <img src = "../../../assets/icons/notifications_settings_white.png">
-                <a> Notifications </a>
-              </div>
-          </div>
-          <ng-template #elseNotifications>
-              <div class = "settings_choice" (click)="display_notifications_settings()">
-                  <img src = "../../../assets/icons/notifications_settings_orange.png">
-                  <a> Notifications </a>
-              </div>
-          </ng-template>
+            <div class = "settings_choice" (click)="display_notifications_settings()" [ngClass]="{'maincolor-to-white': notifications}">
+                <span class="material-symbols-rounded">
+                    notifications
+                </span>
+                <a> {{'Notifications' | translate}} </a>
+            </div>
 
 
-          <div class="settings_choice_list_bis" *ngIf="appearance;else elseAppearance" >
-              <div class = "settings_choice_active" (click)="display_appearance_settings()">
-                <img src = "../../../assets/icons/appearance_settings_white.png">
-                <a> Appearance </a>
-              </div>
-          </div>
-          <ng-template #elseAppearance>
-              <div class = "settings_choice" (click)="display_appearance_settings()">
-                  <img src = "../../../assets/icons/appearance_settings_orange.png">
-                  <a> Appearance </a>
-              </div>
-          </ng-template>
+            <div class = "settings_choice" (click)="display_appearance_settings()" [ngClass]="{'maincolor-to-white': appearance}">
+                <span class="material-symbols-rounded">
+                    palette
+                </span>
+                <a> {{'Appearance' | translate}} </a>
+            </div>
 
 
-          <div class="settings_choice_list_bis" *ngIf="language;else elseLanguage" >
-              <div class = "settings_choice_active" (click)="display_language_settings()">
-                <img src = "../../../assets/icons/language_settings_white.png">
-                <a> Language </a>
-              </div>
-          </div>
-          <ng-template #elseLanguage>
-              <div class = "settings_choice" (click)="display_language_settings()">
-                  <img src = "../../../assets/icons/language_settings_orange.png">
-                  <a> Language </a>
-              </div>
-          </ng-template>
+            <div class = "settings_choice" (click)="display_language_settings()" [ngClass]="{'maincolor-to-white': language}">
+                <span class="material-symbols-rounded">
+                    language
+                </span>
+                <a> {{'Language' | translate}} </a>
+            </div>
 
 
-          <div class="settings_choice_list_bis" *ngIf="acknowlodgements;else elseAcknowlodgements" >
-              <div class = "settings_choice_active" (click)="display_acknowlodgements_settings()">
-                <img src = "../../../assets/icons/acknowledgements_settings_white.png">
-                <a> Acknowledgements </a>
-              </div>
-          </div>
-          <ng-template #elseAcknowlodgements>
-              <div class = "settings_choice" (click)="display_acknowlodgements_settings()">
-                  <img src = "../../../assets/icons/acknowledgements_settings_orange.png">
-                  <a> Acknowledgements </a>
-              </div>
-          </ng-template>
+            <div class = "settings_choice" (click)="display_acknowlodgements_settings()" [ngClass]="{'maincolor-to-white': acknowlodgements}">
+                <span class="material-symbols-rounded">
+                    info
+                </span>
+                <a> {{'Acknowledgements' | translate}} </a>
+            </div>
 
       </div>
   </div>

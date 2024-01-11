@@ -13,7 +13,7 @@
 
 .account_username{
     margin: 2.5em auto 0.5em auto;
-    padding: 0.5em 0em 0.5em 0em;
+    padding: 0.3em 0em 0.5em 0em;
     width: 45%;
     height: 1.6em;
     border-radius: 30px;
@@ -29,10 +29,23 @@
 }
 
 .account_username_input{
-    margin-right : 1em;
     display: flex;
     justify-content: right;
-    max-width: 40%;
+    max-width: 35%;
+}
+
+.material-symbols-rounded{
+    margin-right: 0.22em;
+    cursor: pointer;
+    font-size: 2.5em;
+}
+
+.material-symbols-rounded:hover{
+    color: var(--secondary-color);
+}
+
+.material-symbols-rounded:active{
+    color: var(--tertiary-color);
 }
 
 .account_username_input input{
@@ -44,7 +57,13 @@
     text-align: right;
 }
 
-
+.change_username_already_exist{
+    color:red;
+    width: 45%;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+}
 
 .account_pwd{
     margin: 0.5em auto 2.5em auto;
@@ -98,4 +117,34 @@
 
 .account_disconnect:active{
     background-color: var(--tertiary-color);
+}
+
+/* Media queries for smaller screens */
+@media screen and (max-width: 1100px) {
+    .account_username{
+        width: 75%;
+    }
+    .account_disconnect{
+        width: 75%;
+    }
+    .account_pwd{
+        width: 75%;
+    }
+    .change_username_already_exist{
+        width: 75%;        
+    }
+}
+@media screen and (min-width: 1101px) and (max-width : 1500px){
+    .account_username{
+        width: 75%;
+    }
+    .account_disconnect{
+        width: 75%;
+    }
+    .account_pwd{
+        width: 75%;
+    }
+    .change_username_already_exist{
+        width: 75%;        
+    }
 }

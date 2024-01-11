@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API. 
+ * This is a prototype of CPOO Project's front/back API.
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -18,39 +18,54 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Model tests for ChangePasswordDTO
  */
 public class ChangePasswordDTOTest {
-    private final ChangePasswordDTO model = new ChangePasswordDTO();
+  private final ChangePasswordDTO model = new ChangePasswordDTO();
 
-    /**
-     * Model tests for ChangePasswordDTO
-     */
-    @Test
-    public void testChangePasswordDTO() {
-        // TODO: test ChangePasswordDTO
-    }
+  /**
+   * Model tests for ChangePasswordDTO
+   */
+  @Test
+  public void testChangePasswordDTO() {
+    ChangePasswordDTO chg = new ChangePasswordDTO();
+    chg.setNewpassword("test");
+    chg.setOldpassword("user");
 
-    /**
-     * Test the property 'oldPassword'
-     */
-    @Test
-    public void oldPasswordTest() {
-        // TODO: test oldPassword
-    }
+    // Check that properties have been correctly defined
+    assertEquals("test", chg.getNewpassword());
+    assertEquals("user", chg.getOldpassword());
+  }
 
-    /**
-     * Test the property 'newPassword'
-     */
-    @Test
-    public void newPasswordTest() {
-        // TODO: test newPassword
-    }
+  /**
+   * Test the property 'oldPassword'
+   */
+  @Test
+  public void oldPasswordTest() {
+    ChangePasswordDTO chg = new ChangePasswordDTO();
+    chg.setOldpassword("user");
+    assertEquals("user", chg.getOldpassword());
+  }
+
+  /**
+   * Test the property 'newPassword'
+   */
+  @Test
+  public void newPasswordTest() {
+    ChangePasswordDTO chg = new ChangePasswordDTO();
+    chg.setNewpassword("test");
+    assertEquals("test", chg.getNewpassword());
+  }
 
 }

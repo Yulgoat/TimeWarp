@@ -9,17 +9,17 @@ import java.util.List;
 
 public class MyCookieJar implements CookieJar {
 
-    private List<Cookie> cookies;
+  private List<Cookie> cookies;
 
-    @Override
-    public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        this.cookies = cookies;
-    }
+  @Override
+  public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+    this.cookies = cookies;
+  }
 
-    @Override
-    public List<Cookie> loadForRequest(HttpUrl url) {
-        if (cookies != null)
-            return cookies;
-        return new ArrayList<>();
-    }
+  @Override
+  public List<Cookie> loadForRequest(HttpUrl url) {
+    if (cookies != null)
+      return cookies;
+    return new ArrayList<>();
+  }
 }

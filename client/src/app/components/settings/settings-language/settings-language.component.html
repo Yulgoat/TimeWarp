@@ -1,15 +1,19 @@
-<div class="title">Select a language</div>
+<div class="title">{{'SelectALanguage' | translate}}</div>
 <div class="language-list">
     <div class="language">
-        <input type="radio" id="english" name="language" value="english" checked/>
+        <input type="radio" id="default" name="language" value="browser" [(ngModel)]="selectedLanguage" (change)="changeLanguage('browser')"/>
+        <label for="default">{{'Default' | translate}}</label>
+    </div>
+    <div class="language">
+        <input type="radio" id="english" name="language" value="en" [(ngModel)]="selectedLanguage" (change)="changeLanguage('en')"/>
         <label for="english">English</label>
     </div>
     <div class="language">
-        <input type="radio" id="français" name="language" value="français"/>
+        <input type="radio" id="français" name="language" value="fr" [(ngModel)]="selectedLanguage" (change)="changeLanguage('fr')"/>
         <label for="français">Français</label>
     </div>
     <div class="language">
-        <input type="radio" id="español" name="language" value="español"/>
+        <input type="radio" id="español" name="language" value="es" [(ngModel)]="selectedLanguage" (change)="changeLanguage('es')"/>
         <label for="español">Español</label>
     </div>
 </div>

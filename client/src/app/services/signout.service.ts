@@ -12,7 +12,7 @@ interface UserNameDTO {
 })
 export class SignOutService {
 
-  private baseUrl = 'http://localhost:4200/serverapi/'; 
+  private baseUrl = '/serverapi/'; 
 
  
   constructor(private http: HttpClient) { }

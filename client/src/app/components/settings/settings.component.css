@@ -19,29 +19,35 @@
     height: 100%;
 }
 
-.settings_header_div_button{
-    width: 7vh;
+.settings_header_button{
+    width: 6vh;
+    height: 6vh;
 	padding: auto 0% auto 0% ;
 	margin: 0% 2% 0% 0%;
     display: flex;
     align-items: center;
-    
-}
+    justify-content: center;
+    align-self: center;
 
-.settings_header_button{
-    margin: 0x;
-    padding: 0px;
-    width: 100%;
-    height: auto;
+    background-color: var(--main-color);
+    border-radius: 50%;
+
+    color: white;
     cursor: pointer;
 }
 
+.settings_header_button span{
+    font-size: 4.5vh;
+}
+
 .settings_header_button:hover{
-    content: url(/assets/icons/home_header_button_hover.png);
+    background-color: var(--tertiary-color);
+    color: white;
 }
 
 .settings_header_button:active{
-    content: url(/assets/icons/home_header_button.png);
+    background-color: var(--secondary-color);
+    color: white;
 }
 /* ************************************************ */
 
@@ -55,7 +61,6 @@
 .settings_section {
     position: relative;
     min-height: 91.8vh;
-    background-image: url(/assets/images/blur-background-60s-1.jpg);
     background-size: cover;
     display: flex;
     justify-content: space-around;
@@ -99,36 +104,25 @@
     font-size: 3vh;    
     cursor: pointer;
     margin-bottom: 3vh;
+    color: var(--main-color);
 }
 
-.settings_choice_list_bis{
-    width: 100%;
+.settings_choice a{
+    color: black;
 }
 
-.settings_choice_active{
-    background-color: var(--main-color);
-    border-radius: 30px;
-    width: 100%;
-    height: 8vh;
+.material-symbols-rounded{
     display: flex;
     align-items: center;
-    font-size: 3vh;    
-    cursor: pointer;
-    color : #ffffff;
-    margin-bottom: 3vh;
-}
-
-.settings_choice img{
-    height: 70%;
-    width: auto;
+    font-size: 6vh;
     margin: 0% 6% 0% 4%;
 }
 
-.settings_choice_active img{
-    height: 70%;
-    width: auto;
-    margin: 0% 6% 0% 4%;
-}
+.maincolor-to-white {
+    background-color: var(--main-color);
+    color: white; /* Color after click */
+  }
+  
 
 
     /* ************************ Settings **************************** */    

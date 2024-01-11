@@ -27,62 +27,62 @@ import org.openapitools.client.model.UserDTO;
  */
 public class AdministrationApiTest {
 
-    private final AuthenticationApi authenticationApi = new AuthenticationApi();
+  private final AuthenticationApi authenticationApi = new AuthenticationApi();
 
-    private final AdministrationApi administrationApi = new AdministrationApi();
+  private final AdministrationApi administrationApi = new AdministrationApi();
 
-    @BeforeEach
-    public void init() throws ApiException {
+  @BeforeEach
+  public void init() throws ApiException {
 
-        // Simulate the behavior of a web browser by remembering cookies set by the server
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
-        ApiClient apiClient = new ApiClient(okHttpClient);
-        authenticationApi.setApiClient(apiClient);
-        administrationApi.setApiClient(apiClient);
+    // Simulate the behavior of a web browser by remembering cookies set by the server
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    OkHttpClient okHttpClient = builder.cookieJar(new MyCookieJar()).build();
+    ApiClient apiClient = new ApiClient(okHttpClient);
+    authenticationApi.setApiClient(apiClient);
+    administrationApi.setApiClient(apiClient);
+  }
+
+  /**
+   * Delete a user account
+   * <p>
+   * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
+   *
+   * @throws ApiException if the Api call fails
+   */
+  @Test
+  public void userUsernameDeleteTest() throws ApiException {
+
+    // Delete the test account if exists
+    authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
+    try {
+      administrationApi.userUsernameDelete("test");
+    }
+    catch (ApiException e) {
+      Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
+    }
+    authenticationApi.userSignoutPost();
+
+    // Sign up a test user
+    UserDTO testUser = new UserDTO().username("test").email("test").password("test");
+    authenticationApi.userSignupPost(testUser);
+
+    // Sign in as the test user
+    authenticationApi.userSigninPost(testUser);
+
+    // Deleting the test account without admin rights should fail with FORBIDDEN
+    try {
+      administrationApi.userUsernameDelete("test");
+      Assertions.fail();
+    }
+    catch (ApiException e) {
+      Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
     }
 
-    /**
-     * Delete a user account
-     * <p>
-     * Delete the account of the user matching the given username. Only the administrator can use this endpoint.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void userUsernameDeleteTest() throws ApiException {
+    // Sign is as the admin
+    authenticationApi.userSignoutPost();
+    authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
 
-        // Delete the test account if exists
-        authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
-        try {
-            administrationApi.userUsernameDelete("test");
-        }
-        catch (ApiException e) {
-            Assertions.assertEquals(HttpStatus.SC_NOT_FOUND, e.getCode());
-        }
-        authenticationApi.userSignoutPost();
-
-        // Sign up a test user
-        UserDTO testUser = new UserDTO().username("test").email("test").password("test");
-        authenticationApi.userSignupPost(testUser);
-
-        // Sign in as the test user
-        authenticationApi.userSigninPost(testUser);
-
-        // Deleting the test account without admin rights should fail with FORBIDDEN
-        try {
-            administrationApi.userUsernameDelete("test");
-            Assertions.fail();
-        }
-        catch (ApiException e) {
-            Assertions.assertEquals(HttpStatus.SC_FORBIDDEN, e.getCode());
-        }
-
-        // Sign is as the admin
-        authenticationApi.userSignoutPost();
-        authenticationApi.userSigninPost(new UserDTO().username("admin").password("admin"));
-
-        // Deleting the test account with admin rights should work
-        administrationApi.userUsernameDelete("test");
-    }
+    // Deleting the test account with admin rights should work
+    administrationApi.userUsernameDelete("test");
+  }
 }

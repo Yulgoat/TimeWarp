@@ -1,5 +1,8 @@
 package fr.mightycode.cpoo.server.security;
 
+import fr.mightycode.cpoo.server.Manager.TimeWarpUser;
+import fr.mightycode.cpoo.server.Manager.TimeWarpUserDetailsManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -8,16 +11,25 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+  @Autowired
+  private DataSource dataSource;
+
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -48,6 +60,9 @@ public class SecurityConfiguration {
     return new BCryptPasswordEncoder();
   }
 
+
+  /*
+  //Like TimeWarpUserDetailsManager but with the data stock in the memory and no in a database
   @Bean
   public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
     UserDetails user = User.withUsername("user")
@@ -59,5 +74,72 @@ public class SecurityConfiguration {
       .roles("USER", "ADMIN")
       .build();
     return new InMemoryUserDetailsManager(user, admin);
+  }
+  */
+
+  @Bean
+  public TimeWarpUserDetailsManager timeWarpUserDetailsManager(PasswordEncoder passwordEncoder) {
+    TimeWarpUserDetailsManager userDetailsManager = new TimeWarpUserDetailsManager(dataSource);
+
+    try {
+      // Create a user account to be used by end-to-end tests
+      TimeWarpUser user = TimeWarpUser
+        .withUsernameTW("user")
+        .password(passwordEncoder.encode("user"))
+        .email("user")
+        .roles("USER")
+        .build();
+      userDetailsManager.createUser(user);
+    }
+    catch (Exception e) {
+      System.out.println("'user' account already created");
+      System.out.println(e);
+    }
+
+    try {
+      // Create a user account to be used by end-to-end tests
+      TimeWarpUser user = TimeWarpUser
+        .withUsernameTW("a")
+        .password(passwordEncoder.encode("a"))
+        .email("a@a.fr")
+        .roles("USER")
+        .build();
+      userDetailsManager.createUser(user);
+    }
+    catch (Exception e) {
+      System.out.println("'user' account already created");
+      System.out.println(e);
+    }
+
+    try {
+      // Create a user account to be used by end-to-end tests
+      TimeWarpUser user = TimeWarpUser
+        .withUsernameTW("b")
+        .password(passwordEncoder.encode("b"))
+        .email("b@b.fr")
+        .roles("USER")
+        .build();
+      userDetailsManager.createUser(user);
+    }
+    catch (Exception e) {
+      System.out.println("'user' account already created");
+      System.out.println(e);
+    }
+
+    try {
+      // Create an administrator account
+      TimeWarpUser admin = TimeWarpUser.withUsernameTW("admin")
+        .password(passwordEncoder.encode("admin"))
+        .email("admin")
+        .roles("USER", "ADMIN")
+        .build();
+      userDetailsManager.createUser(admin);
+    }
+    catch (Exception e) {
+      System.out.println("'admin' account already created");
+      System.out.println(e);
+    }
+
+    return userDetailsManager;
   }
 }

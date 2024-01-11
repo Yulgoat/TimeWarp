@@ -72,13 +72,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-  /user/delete:
-    post:
+  /user/{username}:
+    delete:
+      summary: Delete a user account
+      description: Delete the account of the user matching the given username.
+        Only the administrator can use this endpoint.
       tags:
-        - authentication
+        - administration
+      parameters:
+        - description: username of the user account to delete.
+          in: path
+          name: username
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Success
+        '404':
+          description: 'Not found: User account not found.'
         default:
           description: Error
           content:
@@ -147,10 +159,9 @@ paths:
       requestBody:
         required: true
         content:
-          text/plain:
+          application/json:
             schema:
-              title: username
-              type: string
+              $ref: '#/components/schemas/UserDTO'
       responses:
         '200':
           description: Success
@@ -200,19 +211,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-  /user/disconnect:
-    post:
-      tags:
-        - user settings
-      responses:
-        '200':
-          description: Success
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDTO'
   /user/notifications:
     patch:
       tags:
@@ -241,12 +239,9 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                themeId:
-                  type: integer
+          text/plain:
+            schema :
+              title : themeId
       responses:
         '200':
           description: Theme changed successfully
@@ -291,6 +286,76 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DiscussionDTO'
+    post:
+      tags:
+        - messaging
+      summary: Create a new discussion with a user
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              title: user
+              type: string
+      responses:
+        '201':
+          description: Conversation created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscussionDTO'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+    patch:
+      tags:
+        - messaging
+      summary: Set timestamp to actual time
+      requestBody:
+        required: true
+        content:
+          text/plain:
+            schema:
+              title: discussionID
+              type: string
+      responses:
+        '200':
+          description: Timestamp change successfully
+          content:
+            text/plain:
+              schema:
+                type: integer
+                format: int64
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+  
+  /discussions/unreadmessage:
+    patch:
+      tags:
+        - messaging
+      summary: Change unread message parameter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnreadMessageDTO'
+      responses:
+        '200':
+          description: Success
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
                   
   /discussions/{discussion_id}/messages:
     get:
@@ -326,8 +391,12 @@ paths:
             schema:
               $ref: '#/components/schemas/PostMessageDTO'
       responses:
-        '200':
+        '201':
           description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
         default:
           description: Error
           content:
@@ -353,27 +422,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
-  /discussions/create:
-    post:
-      tags:
-        - messaging
-      summary: Create a new discussion with a user
-      requestBody:
-        required: true
-        content:
-          text/plain:
-            schema:
-              title: user
-              type: string
-      responses:
-        '200':
-          description: Conversation created successfully
-        default:
-          description: Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDTO'
+                
 components:
   schemas:
     UserDTO:
@@ -455,12 +504,18 @@ components:
           type: string
           format: uuid
           example: 667bdc23-3de4-482f-a0f4-3391452a7742
+        timestamp:
+          type: integer
+          format: int64
+          example: 1720294759999
         user1:
           type: string
           example: alice@acme
         user2:
           type: string
           example: bob@acme
+        unreadMessage:
+          type: boolean
     NewPasswordDTO:
       type : object
       properties :
@@ -476,10 +531,10 @@ components:
     ChangePasswordDTO:
       type : object
       properties :
-        old-password:
+        oldpassword:
           type : string
           example: oldpassword
-        new-password : 
+        newpassword : 
           type : string
           example: newpassword
     NotificationsDTO:
@@ -489,6 +544,19 @@ components:
           type: boolean
         badges:
           type: boolean
+    UnreadMessageDTO:
+      type: object
+      required:
+        - discussionId
+        - unread_message
+      properties:
+        discussionId:
+          type: string
+          format: uuid
+          example: 667bdc23-3de4-482f-a0f4-3391452a7742
+        unreadMessage:
+          type: boolean
+          example: false
     ErrorDTO:
       description: Error information
       type: object

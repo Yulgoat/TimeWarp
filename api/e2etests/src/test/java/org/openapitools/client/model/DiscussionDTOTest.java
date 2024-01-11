@@ -1,6 +1,6 @@
 /*
  * CPOO Server API
- * This is a prototype of CPOO Project's front/back API. 
+ * This is a prototype of CPOO Project's front/back API.
  *
  * The version of the OpenAPI document: 0.0.1
  * Contact: contact@mightycode.fr
@@ -16,6 +16,7 @@ package org.openapitools.client.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -23,60 +24,60 @@ import org.junit.jupiter.api.Test;
  */
 public class DiscussionDTOTest {
 
-    /**
-     * Model tests for DiscussionDTO
-     */
-    @Test
-    public void testDiscussionDTO() {
-        // Create an instance of DiscussionDTO with sample values
-        DiscussionDTO discussion = new DiscussionDTO();
-        discussion.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
-        discussion.setUser1("alice@acme");
-        discussion.setUser2("bob@acme");
+  /**
+   * Model tests for DiscussionDTO
+   */
+  @Test
+  public void testDiscussionDTO() {
+    // Create an instance of DiscussionDTO with sample values
+    DiscussionDTO discussion = new DiscussionDTO();
+    discussion.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
+    discussion.setUser1("alice@acme");
+    discussion.setUser2("bob@acme");
 
-        // Check that properties have been correctly defined
-        assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", discussion.getId().toString());
-        assertEquals("alice@acme", discussion.getUser1());
-        assertEquals("bob@acme", discussion.getUser2());
-    }
+    // Check that properties have been correctly defined
+    assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", discussion.getId().toString());
+    assertEquals("alice@acme", discussion.getUser1());
+    assertEquals("bob@acme", discussion.getUser2());
+  }
 
-    /**
-     * Test the property 'id'
-     */
-    @Test
-    public void idTest() {
-        // Create an instance of DiscussionDTO and define the 'id' property
-        DiscussionDTO discussion = new DiscussionDTO();
-        discussion.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
+  /**
+   * Test the property 'id'
+   */
+  @Test
+  public void idTest() {
+    // Create an instance of DiscussionDTO and define the 'id' property
+    DiscussionDTO discussion = new DiscussionDTO();
+    discussion.setId(UUID.fromString("667bdc23-3de4-482f-a0f4-3391452a7742"));
 
-        // Check that the 'id' property has been set correctly
-        assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", discussion.getId().toString());
-    }
+    // Check that the 'id' property has been set correctly
+    assertEquals("667bdc23-3de4-482f-a0f4-3391452a7742", discussion.getId().toString());
+  }
 
-    /**
-     * Test the property 'user1'
-     */
-    @Test
-    public void user1Test() {
-        // Create an instance of DiscussionDTO and define the 'user1' property
-        DiscussionDTO discussion = new DiscussionDTO();
-        discussion.setUser1("alice@acme");
+  /**
+   * Test the property 'user1'
+   */
+  @Test
+  public void user1Test() {
+    // Create an instance of DiscussionDTO and define the 'user1' property
+    DiscussionDTO discussion = new DiscussionDTO();
+    discussion.setUser1("alice@acme");
 
-        // Check that the 'user1' property has been set correctly
-        assertEquals("alice@acme", discussion.getUser1());
-    }
+    // Check that the 'user1' property has been set correctly
+    assertEquals("alice@acme", discussion.getUser1());
+  }
 
-    /**
-     * Test the property 'user2'
-     */
-    @Test
-    public void user2Test() {
-        // Create an instance of DiscussionDTO and define the 'user2' property
-        DiscussionDTO discussion = new DiscussionDTO();
-        discussion.setUser2("bob@acme");
+  /**
+   * Test the property 'user2'
+   */
+  @Test
+  public void user2Test() {
+    // Create an instance of DiscussionDTO and define the 'user2' property
+    DiscussionDTO discussion = new DiscussionDTO();
+    discussion.setUser2("bob@acme");
 
-        // Check that the 'user2' property has been set correctly
-        assertEquals("bob@acme", discussion.getUser2());
-    }
+    // Check that the 'user2' property has been set correctly
+    assertEquals("bob@acme", discussion.getUser2());
+  }
 
 }

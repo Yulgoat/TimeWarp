@@ -1,11 +1,11 @@
 <div class="container">
     <img src="/assets/icons/sound.svg" alt="Sound icon">
     <div class="text-container">
-      <div class="title">Notification sounds</div>
-      <div class="description">Play sound to alert you to incoming messages</div>
+      <div class="title">{{'NotificationSounds' | translate}}</div>
+      <div class="description">{{'PlaySoundToAlert' | translate}}</div>
     </div>
     <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" [(ngModel)]="soundIsChecked" (change)="onCheckboxChange()">
         <span class="slider round"></span>
     </label>
 </div>
@@ -13,11 +13,11 @@
 <div class="container">
     <img src="/assets/icons/unread_message.svg" alt="Icon badges icon">
     <div class="text-container">
-      <div class="title">Icon badges</div>
-      <div class="description">Display icon badges to indicate the number of unread messages</div>
+      <div class="title">{{'IconBadges' | translate}}</div>
+      <div class="description">{{'DisplayIconBadges' | translate}}</div>
     </div>
     <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" [(ngModel)]="badgesIsChecked" (change)="onCheckboxChange()">
         <span class="slider round"></span>
     </label>
 </div>

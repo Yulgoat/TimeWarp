@@ -11,11 +11,10 @@ docs/MessagingApi.md
 docs/NewPasswordDTO.md
 docs/NotificationsDTO.md
 docs/PostMessageDTO.md
-docs/UserChangeThemePatchRequest.md
+docs/UnreadMessageDTO.md
 docs/UserDTO.md
 docs/UserSettingsApi.md
 docs/UserSettingsDTO.md
-git_push.sh
 settings.gradle
 src/main/AndroidManifest.xml
 src/main/java/org/openapitools/client/ApiCallback.java
@@ -31,6 +30,7 @@ src/main/java/org/openapitools/client/ProgressResponseBody.java
 src/main/java/org/openapitools/client/ServerConfiguration.java
 src/main/java/org/openapitools/client/ServerVariable.java
 src/main/java/org/openapitools/client/StringUtil.java
+src/main/java/org/openapitools/client/api/AdministrationApi.java
 src/main/java/org/openapitools/client/api/AuthenticationApi.java
 src/main/java/org/openapitools/client/api/MessagingApi.java
 src/main/java/org/openapitools/client/api/UserSettingsApi.java
@@ -46,6 +46,6 @@ src/main/java/org/openapitools/client/model/MessageDTO.java
 src/main/java/org/openapitools/client/model/NewPasswordDTO.java
 src/main/java/org/openapitools/client/model/NotificationsDTO.java
 src/main/java/org/openapitools/client/model/PostMessageDTO.java
-src/main/java/org/openapitools/client/model/UserChangeThemePatchRequest.java
+src/main/java/org/openapitools/client/model/UnreadMessageDTO.java
 src/main/java/org/openapitools/client/model/UserDTO.java
 src/main/java/org/openapitools/client/model/UserSettingsDTO.java

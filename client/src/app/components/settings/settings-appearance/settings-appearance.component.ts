@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserSettingsService } from 'src/app/services/user-settings.service';
 
 @Component({
   selector: 'app-settings-appearance',
   templateUrl: './settings-appearance.component.html',
   styleUrls: ['./settings-appearance.component.css']
 })
-export class SettingsAppearanceComponent {
+export class SettingsAppearanceComponent{
+
+  private themeId = 0;
 
   // Arrays to hold image data for the 1960s and 1970s with selection state
   images60s: { src: string; isSelected: boolean }[] = [
@@ -24,22 +27,34 @@ export class SettingsAppearanceComponent {
   selectedIndex60s: number | null = 0;
   selectedIndex70s: number | null = null;
 
+  constructor(private userSettingsService: UserSettingsService){
+    this.themeId = this.userSettingsService.themeId;
+    if(this.themeId<this.images60s.length) {
+      this.selectedIndex60s = this.themeId;
+      this.selectedIndex70s = null;
+    }
+    else if(this.themeId<this.images60s.length+this.images70s.length) {
+      this.selectedIndex60s = null;
+      this.selectedIndex70s = this.themeId-this.images60s.length;
+    }
+  }
+
   // Function to handle image selection
   selectImage(index: number, imageArray: any[], era: string) {
 
+    let themeId = 0;
     // Depending on the era, select or deselect images and update the selected index
     if (era === '60s') {
       this.selectedIndex70s = null; // Deselect the image in the 70s era
       this.selectedIndex60s = index; // Select the image in the 60s era
+      themeId=index;
     } else if (era === '70s') {
       this.selectedIndex60s = null; // Deselect the image in the 60s era
       this.selectedIndex70s = index; // Select the image in the 70s era
+      themeId=index+this.images60s.length
     }
 
-    // Update the isSelected property of each image for styling
-    imageArray.forEach((image, i) => {
-      image.isSelected = i === index;
-    });
+    this.userSettingsService.updateTheme(themeId);
   }
 
 }

@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ImageComponent {
 
-  @Input() src: string="";
-  @Input() isSelected: boolean=false;
+  @Input() src="";
+  @Input() isSelected=false;
   @Output() imageClicked = new EventEmitter<void>();
 
   onClick() {

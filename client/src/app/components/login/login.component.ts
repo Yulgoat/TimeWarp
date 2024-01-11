@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SigninServiceService } from 'src/app/services/signin-service.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -33,7 +34,7 @@ export class LoginComponent {
     password:''
   }  
   
-  constructor(private router: Router, private signinService: SigninServiceService) {
+  constructor(private router: Router, private signinService: SigninServiceService, private translate: TranslateService) {
     // Get the current user, if it exists, we skip login
     this.signinService.getActualUser().subscribe(already_an_user => {
       console.log("Actual user Login");
@@ -65,26 +66,26 @@ export class LoginComponent {
 
 
 
-  username : string = "";
-  password : string = "";
+  username  = "";
+  password  = "";
 
   
 
   /* Message that will display the corresponding field in case of error */
-  userErrorMessage : string ="";
-  pwdErrorMessage : string ="";
+  userErrorMessage  ="";
+  pwdErrorMessage  ="";
 
   /* Will be true if the corresponding field contain an error, else false */
-  userError : boolean = false;
-  pwdError : boolean = false;
+  userError  = false;
+  pwdError  = false;
   
  /* Checks if the different fields are empty */
   username_empty (): boolean{
-    if(this.username==="") {this.userErrorMessage = "Field Empty";return true; }
+    if(this.username==="") {this.userErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
   pwd_empty (): boolean{
-    if(this.password==="") {this.pwdErrorMessage = "Field Empty";return true; }
+    if(this.password==="") {this.pwdErrorMessage = this.translate.instant('FieldEmpty');return true; }
     else{return false;}
   }
 
@@ -94,8 +95,8 @@ export class LoginComponent {
     this.password = '';
     this.userError = true;
     this.pwdError = true;
-    this.userErrorMessage = "Invalid login or password";
-    this.pwdErrorMessage = "Invalid login or password"; 
+    this.userErrorMessage = this.translate.instant('InvalidLoginOrPassword');
+    this.pwdErrorMessage = this.translate.instant('InvalidLoginOrPassword'); 
   }
 
   /* If the user already connect */
@@ -104,8 +105,8 @@ export class LoginComponent {
    this.password = '';
    this.userError = true;
    this.pwdError = true;
-   this.userErrorMessage = "Already signed in";
-   this.pwdErrorMessage = "Already signed in"; 
+   this.userErrorMessage = this.translate.instant('AlreadySignedIn');
+   this.pwdErrorMessage = this.translate.instant('AlreadySignedIn'); 
  }
 
   signIn(user: UserDTO): void {

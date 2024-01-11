@@ -23,32 +23,51 @@ form div{
     width: 100%;
 }
   
-#password, #confirm-password, #old-password {
+form p {
+    margin: 0;
+}
+
+.input-container {
+    position: relative;
     margin-bottom: 1em;
-    background-image: url('/assets/icons/padlock-orange.svg');
-    background-repeat: no-repeat;
-    background-position: left 10px center;
+}
+
+.input-container span.material-symbols-rounded {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: var(--main-color);
+}
+
+#password, #confirm-password, #old-password {
     padding-left: 50px;
-    background-size: 30px 30px;
     background-color: white;
     font-size: 1.1em;
     width: 100%;
     box-sizing: border-box;
 }
-  
-form p {
-    margin: 0;
-}
 
-.error_fields{
+.no_error::placeholder {
+    color: var(--secondary-color);
+  }
+  
+  .error_fields::placeholder {
+    color: red; 
+  }
+  
+  .error_fields{
     border: solid;
     border-color: red;
     color: red;
-}
+  }
   
-.no_error{
-    color: var(--main-color);
-}
+  .no_error{
+    color: var(--secondary-color);
+    border: 0;
+  }
+  
   
 /* Button Styles */
 .button {

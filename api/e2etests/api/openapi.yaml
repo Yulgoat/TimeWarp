@@ -79,19 +79,33 @@ paths:
       tags:
       - authentication
       x-accepts: application/json
-  /user/delete:
-    post:
+  /user/{username}:
+    delete:
+      description: Delete the account of the user matching the given username. Only
+        the administrator can use this endpoint.
+      parameters:
+      - description: username of the user account to delete.
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           description: Success
+        "404":
+          description: "Not found: User account not found."
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDTO'
           description: Error
+      summary: Delete a user account
       tags:
-      - authentication
+      - administration
       x-accepts: application/json
   /user/forgotpwd:
     post:
@@ -155,10 +169,9 @@ paths:
     patch:
       requestBody:
         content:
-          text/plain:
+          application/json:
             schema:
-              title: username
-              type: string
+              $ref: '#/components/schemas/UserDTO'
         required: true
       responses:
         "200":
@@ -171,7 +184,7 @@ paths:
           description: Error
       tags:
       - user settings
-      x-content-type: text/plain
+      x-content-type: application/json
       x-accepts: application/json
   /user/account/changepp:
     patch:
@@ -216,20 +229,6 @@ paths:
       - user settings
       x-content-type: application/json
       x-accepts: application/json
-  /user/disconnect:
-    post:
-      responses:
-        "200":
-          description: Success
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDTO'
-          description: Error
-      tags:
-      - user settings
-      x-accepts: application/json
   /user/notifications:
     patch:
       requestBody:
@@ -255,9 +254,9 @@ paths:
     patch:
       requestBody:
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/_user_change_theme_patch_request'
+              title: themeId
         required: true
       responses:
         "200":
@@ -271,7 +270,7 @@ paths:
       summary: Change user theme
       tags:
       - user settings
-      x-content-type: application/json
+      x-content-type: text/plain
       x-accepts: application/json
   /user/language:
     patch:
@@ -309,6 +308,81 @@ paths:
       summary: Get a list of all discussions of the current user
       tags:
       - messaging
+      x-accepts: application/json
+    patch:
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              title: discussionID
+              type: string
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: int64
+                type: integer
+          description: Timestamp change successfully
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Set timestamp to actual time
+      tags:
+      - messaging
+      x-content-type: text/plain
+      x-accepts: application/json
+    post:
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              title: user
+              type: string
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscussionDTO'
+          description: Conversation created successfully
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Create a new discussion with a user
+      tags:
+      - messaging
+      x-content-type: text/plain
+      x-accepts: application/json
+  /discussions/unreadmessage:
+    patch:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnreadMessageDTO'
+        required: true
+      responses:
+        "200":
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDTO'
+          description: Error
+      summary: Change unread message parameter
+      tags:
+      - messaging
+      x-content-type: application/json
       x-accepts: application/json
   /discussions/{discussion_id}/messages:
     get:
@@ -363,7 +437,11 @@ paths:
               $ref: '#/components/schemas/PostMessageDTO'
         required: true
       responses:
-        "200":
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageDTO'
           description: Message sent successfully
         default:
           content:
@@ -375,29 +453,6 @@ paths:
       tags:
       - messaging
       x-content-type: application/json
-      x-accepts: application/json
-  /discussions/create:
-    post:
-      requestBody:
-        content:
-          text/plain:
-            schema:
-              title: user
-              type: string
-        required: true
-      responses:
-        "200":
-          description: Conversation created successfully
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorDTO'
-          description: Error
-      summary: Create a new discussion with a user
-      tags:
-      - messaging
-      x-content-type: text/plain
       x-accepts: application/json
 components:
   schemas:
@@ -490,18 +545,26 @@ components:
       example:
         user1: alice@acme
         user2: bob@acme
+        unreadMessage: true
         id: 667bdc23-3de4-482f-a0f4-3391452a7742
+        timestamp: 1720294759999
       properties:
         id:
           example: 667bdc23-3de4-482f-a0f4-3391452a7742
           format: uuid
           type: string
+        timestamp:
+          example: 1720294759999
+          format: int64
+          type: integer
         user1:
           example: alice@acme
           type: string
         user2:
           example: bob@acme
           type: string
+        unreadMessage:
+          type: boolean
       type: object
     NewPasswordDTO:
       example:
@@ -521,13 +584,13 @@ components:
       type: object
     ChangePasswordDTO:
       example:
-        old-password: oldpassword
-        new-password: newpassword
+        oldpassword: oldpassword
+        newpassword: newpassword
       properties:
-        old-password:
+        oldpassword:
           example: oldpassword
           type: string
-        new-password:
+        newpassword:
           example: newpassword
           type: string
       type: object
@@ -540,6 +603,22 @@ components:
           type: boolean
         badges:
           type: boolean
+      type: object
+    UnreadMessageDTO:
+      example:
+        discussionId: 667bdc23-3de4-482f-a0f4-3391452a7742
+        unreadMessage: false
+      properties:
+        discussionId:
+          example: 667bdc23-3de4-482f-a0f4-3391452a7742
+          format: uuid
+          type: string
+        unreadMessage:
+          example: false
+          type: boolean
+      required:
+      - discussionId
+      - unread_message
       type: object
     ErrorDTO:
       description: Error information
@@ -564,11 +643,6 @@ components:
           description: Path of the endpoint called
           example: /user/signin
           type: string
-      type: object
-    _user_change_theme_patch_request:
-      properties:
-        themeId:
-          type: integer
       type: object
   securitySchemes:
     CookieAuth:

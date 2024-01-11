@@ -51,56 +51,56 @@ import org.openapitools.client.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
 public class ChangePasswordDTO {
-  public static final String SERIALIZED_NAME_OLD_PASSWORD = "oldpassword";
-  @SerializedName(SERIALIZED_NAME_OLD_PASSWORD)
-  private String oldPassword;
+  public static final String SERIALIZED_NAME_OLDPASSWORD = "oldpassword";
+  @SerializedName(SERIALIZED_NAME_OLDPASSWORD)
+  private String oldpassword;
 
-  public static final String SERIALIZED_NAME_NEW_PASSWORD = "newpassword";
-  @SerializedName(SERIALIZED_NAME_NEW_PASSWORD)
-  private String newPassword;
+  public static final String SERIALIZED_NAME_NEWPASSWORD = "newpassword";
+  @SerializedName(SERIALIZED_NAME_NEWPASSWORD)
+  private String newpassword;
 
   public ChangePasswordDTO() {
   }
 
-  public ChangePasswordDTO oldPassword(String oldPassword) {
+  public ChangePasswordDTO oldpassword(String oldpassword) {
     
-    this.oldPassword = oldPassword;
+    this.oldpassword = oldpassword;
     return this;
   }
 
    /**
-   * Get oldPassword
-   * @return oldPassword
+   * Get oldpassword
+   * @return oldpassword
   **/
   @javax.annotation.Nullable
-  public String getOldPassword() {
-    return oldPassword;
+  public String getOldpassword() {
+    return oldpassword;
   }
 
 
-  public void setOldPassword(String oldPassword) {
-    this.oldPassword = oldPassword;
+  public void setOldpassword(String oldpassword) {
+    this.oldpassword = oldpassword;
   }
 
 
-  public ChangePasswordDTO newPassword(String newPassword) {
+  public ChangePasswordDTO newpassword(String newpassword) {
     
-    this.newPassword = newPassword;
+    this.newpassword = newpassword;
     return this;
   }
 
    /**
-   * Get newPassword
-   * @return newPassword
+   * Get newpassword
+   * @return newpassword
   **/
   @javax.annotation.Nullable
-  public String getNewPassword() {
-    return newPassword;
+  public String getNewpassword() {
+    return newpassword;
   }
 
 
-  public void setNewPassword(String newPassword) {
-    this.newPassword = newPassword;
+  public void setNewpassword(String newpassword) {
+    this.newpassword = newpassword;
   }
 
 
@@ -114,21 +114,21 @@ public class ChangePasswordDTO {
       return false;
     }
     ChangePasswordDTO changePasswordDTO = (ChangePasswordDTO) o;
-    return Objects.equals(this.oldPassword, changePasswordDTO.oldPassword) &&
-        Objects.equals(this.newPassword, changePasswordDTO.newPassword);
+    return Objects.equals(this.oldpassword, changePasswordDTO.oldpassword) &&
+        Objects.equals(this.newpassword, changePasswordDTO.newpassword);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(oldPassword, newPassword);
+    return Objects.hash(oldpassword, newpassword);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ChangePasswordDTO {\n");
-    sb.append("    oldPassword: ").append(toIndentedString(oldPassword)).append("\n");
-    sb.append("    newPassword: ").append(toIndentedString(newPassword)).append("\n");
+    sb.append("    oldpassword: ").append(toIndentedString(oldpassword)).append("\n");
+    sb.append("    newpassword: ").append(toIndentedString(newpassword)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -180,10 +180,10 @@ public class ChangePasswordDTO {
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("oldpassword") != null && !jsonObj.get("oldpassword").isJsonNull()) && !jsonObj.get("oldpassword").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `old-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("oldpassword").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `oldpassword` to be a primitive type in the JSON string but got `%s`", jsonObj.get("oldpassword").toString()));
       }
       if ((jsonObj.get("newpassword") != null && !jsonObj.get("newpassword").isJsonNull()) && !jsonObj.get("newpassword").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `new-password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("newpassword").toString()));
+        throw new IllegalArgumentException(String.format("Expected the field `newpassword` to be a primitive type in the JSON string but got `%s`", jsonObj.get("newpassword").toString()));
       }
   }
 

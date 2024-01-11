@@ -12,10 +12,12 @@
   font-weight: bold;
   font-style: normal;
 }
-body, html, input {
-    margin: 0;
-    font-family: "Gliker";
-  }
+
+*{
+  margin: 0;
+  font-family: "Gliker";
+  transition: color 0.5s ease-in-out, border-color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
 
   :root{
     --main-color: #fc9631;

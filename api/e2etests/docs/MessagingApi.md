@@ -4,79 +4,14 @@ All URIs are relative to *http://localhost:8080*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**discussionsCreatePost**](MessagingApi.md#discussionsCreatePost) | **POST** /discussions/create | Create a new discussion with a user |
 | [**discussionsDiscussionIdMessagesGet**](MessagingApi.md#discussionsDiscussionIdMessagesGet) | **GET** /discussions/{discussion_id}/messages | Get all messages in a discussion |
 | [**discussionsGet**](MessagingApi.md#discussionsGet) | **GET** /discussions | Get a list of all discussions of the current user |
 | [**discussionsMessageGet**](MessagingApi.md#discussionsMessageGet) | **GET** /discussions/message | Receive a message |
 | [**discussionsMessagePost**](MessagingApi.md#discussionsMessagePost) | **POST** /discussions/message | Send a message in a disccusion |
+| [**discussionsPatch**](MessagingApi.md#discussionsPatch) | **PATCH** /discussions | Set timestamp to actual time |
+| [**discussionsPost**](MessagingApi.md#discussionsPost) | **POST** /discussions | Create a new discussion with a user |
+| [**discussionsUnreadmessagePatch**](MessagingApi.md#discussionsUnreadmessagePatch) | **PATCH** /discussions/unreadmessage | Change unread message parameter |
 
-
-<a id="discussionsCreatePost"></a>
-# **discussionsCreatePost**
-> discussionsCreatePost(body)
-
-Create a new discussion with a user
-
-### Example
-```java
-// Import classes:
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.Configuration;
-import org.openapitools.client.auth.*;
-import org.openapitools.client.models.*;
-import org.openapitools.client.api.MessagingApi;
-
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("http://localhost:8080");
-    
-    // Configure API key authorization: CookieAuth
-    ApiKeyAuth CookieAuth = (ApiKeyAuth) defaultClient.getAuthentication("CookieAuth");
-    CookieAuth.setApiKey("YOUR API KEY");
-    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    //CookieAuth.setApiKeyPrefix("Token");
-
-    MessagingApi apiInstance = new MessagingApi(defaultClient);
-    String body = "body_example"; // String | 
-    try {
-      apiInstance.discussionsCreatePost(body);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling MessagingApi#discussionsCreatePost");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **body** | **String**|  | |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[CookieAuth](../README.md#CookieAuth)
-
-### HTTP request headers
-
- - **Content-Type**: text/plain
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Conversation created successfully |  -  |
-| **0** | Error |  -  |
 
 <a id="discussionsDiscussionIdMessagesGet"></a>
 # **discussionsDiscussionIdMessagesGet**
@@ -275,7 +210,7 @@ This endpoint does not need any parameter.
 
 <a id="discussionsMessagePost"></a>
 # **discussionsMessagePost**
-> discussionsMessagePost(postMessageDTO)
+> MessageDTO discussionsMessagePost(postMessageDTO)
 
 Send a message in a disccusion
 
@@ -303,7 +238,8 @@ public class Example {
     MessagingApi apiInstance = new MessagingApi(defaultClient);
     PostMessageDTO postMessageDTO = new PostMessageDTO(); // PostMessageDTO | 
     try {
-      apiInstance.discussionsMessagePost(postMessageDTO);
+      MessageDTO result = apiInstance.discussionsMessagePost(postMessageDTO);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling MessagingApi#discussionsMessagePost");
       System.err.println("Status code: " + e.getCode());
@@ -323,6 +259,209 @@ public class Example {
 
 ### Return type
 
+[**MessageDTO**](MessageDTO.md)
+
+### Authorization
+
+[CookieAuth](../README.md#CookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Message sent successfully |  -  |
+| **0** | Error |  -  |
+
+<a id="discussionsPatch"></a>
+# **discussionsPatch**
+> Long discussionsPatch(body)
+
+Set timestamp to actual time
+
+### Example
+```java
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.MessagingApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080");
+    
+    // Configure API key authorization: CookieAuth
+    ApiKeyAuth CookieAuth = (ApiKeyAuth) defaultClient.getAuthentication("CookieAuth");
+    CookieAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //CookieAuth.setApiKeyPrefix("Token");
+
+    MessagingApi apiInstance = new MessagingApi(defaultClient);
+    String body = "body_example"; // String | 
+    try {
+      Long result = apiInstance.discussionsPatch(body);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MessagingApi#discussionsPatch");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **body** | **String**|  | |
+
+### Return type
+
+**Long**
+
+### Authorization
+
+[CookieAuth](../README.md#CookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: text/plain
+ - **Accept**: text/plain, application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Timestamp change successfully |  -  |
+| **0** | Error |  -  |
+
+<a id="discussionsPost"></a>
+# **discussionsPost**
+> DiscussionDTO discussionsPost(body)
+
+Create a new discussion with a user
+
+### Example
+```java
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.MessagingApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080");
+    
+    // Configure API key authorization: CookieAuth
+    ApiKeyAuth CookieAuth = (ApiKeyAuth) defaultClient.getAuthentication("CookieAuth");
+    CookieAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //CookieAuth.setApiKeyPrefix("Token");
+
+    MessagingApi apiInstance = new MessagingApi(defaultClient);
+    String body = "body_example"; // String | 
+    try {
+      DiscussionDTO result = apiInstance.discussionsPost(body);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MessagingApi#discussionsPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **body** | **String**|  | |
+
+### Return type
+
+[**DiscussionDTO**](DiscussionDTO.md)
+
+### Authorization
+
+[CookieAuth](../README.md#CookieAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: text/plain
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Conversation created successfully |  -  |
+| **0** | Error |  -  |
+
+<a id="discussionsUnreadmessagePatch"></a>
+# **discussionsUnreadmessagePatch**
+> discussionsUnreadmessagePatch(unreadMessageDTO)
+
+Change unread message parameter
+
+### Example
+```java
+// Import classes:
+import org.openapitools.client.ApiClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.Configuration;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.models.*;
+import org.openapitools.client.api.MessagingApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("http://localhost:8080");
+    
+    // Configure API key authorization: CookieAuth
+    ApiKeyAuth CookieAuth = (ApiKeyAuth) defaultClient.getAuthentication("CookieAuth");
+    CookieAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //CookieAuth.setApiKeyPrefix("Token");
+
+    MessagingApi apiInstance = new MessagingApi(defaultClient);
+    UnreadMessageDTO unreadMessageDTO = new UnreadMessageDTO(); // UnreadMessageDTO | 
+    try {
+      apiInstance.discussionsUnreadmessagePatch(unreadMessageDTO);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling MessagingApi#discussionsUnreadmessagePatch");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **unreadMessageDTO** | [**UnreadMessageDTO**](UnreadMessageDTO.md)|  | |
+
+### Return type
+
 null (empty response body)
 
 ### Authorization
@@ -337,6 +476,6 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Message sent successfully |  -  |
+| **200** | Success |  -  |
 | **0** | Error |  -  |
 

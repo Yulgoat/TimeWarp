@@ -1,21 +1,21 @@
 <div class="section1">
-  <h1>Welcome to TimeWarp</h1>
-  <p>Travel through Time, one message at a Time!</p>
+  <h1>{{'Welcome' | translate}}</h1>
+  <p>{{'Slogan' | translate}}</p>
 </div>
 
 <div class="section2">
-  <h1>USER LOGIN</h1>
+  <h1>{{'UserLogin' | translate | uppercase}}</h1>
   <form>
     <!-- Form Row containing Username and Password input fields -->
     <div class="form-row">      
-      <div *ngIf="userError==false; else elseUser">
-        <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="Username">
+      <div *ngIf="userError===false; else elseUser">
+        <input class="no_error" [(ngModel)]="username" type="text" id="username" name="username" placeholder="{{'Username' | translate}}">
       </div>
       <ng-template #elseUser>
         <input class="error_fields" [(ngModel)]="username" type="text" id="username" name="username" placeholder={{userErrorMessage}}>
       </ng-template>
-      <div *ngIf="pwdError==false; else elsePwd">
-        <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="Password">
+      <div *ngIf="pwdError===false; else elsePwd">
+        <input class="no_error" [(ngModel)]="password" type="password" id="password" name="password" placeholder="{{'Password' | translate}}">
       </div>
       <ng-template #elsePwd>
         <input class="error_fields" [(ngModel)]="password" type="password" id="password" name="password" placeholder={{pwdErrorMessage}}>
@@ -26,20 +26,20 @@
     <div class="form-bottom">
       <div>
         <input type="checkbox" id="remember" name="remember">
-        <label for="remember">Remember me</label>
+        <label for="remember">{{'RememberMe' | translate}}</label>
       </div>
       <div>
         <!-- Forgot Password link -->
-        <p><a id="forgot-password" (click)="navigateToForgotPassword()">Forgot password ?</a></p>
+        <p><a id="forgot-password" (click)="navigateToForgotPassword()">{{'ForgotPassword' | translate}}</a></p>
       </div>
     </div>
 
     <!-- Login button -->
     <div>
-      <input type="submit" value="LOGIN" class="button" (click)="login()">
+      <input type="submit" value="{{'Login' | translate | uppercase}}" class="button" (click)="login()">
     </div>
     
     <!-- Create Account link -->
-    <p id="create-account"><a (click)="navigateToCreateAccount()">Create account</a></p>
+    <p id="create-account"><a (click)="navigateToCreateAccount()">{{'CreateAccount' | translate}}</a></p>
   </form>
 </div>
